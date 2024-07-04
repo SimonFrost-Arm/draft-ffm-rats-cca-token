@@ -1,0 +1,214 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-07-04T00:59:19.942306+00:00",
+  "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOMRXjbM6OaCXf",
+      "title": "Integrated RME-DA EP SW attestation",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/2",
+      "state": "OPEN",
+      "author": "gmandyam",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Can an integrated endpoint whose FW/SW is validated by HES at boot be listed as part of SW components?",
+      "createdAt": "2024-07-03T18:11:29Z",
+      "updatedAt": "2024-07-03T18:11:29Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOMRXjbM6OaDGJ",
+      "title": "Is verification service indicator optional for the attester?",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/3",
+      "state": "OPEN",
+      "author": "gmandyam",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Current text implies that it can be ignored by the RP, but text does not clarify whether an attestation is possible without a service indicator.",
+      "createdAt": "2024-07-03T18:13:31Z",
+      "updatedAt": "2024-07-03T18:14:16Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "I_kwDOMRXjbM6OaSp2",
+      "title": "Is rim a single measurement or multiple?",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/4",
+      "state": "OPEN",
+      "author": "gmandyam",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Current text states \"The Realm Initial Measurement claim contains the measurements taken of Realm state\r\nbefore the Realm is activated\".  Can more than one measurement constitute a rim?",
+      "createdAt": "2024-07-03T18:59:45Z",
+      "updatedAt": "2024-07-03T18:59:45Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "I_kwDOMRXjbM6OaUzL",
+      "title": "Direct model and Detached EAT Bundle",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/5",
+      "state": "CLOSED",
+      "author": "gmandyam",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Consider including a discussion as to why Detached EAT bundles are not appropriate for direct token binding.",
+      "createdAt": "2024-07-03T19:06:20Z",
+      "updatedAt": "2024-07-03T19:08:30Z",
+      "closedAt": "2024-07-03T19:08:08Z",
+      "comments": [
+        {
+          "author": "gmandyam",
+          "authorAssociation": "NONE",
+          "body": "Sorry - missed text describing why.  It is already present.",
+          "createdAt": "2024-07-03T19:08:29Z",
+          "updatedAt": "2024-07-03T19:08:29Z"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "I_kwDOMRXjbM6OaYvS",
+      "title": "Consider adding discussion on simplifications to inline cert when verification service ID is present (Signing Key Implementation Alternatives)",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/6",
+      "state": "OPEN",
+      "author": "gmandyam",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "It seems that a specific verifier may already have certs corresponding to trust anchors and intermediate CA's, so the manufacturer could just send the leaf cert (as already mentioned in the text).  Consider adding text such as \"If the inlined cert chain is partial (e.g. EE cert only , or EE and intermediate cert) then the attestation token may direct the Relying Party to a specific verifier already in possession of root certificates necessary to complete the full chain by use of the verification service ID.\"",
+      "createdAt": "2024-07-03T19:16:12Z",
+      "updatedAt": "2024-07-03T19:16:12Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 8,
+      "id": "I_kwDOMRXjbM6OabDa",
+      "title": "Replace PSA attester",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/8",
+      "state": "OPEN",
+      "author": "gmandyam",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "PSA attester should conform with PRoT requirements.  It is not clear that PRoT meets all HES requirements for CCA.  Can we replace PSA attester with  HES attester?",
+      "createdAt": "2024-07-03T19:22:07Z",
+      "updatedAt": "2024-07-03T19:22:07Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOMRXjbM50U4Vd",
+      "title": "build fixes and ascii art adjustments",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/1",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-03T13:22:53Z",
+      "updatedAt": "2024-07-03T16:02:10Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "0e29bf6c2bda2c961b8383575115cd30eafdf5f1",
+      "headRepository": "thomas-fossati/draft-ffm-rats-cca-token",
+      "headRefName": "main",
+      "headRefOid": "2bdd958f692f4f346246ba5b15c2c833d07c27c6",
+      "closedAt": "2024-07-03T16:02:10Z",
+      "mergedAt": "2024-07-03T16:02:10Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "5cd06e18ad5e8d81f05d3e9bf403f1594c04d282"
+      },
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOMRXjbM50XLah",
+      "title": "Editorial changes and typo fixes for initial draft",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/7",
+      "state": "OPEN",
+      "author": "gmandyam",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Please review prior to merging",
+      "createdAt": "2024-07-03T19:20:14Z",
+      "updatedAt": "2024-07-03T19:20:14Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "5cd06e18ad5e8d81f05d3e9bf403f1594c04d282",
+      "headRepository": "gmandyam/draft-ffm-rats-cca-token",
+      "headRefName": "branch1",
+      "headRefOid": "de881c0db89897366f6cb7cf864191ae5c95810d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
