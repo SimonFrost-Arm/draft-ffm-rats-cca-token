@@ -5,7 +5,7 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 5 January 2025                                              Arm
+Expires: 5 January 2025                                           Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
                                                              4 July 2024
@@ -1731,8 +1731,8 @@ Authors' Addresses
 
 
    Thomas Fossati
-   Arm
-   Email: thomas.fossati2@arm.com
+   Linaro
+   Email: thomas.fossati@linaro.org
 
 
    Giri Mandyam
