@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 4 January 2025                                              Arm
+Expires: 5 January 2025                                              Arm
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                             3 July 2024
+                                                             4 July 2024
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -20,7 +20,7 @@ Abstract
    and software innovations that enhance Arm’s support for Confidential
    Computing for large, compute-intensive workloads.  Devices that
    implement CCA can produce attestation tokens as described in this
-   memo, which are the basis trustworthiness assessment of the
+   memo, which are the basis for trustworthiness assessment of the
    Confidential Compute environment.  This document specifies the CCA
    attestation token structure and semantics.
 
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 January 2025.
+   This Internet-Draft will expire on 5 January 2025.
 
 Copyright Notice
 
@@ -152,14 +152,15 @@ Table of Contents
    As outlined in the RATS Architecture [RFC9334], an Attester produces
    a signed collection of Claims that constitutes Evidence about its
    target environment.  This document focuses on the output provided by
-   requests from the Realm to the RMM management component for an
-   attestation token that covers the state of that Realm and the CCA
-   Platform.  This output corresponds to Evidence in [RFC9334] and, as a
-   design decision, the CCA attestation token is a profile of the Entity
-   Attestation Token (EAT) [EAT].  Note that there are other profiles of
-   EAT available, such as [I-D.kdyxy-rats-tdx-eat-profile] and
-   [I-D.mandyam-rats-qwestoken], for use with different use cases and by
-   different attestation technologies.
+   requests from the Realm to the Realm Management Monitor (RMM)
+   management component for an attestation token that covers the state
+   of that Realm and the CCA Platform.  This output corresponds to
+   Evidence in [RFC9334] and, as a design decision, the CCA attestation
+   token is a profile of the Entity Attestation Token (EAT) [EAT].  Note
+   that there are other profiles of EAT available, such as
+   [I-D.kdyxy-rats-tdx-eat-profile] and [I-D.mandyam-rats-qwestoken],
+   for use with different use cases and by different attestation
+   technologies.
 
    Since the CCA tokens are consumed by services outside the device,
    there is an actual need to ensure interoperability.  Interoperability
@@ -198,7 +199,9 @@ Table of Contents
       Root of Trust is authentic and unmodified.  An example of a RoT
       suitable for CCA would be an isolated Trusted subsystem
       responsible for initial measurements, lifecycle state management,
-      identity and attestation services.
+      identity and attestation services.  The services that the RoT
+      provides for securitization of the CCA environment are descibed as
+      Hardware-Enforced Security (HES) - see Section B4.1.5 of [RME].
 
    Realm-World:
       Realm World, provides a security state and physical address range
@@ -268,8 +271,8 @@ Table of Contents
    information to be represented in CCA claims and to assemble them into
    Evidence.  It is made of three cooperating components:
 
-   *  The Main Bootloader, executing at boot-time, measures the TCB of
-      the Realm World
+   *  The Main Bootloader, executing at boot-time, measures the trusted
+      computing base (TCB) of the Realm World
 
    *  i.e., loaded firmware components and sends them to the HES RoT to
       be stored isolated.  (CCA Platform Boot State).  See Figure 2.
@@ -300,7 +303,8 @@ Table of Contents
       state of the CCA platform TCB, including the lifecycle state of
       the CCA platform.  It can answer requests coming from the RMM to
       collect and format claims corresponding to that state and use a
-      CCA Platform Attestation Key (CPAK) to sign them.
+      CCA Platform Attestation Key (CPAK) to sign them.  How the CPAK is
+      derived is implementation-specific.
 
    See Figure 3.
 
@@ -368,7 +372,7 @@ Table of Contents
    single logical unit.  See Section 9 for more details.
 
    The above tokens are presented to the requester within a top level
-   CMW collection [CMW].
+   Conceptual Message WWrapper (CMW) collection [CMW].
 
    CDDL [RFC8610] along with text descriptions is used to define each
    claim independent of encoding.  The following CDDL type(s) are reused
@@ -806,7 +810,7 @@ arm-platform-verification-service = (
 
    The EAT [EAT] nonce (claim key 10) is used.  Since the EAT nonce
    claim offers flexiblity for different attestation technologies, this
-   specifications applies the following constraints to the nonce-type:
+   specification applies the following constraints to the nonce-type:
 
    *  The length MUST be either 32, 48, or 64 bytes.
 
@@ -906,8 +910,8 @@ cca-realm-extensible-measurements = (
 
 4.8.7.  Realm Public Key
 
-   The Realm public key claim identifies the key which is used to sign
-   the Realm token
+   The Realm public key claim identifies the attestation key which is
+   used to sign the Realm token
 
    The value of the Realm public key claim is a byte string
    representation of a COSE_Key.
@@ -926,7 +930,7 @@ cca-realm-extensible-measurements = (
 4.8.8.  Realm Public Key Hash Algorithm ID
 
    The Realm public key hash algorithm identifier claim identifies the
-   algorithm used hash the value of the Realm Public Key claim
+   algorithm used to hash the value of the Realm Public Key claim
    Section 4.8.7 such that it can be presented as a Challenge for the
    bound CCA Platform token Section 4.10.
 
@@ -974,7 +978,7 @@ cca-realm-extensible-measurements = (
    a CMW Collection as in the Delegated model.  The two parts of the
    collection are bound together by the Nonce claim in the CCA Platform
    token having the same value as the hash of the Realm state claim set.
-   If the Direct Model is used, the CCA Platfrom profile claim
+   If the Direct Model is used, the CCA Platform profile claim
    Section 4.5.1 MUST have a different value from the reference profile.
    The map value within the CCA Attestation token CMW Collection for the
    Realm state claim set MUST also have a different value to that used
@@ -1077,7 +1081,7 @@ cca-realm-extensible-measurements = (
    are raw public keys.
 
    Some implementations may choose to use an PAK that is a certified
-   public keys.  If this option is taken, the value of the CCA Platform
+   public key.  If this option is taken, the value of the CCA Platform
    Profile Definition claim Section 4.5.1 MUST be altered from the
    reference implementation value.
 
@@ -1733,4 +1737,4 @@ Authors' Addresses
 
    Giri Mandyam
    Mediatek Inc
-   Email: giri.mandyam@mediatek.com
+   Email: giridhar.mandyam@gmail.com
