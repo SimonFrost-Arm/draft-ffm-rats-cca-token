@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-04T00:59:19.942306+00:00",
+  "timestamp": "2024-07-07T01:04:32.230258+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -57,7 +57,7 @@
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/2",
       "state": "OPEN",
       "author": "gmandyam",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Can an integrated endpoint whose FW/SW is validated by HES at boot be listed as part of SW components?",
@@ -73,7 +73,7 @@
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/3",
       "state": "OPEN",
       "author": "gmandyam",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Current text implies that it can be ignored by the RP, but text does not clarify whether an attestation is possible without a service indicator.",
@@ -89,7 +89,7 @@
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/4",
       "state": "OPEN",
       "author": "gmandyam",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Current text states \"The Realm Initial Measurement claim contains the measurements taken of Realm state\r\nbefore the Realm is activated\".  Can more than one measurement constitute a rim?",
@@ -105,7 +105,7 @@
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/5",
       "state": "CLOSED",
       "author": "gmandyam",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Consider including a discussion as to why Detached EAT bundles are not appropriate for direct token binding.",
@@ -115,7 +115,7 @@
       "comments": [
         {
           "author": "gmandyam",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "body": "Sorry - missed text describing why.  It is already present.",
           "createdAt": "2024-07-03T19:08:29Z",
           "updatedAt": "2024-07-03T19:08:29Z"
@@ -129,7 +129,7 @@
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/6",
       "state": "OPEN",
       "author": "gmandyam",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "It seems that a specific verifier may already have certs corresponding to trust anchors and intermediate CA's, so the manufacturer could just send the leaf cert (as already mentioned in the text).  Consider adding text such as \"If the inlined cert chain is partial (e.g. EE cert only , or EE and intermediate cert) then the attestation token may direct the Relying Party to a specific verifier already in possession of root certificates necessary to complete the full chain by use of the verification service ID.\"",
@@ -145,7 +145,7 @@
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/8",
       "state": "OPEN",
       "author": "gmandyam",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "PSA attester should conform with PRoT requirements.  It is not clear that PRoT meets all HES requirements for CCA.  Can we replace PSA attester with  HES attester?",
@@ -163,7 +163,7 @@
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/1",
       "state": "MERGED",
       "author": "thomas-fossati",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
@@ -189,26 +189,134 @@
       "id": "PR_kwDOMRXjbM50XLah",
       "title": "Editorial changes and typo fixes for initial draft",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/7",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "gmandyam",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Please review prior to merging",
       "createdAt": "2024-07-03T19:20:14Z",
-      "updatedAt": "2024-07-03T19:20:14Z",
+      "updatedAt": "2024-07-04T08:37:42Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "5cd06e18ad5e8d81f05d3e9bf403f1594c04d282",
       "headRepository": "gmandyam/draft-ffm-rats-cca-token",
       "headRefName": "branch1",
-      "headRefOid": "de881c0db89897366f6cb7cf864191ae5c95810d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "72c814271486387381b1cf3f9e97cf7998e378be",
+      "closedAt": "2024-07-04T08:37:42Z",
+      "mergedAt": "2024-07-04T08:37:42Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "762e9424673d65e22ea99352715c2132ed2b6c51"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM6ApP7F",
+          "commit": {
+            "abbreviatedOid": "de881c0"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "LGTM, thanks",
+          "createdAt": "2024-07-04T08:21:51Z",
+          "updatedAt": "2024-07-04T08:21:51Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "id": "PR_kwDOMRXjbM50an9v",
+      "title": "Change Thomas affiliation",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/9",
+      "state": "MERGED",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-04T08:42:37Z",
+      "updatedAt": "2024-07-04T08:45:51Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "762e9424673d65e22ea99352715c2132ed2b6c51",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "thomas-affil",
+      "headRefOid": "50657d0124cfc73e486a3b1e41c9bdcdbc41f4b6",
+      "closedAt": "2024-07-04T08:45:51Z",
+      "mergedAt": "2024-07-04T08:45:51Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "32ddea2d82b403c3efae37495f4d09c63c0a9988"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM6Apcta",
+          "commit": {
+            "abbreviatedOid": "50657d0"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-04T08:45:45Z",
+          "updatedAt": "2024-07-04T08:45:45Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOMRXjbM50hENF",
+      "title": "Correct README.md",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/10",
+      "state": "MERGED",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-07-05T09:15:09Z",
+      "updatedAt": "2024-07-05T09:29:03Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "32ddea2d82b403c3efae37495f4d09c63c0a9988",
+      "headRepository": "yogeshbdeshpande/draft-ffm-rats-cca-token",
+      "headRefName": "README-correction",
+      "headRefOid": "db46fbde05f93fe5ce00df2db3ae03bc41626a72",
+      "closedAt": "2024-07-05T09:29:03Z",
+      "mergedAt": "2024-07-05T09:29:03Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "fc5f89646dbc94857c52d10665c5d2346743b924"
+      },
+      "comments": [
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@SimonFrost-Arm : Please edit the repo permission for me to make this change!",
+          "createdAt": "2024-07-05T09:16:45Z",
+          "updatedAt": "2024-07-05T09:16:45Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM6AxCjz",
+          "commit": {
+            "abbreviatedOid": "db46fbd"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-07-05T09:28:46Z",
+          "updatedAt": "2024-07-05T09:28:46Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
