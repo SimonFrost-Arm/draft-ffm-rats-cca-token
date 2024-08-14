@@ -1038,11 +1038,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CCA Reference Attestation Token</td>
-<td class="right">July 2024</td>
+<td class="right">August 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Frost, et al.</td>
-<td class="center">Expires 5 January 2025</td>
+<td class="center">Expires 15 February 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1055,12 +1055,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ffm-rats-cca-token-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-07-04" class="published">4 July 2024</time>
+<time datetime="2024-08-14" class="published">14 August 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-01-05">5 January 2025</time></dd>
+<dd class="expires"><time datetime="2025-02-15">15 February 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1114,7 +1114,7 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 5 January 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 15 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1923,7 +1923,7 @@ conforms. This allows a receiver to assign the intended semantics to the rest of
 found in the token.<a href="#section-4.5.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.5.1-2">The EAT <code>eat_profile</code> (claim key 265) is used.<a href="#section-4.5.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.5.1-3">The format of the CCA platform profile claim is defined as a text string of value
-"tag:arm.com,2023:cca#1.0.0".<a href="#section-4.5.1-3" class="pilcrow">¶</a></p>
+"tag:arm.com,2023:cca_platform#1.0.0".<a href="#section-4.5.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.5.1-4">This claim MUST be present in a CCA Platform attestation token.<a href="#section-4.5.1-4" class="pilcrow">¶</a></p>
 <p id="section-4.5.1-5">See <a href="#sec-backwards-compat" class="auto internal xref">Section 4.9</a>, for considerations about backwards compatibility
 with previous versions of the CCA Platform attestation token format.<a href="#section-4.5.1-5" class="pilcrow">¶</a></p>
@@ -2335,6 +2335,7 @@ CCA Platform token. Since the relying party may not be in possession of a trust
 anchor to verify the digital signature, it uses the hint in the same way
 as it would treat any other information provided by an external party,
 which includes attacker-provided data.<a href="#section-4.7.1-4" class="pilcrow">¶</a></p>
+<p id="section-4.7.1-5">The CCA platform verification service indicator claim is OPTIONAL in a CCA platform token.<a href="#section-4.7.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-arm-platform-hash-algm-id">
@@ -2380,7 +2381,7 @@ attestation technologies, this specification applies the following constraints
  to the <code>nonce-type</code>:<a href="#section-4.8.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.8.1-3.1">
-              <p id="section-4.8.1-3.1.1">The length MUST be either 32, 48, or 64 bytes.<a href="#section-4.8.1-3.1.1" class="pilcrow">¶</a></p>
+              <p id="section-4.8.1-3.1.1">The length MUST be 64 bytes.<a href="#section-4.8.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.8.1-3.2">
               <p id="section-4.8.1-3.2.1">Only a single nonce value is conveyed. The array notation MUST NOT be used for encoding the nonce value.<a href="#section-4.8.1-3.2.1" class="pilcrow">¶</a></p>
@@ -2452,8 +2453,8 @@ cca-realm-personalization-value = (
           <h4 id="name-realm-initial-measurement">
 <a href="#section-4.8.4" class="section-number selfRef">4.8.4. </a><a href="#name-realm-initial-measurement" class="section-name selfRef">Realm Initial Measurement</a>
           </h4>
-<p id="section-4.8.4-1">The Realm Initial Measurement claim contains the measurements taken of Realm state
-before the Realm is activated.<a href="#section-4.8.4-1" class="pilcrow">¶</a></p>
+<p id="section-4.8.4-1">The Realm Initial Measurement claim contains the compound extension of
+measurements taken of Realm memory and state before the Realm is activated.<a href="#section-4.8.4-1" class="pilcrow">¶</a></p>
 <p id="section-4.8.4-2">This claim MUST be present in a CCA Realm state attestation token.<a href="#section-4.8.4-2" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.8.4-3">
 <pre>
@@ -2630,7 +2631,7 @@ will accept a wider range of algorithms, while Attesters would produce CCA token
 using only one such algorithm.<a href="#section-4.11.1-4" class="pilcrow">¶</a></p>
 <p id="section-4.11.1-5">The CCA Platform token is always directly signed by the CCA Platform RoT.  Therefore, the CCA
 claims-set is never carried in a Detached EAT bundle
-(<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-28#section-5" class="relref">Section 5</a> of [<a href="#EAT" class="cite xref">EAT</a>]</span>).<a href="#section-4.11.1-5" class="pilcrow">¶</a></p>
+(<span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-30#section-5" class="relref">Section 5</a> of [<a href="#EAT" class="cite xref">EAT</a>]</span>).<a href="#section-4.11.1-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="freshness-model">
@@ -2696,7 +2697,7 @@ For use in CCA tokens, it must be possible to encode the epoch handle as an opaq
               </tr>
               <tr>
                 <td class="text-left" rowspan="1" colspan="1">Verification Key Identification</td>
-                <td class="text-left" rowspan="1" colspan="1">Any identification method listed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-28#appendix-F.1" class="relref">Appendix F.1</a> of [<a href="#EAT" class="cite xref">EAT</a>]</span>
+                <td class="text-left" rowspan="1" colspan="1">Any identification method listed in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-30#appendix-F.1" class="relref">Appendix F.1</a> of [<a href="#EAT" class="cite xref">EAT</a>]</span>
 </td>
               </tr>
               <tr>
@@ -2923,10 +2924,9 @@ implementation is expected to follow the algorithm described in <span><a href="h
         <h3 id="name-endorsements-reference-valu">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-endorsements-reference-valu" class="section-name selfRef">Endorsements, Reference Values and Verification Key Material</a>
         </h3>
-<p id="section-7.2-1">The <strong>TODO</strong>  ref-to-CCA-Endorsements defines a protocol based on the <span>[<a href="#RATS-CoRIM" class="cite xref">RATS-CoRIM</a>]</span> data model
-that can be used to convey CCA Endorsements, Reference Values and verification
-key material to the Verifier.
-TODO... perhaps redact this section until a cca-endorsements draft is available?<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">The <span>[<a href="#CCA-ENDORSEMENTS" class="cite xref">CCA-ENDORSEMENTS</a>]</span> defines a protocol based on the <span>[<a href="#RATS-CoRIM" class="cite xref">RATS-CoRIM</a>]</span> data model
+that can be used to convey CCA Endorsements, Reference Values and Verification
+Key Material to the Verifier.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2936,7 +2936,7 @@ TODO... perhaps redact this section until a cca-endorsements draft is available?
       <h2 id="name-implementation-status">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-implementation-status" class="section-name selfRef">Implementation Status</a>
       </h2>
-<p id="section-8-1"><span class="cref" id="rfc-ed-note">RFC Editor:</span> please remove this section before pubblication.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1"><span class="cref" id="rfc-ed-note">RFC Editor:</span> please remove this section before publication.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">Implementations of this specification are provided by the Trusted
 Firmware-RMM project <span>[<a href="#TF-RMM" class="cite xref">TF-RMM</a>]</span> and the Veraison project <span>[<a href="#Veraison" class="cite xref">Veraison</a>]</span>.
 These implementations are released as open-source software.<a href="#section-8-2" class="pilcrow">¶</a></p>
@@ -2949,16 +2949,11 @@ These implementations are released as open-source software.<a href="#section-8-2
       </h2>
 <p id="section-9-1">This specification re-uses the EAT specification and therefore the CWT specification.
 Hence, the security and privacy considerations of those specifications apply here as well.<a href="#section-9-1" class="pilcrow">¶</a></p>
-<p id="section-9-2">TODO... questionable ability to execute on this as anyone can call RSI??
-A PSA Attester MUST NOT provide Evidence to an untrusted
-challenger, as it may allow attackers to interpose and trick the Verifier into
-believing the attacker is a legitimate Attester.
-This is especially relevant to protocols that use PSA attestation tokens to authenticate the attester to a relying party.<a href="#section-9-2" class="pilcrow">¶</a></p>
-<p id="section-9-3">Attestation tokens contain information that may be unique to a device and
+<p id="section-9-2">Attestation tokens contain information that may be unique to a device and
 therefore they may allow singling out an individual device for tracking
 purposes.  Deployments that have privacy requirements must take appropriate
 measures to ensure that the token is only used to provision anonymous/pseudonym
-keys.<a href="#section-9-3" class="pilcrow">¶</a></p>
+keys.<a href="#section-9-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -3405,7 +3400,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 To indicate that the transmitted content is a CCA attestation token,
 applications can use the <code>application/eat+cwt</code> media type defined in
 <span>[<a href="#EAT-MEDIATYPES" class="cite xref">EAT-MEDIATYPES</a>]</span> with the <code>eat_profile</code> parameter set to
-<code>tag:arm.com,2023:cca#1.0.0</code>.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
+<code>tag:arm.com,2023:cca_platform#1.0.0</code>.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-iana-coap-content-format">
@@ -3418,7 +3413,7 @@ Content-Formats" registry <span>[<a href="#IANA-CoAP-Content-Formats" class="cit
 <ul class="normal">
 <li class="normal" id="section-10.3-2.1">
             <p id="section-10.3-2.1.1">A registration for the <code>application/eat+cwt</code> media type with the <code>eat_profile</code> parameter
-equal to "tag:arm.com,2023:cca#1.0.0"<a href="#section-10.3-2.1.1" class="pilcrow">¶</a></p>
+equal to "tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3-2.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
 <p id="section-10.3-3">The Content-Formats should be allocated from the Expert review range (0-255).<a href="#section-10.3-3" class="pilcrow">¶</a></p>
@@ -3429,7 +3424,7 @@ equal to "tag:arm.com,2023:cca#1.0.0"<a href="#section-10.3-2.1.1" class="pilcro
           </h4>
 <ul class="normal">
 <li class="normal" id="section-10.3.1-1.1">
-              <p id="section-10.3.1-1.1.1">Media Type: `application/eat+cwt; eat_profile="tag:arm.com,2023:cca#1.0.0"<a href="#section-10.3.1-1.1.1" class="pilcrow">¶</a></p>
+              <p id="section-10.3.1-1.1.1">Media Type: `application/eat+cwt; eat_profile="tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.3.1-1.2">
               <p id="section-10.3.1-1.2.1">Encoding: -<a href="#section-10.3.1-1.2.1" class="pilcrow">¶</a></p>
@@ -3459,6 +3454,7 @@ equal to "tag:arm.com,2023:cca#1.0.0"<a href="#section-10.3-2.1.1" class="pilcro
 </div>
 </section>
 </div>
+<div id="sec-combined-references">
 <section id="section-11">
       <h2 id="name-references">
 <a href="#section-11" class="section-number selfRef">11. </a><a href="#name-references" class="section-name selfRef">References</a>
@@ -3475,7 +3471,7 @@ equal to "tag:arm.com,2023:cca#1.0.0"<a href="#section-10.3-2.1.1" class="pilcro
 <dd class="break"></dd>
 <dt id="CMW">[CMW]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Smith, N.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"RATS Conceptual Messages Wrapper (CMW)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-msg-wrap-06</span>, <time datetime="2024-07-01" class="refDate">1 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-msg-wrap-06">https://datatracker.ietf.org/doc/html/draft-ietf-rats-msg-wrap-06</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Smith, N.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"RATS Conceptual Messages Wrapper (CMW)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-msg-wrap-07</span>, <time datetime="2024-07-24" class="refDate">24 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-msg-wrap-07">https://datatracker.ietf.org/doc/html/draft-ietf-rats-msg-wrap-07</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="COSE-ALGS">[COSE-ALGS]</dt>
         <dd>
@@ -3483,11 +3479,11 @@ equal to "tag:arm.com,2023:cca#1.0.0"<a href="#section-10.3-2.1.1" class="pilcro
 <dd class="break"></dd>
 <dt id="EAT">[EAT]</dt>
         <dd>
-<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Mandyam, G.</span>, <span class="refAuthor">O'Donoghue, J.</span>, and <span class="refAuthor">C. Wallace</span>, <span class="refTitle">"The Entity Attestation Token (EAT)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-28</span>, <time datetime="2024-06-25" class="refDate">25 June 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-28">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-28</a>&gt;</span>. </dd>
+<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Mandyam, G.</span>, <span class="refAuthor">O'Donoghue, J.</span>, and <span class="refAuthor">C. Wallace</span>, <span class="refTitle">"The Entity Attestation Token (EAT)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-30</span>, <time datetime="2024-08-02" class="refDate">2 August 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-30">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-30</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="EAT-MEDIATYPES">[EAT-MEDIATYPES]</dt>
         <dd>
-<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"EAT Media Types"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-media-type-07</span>, <time datetime="2024-04-02" class="refDate">2 April 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-07">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"EAT Media Types"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-media-type-08</span>, <time datetime="2024-07-04" class="refDate">4 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-08">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA-CWT">[IANA-CWT]</dt>
         <dd>
@@ -3495,7 +3491,7 @@ equal to "tag:arm.com,2023:cca#1.0.0"<a href="#section-10.3-2.1.1" class="pilcro
 <dd class="break"></dd>
 <dt id="IANA.named-information">[IANA.named-information]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"Named Information"</span>, <span>&lt;<a href="http://www.iana.org/assignments/named-information">http://www.iana.org/assignments/named-information</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Named Information"</span>, <span>&lt;<a href="https://www.iana.org/assignments/named-information">https://www.iana.org/assignments/named-information</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -3542,6 +3538,10 @@ equal to "tag:arm.com,2023:cca#1.0.0"<a href="#section-10.3-2.1.1" class="pilcro
 <a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="CCA-ENDORSEMENTS">[CCA-ENDORSEMENTS]</dt>
+        <dd>
+<span class="refAuthor">Deshpande, Y.</span> and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Arm's Confidential Computing Architecture (Arm CCA) Attestation Verifier Endorsements"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ydb-rats-cca-endorsements-00</span>, <time datetime="2024-07-05" class="refDate">5 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ydb-rats-cca-endorsements-00">https://datatracker.ietf.org/doc/html/draft-ydb-rats-cca-endorsements-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="COSE-X509">[COSE-X509]</dt>
         <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Header Parameters for Carrying and Referencing X.509 Certificates"</span>, <span class="seriesInfo">RFC 9360</span>, <span class="seriesInfo">DOI 10.17487/RFC9360</span>, <time datetime="2023-02" class="refDate">February 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9360">https://www.rfc-editor.org/rfc/rfc9360</a>&gt;</span>. </dd>
@@ -3564,7 +3564,7 @@ equal to "tag:arm.com,2023:cca#1.0.0"<a href="#section-10.3-2.1.1" class="pilcro
 <dd class="break"></dd>
 <dt id="RATS-CoRIM">[RATS-CoRIM]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-04</span>, <time datetime="2024-03-04" class="refDate">4 March 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-04">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-04</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-05</span>, <time datetime="2024-07-08" class="refDate">8 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-05">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-05</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9334">[RFC9334]</dt>
         <dd>
@@ -3590,6 +3590,7 @@ equal to "tag:arm.com,2023:cca#1.0.0"<a href="#section-10.3-2.1.1" class="pilcro
 </section>
 </div>
 </section>
+</div>
 <div id="examples">
 <section id="appendix-A">
       <h2 id="name-examples">
