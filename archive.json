@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-13T01:03:12.890088+00:00",
+  "timestamp": "2024-08-15T00:59:15.838792+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -71,32 +71,48 @@
       "id": "I_kwDOMRXjbM6OaDGJ",
       "title": "Is verification service indicator optional for the attester?",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Current text implies that it can be ignored by the RP, but text does not clarify whether an attestation is possible without a service indicator.",
       "createdAt": "2024-07-03T18:13:31Z",
-      "updatedAt": "2024-07-03T18:14:16Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-08-14T12:17:10Z",
+      "closedAt": "2024-08-14T12:17:10Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Addressed in PR #11",
+          "createdAt": "2024-08-14T12:17:10Z",
+          "updatedAt": "2024-08-14T12:17:10Z"
+        }
+      ]
     },
     {
       "number": 4,
       "id": "I_kwDOMRXjbM6OaSp2",
       "title": "Is rim a single measurement or multiple?",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/4",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Current text states \"The Realm Initial Measurement claim contains the measurements taken of Realm state\r\nbefore the Realm is activated\".  Can more than one measurement constitute a rim?",
       "createdAt": "2024-07-03T18:59:45Z",
-      "updatedAt": "2024-07-03T18:59:45Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-08-14T12:16:53Z",
+      "closedAt": "2024-08-14T12:16:52Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Addressed in PR #11",
+          "createdAt": "2024-08-14T12:16:52Z",
+          "updatedAt": "2024-08-14T12:16:52Z"
+        }
+      ]
     },
     {
       "number": 5,
@@ -143,16 +159,24 @@
       "id": "I_kwDOMRXjbM6OabDa",
       "title": "Replace PSA attester",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/8",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "PSA attester should conform with PRoT requirements.  It is not clear that PRoT meets all HES requirements for CCA.  Can we replace PSA attester with  HES attester?",
       "createdAt": "2024-07-03T19:22:07Z",
-      "updatedAt": "2024-07-03T19:22:07Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2024-08-14T12:16:27Z",
+      "closedAt": "2024-08-14T12:16:27Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Addressed in PR #11 ",
+          "createdAt": "2024-08-14T12:16:14Z",
+          "updatedAt": "2024-08-14T12:16:14Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -275,7 +299,7 @@
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/10",
       "state": "MERGED",
       "author": "yogeshbdeshpande",
-      "authorAssociation": "CONTRIBUTOR",
+      "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
@@ -296,7 +320,7 @@
       "comments": [
         {
           "author": "yogeshbdeshpande",
-          "authorAssociation": "CONTRIBUTOR",
+          "authorAssociation": "COLLABORATOR",
           "body": "@SimonFrost-Arm : Please edit the repo permission for me to make this change!",
           "createdAt": "2024-07-05T09:16:45Z",
           "updatedAt": "2024-07-05T09:16:45Z"
@@ -317,6 +341,156 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 11,
+      "id": "PR_kwDOMRXjbM54Qlfs",
+      "title": "Updated text to address multiple issues",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/11",
+      "state": "MERGED",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Issue #8 - use of 'PSA Attester'\r\nIssue #4 - statement on multiple measurements contributing to RIM Issue #3 - optionality of verification service indicator Typo in profile tag for 'cca' - should have been 'cca_platform'",
+      "createdAt": "2024-08-13T17:09:17Z",
+      "updatedAt": "2024-08-14T12:03:21Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "fc5f89646dbc94857c52d10665c5d2346743b924",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "iss_aug13",
+      "headRefOid": "6ad95083a582ef93f7e78d3ac6880903cbc53720",
+      "closedAt": "2024-08-14T12:02:57Z",
+      "mergedAt": "2024-08-14T12:02:57Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "7aa7cae4a8590fef3ad453e4f2a56a6f99cd5a4c"
+      },
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "For reason I've yet to figure out, don't seem to be able to add Giri as a reviewer to this PR",
+          "createdAt": "2024-08-13T17:11:50Z",
+          "updatedAt": "2024-08-13T17:11:50Z"
+        },
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Outstanding line length & Ref failing checks noted.",
+          "createdAt": "2024-08-13T17:12:56Z",
+          "updatedAt": "2024-08-13T17:12:56Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> For reason I've yet to figure out, don't seem to be able to add Giri as a reviewer to this PR\r\n\r\nDid you invite him as a collaborator?  If so, did he accept the invitation?\r\nIf both conditions hold, you should see him appear in the \"reviewers\" drop-down menu.",
+          "createdAt": "2024-08-13T18:10:57Z",
+          "updatedAt": "2024-08-13T18:11:16Z"
+        },
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Merged - will add another change for format issues",
+          "createdAt": "2024-08-14T12:03:20Z",
+          "updatedAt": "2024-08-14T12:03:20Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM6FXcVP",
+          "commit": {
+            "abbreviatedOid": "6ad9508"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "thanks!",
+          "createdAt": "2024-08-14T08:37:23Z",
+          "updatedAt": "2024-08-14T08:37:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOMRXjbM54YX-U",
+      "title": "Fix lint issues blocking CI",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/12",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Missing refs and whitespace at EOL tidied, should fix CI ",
+      "createdAt": "2024-08-14T16:06:09Z",
+      "updatedAt": "2024-08-14T16:13:03Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "7aa7cae4a8590fef3ad453e4f2a56a6f99cd5a4c",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "lints1408",
+      "headRefOid": "227c07ad0ab03d1ef8d5717642e0fa7728acf63b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM6FbtNR",
+          "commit": {
+            "abbreviatedOid": "227c07a"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-14T16:09:42Z",
+          "updatedAt": "2024-08-14T16:09:42Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM6Fbu5m",
+          "commit": {
+            "abbreviatedOid": "227c07a"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM!",
+          "createdAt": "2024-08-14T16:13:03Z",
+          "updatedAt": "2024-08-14T16:13:03Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOMRXjbM54aZTh",
+      "title": "Realm Nonce correction and other minor tidy up",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/13",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Correct Realm Nonce size constraint and add reference to CCA Endorsements",
+      "createdAt": "2024-08-14T22:08:33Z",
+      "updatedAt": "2024-08-14T22:10:00Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "7aa7cae4a8590fef3ad453e4f2a56a6f99cd5a4c",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "nonce-correction",
+      "headRefOid": "1177f88b7a3a127e386e421f8651dc8cb8f7138a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
