@@ -2381,7 +2381,7 @@ attestation technologies, this specification applies the following constraints
  to the <code>nonce-type</code>:<a href="#section-4.8.1-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.8.1-3.1">
-              <p id="section-4.8.1-3.1.1">The length MUST be either 32, 48, or 64 bytes.<a href="#section-4.8.1-3.1.1" class="pilcrow">¶</a></p>
+              <p id="section-4.8.1-3.1.1">The length MUST be 64 bytes.<a href="#section-4.8.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-4.8.1-3.2">
               <p id="section-4.8.1-3.2.1">Only a single nonce value is conveyed. The array notation MUST NOT be used for encoding the nonce value.<a href="#section-4.8.1-3.2.1" class="pilcrow">¶</a></p>
@@ -2924,10 +2924,9 @@ implementation is expected to follow the algorithm described in <span><a href="h
         <h3 id="name-endorsements-reference-valu">
 <a href="#section-7.2" class="section-number selfRef">7.2. </a><a href="#name-endorsements-reference-valu" class="section-name selfRef">Endorsements, Reference Values and Verification Key Material</a>
         </h3>
-<p id="section-7.2-1">The <strong>TODO</strong>  ref-to-CCA-Endorsements defines a protocol based on the <span>[<a href="#RATS-CoRIM" class="cite xref">RATS-CoRIM</a>]</span> data model
-that can be used to convey CCA Endorsements, Reference Values and verification
-key material to the Verifier.
-TODO... perhaps redact this section until a cca-endorsements draft is available?<a href="#section-7.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.2-1">The <span>[<a href="#CCA-ENDORSEMENTS" class="cite xref">CCA-ENDORSEMENTS</a>]</span> defines a protocol based on the <span>[<a href="#RATS-CoRIM" class="cite xref">RATS-CoRIM</a>]</span> data model
+that can be used to convey CCA Endorsements, Reference Values and Verification
+Key Material to the Verifier.<a href="#section-7.2-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2937,7 +2936,7 @@ TODO... perhaps redact this section until a cca-endorsements draft is available?
       <h2 id="name-implementation-status">
 <a href="#section-8" class="section-number selfRef">8. </a><a href="#name-implementation-status" class="section-name selfRef">Implementation Status</a>
       </h2>
-<p id="section-8-1"><span class="cref" id="rfc-ed-note">RFC Editor:</span> please remove this section before pubblication.<a href="#section-8-1" class="pilcrow">¶</a></p>
+<p id="section-8-1"><span class="cref" id="rfc-ed-note">RFC Editor:</span> please remove this section before publication.<a href="#section-8-1" class="pilcrow">¶</a></p>
 <p id="section-8-2">Implementations of this specification are provided by the Trusted
 Firmware-RMM project <span>[<a href="#TF-RMM" class="cite xref">TF-RMM</a>]</span> and the Veraison project <span>[<a href="#Veraison" class="cite xref">Veraison</a>]</span>.
 These implementations are released as open-source software.<a href="#section-8-2" class="pilcrow">¶</a></p>
@@ -3535,6 +3534,10 @@ equal to "tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3-2.1.1" clas
 <a href="#section-11.2" class="section-number selfRef">11.2. </a><a href="#name-informative-references" class="section-name selfRef">Informative References</a>
         </h3>
 <dl class="references">
+<dt id="CCA-ENDORSEMENTS">[CCA-ENDORSEMENTS]</dt>
+        <dd>
+<span class="refAuthor">Deshpande, Y.</span> and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"Arm's Confidential Computing Architecture (Arm CCA) Attestation Verifier Endorsements"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ydb-rats-cca-endorsements-00</span>, <time datetime="2024-07-05" class="refDate">5 July 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ydb-rats-cca-endorsements-00">https://datatracker.ietf.org/doc/html/draft-ydb-rats-cca-endorsements-00</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="COSE-X509">[COSE-X509]</dt>
         <dd>
 <span class="refAuthor">Schaad, J.</span>, <span class="refTitle">"CBOR Object Signing and Encryption (COSE): Header Parameters for Carrying and Referencing X.509 Certificates"</span>, <span class="seriesInfo">RFC 9360</span>, <span class="seriesInfo">DOI 10.17487/RFC9360</span>, <time datetime="2023-02" class="refDate">February 2023</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9360">https://www.rfc-editor.org/rfc/rfc9360</a>&gt;</span>. </dd>

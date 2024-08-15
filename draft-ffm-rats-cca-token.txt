@@ -815,7 +815,7 @@ arm-platform-verification-service = (
    claim offers flexiblity for different attestation technologies, this
    specification applies the following constraints to the nonce-type:
 
-   *  The length MUST be either 32, 48, or 64 bytes.
+   *  The length MUST be 64 bytes.
 
    *  Only a single nonce value is conveyed.  The array notation MUST
       NOT be used for encoding the nonce value.
@@ -1232,16 +1232,14 @@ cca-realm-extensible-measurements = (
 
 7.2.  Endorsements, Reference Values and Verification Key Material
 
-   The *TODO* ref-to-CCA-Endorsements defines a protocol based on the
-   [RATS-CoRIM] data model that can be used to convey CCA Endorsements,
-   Reference Values and verification key material to the Verifier.
-   TODO... perhaps redact this section until a cca-endorsements draft is
-   available?
+   The [CCA-ENDORSEMENTS] defines a protocol based on the [RATS-CoRIM]
+   data model that can be used to convey CCA Endorsements, Reference
+   Values and Verification Key Material to the Verifier.
 
 8.  Implementation Status
 
 
-   // RFC Editor: please remove this section before pubblication.
+   // RFC Editor: please remove this section before publication.
 
    Implementations of this specification are provided by the Trusted
    Firmware-RMM project [TF-RMM] and the Veraison project [Veraison].
@@ -1609,6 +1607,14 @@ cca-realm-extensible-measurements = (
               <https://www.rfc-editor.org/rfc/rfc9052>.
 
 11.2.  Informative References
+
+   [CCA-ENDORSEMENTS]
+              Deshpande, Y. and T. Fossati, "Arm's Confidential
+              Computing Architecture (Arm CCA) Attestation Verifier
+              Endorsements", Work in Progress, Internet-Draft, draft-
+              ydb-rats-cca-endorsements-00, 5 July 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ydb-rats-cca-
+              endorsements-00>.
 
    [COSE-X509]
               Schaad, J., "CBOR Object Signing and Encryption (COSE):
