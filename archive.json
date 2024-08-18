@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-15T00:59:15.838792+00:00",
+  "timestamp": "2024-08-18T01:05:38.164364+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -418,24 +418,26 @@
       "id": "PR_kwDOMRXjbM54YX-U",
       "title": "Fix lint issues blocking CI",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/12",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SimonFrost-Arm",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Missing refs and whitespace at EOL tidied, should fix CI ",
       "createdAt": "2024-08-14T16:06:09Z",
-      "updatedAt": "2024-08-14T16:13:03Z",
+      "updatedAt": "2024-08-15T07:11:41Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "7aa7cae4a8590fef3ad453e4f2a56a6f99cd5a4c",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "lints1408",
       "headRefOid": "227c07ad0ab03d1ef8d5717642e0fa7728acf63b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-08-15T07:11:41Z",
+      "mergedAt": "2024-08-15T07:11:41Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "ba25d8f10b19c7b64c760093c766169095068bbe"
+      },
       "comments": [],
       "reviews": [
         {
@@ -471,26 +473,42 @@
       "id": "PR_kwDOMRXjbM54aZTh",
       "title": "Realm Nonce correction and other minor tidy up",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/13",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Correct Realm Nonce size constraint and add reference to CCA Endorsements",
       "createdAt": "2024-08-14T22:08:33Z",
-      "updatedAt": "2024-08-14T22:10:00Z",
+      "updatedAt": "2024-08-15T07:12:01Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "7aa7cae4a8590fef3ad453e4f2a56a6f99cd5a4c",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "nonce-correction",
       "headRefOid": "1177f88b7a3a127e386e421f8651dc8cb8f7138a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-08-15T07:12:01Z",
+      "mergedAt": "2024-08-15T07:12:01Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "69a3c2c694bcb19beaa61272b98ba4bc5f78b2b1"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM6FgWSK",
+          "commit": {
+            "abbreviatedOid": "1177f88"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2024-08-15T07:11:14Z",
+          "updatedAt": "2024-08-15T07:11:14Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
