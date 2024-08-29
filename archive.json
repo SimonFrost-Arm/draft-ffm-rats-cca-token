@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-27T01:03:26.863481+00:00",
+  "timestamp": "2024-08-29T01:04:21.538127+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -177,6 +177,42 @@
           "updatedAt": "2024-08-14T12:16:14Z"
         }
       ]
+    },
+    {
+      "number": 14,
+      "id": "I_kwDOMRXjbM6UWbMA",
+      "title": "CCA attester model",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/14",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "The CCA attester model is slightly more complicated than is currently described.\r\n\r\nThere are _two_ separate sub-attesters (platform and realm) rather than one, each with their independent AE/TE split, and bound via RAK attestation.\r\n\r\nThis should be explained in Section 3 and illustrated in Figure 1.",
+      "createdAt": "2024-08-27T10:17:57Z",
+      "updatedAt": "2024-08-27T10:28:15Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOMRXjbM6UWgk6",
+      "title": "Automated build and validation machinery",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/15",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "thomas-fossati"
+      ],
+      "labels": [],
+      "body": "We must put the build and validation machinery around the CDDL and the EDN examples in place.\r\n\r\nSpecifically:\r\n\r\n* [ ] Validate the platform CDDL\r\n* [ ] Validate the realm CDDL\r\n* [ ] Automatically assemble the top-level token\r\n* [ ] Automatically validate the top-level token CDDL\r\n* [ ] Compile examples (EDN->CBOR) and validate them against the top-level schema\r\n* [ ] Include examples in the draft document\r\n* [ ] Include the top-level token in the draft document\r\n\r\nAll of this should be executed as part of the CI.",
+      "createdAt": "2024-08-27T10:27:18Z",
+      "updatedAt": "2024-08-27T10:28:22Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
