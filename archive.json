@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-15T01:09:50.463301+00:00",
+  "timestamp": "2024-10-17T01:08:57.898912+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -211,6 +211,22 @@
       "body": "We must put the build and validation machinery around the CDDL and the EDN examples in place.\r\n\r\nSpecifically:\r\n\r\n* [ ] Validate the platform CDDL\r\n* [ ] Validate the realm CDDL\r\n* [ ] Automatically assemble the top-level token\r\n* [ ] Automatically validate the top-level token CDDL\r\n* [ ] Compile examples (EDN->CBOR) and validate them against the top-level schema\r\n* [ ] Include examples in the draft document\r\n* [ ] Include the top-level token in the draft document\r\n\r\nAll of this should be executed as part of the CI.",
       "createdAt": "2024-08-27T10:27:18Z",
       "updatedAt": "2024-08-27T10:28:22Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 16,
+      "id": "I_kwDOMRXjbM6aRgfS",
+      "title": "Describe \"direct\" mode",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/16",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This is releted to #14 because the direct mode is a different attester from delegated.",
+      "createdAt": "2024-10-15T10:04:58Z",
+      "updatedAt": "2024-10-15T10:04:58Z",
       "closedAt": null,
       "comments": []
     }
