@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 19 May 2025                                              Linaro
+Expires: 24 May 2025                                              Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                        15 November 2024
+                                                        20 November 2024
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 19 May 2025.
+   This Internet-Draft will expire on 24 May 2025.
 
 Copyright Notice
 
@@ -67,6 +67,10 @@ Table of Contents
    1.  Introduction
    2.  Conventions and Definitions
    3.  CCA Attester Model
+     3.1.  Direct
+     3.2.  Delegated
+     3.3.  Boot Phase
+     3.4.  Run-time Phase
    4.  CCA Claims
      4.1.  CCA Attestation Token top level wrapper
      4.2.  CCA Platform token Claims
@@ -227,55 +231,99 @@ Table of Contents
 
 3.  CCA Attester Model
 
-   Figure 1 outlines the structure of the CCA Attester according to the
-   conceptual model described in Section 3.1 of [RFC9334].
+   There are two kinds of CCA Attester: direct and delegated.  Their
+   architectural arrangements are described in Section 3.1 and
+   Section 3.2, respectively.
 
-                                          .----------.
-                                          | Verifier |
-                                          '----------'
-                                               ^
-                                               |
-                                     CCA Token |
-                                               |
-   .-------------------------------------------|----------.
-   | .-----------------------------------------|--------. |
-   | | Attesting Environment   .<------R-----. |        | |
-   | |                         |             | |        | |
-   | |    .------------.    .--+--.     .----+-+------. | |
-   | |    | Main       |    | HES |     | Realm       | | |
-   | |    | Bootloader +--->| RoT |<----+ Management  | | |
-   | |    |            | W  |     |  R  | Monitor     | | |
-   | |    '-----+------'    '-----'     '------+------' | |
-   | '----------|------------------------------|--------' |
-   |            |                              |          |
-   | .----------|------------------------------|--------. |
-   | |          |                              |        | |
-   | |    .-----o-------.                .-----o------. | |
-   | |    | Realm World |                | Realm      | | |
-   | |    |    TCB      |                | State      | | |
-   | |    '-------------'                '------------' | |
-   | | Target Environment                               | |
-   | '--------------------------------------------------' |
-   '------------------------------------------------------'
-   Legend:
-                ---> read    ---> write    ---o measure
-                 R            W
+3.1.  Direct
+
+   TODO
+
+3.2.  Delegated
+
+   The structure of the CCA delegated Attester is illustrated in
+   Figure 1.  The CCA delegated Attester is a "layered attester"
+   (Section 3.2 of [RFC9334]) with exactly two layers: platform and
+   realm.
+
+   The Realm Management Monitor (RMM) is the top layer Attesting
+   Environment.  It attests to the initial memory content of each Realm
+   that is executed on a CCA platform, and any dynamic measurements
+   provided by Realm guest code.  It uses its own private key called RAK
+   (Realm Attestation Key) to sign the claims regarding the requesting
+   Realm.
+
+   The HES (Hardware Enforced Security) is the bottom layer Attesting
+   Environment, which acts as the CCA platform hardware RoT.  It attests
+   to the executables and configuration contents of the "Monitor
+   Security Domain", which includes the RMM, as well as a few relevant
+   CCA parameters (e.g., the CCA platform implementation identifier),
+   and the security lifecycle state of the platform.  Additionally, it
+   generates the RAK keypair, transfers it over a trusted channel to the
+   RMM, and stores the hash of the RAK public key in a claim that is
+   signed using the CCA Platform Attestation Key (CPAK) as part of the
+   platform Evidence.
+
+   The CCA Evidence produced in delegated mode comprises two separately
+   signed EATs, one for the platform, another for the realm, wrapped in
+   a CMW [CMW] collection.  The intra-collection binding is detailed in
+   Section 4.10.
+
+                                      .----------.
+                                      |          |
+                                      | Verifier |
+                                      |          |
+                                      '----------'
+                                           ^
+   .-----------------------------------.   |
+   |    .-------------.                |   |
+   |    | Target      |                |   |
+   |    | Environment +----.           |   | Layered
+   |    |             | TE |           |   | Evidence for
+   |    | Realm 1     |    +----.      |   | Platform and
+   |    '-+--+--------'    | TE |      |   | Realm
+   |      |  | Realm 2     |    |      |   |
+   |      |  '-+--+--------'    |      |   |
+   |      |    |  |  ...        |      |   |
+   |      |    |  '-+-----------'      |   |
+   |      |    |    | Collect Claims   |   |
+   | .----| ---|----|----------------. |   |
+   | |    v    v    v    Target      | |   |
+   | |   .-----------.   Environment | |   |
+   | |  | Realm       |              | |   |
+   | |  | Management  +-------------------'
+   | |  | Monitor     | .----------. | |
+   | |  | (RMM)       | |   BLs    | | |
+   | |  |             | '----------' | |
+   | |  |             |              | |
+   | |  | Attesting   | .----------. | |
+   | |  | Environment | |   CFGs   | | |
+   | |   '-----------'  '----------' | |
+   | |    ^                 Platform | |
+   | '----|--------------+-----------' |
+   |      | Evidence     | Collect     |
+   |      | for          | Claims      |
+   |      | Platform     v             |
+   |  .---+----------------------.     |
+   | | Hardware                   |    |
+   | | Enforced                   |    |
+   | | Security       Attesting   |    |
+   | | (HES)          Environment |    |
+   |  '--------------------------'     |
+   '-----------------------------------'
 
                            Figure 1: CCA Attester
 
-   The CCA Attester is a relatively straightforward embodiment of the
-   RATS Attester with exactly one Attesting Environment and one or more
-   Target Environments.
+3.3.  Boot Phase
 
-   The Attesting Environment is responsible for collecting the
-   information to be represented in CCA claims and to assemble them into
-   Evidence.  It is made of three cooperating components:
+   The HES Attesting Environment is responsible for collecting the
+   information to be represented in CCA platform claims and to assemble
+   them into Evidence.
 
-   *  The Main Bootloader, executing at boot-time, measures the trusted
-      computing base (TCB) of the Realm World
-
-   *  i.e., loaded firmware components and sends them to the HES RoT to
-      be stored isolated.  (CCA Platform Boot State).  See Figure 2.
+   The Main Bootloader, executing at boot-time, measures the trusted
+   computing base (TCB) of the Realm World - i.e., loaded firmware
+   components and the associated configuration payloads - and sends them
+   to the HES RoT to be stored isolated.  See Figure 2.
 
        i-th Target    Main Boot        HES
        Environment      Loader         RoT
@@ -292,66 +340,58 @@ Table of Contents
 
                      Figure 2: CCA Attester Boot Phase
 
-   *  The Realm Management Monitor (RMM), executing at run-time,
-      maintains measurements for the state of a Realm.  It can respond
-      to requests issued from a Realm for an attestation token relevant
-      for that Realm by obtaining a CCA Platform attestation token from
-      the HES RoT and combining that with an attestation token
-      containing Evidence reflecting Realm state.
+3.4.  Run-time Phase
 
-   *  The HES RoT, executing at run-time, maintains measurements for the
-      state of the CCA platform TCB, including the lifecycle state of
-      the CCA platform.  It can answer requests coming from the RMM to
-      collect and format claims corresponding to that state and use a
-      CCA Platform Attestation Key (CPAK) to sign them.  How the CPAK is
-      derived is implementation-specific.
+   The Realm Management Monitor (RMM), executing at run-time, maintains
+   measurements for the state of a Realm.  It can respond to requests
+   issued from a Realm for an attestation token relevant for that Realm
+   by obtaining a CCA Platform attestation token from the HES RoT and
+   combining that with an attestation token containing Evidence
+   reflecting Realm state.
 
-   See Figure 3.
+   The HES RoT, executing at run-time, maintains measurements for the
+   state of the CCA platform TCB, including the lifecycle state of the
+   CCA platform.  It can answer requests coming from the RMM to collect
+   and format claims corresponding to that state and use a CCA Platform
+   Attestation Key (CPAK) to sign them (see Figure 3).  How the CPAK is
+   derived is implementation-specific.
 
-             HES           Realm
-             RoT           Manager     Verifier
-              |               |           |
-   -----------+---------------+-----------+----
-              |               |           |
-    Platform  |               |           |
-    Boot      |               |           |
-    State     | Req. Platform |           |
-     |        | Token (#RAK)  |           |
-     |        |<--------------+           |
-     v        |               |           |
-   Platform <-|               |           |
-     Token  ->|               |           |
-              |               |           |
-          <---|               |           |
-      sign    |               |           |
-          --->|   Plat Token  |           |
-              +-------------->|           |
-              |               |           |
-              |     Realm     |           |
-              |     State     |           |
-              |       |       |           |
-              |       |       |           |
-              |       v       |           |
-              |     Realm     |           |
-              |     Token     |           |
-              |           .---+           |
-              |      sign |   |           |
-              |           '-->|           |
-              |               |           |
-              |               |           |
-              |               | CCA Token |
-              |               +---------->|
-              |               |           |
+              HES           Realm
+              RoT           Manager     Verifier
+               |               |           |
+               |               |           |
+     Platform  |               |           |
+     Boot      |               |           |
+     State     | Req. Platform |           |
+       |       | Token (#RAK)  |           |
+       |       |<--------------+           |
+       v       |               |           |
+     Platform  |               |           |
+     Token     |               |           |
+               |               |           |
+      sign .---+               |           |
+      w/   |   |               |           |
+      CPAK '-->|   Plat Token  |           |
+               +-------------->|           |
+               |               |           |
+               |     Realm     |           |
+               |     State     |           |
+               |       |       |           |
+               |       |       |           |
+               |       v       |           |
+               |     Realm     |           |
+               |     Token     |           |
+               |               |           |
+               |      sign .---+           |
+               |      w/   |   |           |
+               |      RAK  '-->|           |
+               |               |           |
+               |               |           |
+               |               | CCA Token |
+               |               +---------->|
+               |               |           |
 
                    Figure 3: CCA Attester Run-time Phase
-
-   The Target Environment consists of two elements:
-
-   *  Realm World TCB - hardware, firmware and configuration
-      contributions.
-
-   *  Individual state of a Realm - measurements of the initial state of
-      the Realm and dynamic measurements provided by Realm guest code.
 
    A reference implementation of the CCA Attester is provided by
    [TF-RMM].
@@ -1081,7 +1121,7 @@ cca-realm-extensible-measurements = (
 
 6.  Signing key implementation alternatives
 
-   In the CCA Platform reference design, PAKs (Section 3, Paragraph 8)
+   In the CCA Platform reference design, PAKs (Section 3.4, Paragraph 2)
    are raw public keys.
 
    Some implementations may choose to use an PAK that is a certified
@@ -1537,11 +1577,11 @@ cca-realm-extensible-measurements = (
               Confidential Compute Architecture", May 2023,
               <https://developer.arm.com/documentation/den0125/0300>.
 
-   [CMW]      Birkholz, H., Smith, N., Fossati, T., and H. Tschofenig,
-              "RATS Conceptual Messages Wrapper (CMW)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-msg-wrap-10, 4
-              November 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-msg-wrap-10>.
+   [CMW]      Birkholz, H., Smith, N., Fossati, T., Tschofenig, H., and
+              D. Glaze, "RATS Conceptual Messages Wrapper (CMW)", Work
+              in Progress, Internet-Draft, draft-ietf-rats-msg-wrap-11,
+              15 November 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-msg-wrap-11>.
 
    [COSE-ALGS]
               Schaad, J., "CBOR Object Signing and Encryption (COSE):
