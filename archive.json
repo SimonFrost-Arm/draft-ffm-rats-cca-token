@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-19T01:13:09.394397+00:00",
+  "timestamp": "2024-11-21T01:12:25.115348+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -208,9 +208,9 @@
         "thomas-fossati"
       ],
       "labels": [],
-      "body": "We must put the build and validation machinery around the CDDL and the EDN examples in place.\r\n\r\nSpecifically:\r\n\r\n* [ ] Validate the platform CDDL\r\n* [ ] Validate the realm CDDL\r\n* [ ] Automatically assemble the top-level token\r\n* [ ] Automatically validate the top-level token CDDL\r\n* [ ] Compile examples (EDN->CBOR) and validate them against the top-level schema\r\n* [ ] Include examples in the draft document\r\n* [ ] Include the top-level token in the draft document\r\n\r\nAll of this should be executed as part of the CI.",
+      "body": "We must put the build and validation machinery around the CDDL and the EDN examples in place.\r\n\r\nSpecifically:\r\n\r\n* [x] Validate the platform CDDL\r\n* [x] Validate the realm CDDL\r\n* [x] Automatically assemble the top-level token\r\n* [x] Automatically validate the top-level token CDDL\r\n* [x] Compile examples (EDN->CBOR) and validate them against the top-level schema\r\n* [ ] Include examples in the draft document\r\n* [ ] Include the top-level token in the draft document\r\n\r\nAll of this should be executed as part of the CI.",
       "createdAt": "2024-08-27T10:27:18Z",
-      "updatedAt": "2024-08-27T10:28:22Z",
+      "updatedAt": "2024-11-20T13:34:42Z",
       "closedAt": null,
       "comments": []
     },
@@ -572,9 +572,9 @@
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
-      "body": "Add automatic build and check machinery and hook it into the top-level build.\r\n\r\n",
+      "body": "Add automatic build and check machinery and hook it into the top-level build.\r\n\r\nFix #15 (partially)\r\n",
       "createdAt": "2024-11-12T16:01:59Z",
-      "updatedAt": "2024-11-13T06:39:44Z",
+      "updatedAt": "2024-11-20T13:35:25Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "69a3c2c694bcb19beaa61272b98ba4bc5f78b2b1",
@@ -616,6 +616,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 18,
+      "id": "PR_kwDOMRXjbM6CiF8Q",
+      "title": "delegated attester pics and prose",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/18",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #14",
+      "createdAt": "2024-11-20T13:34:05Z",
+      "updatedAt": "2024-11-20T13:34:08Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "69a3c2c694bcb19beaa61272b98ba4bc5f78b2b1",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "pics",
+      "headRefOid": "78424ef0d204b9891d828486a98e94a9f748da04",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
