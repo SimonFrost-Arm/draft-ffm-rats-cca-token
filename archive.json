@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-28T01:14:24.009163+00:00",
+  "timestamp": "2024-12-01T01:25:50.331757+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -192,9 +192,52 @@
       "labels": [],
       "body": "The CCA attester model is slightly more complicated than is currently described.\r\n\r\nThere are _two_ separate sub-attesters (platform and realm) rather than one, each with their independent AE/TE split, and bound via RAK attestation.\r\n\r\nThis should be explained in Section 3 and illustrated in Figure 1.",
       "createdAt": "2024-08-27T10:17:57Z",
-      "updatedAt": "2024-08-27T10:28:15Z",
+      "updatedAt": "2024-11-28T19:19:38Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "I am curious to know why some of editors (who are also co-authors in [this work](https://ieeexplore.ieee.org/document/10373038)) changed their mind from composite attester to \"exactly one attesting environment\" in [draft-00](https://datatracker.ietf.org/doc/draft-ffm-rats-cca-token/00/) and now to layered attester in #18. Seems to perfectly support my view that abstractions in [RATS architecture](https://datatracker.ietf.org/doc/rfc9334/) are not helpful. ",
+          "createdAt": "2024-11-28T11:44:11Z",
+          "updatedAt": "2024-11-28T11:44:11Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I am curious to know why some of editors (who are also co-authors in [this work](https://ieeexplore.ieee.org/document/10373038)) changed their mind from composite attester to \"exactly one attesting environment\" in [draft-00](https://datatracker.ietf.org/doc/draft-ffm-rats-cca-token/00/) and now to layered attester in #18. Seems to perfectly support my view that abstractions in [RATS architecture](https://datatracker.ietf.org/doc/rfc9334/) are not helpful.\r\n\r\n@SimonFrost-Arm can set the authority bit while answering this query, but I can make a quite educated guess that this is a C&P error from the equivalent section in the [PSA token I-D](https://www.ietf.org/archive/id/draft-tschofenig-rats-psa-token-24.html#section-3) which has been used as a model for this doc.",
+          "createdAt": "2024-11-28T13:05:16Z",
+          "updatedAt": "2024-11-28T13:05:16Z"
+        },
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "@thomas-fossati is correct. The fastest way to create the doc was to use the PSA doc as a source and edit. At the -00 stage, not all of the necessary changes are yet present.",
+          "createdAt": "2024-11-28T13:24:59Z",
+          "updatedAt": "2024-11-28T13:24:59Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "@thomas-fossati @SimonFrost-Arm Thanks. That clairifies the \"exactly one attesting environment\" transition. What about Composite -> Layered change?",
+          "createdAt": "2024-11-28T13:55:06Z",
+          "updatedAt": "2024-11-28T13:55:06Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> What about Composite -> Layered change?\r\n\r\nOn further reflection, the delegated mode fits the layered model better.\r\n\r\n",
+          "createdAt": "2024-11-28T14:14:20Z",
+          "updatedAt": "2024-11-28T14:14:20Z"
+        },
+        {
+          "author": "muhammad-usama-sardar",
+          "authorAssociation": "NONE",
+          "body": "> the delegated mode fits the layered model better.\r\n\r\nonly delegated one, right? So your current position is that:\r\n\r\n- non-delegated mode is composite and \r\n- delegated mode is layered?",
+          "createdAt": "2024-11-28T19:19:36Z",
+          "updatedAt": "2024-11-28T19:19:36Z"
+        }
+      ]
     },
     {
       "number": 15,
