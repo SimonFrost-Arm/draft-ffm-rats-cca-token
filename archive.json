@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-01T01:25:50.331757+00:00",
+  "timestamp": "2024-12-03T01:15:50.734828+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -270,6 +270,22 @@
       "body": "This is releted to #14 because the direct mode is a different attester from delegated.",
       "createdAt": "2024-10-15T10:04:58Z",
       "updatedAt": "2024-10-15T10:04:58Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 19,
+      "id": "I_kwDOMRXjbM6hmUn0",
+      "title": "In delegated mode, should `eat_nonce` be `rak_pub_hash_value` instead?",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/19",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "There is potential semantic ambiguity in using `eat_nonce` for the binder in delegated mode.\r\n\r\nIn particular,\r\n\r\n1. it's not a proper challenge issued by the ABI caller\r\n2. freshness properties associated with the claim are not clear.\r\n\r\nIt seems easier to create a new claim with explicit semantics, e.g., `rak_pub_hash_value`.",
+      "createdAt": "2024-12-02T09:24:23Z",
+      "updatedAt": "2024-12-02T09:24:23Z",
       "closedAt": null,
       "comments": []
     }
