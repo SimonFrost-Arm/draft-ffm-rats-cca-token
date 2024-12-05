@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-12-03T01:15:50.734828+00:00",
+  "timestamp": "2024-12-05T01:15:50.144164+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -285,9 +285,17 @@
       "labels": [],
       "body": "There is potential semantic ambiguity in using `eat_nonce` for the binder in delegated mode.\r\n\r\nIn particular,\r\n\r\n1. it's not a proper challenge issued by the ABI caller\r\n2. freshness properties associated with the claim are not clear.\r\n\r\nIt seems easier to create a new claim with explicit semantics, e.g., `rak_pub_hash_value`.",
       "createdAt": "2024-12-02T09:24:23Z",
-      "updatedAt": "2024-12-02T09:24:23Z",
+      "updatedAt": "2024-12-03T10:23:20Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Would better documentation for the usage of eat_nonce in this profile suffice? My concern about adding an explicit binder for delegate is ambiguity on presence or not of eat_nonce in the same platform report: should they both be there / what are there relation / if no eat_nonce then will profile implementers be confident of freshness?  Keeping eat_nonce allows re-use of the platform report in multiple layerings, including both binding and as a pure freshness challenge.",
+          "createdAt": "2024-12-03T10:23:19Z",
+          "updatedAt": "2024-12-03T10:23:19Z"
+        }
+      ]
     }
   ],
   "pulls": [
