@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 16 May 2025                                              Linaro
+Expires: 21 June 2025                                             Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                        12 November 2024
+                                                        18 December 2024
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 May 2025.
+   This Internet-Draft will expire on 21 June 2025.
 
 Copyright Notice
 
@@ -1527,11 +1527,11 @@ cca-realm-extensible-measurements = (
               Confidential Compute Architecture", May 2023,
               <https://developer.arm.com/documentation/den0125/0300>.
 
-   [CMW]      Birkholz, H., Smith, N., Fossati, T., and H. Tschofenig,
-              "RATS Conceptual Messages Wrapper (CMW)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-msg-wrap-10, 4
-              November 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-msg-wrap-10>.
+   [CMW]      Birkholz, H., Smith, N., Fossati, T., Tschofenig, H., and
+              D. Glaze, "RATS Conceptual Messages Wrapper (CMW)", Work
+              in Progress, Internet-Draft, draft-ietf-rats-msg-wrap-11,
+              15 November 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-msg-wrap-11>.
 
    [COSE-ALGS]
               Schaad, J., "CBOR Object Signing and Encryption (COSE):
@@ -1614,11 +1614,11 @@ cca-realm-extensible-measurements = (
 
    [I-D.kdyxy-rats-tdx-eat-profile]
               Kostal, G., Dittakavi, S., Yeluri, R., Xia, H., and J. Yu,
-              "EAT profile for Intel® Trust Domain Extensions (TDX)
+              "EAT profile for Intel(r) Trust Domain Extensions (TDX)
               attestation result", Work in Progress, Internet-Draft,
-              draft-kdyxy-rats-tdx-eat-profile-01, 23 April 2024,
+              draft-kdyxy-rats-tdx-eat-profile-02, 13 December 2024,
               <https://datatracker.ietf.org/doc/html/draft-kdyxy-rats-
-              tdx-eat-profile-01>.
+              tdx-eat-profile-02>.
 
    [I-D.mandyam-rats-qwestoken]
               Mandyam, G., Sekhar, V., and S. Mohammed, "The Qualcomm
