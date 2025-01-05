@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-02T01:08:52.043999+00:00",
+  "timestamp": "2025-01-05T01:14:54.666024+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -765,25 +765,33 @@
       "id": "PR_kwDOMRXjbM6FqBvn",
       "title": "shell fixup for odd gmake env issue",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/20",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "SimonFrost-Arm",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "force shell to bash in tools check for environment where gmake not picking up /bin/bash",
       "createdAt": "2024-12-18T14:24:22Z",
-      "updatedAt": "2024-12-18T14:24:22Z",
+      "updatedAt": "2025-01-03T17:25:25Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "cddl",
       "baseRefOid": "c805b3a28dc6617e167718e3d7f65675886dd328",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "tfcddl",
       "headRefOid": "5f134689dd36bed546e42071f917e9d82763fe8f",
-      "closedAt": null,
+      "closedAt": "2025-01-03T17:25:24Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing this PR as the logic has been incorporated in https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/17/commits/b2871232273dd3931fa70ca88804c25c7cb11ccd as part of #17 ",
+          "createdAt": "2025-01-03T17:25:24Z",
+          "updatedAt": "2025-01-03T17:25:24Z"
+        }
+      ],
       "reviews": []
     },
     {
@@ -798,19 +806,40 @@
       "labels": [],
       "body": "See https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/21",
       "createdAt": "2024-12-30T22:45:30Z",
-      "updatedAt": "2024-12-30T22:45:52Z",
+      "updatedAt": "2025-01-04T21:55:14Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "69a3c2c694bcb19beaa61272b98ba4bc5f78b2b1",
       "headRepository": "gmandyam/draft-ffm-rats-cca-token",
       "headRefName": "token_example",
-      "headRefOid": "ab985e79ed74a0b9e5a13a9068accd41f43a82dc",
+      "headRefOid": "d53e79aaa8089d2c9f6190f39f078102f2b06aa5",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM6WxHcu",
+          "commit": {
+            "abbreviatedOid": "d776d2a"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-03T17:29:32Z",
+          "updatedAt": "2025-01-03T17:29:32Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "The long lines in the diag file are going to drive idnits crazy ;-)\r\n\r\nI suggest using `include-fold` instead of plain `include`:\r\n\r\n```suggestion\r\n{::include-fold cddl/sample_tokens/platform.diag}\r\n```\r\n\r\nI haven't personally tested the output though, it may be horrible.\r\n",
+              "createdAt": "2025-01-03T17:29:32Z",
+              "updatedAt": "2025-01-03T17:31:14Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
