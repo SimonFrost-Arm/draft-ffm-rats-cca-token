@@ -1167,7 +1167,21 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-cca-attester-model" class="internal xref">CCA Attester Model</a></p>
+            <p id="section-toc.1-1.3.1"><a href="#section-3" class="auto internal xref">3</a>.  <a href="#name-cca-attester-model" class="internal xref">CCA Attester Model</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.1">
+                <p id="section-toc.1-1.3.2.1.1" class="keepWithNext"><a href="#section-3.1" class="auto internal xref">3.1</a>.  <a href="#name-direct" class="internal xref">Direct</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.2">
+                <p id="section-toc.1-1.3.2.2.1"><a href="#section-3.2" class="auto internal xref">3.2</a>.  <a href="#name-delegated" class="internal xref">Delegated</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.3">
+                <p id="section-toc.1-1.3.2.3.1"><a href="#section-3.3" class="auto internal xref">3.3</a>.  <a href="#name-boot-phase" class="internal xref">Boot Phase</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3.2.4">
+                <p id="section-toc.1-1.3.2.4.1"><a href="#section-3.4" class="auto internal xref">3.4</a>.  <a href="#name-run-time-phase" class="internal xref">Run-time Phase</a></p>
+</li>
+            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="auto internal xref">4</a>.  <a href="#name-cca-claims" class="internal xref">CCA Claims</a></p>
@@ -1491,264 +1505,292 @@ scheduling for other worlds.<a href="#section-2-4.8.1" class="pilcrow">¶</a></p
       <h2 id="name-cca-attester-model">
 <a href="#section-3" class="section-number selfRef">3. </a><a href="#name-cca-attester-model" class="section-name selfRef">CCA Attester Model</a>
       </h2>
-<p id="section-3-1"><a href="#fig-cca-attester" class="auto internal xref">Figure 1</a> outlines the structure of the CCA Attester according to
-the conceptual model described in <span><a href="https://rfc-editor.org/rfc/rfc9334#section-3.1" class="relref">Section 3.1</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>.<a href="#section-3-1" class="pilcrow">¶</a></p>
-<span id="name-cca-attester"></span><div id="fig-cca-attester">
+<p id="section-3-1">There are two kinds of CCA Attester: direct and delegated.
+Their architectural arrangements are described in <a href="#direct" class="auto internal xref">Section 3.1</a> and <a href="#delegated" class="auto internal xref">Section 3.2</a>, respectively.<a href="#section-3-1" class="pilcrow">¶</a></p>
+<div id="direct">
+<section id="section-3.1">
+        <h3 id="name-direct">
+<a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-direct" class="section-name selfRef">Direct</a>
+        </h3>
+<p id="section-3.1-1">TODO<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="delegated">
+<section id="section-3.2">
+        <h3 id="name-delegated">
+<a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-delegated" class="section-name selfRef">Delegated</a>
+        </h3>
+<p id="section-3.2-1">The structure of the CCA delegated Attester is illustrated in <a href="#fig-cca-delegated-attester" class="auto internal xref">Figure 1</a>.
+The CCA delegated Attester is a "layered attester" (<span><a href="https://rfc-editor.org/rfc/rfc9334#section-3.2" class="relref">Section 3.2</a> of [<a href="#RFC9334" class="cite xref">RFC9334</a>]</span>) with exactly two layers: platform and realm.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+<p id="section-3.2-2">The Realm Management Monitor (RMM) is the top layer Attesting Environment.
+It attests to the initial memory content of each Realm that is executed on a CCA platform, and any dynamic measurements provided by Realm guest code.
+It uses its own private key called RAK (Realm Attestation Key) to sign the claims regarding the requesting Realm.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+<p id="section-3.2-3">The HES (Hardware Enforced Security) is the bottom layer Attesting Environment, which acts as the CCA platform hardware RoT.
+It attests to the executables and configuration contents of the "Monitor Security Domain", which includes the RMM, as well as a few relevant CCA parameters (e.g., the CCA platform implementation identifier), and the security lifecycle state of the platform.
+Additionally, it generates the RAK keypair, transfers it over a trusted channel to the RMM, and stores the hash of the RAK public key in a claim that is signed using the CCA Platform Attestation Key (CPAK) as part of the platform Evidence.<a href="#section-3.2-3" class="pilcrow">¶</a></p>
+<p id="section-3.2-4">The CCA Evidence produced in delegated mode comprises two separately signed EATs, one for the platform, another for the realm, wrapped in a CMW <span>[<a href="#CMW" class="cite xref">CMW</a>]</span> collection.
+The intra-collection binding is detailed in <a href="#sec-token-binding" class="auto internal xref">Section 4.10</a>.<a href="#section-3.2-4" class="pilcrow">¶</a></p>
+<span id="name-cca-attester"></span><div id="fig-cca-delegated-attester">
 <figure id="figure-1">
-        <div id="section-3-2.1">
-          <div class="alignLeft art-svg artwork" id="section-3-2.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="512" width="456" viewBox="0 0 456 512" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-              <path d="M 8,144 L 8,448" fill="none" stroke="black"></path>
-              <path d="M 24,160 L 24,288" fill="none" stroke="black"></path>
-              <path d="M 24,320 L 24,432" fill="none" stroke="black"></path>
-              <path d="M 64,208 L 64,272" fill="none" stroke="black"></path>
-              <path d="M 64,352 L 64,400" fill="none" stroke="black"></path>
-              <path d="M 112,272 L 112,352" fill="none" stroke="black"></path>
-              <path d="M 168,208 L 168,272" fill="none" stroke="black"></path>
-              <path d="M 176,352 L 176,400" fill="none" stroke="black"></path>
-              <path d="M 208,208 L 208,272" fill="none" stroke="black"></path>
-              <path d="M 232,176 L 232,208" fill="none" stroke="black"></path>
-              <path d="M 256,208 L 256,272" fill="none" stroke="black"></path>
-              <path d="M 304,208 L 304,272" fill="none" stroke="black"></path>
-              <path d="M 312,352 L 312,400" fill="none" stroke="black"></path>
-              <path d="M 320,32 L 320,64" fill="none" stroke="black"></path>
-              <path d="M 344,176 L 344,208" fill="none" stroke="black"></path>
-              <path d="M 360,72 L 360,208" fill="none" stroke="black"></path>
-              <path d="M 360,272 L 360,352" fill="none" stroke="black"></path>
-              <path d="M 408,32 L 408,64" fill="none" stroke="black"></path>
-              <path d="M 416,208 L 416,272" fill="none" stroke="black"></path>
-              <path d="M 416,352 L 416,400" fill="none" stroke="black"></path>
-              <path d="M 432,160 L 432,288" fill="none" stroke="black"></path>
-              <path d="M 432,320 L 432,432" fill="none" stroke="black"></path>
-              <path d="M 448,144 L 448,448" fill="none" stroke="black"></path>
-              <path d="M 320,32 L 408,32" fill="none" stroke="black"></path>
-              <path d="M 320,64 L 408,64" fill="none" stroke="black"></path>
-              <path d="M 8,144 L 352,144" fill="none" stroke="black"></path>
-              <path d="M 368,144 L 448,144" fill="none" stroke="black"></path>
-              <path d="M 24,160 L 352,160" fill="none" stroke="black"></path>
-              <path d="M 368,160 L 432,160" fill="none" stroke="black"></path>
-              <path d="M 240,176 L 288,176" fill="none" stroke="black"></path>
-              <path d="M 304,176 L 344,176" fill="none" stroke="black"></path>
-              <path d="M 64,208 L 168,208" fill="none" stroke="black"></path>
-              <path d="M 208,208 L 256,208" fill="none" stroke="black"></path>
-              <path d="M 304,208 L 416,208" fill="none" stroke="black"></path>
-              <path d="M 168,240 L 200,240" fill="none" stroke="black"></path>
-              <path d="M 264,240 L 304,240" fill="none" stroke="black"></path>
-              <path d="M 64,272 L 168,272" fill="none" stroke="black"></path>
-              <path d="M 208,272 L 256,272" fill="none" stroke="black"></path>
-              <path d="M 304,272 L 416,272" fill="none" stroke="black"></path>
-              <path d="M 24,288 L 104,288" fill="none" stroke="black"></path>
-              <path d="M 120,288 L 352,288" fill="none" stroke="black"></path>
-              <path d="M 368,288 L 432,288" fill="none" stroke="black"></path>
-              <path d="M 24,320 L 104,320" fill="none" stroke="black"></path>
-              <path d="M 120,320 L 352,320" fill="none" stroke="black"></path>
-              <path d="M 368,320 L 432,320" fill="none" stroke="black"></path>
-              <path d="M 64,352 L 104,352" fill="none" stroke="black"></path>
-              <path d="M 120,352 L 176,352" fill="none" stroke="black"></path>
-              <path d="M 312,352 L 352,352" fill="none" stroke="black"></path>
-              <path d="M 368,352 L 416,352" fill="none" stroke="black"></path>
-              <path d="M 64,400 L 176,400" fill="none" stroke="black"></path>
-              <path d="M 312,400 L 416,400" fill="none" stroke="black"></path>
-              <path d="M 24,432 L 432,432" fill="none" stroke="black"></path>
-              <path d="M 8,448 L 448,448" fill="none" stroke="black"></path>
-              <path d="M 112,480 L 136,480" fill="none" stroke="black"></path>
-              <path d="M 216,480 L 240,480" fill="none" stroke="black"></path>
-              <path d="M 328,480 L 344,480" fill="none" stroke="black"></path>
-              <polygon class="arrowhead" points="368,72 356,66.4 356,77.6" fill="black" transform="rotate(270,360,72)"></polygon>
-              <polygon class="arrowhead" points="272,240 260,234.4 260,245.6" fill="black" transform="rotate(180,264,240)"></polygon>
-              <polygon class="arrowhead" points="248,480 236,474.4 236,485.6" fill="black" transform="rotate(0,240,480)"></polygon>
-              <polygon class="arrowhead" points="248,176 236,170.4 236,181.6" fill="black" transform="rotate(180,240,176)"></polygon>
-              <polygon class="arrowhead" points="208,240 196,234.4 196,245.6" fill="black" transform="rotate(0,200,240)"></polygon>
-              <polygon class="arrowhead" points="144,480 132,474.4 132,485.6" fill="black" transform="rotate(0,136,480)"></polygon>
-              <circle cx="112" cy="352" r="6" class="opendot" fill="white" stroke="black"></circle>
-              <circle cx="352" cy="480" r="6" class="opendot" fill="white" stroke="black"></circle>
-              <circle cx="360" cy="352" r="6" class="opendot" fill="white" stroke="black"></circle>
-              <g class="text">
-                <text x="364" y="52">Verifier</text>
-                <text x="288" y="116">CCA</text>
-                <text x="328" y="116">Token</text>
-                <text x="72" y="180">Attesting</text>
-                <text x="160" y="180">Environment</text>
-                <text x="296" y="180">R</text>
-                <text x="92" y="228">Main</text>
-                <text x="232" y="228">HES</text>
-                <text x="336" y="228">Realm</text>
-                <text x="116" y="244">Bootloader</text>
-                <text x="232" y="244">RoT</text>
-                <text x="356" y="244">Management</text>
-                <text x="184" y="260">W</text>
-                <text x="280" y="260">R</text>
-                <text x="344" y="260">Monitor</text>
-                <text x="96" y="372">Realm</text>
-                <text x="144" y="372">World</text>
-                <text x="344" y="372">Realm</text>
-                <text x="112" y="388">TCB</text>
-                <text x="344" y="388">State</text>
-                <text x="60" y="420">Target</text>
-                <text x="136" y="420">Environment</text>
-                <text x="32" y="468">Legend:</text>
-                <text x="164" y="484">read</text>
-                <text x="272" y="484">write</text>
-                <text x="392" y="484">measure</text>
-                <text x="120" y="500">R</text>
-                <text x="224" y="500">W</text>
-              </g>
-            </svg><a href="#section-3-2.1.1" class="pilcrow">¶</a>
+          <div id="section-3.2-5.1">
+            <div class="alignLeft art-svg artwork" id="section-3.2-5.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="704" width="440" viewBox="0 0 440 704" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                <path d="M 8,128 L 8,688" fill="none" stroke="black"></path>
+                <path d="M 24,320 L 24,528" fill="none" stroke="black"></path>
+                <path d="M 24,608 L 24,656" fill="none" stroke="black"></path>
+                <path d="M 48,144 L 48,224" fill="none" stroke="black"></path>
+                <path d="M 48,368 L 48,480" fill="none" stroke="black"></path>
+                <path d="M 64,224 L 64,344" fill="none" stroke="black"></path>
+                <path d="M 64,504 L 64,592" fill="none" stroke="black"></path>
+                <path d="M 88,224 L 88,256" fill="none" stroke="black"></path>
+                <path d="M 104,256 L 104,344" fill="none" stroke="black"></path>
+                <path d="M 128,256 L 128,288" fill="none" stroke="black"></path>
+                <path d="M 144,288 L 144,344" fill="none" stroke="black"></path>
+                <path d="M 160,144 L 160,224" fill="none" stroke="black"></path>
+                <path d="M 160,368 L 160,480" fill="none" stroke="black"></path>
+                <path d="M 176,400 L 176,432" fill="none" stroke="black"></path>
+                <path d="M 176,464 L 176,496" fill="none" stroke="black"></path>
+                <path d="M 184,528 L 184,584" fill="none" stroke="black"></path>
+                <path d="M 200,176 L 200,256" fill="none" stroke="black"></path>
+                <path d="M 240,208 L 240,288" fill="none" stroke="black"></path>
+                <path d="M 256,608 L 256,656" fill="none" stroke="black"></path>
+                <path d="M 264,400 L 264,432" fill="none" stroke="black"></path>
+                <path d="M 264,464 L 264,496" fill="none" stroke="black"></path>
+                <path d="M 280,320 L 280,376" fill="none" stroke="black"></path>
+                <path d="M 280,392 L 280,528" fill="none" stroke="black"></path>
+                <path d="M 288,32 L 288,96" fill="none" stroke="black"></path>
+                <path d="M 296,128 L 296,376" fill="none" stroke="black"></path>
+                <path d="M 296,392 L 296,688" fill="none" stroke="black"></path>
+                <path d="M 328,104 L 328,368" fill="none" stroke="black"></path>
+                <path d="M 376,32 L 376,96" fill="none" stroke="black"></path>
+                <path d="M 288,32 L 376,32" fill="none" stroke="black"></path>
+                <path d="M 288,96 L 376,96" fill="none" stroke="black"></path>
+                <path d="M 8,128 L 296,128" fill="none" stroke="black"></path>
+                <path d="M 48,144 L 160,144" fill="none" stroke="black"></path>
+                <path d="M 160,176 L 200,176" fill="none" stroke="black"></path>
+                <path d="M 200,208 L 240,208" fill="none" stroke="black"></path>
+                <path d="M 48,224 L 160,224" fill="none" stroke="black"></path>
+                <path d="M 88,256 L 200,256" fill="none" stroke="black"></path>
+                <path d="M 128,288 L 240,288" fill="none" stroke="black"></path>
+                <path d="M 24,320 L 56,320" fill="none" stroke="black"></path>
+                <path d="M 80,320 L 96,320" fill="none" stroke="black"></path>
+                <path d="M 112,320 L 136,320" fill="none" stroke="black"></path>
+                <path d="M 152,320 L 280,320" fill="none" stroke="black"></path>
+                <path d="M 64,352 L 144,352" fill="none" stroke="black"></path>
+                <path d="M 160,384 L 312,384" fill="none" stroke="black"></path>
+                <path d="M 176,400 L 264,400" fill="none" stroke="black"></path>
+                <path d="M 176,432 L 264,432" fill="none" stroke="black"></path>
+                <path d="M 176,464 L 264,464" fill="none" stroke="black"></path>
+                <path d="M 64,496 L 144,496" fill="none" stroke="black"></path>
+                <path d="M 176,496 L 264,496" fill="none" stroke="black"></path>
+                <path d="M 24,528 L 56,528" fill="none" stroke="black"></path>
+                <path d="M 72,528 L 280,528" fill="none" stroke="black"></path>
+                <path d="M 40,592 L 240,592" fill="none" stroke="black"></path>
+                <path d="M 40,672 L 240,672" fill="none" stroke="black"></path>
+                <path d="M 8,688 L 296,688" fill="none" stroke="black"></path>
+                <path d="M 64,352 C 55.16936,352 48,359.16936 48,368" fill="none" stroke="black"></path>
+                <path d="M 144,352 C 152.83064,352 160,359.16936 160,368" fill="none" stroke="black"></path>
+                <path d="M 312,384 C 320.83064,384 328,376.83064 328,368" fill="none" stroke="black"></path>
+                <path d="M 64,496 C 55.16936,496 48,488.83064 48,480" fill="none" stroke="black"></path>
+                <path d="M 144,496 C 152.83064,496 160,488.83064 160,480" fill="none" stroke="black"></path>
+                <path d="M 40,592 C 31.16936,592 24,599.16936 24,608" fill="none" stroke="black"></path>
+                <path d="M 240,592 C 248.83064,592 256,599.16936 256,608" fill="none" stroke="black"></path>
+                <path d="M 40,672 C 31.16936,672 24,664.83064 24,656" fill="none" stroke="black"></path>
+                <path d="M 240,672 C 248.83064,672 256,664.83064 256,656" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="336,104 324,98.4 324,109.6" fill="black" transform="rotate(270,328,104)"></polygon>
+                <polygon class="arrowhead" points="192,584 180,578.4 180,589.6" fill="black" transform="rotate(90,184,584)"></polygon>
+                <polygon class="arrowhead" points="152,344 140,338.4 140,349.6" fill="black" transform="rotate(90,144,344)"></polygon>
+                <polygon class="arrowhead" points="112,344 100,338.4 100,349.6" fill="black" transform="rotate(90,104,344)"></polygon>
+                <polygon class="arrowhead" points="72,504 60,498.4 60,509.6" fill="black" transform="rotate(270,64,504)"></polygon>
+                <polygon class="arrowhead" points="72,344 60,338.4 60,349.6" fill="black" transform="rotate(90,64,344)"></polygon>
+                <g class="text">
+                  <text x="332" y="68">Verifier</text>
+                  <text x="84" y="164">Target</text>
+                  <text x="104" y="180">Environment</text>
+                  <text x="368" y="180">Layered</text>
+                  <text x="180" y="196">TE</text>
+                  <text x="372" y="196">Evidence</text>
+                  <text x="424" y="196">for</text>
+                  <text x="80" y="212">Realm</text>
+                  <text x="112" y="212">1</text>
+                  <text x="372" y="212">Platform</text>
+                  <text x="424" y="212">and</text>
+                  <text x="220" y="228">TE</text>
+                  <text x="360" y="228">Realm</text>
+                  <text x="120" y="244">Realm</text>
+                  <text x="152" y="244">2</text>
+                  <text x="160" y="276">...</text>
+                  <text x="184" y="308">Collect</text>
+                  <text x="244" y="308">Claims</text>
+                  <text x="204" y="340">Target</text>
+                  <text x="224" y="356">Environment</text>
+                  <text x="80" y="372">Realm</text>
+                  <text x="100" y="388">Management</text>
+                  <text x="88" y="404">Monitor</text>
+                  <text x="80" y="420">(RMM)</text>
+                  <text x="216" y="420">BLs</text>
+                  <text x="96" y="468">Attesting</text>
+                  <text x="104" y="484">Environment</text>
+                  <text x="220" y="484">CFGs</text>
+                  <text x="236" y="516">Platform</text>
+                  <text x="108" y="548">Evidence</text>
+                  <text x="224" y="548">Collect</text>
+                  <text x="88" y="564">for</text>
+                  <text x="220" y="564">Claims</text>
+                  <text x="108" y="580">Platform</text>
+                  <text x="68" y="612">Hardware</text>
+                  <text x="68" y="628">Enforced</text>
+                  <text x="68" y="644">Security</text>
+                  <text x="192" y="644">Attesting</text>
+                  <text x="56" y="660">(HES)</text>
+                  <text x="200" y="660">Environment</text>
+                </g>
+              </svg><a href="#section-3.2-5.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-1" class="selfRef">Figure 1</a>:
 <a href="#name-cca-attester" class="selfRef">CCA Attester</a>
-        </figcaption></figure>
+          </figcaption></figure>
 </div>
-<p id="section-3-3">The CCA Attester is a relatively straightforward embodiment of the RATS
-Attester with exactly one Attesting Environment and one or more Target Environments.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">The Attesting Environment is responsible for collecting the information to be
-represented in CCA claims and to assemble them into Evidence. It is made of three
-cooperating components:<a href="#section-3-4" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3-5.1">
-          <p id="section-3-5.1.1">The Main Bootloader, executing at boot-time, measures the trusted computing base (TCB) of the Realm World<a href="#section-3-5.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-3-5.2">
-          <p id="section-3-5.2.1">i.e., loaded firmware components and sends them to the HES RoT to be stored isolated.
-(CCA Platform Boot State). See <a href="#fig-cca-attester-boot" class="auto internal xref">Figure 2</a>.<a href="#section-3-5.2.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
+</section>
+</div>
+<div id="boot-phase">
+<section id="section-3.3">
+        <h3 id="name-boot-phase">
+<a href="#section-3.3" class="section-number selfRef">3.3. </a><a href="#name-boot-phase" class="section-name selfRef">Boot Phase</a>
+        </h3>
+<p id="section-3.3-1">The HES Attesting Environment is responsible for collecting the information to be
+represented in CCA platform claims and to assemble them into Evidence.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">The Main Bootloader, executing at boot-time, measures the trusted computing base (TCB) of the Realm World - i.e., loaded firmware components and the associated configuration payloads - and sends them to the HES RoT to be stored isolated.  See <a href="#fig-cca-attester-boot" class="auto internal xref">Figure 2</a>.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <span id="name-cca-attester-boot-phase"></span><div id="fig-cca-attester-boot">
 <figure id="figure-2">
-        <div id="section-3-6.1">
-          <div class="alignCenter art-svg artwork" id="section-3-6.1.1">
+          <div id="section-3.3-3.1">
+            <div class="alignCenter art-svg artwork" id="section-3.3-3.1.1">
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="224" width="352" viewBox="0 0 352 224" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-              <path d="M 8,80 L 8,192" fill="none" stroke="black"></path>
-              <path d="M 80,64 L 80,208" fill="none" stroke="black"></path>
-              <path d="M 192,64 L 192,208" fill="none" stroke="black"></path>
-              <path d="M 304,64 L 304,208" fill="none" stroke="black"></path>
-              <path d="M 344,80 L 344,192" fill="none" stroke="black"></path>
-              <path d="M 8,80 L 72,80" fill="none" stroke="black"></path>
-              <path d="M 88,80 L 184,80" fill="none" stroke="black"></path>
-              <path d="M 200,80 L 296,80" fill="none" stroke="black"></path>
-              <path d="M 312,80 L 344,80" fill="none" stroke="black"></path>
-              <path d="M 96,128 L 192,128" fill="none" stroke="black"></path>
-              <path d="M 192,176 L 296,176" fill="none" stroke="black"></path>
-              <path d="M 8,192 L 72,192" fill="none" stroke="black"></path>
-              <path d="M 88,192 L 184,192" fill="none" stroke="black"></path>
-              <path d="M 200,192 L 296,192" fill="none" stroke="black"></path>
-              <path d="M 312,192 L 344,192" fill="none" stroke="black"></path>
-              <polygon class="arrowhead" points="304,176 292,170.4 292,181.6" fill="black" transform="rotate(0,296,176)"></polygon>
-              <circle cx="88" cy="128" r="6" class="opendot" fill="white" stroke="black"></circle>
-              <g class="text">
-                <text x="52" y="36">i-th</text>
-                <text x="100" y="36">Target</text>
-                <text x="172" y="36">Main</text>
-                <text x="212" y="36">Boot</text>
-                <text x="304" y="36">HES</text>
-                <text x="80" y="52">Environment</text>
-                <text x="196" y="52">Loader</text>
-                <text x="304" y="52">RoT</text>
-                <text x="36" y="100">loop</text>
-                <text x="64" y="100">i</text>
-                <text x="120" y="116">measure</text>
-                <text x="224" y="148">write</text>
-                <text x="248" y="164">measurement</text>
-              </g>
-            </svg><a href="#section-3-6.1.1" class="pilcrow">¶</a>
+                <path d="M 8,80 L 8,192" fill="none" stroke="black"></path>
+                <path d="M 80,64 L 80,208" fill="none" stroke="black"></path>
+                <path d="M 192,64 L 192,208" fill="none" stroke="black"></path>
+                <path d="M 304,64 L 304,208" fill="none" stroke="black"></path>
+                <path d="M 344,80 L 344,192" fill="none" stroke="black"></path>
+                <path d="M 8,80 L 72,80" fill="none" stroke="black"></path>
+                <path d="M 88,80 L 184,80" fill="none" stroke="black"></path>
+                <path d="M 200,80 L 296,80" fill="none" stroke="black"></path>
+                <path d="M 312,80 L 344,80" fill="none" stroke="black"></path>
+                <path d="M 96,128 L 192,128" fill="none" stroke="black"></path>
+                <path d="M 192,176 L 296,176" fill="none" stroke="black"></path>
+                <path d="M 8,192 L 72,192" fill="none" stroke="black"></path>
+                <path d="M 88,192 L 184,192" fill="none" stroke="black"></path>
+                <path d="M 200,192 L 296,192" fill="none" stroke="black"></path>
+                <path d="M 312,192 L 344,192" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="304,176 292,170.4 292,181.6" fill="black" transform="rotate(0,296,176)"></polygon>
+                <circle cx="88" cy="128" r="6" class="opendot" fill="white" stroke="black"></circle>
+                <g class="text">
+                  <text x="52" y="36">i-th</text>
+                  <text x="100" y="36">Target</text>
+                  <text x="172" y="36">Main</text>
+                  <text x="212" y="36">Boot</text>
+                  <text x="304" y="36">HES</text>
+                  <text x="80" y="52">Environment</text>
+                  <text x="196" y="52">Loader</text>
+                  <text x="304" y="52">RoT</text>
+                  <text x="36" y="100">loop</text>
+                  <text x="64" y="100">i</text>
+                  <text x="120" y="116">measure</text>
+                  <text x="224" y="148">write</text>
+                  <text x="248" y="164">measurement</text>
+                </g>
+              </svg><a href="#section-3.3-3.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-2" class="selfRef">Figure 2</a>:
 <a href="#name-cca-attester-boot-phase" class="selfRef">CCA Attester Boot Phase</a>
-        </figcaption></figure>
+          </figcaption></figure>
 </div>
-<ul class="normal">
-<li class="normal" id="section-3-7.1">
-          <p id="section-3-7.1.1">The Realm Management Monitor (RMM), executing at run-time, maintains measurements for
+</section>
+</div>
+<div id="run-time-phase">
+<section id="section-3.4">
+        <h3 id="name-run-time-phase">
+<a href="#section-3.4" class="section-number selfRef">3.4. </a><a href="#name-run-time-phase" class="section-name selfRef">Run-time Phase</a>
+        </h3>
+<p id="section-3.4-1">The Realm Management Monitor (RMM), executing at run-time, maintains measurements for
 the state of a Realm. It can respond to requests issued from a Realm for an attestation
 token relevant for that Realm by obtaining a CCA Platform attestation token from the
 HES RoT and combining that with an attestation token containing Evidence reflecting
-Realm state.<a href="#section-3-7.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-3-7.2">
-          <p id="section-3-7.2.1">The HES RoT, executing at run-time, maintains measurements for the state of the CCA
+Realm state.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
+<div id="para-pak-intro">
+<p id="section-3.4-2">The HES RoT, executing at run-time, maintains measurements for the state of the CCA
 platform TCB, including the lifecycle state of the CCA platform. It can answer requests
 coming from the RMM to collect and format claims corresponding to that state and use a
-CCA Platform Attestation Key (CPAK) to sign them.  How the CPAK is derived is implementation-specific.<a href="#section-3-7.2.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<div id="para-pak-intro">
-<p id="section-3-8">See <a href="#fig-cca-attester-runtime" class="auto internal xref">Figure 3</a>.<a href="#section-3-8" class="pilcrow">¶</a></p>
+CCA Platform Attestation Key (CPAK) to sign them (see <a href="#fig-cca-attester-runtime" class="auto internal xref">Figure 3</a>).
+How the CPAK is derived is implementation-specific.<a href="#section-3.4-2" class="pilcrow">¶</a></p>
 </div>
 <span id="name-cca-attester-run-time-phase"></span><div id="fig-cca-attester-runtime">
 <figure id="figure-3">
-        <div id="section-3-9.1">
-          <div class="alignCenter art-svg artwork" id="section-3-9.1.1">
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="576" width="360" viewBox="0 0 360 576" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
-              <path d="M 24,160 L 24,192" fill="none" stroke="black"></path>
-              <path d="M 96,64 L 96,560" fill="none" stroke="black"></path>
-              <path d="M 160,368 L 160,400" fill="none" stroke="black"></path>
-              <path d="M 192,448 L 192,480" fill="none" stroke="black"></path>
-              <path d="M 224,64 L 224,560" fill="none" stroke="black"></path>
-              <path d="M 320,64 L 320,560" fill="none" stroke="black"></path>
-              <path d="M 8,80 L 352,80" fill="none" stroke="black"></path>
-              <path d="M 104,176 L 224,176" fill="none" stroke="black"></path>
-              <path d="M 64,256 L 88,256" fill="none" stroke="black"></path>
-              <path d="M 64,288 L 88,288" fill="none" stroke="black"></path>
-              <path d="M 96,304 L 216,304" fill="none" stroke="black"></path>
-              <path d="M 192,448 L 224,448" fill="none" stroke="black"></path>
-              <path d="M 192,480 L 216,480" fill="none" stroke="black"></path>
-              <path d="M 224,544 L 312,544" fill="none" stroke="black"></path>
-              <polygon class="arrowhead" points="320,544 308,538.4 308,549.6" fill="black" transform="rotate(0,312,544)"></polygon>
-              <polygon class="arrowhead" points="224,480 212,474.4 212,485.6" fill="black" transform="rotate(0,216,480)"></polygon>
-              <polygon class="arrowhead" points="224,304 212,298.4 212,309.6" fill="black" transform="rotate(0,216,304)"></polygon>
-              <polygon class="arrowhead" points="168,400 156,394.4 156,405.6" fill="black" transform="rotate(90,160,400)"></polygon>
-              <polygon class="arrowhead" points="112,176 100,170.4 100,181.6" fill="black" transform="rotate(180,104,176)"></polygon>
-              <polygon class="arrowhead" points="96,288 84,282.4 84,293.6" fill="black" transform="rotate(0,88,288)"></polygon>
-              <polygon class="arrowhead" points="72,256 60,250.4 60,261.6" fill="black" transform="rotate(180,64,256)"></polygon>
-              <polygon class="arrowhead" points="32,192 20,186.4 20,197.6" fill="black" transform="rotate(90,24,192)"></polygon>
-              <g class="text">
-                <text x="96" y="36">HES</text>
-                <text x="216" y="36">Realm</text>
-                <text x="96" y="52">RoT</text>
-                <text x="224" y="52">Manager</text>
-                <text x="324" y="52">Verifier</text>
-                <text x="44" y="116">Platform</text>
-                <text x="28" y="132">Boot</text>
-                <text x="32" y="148">State</text>
-                <text x="124" y="148">Req.</text>
-                <text x="180" y="148">Platform</text>
-                <text x="128" y="164">Token</text>
-                <text x="180" y="164">(#RAK)</text>
-                <text x="36" y="212">Platform</text>
-                <text x="84" y="212">&lt;-</text>
-                <text x="40" y="228">Token</text>
-                <text x="84" y="228">-&gt;</text>
-                <text x="44" y="276">sign</text>
-                <text x="140" y="292">Plat</text>
-                <text x="184" y="292">Token</text>
-                <text x="160" y="340">Realm</text>
-                <text x="160" y="356">State</text>
-                <text x="160" y="420">Realm</text>
-                <text x="160" y="436">Token</text>
-                <text x="164" y="468">sign</text>
-                <text x="248" y="532">CCA</text>
-                <text x="288" y="532">Token</text>
-              </g>
-            </svg><a href="#section-3-9.1.1" class="pilcrow">¶</a>
+          <div id="section-3.4-3.1">
+            <div class="alignCenter art-svg artwork" id="section-3.4-3.1.1">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="592" width="352" viewBox="0 0 352 592" class="diagram" text-anchor="middle" font-family="monospace" font-size="13px" stroke-linecap="round">
+                <path d="M 24,144 L 24,176" fill="none" stroke="black"></path>
+                <path d="M 56,240 L 56,272" fill="none" stroke="black"></path>
+                <path d="M 88,64 L 88,560" fill="none" stroke="black"></path>
+                <path d="M 152,352 L 152,384" fill="none" stroke="black"></path>
+                <path d="M 184,448 L 184,480" fill="none" stroke="black"></path>
+                <path d="M 216,64 L 216,560" fill="none" stroke="black"></path>
+                <path d="M 312,64 L 312,560" fill="none" stroke="black"></path>
+                <path d="M 96,160 L 216,160" fill="none" stroke="black"></path>
+                <path d="M 56,240 L 88,240" fill="none" stroke="black"></path>
+                <path d="M 56,272 L 80,272" fill="none" stroke="black"></path>
+                <path d="M 88,288 L 208,288" fill="none" stroke="black"></path>
+                <path d="M 184,448 L 216,448" fill="none" stroke="black"></path>
+                <path d="M 184,480 L 208,480" fill="none" stroke="black"></path>
+                <path d="M 216,544 L 304,544" fill="none" stroke="black"></path>
+                <polygon class="arrowhead" points="312,544 300,538.4 300,549.6" fill="black" transform="rotate(0,304,544)"></polygon>
+                <polygon class="arrowhead" points="216,480 204,474.4 204,485.6" fill="black" transform="rotate(0,208,480)"></polygon>
+                <polygon class="arrowhead" points="216,288 204,282.4 204,293.6" fill="black" transform="rotate(0,208,288)"></polygon>
+                <polygon class="arrowhead" points="160,384 148,378.4 148,389.6" fill="black" transform="rotate(90,152,384)"></polygon>
+                <polygon class="arrowhead" points="104,160 92,154.4 92,165.6" fill="black" transform="rotate(180,96,160)"></polygon>
+                <polygon class="arrowhead" points="88,272 76,266.4 76,277.6" fill="black" transform="rotate(0,80,272)"></polygon>
+                <polygon class="arrowhead" points="32,176 20,170.4 20,181.6" fill="black" transform="rotate(90,24,176)"></polygon>
+                <g class="text">
+                  <text x="88" y="36">HES</text>
+                  <text x="208" y="36">Realm</text>
+                  <text x="88" y="52">RoT</text>
+                  <text x="216" y="52">Manager</text>
+                  <text x="316" y="52">Verifier</text>
+                  <text x="36" y="100">Platform</text>
+                  <text x="20" y="116">Boot</text>
+                  <text x="24" y="132">State</text>
+                  <text x="116" y="132">Req.</text>
+                  <text x="172" y="132">Platform</text>
+                  <text x="120" y="148">Token</text>
+                  <text x="172" y="148">(#RAK)</text>
+                  <text x="36" y="196">Platform</text>
+                  <text x="24" y="212">Token</text>
+                  <text x="28" y="244">sign</text>
+                  <text x="20" y="260">w/</text>
+                  <text x="28" y="276">CPAK</text>
+                  <text x="132" y="276">Plat</text>
+                  <text x="176" y="276">Token</text>
+                  <text x="152" y="324">Realm</text>
+                  <text x="152" y="340">State</text>
+                  <text x="152" y="404">Realm</text>
+                  <text x="152" y="420">Token</text>
+                  <text x="156" y="452">sign</text>
+                  <text x="148" y="468">w/</text>
+                  <text x="152" y="484">RAK</text>
+                  <text x="240" y="532">CCA</text>
+                  <text x="280" y="532">Token</text>
+                </g>
+              </svg><a href="#section-3.4-3.1.1" class="pilcrow">¶</a>
 </div>
 </div>
 <figcaption><a href="#figure-3" class="selfRef">Figure 3</a>:
 <a href="#name-cca-attester-run-time-phase" class="selfRef">CCA Attester Run-time Phase</a>
-        </figcaption></figure>
+          </figcaption></figure>
 </div>
-<p id="section-3-10">The Target Environment consists of two elements:<a href="#section-3-10" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-3-11.1">
-          <p id="section-3-11.1.1">Realm World TCB - hardware, firmware and configuration contributions.<a href="#section-3-11.1.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-3-11.2">
-          <p id="section-3-11.2.1">Individual state of a Realm - measurements of the initial state of the Realm
-and dynamic measurements provided by Realm guest code.<a href="#section-3-11.2.1" class="pilcrow">¶</a></p>
-</li>
-      </ul>
-<p id="section-3-12">A reference implementation of the CCA Attester is provided by <span>[<a href="#TF-RMM" class="cite xref">TF-RMM</a>]</span>.<a href="#section-3-12" class="pilcrow">¶</a></p>
+<p id="section-3.4-4">A reference implementation of the CCA Attester is provided by <span>[<a href="#TF-RMM" class="cite xref">TF-RMM</a>]</span>.<a href="#section-3.4-4" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-cca-claims">
@@ -2749,7 +2791,7 @@ TODO...include cddl/cca-attestation.cddl
       <h2 id="name-signing-key-implementation-">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-signing-key-implementation-" class="section-name selfRef">Signing key implementation alternatives</a>
       </h2>
-<p id="section-6-1">In the CCA Platform reference design, PAKs (<a href="#para-pak-intro" class="auto internal xref">Section 3, Paragraph 8</a>) are raw public keys.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">In the CCA Platform reference design, PAKs (<a href="#para-pak-intro" class="auto internal xref">Section 3.4, Paragraph 2</a>) are raw public keys.<a href="#section-6-1" class="pilcrow">¶</a></p>
 <p id="section-6-2">Some implementations may choose to use an PAK that is a certified public key. If
 this option is taken, the value of the CCA Platform Profile Definition claim
 <a href="#sec-plat-profile-definition-claim" class="auto internal xref">Section 4.5.1</a> MUST be altered from the reference implementation
