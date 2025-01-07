@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 16 February 2025                                         Linaro
+Expires: 11 July 2025                                             Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                          15 August 2024
+                                                          7 January 2025
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,11 +49,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 February 2025.
+   This Internet-Draft will expire on 11 July 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -393,20 +393,10 @@ arm-platform-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
 
 cca-token = #6.399(cca-token-collection) ; CMW (draft-ietf-rats-msg-wrap) Collection
 
-cca-platform-token = bstr .cbor COSE_Sign1_Tagged
-cca-realm-delegated-token = bstr .cbor COSE_Sign1_Tagged
-
 cca-token-collection = {
-    44234 => cca-platform-token          ; 44234 = 0xACCA
-    44241 => cca-realm-delegated-token
+    44234 => COSE_Sign1<arm-platform-claims> ; 44234 = 0xACCA
+    44241 => COSE_Sign1<cca-realm-claims>
 }
-
-; EAT standard definitions
-COSE_Sign1_Tagged = #6.18(COSE_Sign1)
-
-; Deliberately shortcut these definitions until EAT is finalised and able to
-; pull in the full set of definitions
-COSE_Sign1 = "COSE-Sign1 placeholder"
 
 4.2.  CCA Platform token Claims
 
@@ -509,12 +499,12 @@ arm-platform-implementation-id = (
    See Section 4.9, for considerations about backwards compatibility
    with previous versions of the CCA Platform attestation token format.
 
-   cca-platform-profile-label = 265 ; EAT profile
+   arm-platform-profile-label = 265 ; EAT profile
 
-   cca-platform-profile-type = "tag:arm.com,2023:cca_platform#1.0.0"
+   arm-platform-profile-type = "tag:arm.com,2023:cca_platform#1.0.0"
 
-   cca-platform-profile = (
-       cca-platform-profile-label => cca-platform-profile-type
+   arm-platform-profile = (
+       arm-platform-profile-label => arm-platform-profile-type
    )
 
 4.5.2.  Security Lifecycle
@@ -1537,11 +1527,11 @@ cca-realm-extensible-measurements = (
               Confidential Compute Architecture", May 2023,
               <https://developer.arm.com/documentation/den0125/0300>.
 
-   [CMW]      Birkholz, H., Smith, N., Fossati, T., and H. Tschofenig,
-              "RATS Conceptual Messages Wrapper (CMW)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-msg-wrap-07, 24
-              July 2024, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-rats-msg-wrap-07>.
+   [CMW]      Birkholz, H., Smith, N., Fossati, T., Tschofenig, H., and
+              D. Glaze, "RATS Conceptual Messages Wrapper (CMW)", Work
+              in Progress, Internet-Draft, draft-ietf-rats-msg-wrap-11,
+              15 November 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-msg-wrap-11>.
 
    [COSE-ALGS]
               Schaad, J., "CBOR Object Signing and Encryption (COSE):
@@ -1550,16 +1540,16 @@ cca-realm-extensible-measurements = (
 
    [EAT]      Lundblade, L., Mandyam, G., O'Donoghue, J., and C.
               Wallace, "The Entity Attestation Token (EAT)", Work in
-              Progress, Internet-Draft, draft-ietf-rats-eat-30, 2 August
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-eat-30>.
+              Progress, Internet-Draft, draft-ietf-rats-eat-31, 6
+              September 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-eat-31>.
 
    [EAT-MEDIATYPES]
               Lundblade, L., Birkholz, H., and T. Fossati, "EAT Media
               Types", Work in Progress, Internet-Draft, draft-ietf-rats-
-              eat-media-type-08, 4 July 2024,
+              eat-media-type-12, 3 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              eat-media-type-08>.
+              eat-media-type-12>.
 
    [IANA-CWT] IANA, "CBOR Web Token (CWT) Claims", 2022,
               <https://www.iana.org/assignments/cwt/cwt.xhtml#claims-
@@ -1624,11 +1614,11 @@ cca-realm-extensible-measurements = (
 
    [I-D.kdyxy-rats-tdx-eat-profile]
               Kostal, G., Dittakavi, S., Yeluri, R., Xia, H., and J. Yu,
-              "EAT profile for Intel® Trust Domain Extensions (TDX)
+              "EAT profile for Intel(r) Trust Domain Extensions (TDX)
               attestation result", Work in Progress, Internet-Draft,
-              draft-kdyxy-rats-tdx-eat-profile-01, 23 April 2024,
+              draft-kdyxy-rats-tdx-eat-profile-02, 13 December 2024,
               <https://datatracker.ietf.org/doc/html/draft-kdyxy-rats-
-              tdx-eat-profile-01>.
+              tdx-eat-profile-02>.
 
    [I-D.mandyam-rats-qwestoken]
               Mandyam, G., Sekhar, V., and S. Mohammed, "The Qualcomm
@@ -1645,15 +1635,16 @@ cca-realm-extensible-measurements = (
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
               Scarlata, "Attestation Results for Secure Interactions",
               Work in Progress, Internet-Draft, draft-ietf-rats-ar4si-
-              06, 4 March 2024, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-ar4si-06>.
+              07, 2 September 2024,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              ar4si-07>.
 
    [RATS-CoRIM]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-05, 8 July
-              2024, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-corim-05>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-06, 18
+              October 2024, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-06>.
 
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
