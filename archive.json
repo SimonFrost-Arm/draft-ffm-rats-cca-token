@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-07T01:09:57.950416+00:00",
+  "timestamp": "2025-01-09T01:09:28.835298+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -183,7 +183,7 @@
       "id": "I_kwDOMRXjbM6UWbMA",
       "title": "CCA attester model",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/14",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -192,8 +192,8 @@
       "labels": [],
       "body": "The CCA attester model is slightly more complicated than is currently described.\r\n\r\nThere are _two_ separate sub-attesters (platform and realm) rather than one, each with their independent AE/TE split, and bound via RAK attestation.\r\n\r\nThis should be explained in Section 3 and illustrated in Figure 1.",
       "createdAt": "2024-08-27T10:17:57Z",
-      "updatedAt": "2024-11-28T19:19:38Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-07T10:57:52Z",
+      "closedAt": "2025-01-07T10:57:52Z",
       "comments": [
         {
           "author": "muhammad-usama-sardar",
@@ -244,7 +244,7 @@
       "id": "I_kwDOMRXjbM6UWgk6",
       "title": "Automated build and validation machinery",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/15",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [
@@ -253,8 +253,8 @@
       "labels": [],
       "body": "We must put the build and validation machinery around the CDDL and the EDN examples in place.\r\n\r\nSpecifically:\r\n\r\n* [x] Validate the platform CDDL\r\n* [x] Validate the realm CDDL\r\n* [x] Automatically assemble the top-level token\r\n* [x] Automatically validate the top-level token CDDL\r\n* [x] Compile examples (EDN->CBOR) and validate them against the top-level schema\r\n* [ ] Include examples in the draft document\r\n* [ ] Include the top-level token in the draft document\r\n\r\nAll of this should be executed as part of the CI.",
       "createdAt": "2024-08-27T10:27:18Z",
-      "updatedAt": "2024-11-20T13:34:42Z",
-      "closedAt": null,
+      "updatedAt": "2025-01-07T10:57:30Z",
+      "closedAt": "2025-01-07T10:57:30Z",
       "comments": []
     },
     {
@@ -673,24 +673,26 @@
       "id": "PR_kwDOMRXjbM6Bp2XA",
       "title": "CDDL machinery",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/17",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Add automatic build and check machinery and hook it into the top-level build.\r\n\r\nFix #15 (partially)\r\n",
       "createdAt": "2024-11-12T16:01:59Z",
-      "updatedAt": "2024-12-18T14:30:59Z",
+      "updatedAt": "2025-01-07T10:57:34Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "69a3c2c694bcb19beaa61272b98ba4bc5f78b2b1",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "cddl",
       "headRefOid": "b2871232273dd3931fa70ca88804c25c7cb11ccd",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-07T10:57:29Z",
+      "mergedAt": "2025-01-07T10:57:29Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "8d52b16cf057eceda0c499524c972131e9e603ce"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -741,24 +743,26 @@
       "id": "PR_kwDOMRXjbM6CiF8Q",
       "title": "delegated attester pics and prose",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/18",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #14",
       "createdAt": "2024-11-20T13:34:05Z",
-      "updatedAt": "2024-12-18T14:37:58Z",
+      "updatedAt": "2025-01-07T10:57:54Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "69a3c2c694bcb19beaa61272b98ba4bc5f78b2b1",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "pics",
       "headRefOid": "78424ef0d204b9891d828486a98e94a9f748da04",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-01-07T10:57:51Z",
+      "mergedAt": "2025-01-07T10:57:51Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "1920c6863d66faae4621d3823adaaa2f01534f85"
+      },
       "comments": [],
       "reviews": [
         {
@@ -815,25 +819,35 @@
       "id": "PR_kwDOMRXjbM6GdqYw",
       "title": "Platform token example",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/22",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "gmandyam",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "See https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/21",
       "createdAt": "2024-12-30T22:45:30Z",
-      "updatedAt": "2025-01-04T21:55:14Z",
+      "updatedAt": "2025-01-07T10:59:33Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "69a3c2c694bcb19beaa61272b98ba4bc5f78b2b1",
       "headRepository": "gmandyam/draft-ffm-rats-cca-token",
       "headRefName": "token_example",
       "headRefOid": "d53e79aaa8089d2c9f6190f39f078102f2b06aa5",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2025-01-07T10:59:33Z",
+      "mergedAt": "2025-01-07T10:59:33Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "9338a5f2d2a1efa974267d43dd756dd8610f3e86"
+      },
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Thanks @gmandyam very much for this. Will merge & we can augment later where we get any more 'real world' example platform to reference.",
+          "createdAt": "2025-01-07T10:59:29Z",
+          "updatedAt": "2025-01-07T10:59:29Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOMRXjbM6WxHcu",
