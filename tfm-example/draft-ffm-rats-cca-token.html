@@ -1396,10 +1396,27 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.12.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-examples" class="internal xref">Examples</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1">
-                <p id="section-toc.1-1.12.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-sample-platform-token-in-cw" class="internal xref">Sample Platform Token in CWT/COSE Sign1 Format</a></p>
+                <p id="section-toc.1-1.12.2.1.1"><a href="#appendix-A.1" class="auto internal xref">A.1</a>.  <a href="#name-delegated-mode" class="internal xref">Delegated Mode</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1.2.1">
+                    <p id="section-toc.1-1.12.2.1.2.1.1"><a href="#appendix-A.1.1" class="auto internal xref">A.1.1</a>.  <a href="#name-platform-claims-set" class="internal xref">Platform Claims Set</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1.2.2">
+                    <p id="section-toc.1-1.12.2.1.2.2.1"><a href="#appendix-A.1.2" class="auto internal xref">A.1.2</a>.  <a href="#name-realm-claims-set" class="internal xref">Realm Claims Set</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1.2.3">
+                    <p id="section-toc.1-1.12.2.1.2.3.1"><a href="#appendix-A.1.3" class="auto internal xref">A.1.3</a>.  <a href="#name-platform-attestation-key" class="internal xref">Platform Attestation Key</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1.2.4">
+                    <p id="section-toc.1-1.12.2.1.2.4.1"><a href="#appendix-A.1.4" class="auto internal xref">A.1.4</a>.  <a href="#name-realm-attestation-key" class="internal xref">Realm Attestation Key</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.1.2.5">
+                    <p id="section-toc.1-1.12.2.1.2.5.1"><a href="#appendix-A.1.5" class="auto internal xref">A.1.5</a>.  <a href="#name-signed-and-bound-assembly" class="internal xref">Signed and Bound Assembly</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.12.2.2">
-                <p id="section-toc.1-1.12.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-cose-sign1-token" class="internal xref">COSE Sign1 Token</a></p>
+                <p id="section-toc.1-1.12.2.2.1"><a href="#appendix-A.2" class="auto internal xref">A.2</a>.  <a href="#name-direct-mode" class="internal xref">Direct Mode</a></p>
 </li>
             </ul>
 </li>
@@ -3640,101 +3657,524 @@ equal to "tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3-2.1.1" clas
 <a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-examples" class="section-name selfRef">Examples</a>
       </h2>
 <p id="appendix-A-1">The following examples show CCA attestation tokens for an hypothetical system
-comprising a single measured software component.
+comprising a single number of software component.
 The attesting device is in a lifecycle state (<a href="#sec-security-lifecycle" class="auto internal xref">Section 4.5.2</a>) of
 SECURED.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
-<div id="sample-platform-token-in-cwtcose-sign1-format">
+<div id="delegated-mode">
 <section id="appendix-A.1">
-        <h3 id="name-sample-platform-token-in-cw">
-<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-sample-platform-token-in-cw" class="section-name selfRef">Sample Platform Token in CWT/COSE Sign1 Format</a>
+        <h3 id="name-delegated-mode">
+<a href="#appendix-A.1" class="section-number selfRef">A.1. </a><a href="#name-delegated-mode" class="section-name selfRef">Delegated Mode</a>
         </h3>
-<p id="appendix-A.1-1">The following sample claim set and token are representative of a CCA Platform Token.
-The eat-nonce may be set to a hash of the RAK public key if the delegated model is assumed.  If not,
-then the eat-nonce is a hash of the realm claims set, which includes verifier-provided challenge data.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.1-2">
+<p id="appendix-A.1-1">The following sample claim set and token are representative of a CCA Token using "delegated mode" described in <a href="#delegated" class="auto internal xref">Section 3.2</a>.<a href="#appendix-A.1-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.1-2">In this model, the <code>eat_nonce</code> claim in the Platform token contains a hash of the RAK public key claim in the Realm token.<a href="#appendix-A.1-2" class="pilcrow">¶</a></p>
+<div id="platform-claims-set">
+<section id="appendix-A.1.1">
+          <h4 id="name-platform-claims-set">
+<a href="#appendix-A.1.1" class="section-number selfRef">A.1.1. </a><a href="#name-platform-claims-set" class="section-name selfRef">Platform Claims Set</a>
+          </h4>
+<p id="appendix-A.1.1-1">The CCA Platform claims set is<a href="#appendix-A.1.1-1" class="pilcrow">¶</a></p>
+<div class="breakable lang-cbor-diag sourcecode" id="appendix-A.1.1-2">
 <pre>
 =============== NOTE: '\' line wrapping per RFC 8792 ================
 
-/ Sample Platform Claims Set in CDDL                          /
 {
-   / cca-platform-profile / 265:"tag:arm.com,2023:cca_platform#1.0.0"
-   / arm-platform-challenge, SHA-256 calculation of ‘RAK’ / 10: h' \
-    c9cdc457ebe981d563b19b5a8e0e3cbef5b944d58e278c9c6779f77beb65bbd5’
-   / arm-platform-lifecycle / 2395: h'3000' /secured/
-   / arm-platform-sw-components / 2399: [ {1:"ROTFMC", 2:h'\
-903a36d3a0a511ecac4548fee8601af54247c110ce220f680a0b274441729105’, 5\
-:h'd4cf61e472d18c8e926ce0d44496674792587c88706e8a123b294c000895d9ea’\
-                                                                   },
-      {1:"ROTFW", 2:h'\
-59d4116525e974b5b62ffd7c4ffcbaa0b98e08263403aeb6638797132d2af959’, 5\
-:h'd4cf61e472d18c8e926ce0d44496674792587c88706e8a123b294c000895d9ea’\
-                                                                  } ]
-   /arm-platform-id/ 256: h’ \
-    946338159d767f9f37098a00a60f133b6d57886fc656f5f9eed13760b4893fa1’
-   /arm-platform-implementation-id/ 2396: h’\
-    0000000000000000000000000000000000000000000000000000000000000001’
+  265:"tag:arm.com,2023:cca_platform#1.0.0",
+  10:h'\
+   0D22E08A98469058486318283489BDB36F09DBEFEB1864DF433FA6E54EA2D711',
+  2396:h'\
+   7F454C4602010100000000000000000003003E00010000005058000000000000',
+  256:h'\
+ 0107060504030201000F0E0D0C0B0A090817161514131211101F1E1D1C1B1A1918',
+  2401:h'CFCFCFCF',
+  2395:12291,
+  2402:"sha-256",
+  2400:"https://veraison.example/.well-known/veraison/verification",
+  2399:[
+    {
+      1:"RSE_BL1_2",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA',
+      6:"sha-256"
+    },
+    {
+      1:"RSE_BL2",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   53C234E5E8472B6AC51C1AE1CAB3FE06FAD053BEB8EBFD8977B010655BFDD3C3',
+      6:"sha-256"
+    },
+    {
+      1:"RSE_S",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   1121CFCCD5913F0A63FEC40A6FFD44EA64F9DC135C66634BA001D10BCF4302A2',
+      6:"sha-256"
+    },
+    {
+      1:"AP_BL1",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   1571B5EC78BD68512BF7830BB6A2A44B2047C7DF57BCE79EB8A1C0E5BEA0A501',
+      6:"sha-256"
+    },
+    {
+      1:"AP_BL2",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   10159BAF262B43A92D95DB59DAE1F72C645127301661E0A3CE4E38B295A97C58',
+      6:"sha-256"
+    },
+    {
+      1:"SCP_BL1",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   10122E856B3FCD49F063636317476149CB730A1AA1CFAAD818552B72F56D6F68',
+      6:"sha-256"
+    },
+    {
+      1:"SCP_BL2",
+      5:h'\
+   F14B4987904BCB5814E4459A057ED4D20F58A633152288A761214DCD28780B56',
+      2:h'\
+   AA67A169B0BBA217AA0AA88A65346920C84C42447C36BA5F7EA65F422C1FE5D8',
+      6:"sha-256"
+    },
+    {
+      1:"AP_BL31",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   2E6D31A5983A91251BFAE5AEFA1C0A19D8BA3CF601D0E8A706B4CFA9661A6B8A',
+      6:"sha-256"
+    },
+    {
+      1:"RMM",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   A1FB50E6C86FAE1679EF3351296FD6713411A08CF8DD1790A4FD05FAE8688164',
+      6:"sha-256"
+    },
+    {
+      1:"HW_CONFIG",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   1A252402972F6057FA53CC172B52B9FFCA698E18311FACD0F3B06ECAAEF79E17',
+      6:"sha-256"
+    },
+    {
+      1:"FW_CONFIG",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   9A92ADBC0CEE38EF658C71CE1B1BF8C65668F166BFB213644C895CCB1AD07A25',
+      6:"sha-256"
+    },
+    {
+      1:"TB_FW_CONFIG",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   238903180CC104EC2C5D8B3F20C5BC61B389EC0A967DF8CC208CDC7CD454174F',
+      6:"sha-256"
+    },
+    {
+      1:"SOC_FW_CONFIG",
+      5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+      2:h'\
+   E6C21E8D260FE71882DEBDB339D2402A2CA7648529BC2303F48649BCE0380017',
+      6:"sha-256"
+    }
+  ]
 }
-
-/ This is a full CWT-format token. The payload is a sample    /
-/ platform claimset. The main structure                       /
-/ visible is that of the COSE_Sign1.                          /
-
-61( 18( [
-    h'A10126',  / protected headers  /
-    {}, / empty unprotected headers /
-    h’\
-a419010978237461673a61726d2e636f6d2c323032333a6363615f706c74666f726d\
-23312e392e300a580020c9cdc457ebe981d563b19b5a8e0e3cbef5b944d58e278c9c\
-                                 6779f77beb65bbd519095b42300019095f82
-      \
-a30166524f54464d4302580020903a36d3a0a511ecac4548fee8601af54247c110ce\
-220f680a0b27444172910505580020d4cf61e472d18c8e926ce0d44496674792587c\
-                                 88706e8a123b294c000895d9eaae0165524f
-      \
-5446575800200259d4116525e974b5b62ffd7c4ffcbaa0b98e08263403aeb6638797\
-132d2af95905580020d4cf61e472d18c8e926ce0d44496674792587c88706e8a123b\
-                                 294c000895d9ea1901007820946338159d76
-      \
-7f9f37098a00a60f133b6d57886fc656f5f9eed13760b4893fa11a095c5820000000\
-0000000000000000000000000000000000000000000000000000000001' /payload/
-    h'\
-a8c7e7551e2c970742bfc61c0f1bae7afd9068cff1dffe641b26b1927c022100960d\
-78a1098be13bb5d26e6db9ee2be1b4b4749c60cd6a9190b95808881d1c65' /\
-                                                           signature/
-] ) )
-</pre><a href="#appendix-A.1-2" class="pilcrow">¶</a>
+</pre><a href="#appendix-A.1.1-2" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
-<div id="ex-sign1">
+<div id="realm-claims-set">
+<section id="appendix-A.1.2">
+          <h4 id="name-realm-claims-set">
+<a href="#appendix-A.1.2" class="section-number selfRef">A.1.2. </a><a href="#name-realm-claims-set" class="section-name selfRef">Realm Claims Set</a>
+          </h4>
+<p id="appendix-A.1.2-1">The CCA Realm claims set is<a href="#appendix-A.1.2-1" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="appendix-A.1.2-2">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+    265: "tag:arm.com,2023:realm#1.0.0", / eat_profile /
+    10: h'\
+6E86D6D97CC713BC6DD43DBCE491A6B40311C027A8BF85A39DA63E9CE44C132A8A11\
+9D296FAE6A6999E9BF3E4471B0CE01245D889424C31E89793B3B1D6B1504', / \
+                                                          eat_nonce /
+    44236: "sha-256", / Realm hash algorithm /
+    44240: "sha-256", / RAK hash algorithm /
+    44235: h'\
+54686520717569636B2062726F776E20666F78206A756D7073206F76657220313320\
+6C617A7920646F67732E54686520717569636B2062726F776E20666F7820', / PV /
+    44237: &lt;&lt; { / RAK /
+        1: 2, / kty=EC2 /
+        -1: 2, / crv=P-384 /
+        -2: h'\
+76F988091BE585ED41801AECFAB858548C63057E16B0E676120BBD0D2F9C29E056C5\
+                      D41A0130EB9C21517899DC23146B', / x-coordinate /
+        -3: h'\
+28E1B062BD3EA4B315FD219F1CBB528CB6E74CA49BE16773734F61A1CA61031B2BBF\
+                       3D918F2F94FFC4228E50919544AE' / y-coordinate /
+    } &gt;&gt;,
+    44238: h'\
+311314AB73620350CF758834AE5C65D9E8C2DC7FEBE6E7D9654BBE864E300D49', \
+                                                              / RIM /
+    44239: [
+        h'\
+24D5B0A296CC05CBD8068C5067C5BD473B770DDA6AE082FE3BA30ABE3F9A6AB1', \
+                                                           / REM[0] /
+        h'\
+788FC090BFC6B8ED903152BA8414E73DAF5B8C7BB1E79AD502AB0699B659ED16', \
+                                                           / REM[1] /
+        h'\
+DAC46A58415DC3A00D7A741852008E9CAE64F52D03B9F76D76F4B3644FEFC416', \
+                                                           / REM[2] /
+        h'\
+32C6AFC627E55585C03155359F331A0E225F6840DB947DD96EFAB81BE2671939'  \
+                                                           / REM[3] /
+    ],
+    44241: "private"  / MEC policy /
+}
+</pre><a href="#appendix-A.1.2-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="platform-attestation-key">
+<section id="appendix-A.1.3">
+          <h4 id="name-platform-attestation-key">
+<a href="#appendix-A.1.3" class="section-number selfRef">A.1.3. </a><a href="#name-platform-attestation-key" class="section-name selfRef">Platform Attestation Key</a>
+          </h4>
+<p id="appendix-A.1.3-1">The COSE Key representation of the Platform Attestation Key (PAK) used for creating the COSE Sign1 signature over the CCA Platform token is<a href="#appendix-A.1.3-1" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="appendix-A.1.3-2">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  / kty /  1: 2,  / EC2 /
+  / crv / -1: 2,  / P-384 /
+  / x-coordinate / -2: h'\
+212867C52E2B9508B0A420A90560F394D2DFAA21BDD7514FF1A901AFE7E1F78BB11D\
+                                       4E66F8A8A38AFA76AF6A31C4DE8C',
+  / y-coordinate / -3: h'\
+84CE2DAFC9964258B53FAD718774F45620D111B176E8318E1187DB0235A318D37BA5\
+                                       97FEE80E0E4C762A12BCB3EA6ED4',
+  / private key /  -4: h'\
+8AC090C995869F61AC1358F02B021A26AB6EB386203AC735D7CE9855538B91F74C44\
+                                        B0D580243EFB799A293DCBAA0899'
+}
+</pre><a href="#appendix-A.1.3-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="realm-attestation-key">
+<section id="appendix-A.1.4">
+          <h4 id="name-realm-attestation-key">
+<a href="#appendix-A.1.4" class="section-number selfRef">A.1.4. </a><a href="#name-realm-attestation-key" class="section-name selfRef">Realm Attestation Key</a>
+          </h4>
+<p id="appendix-A.1.4-1">The COSE Key representation of the Realm Attestation Key (RAK) used for creating the COSE Sign1 signature over the CCA Realm token is<a href="#appendix-A.1.4-1" class="pilcrow">¶</a></p>
+<div class="lang-cbor-diag sourcecode" id="appendix-A.1.4-2">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+{
+  / kty /  1: 2,  / EC2 /
+  / crv / -1: 2,  / P-384 /
+  / x-coordinate / -2: h'\
+76F988091BE585ED41801AECFAB858548C63057E16B0E676120BBD0D2F9C29E056C5\
+                                       D41A0130EB9C21517899DC23146B',
+  / y-coordinate / -3: h'\
+28E1B062BD3EA4B315FD219F1CBB528CB6E74CA49BE16773734F61A1CA61031B2BBF\
+                                       3D918F2F94FFC4228E50919544AE',
+  / private key /  -4: h'\
+2011C7F03CEE4325176E524F033C0CE1E21A76E6C1A4F0B839AA1DF61E0E8A5C8A05\
+                                        740F9B69EFA7EB1A4185BD117F68'
+}
+</pre><a href="#appendix-A.1.4-2" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+<div id="signed-and-bound-assembly">
+<section id="appendix-A.1.5">
+          <h4 id="name-signed-and-bound-assembly">
+<a href="#appendix-A.1.5" class="section-number selfRef">A.1.5. </a><a href="#name-signed-and-bound-assembly" class="section-name selfRef">Signed and Bound Assembly</a>
+          </h4>
+<p id="appendix-A.1.5-1">The resulting CMW collection is<a href="#appendix-A.1.5-1" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.1.5-2">
+<pre>
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+399({
+  44234: &lt;&lt; 18([
+    h'A1013822',
+    {},
+    &lt;&lt; {
+      265:"tag:arm.com,2023:cca_platform#1.0.0",
+      10:h'\
+   0D22E08A98469058486318283489BDB36F09DBEFEB1864DF433FA6E54EA2D711',
+      2396:h'\
+   7F454C4602010100000000000000000003003E00010000005058000000000000',
+      256:h'\
+ 0107060504030201000F0E0D0C0B0A090817161514131211101F1E1D1C1B1A1918',
+      2401:h'CFCFCFCF',
+      2395:12291,
+      2402:"sha-256",
+      2400:"https://veraison.example/.well-known/veraison/\
+                                                       verification",
+      2399:[
+        {
+          1:"RSE_BL1_2",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   9A271F2A916B0B6EE6CECB2426F0B3206EF074578BE55D9BC94F6F3FE3AB86AA',
+          6:"sha-256"
+        },
+        {
+          1:"RSE_BL2",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   53C234E5E8472B6AC51C1AE1CAB3FE06FAD053BEB8EBFD8977B010655BFDD3C3',
+          6:"sha-256"
+        },
+        {
+          1:"RSE_S",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   1121CFCCD5913F0A63FEC40A6FFD44EA64F9DC135C66634BA001D10BCF4302A2',
+          6:"sha-256"
+        },
+        {
+          1:"AP_BL1",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   1571B5EC78BD68512BF7830BB6A2A44B2047C7DF57BCE79EB8A1C0E5BEA0A501',
+          6:"sha-256"
+        },
+        {
+          1:"AP_BL2",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   10159BAF262B43A92D95DB59DAE1F72C645127301661E0A3CE4E38B295A97C58',
+          6:"sha-256"
+        },
+        {
+          1:"SCP_BL1",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   10122E856B3FCD49F063636317476149CB730A1AA1CFAAD818552B72F56D6F68',
+          6:"sha-256"
+        },
+        {
+          1:"SCP_BL2",
+          5:h'\
+   F14B4987904BCB5814E4459A057ED4D20F58A633152288A761214DCD28780B56',
+          2:h'\
+   AA67A169B0BBA217AA0AA88A65346920C84C42447C36BA5F7EA65F422C1FE5D8',
+          6:"sha-256"
+        },
+        {
+          1:"AP_BL31",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   2E6D31A5983A91251BFAE5AEFA1C0A19D8BA3CF601D0E8A706B4CFA9661A6B8A',
+          6:"sha-256"
+        },
+        {
+          1:"RMM",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   A1FB50E6C86FAE1679EF3351296FD6713411A08CF8DD1790A4FD05FAE8688164',
+          6:"sha-256"
+        },
+        {
+          1:"HW_CONFIG",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   1A252402972F6057FA53CC172B52B9FFCA698E18311FACD0F3B06ECAAEF79E17',
+          6:"sha-256"
+        },
+        {
+          1:"FW_CONFIG",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   9A92ADBC0CEE38EF658C71CE1B1BF8C65668F166BFB213644C895CCB1AD07A25',
+          6:"sha-256"
+        },
+        {
+          1:"TB_FW_CONFIG",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   238903180CC104EC2C5D8B3F20C5BC61B389EC0A967DF8CC208CDC7CD454174F',
+          6:"sha-256"
+        },
+        {
+          1:"SOC_FW_CONFIG",
+          5:h'\
+   5378796307535DF3EC8D8B15A2E2DC5641419C3D3060CFE32238C0FA973F7AA3',
+          2:h'\
+   E6C21E8D260FE71882DEBDB339D2402A2CA7648529BC2303F48649BCE0380017',
+          6:"sha-256"
+        }
+      ]
+    } &gt;&gt;,
+    h'\
+31D04D52CCDE952C1E32CBA181885A40B8CC38E0528C1E89589807642AA5E3F2BC37\
+F95374506BFF4D2E4BE7063C4D72419270C722E8D4D93EE8B6C9FACE3B43C9761A49\
+            941AB6F38FFDFF496AD463B4CBFA11D83E23E31F7F62329DE30C1CC8'
+  ]) &gt;&gt;,
+
+  44241: &lt;&lt; 18([
+    h'A1013822',
+    {},
+    &lt;&lt; {
+      265:"tag:arm.com,2023:realm#1.0.0",
+      10:h'\
+6E86D6D97CC713BC6DD43DBCE491A6B40311C027A8BF85A39DA63E9CE44C132A8A11\
+       9D296FAE6A6999E9BF3E4471B0CE01245D889424C31E89793B3B1D6B1504',
+      44236:"sha-256",
+      44240:"sha-256",
+      44235:h'\
+54686520717569636B2062726F776E20666F78206A756D7073206F76657220313320\
+       6C617A7920646F67732E54686520717569636B2062726F776E20666F7820',
+      44237:h'\
+A40102200221583076F988091BE585ED41801AECFAB858548C63057E16B0E676120B\
+BD0D2F9C29E056C5D41A0130EB9C21517899DC23146B22583028E1B062BD3EA4B315\
+FD219F1CBB528CB6E74CA49BE16773734F61A1CA61031B2BBF3D918F2F94FFC4228E\
+                                                         50919544AE',
+      44238:h'\
+   311314AB73620350CF758834AE5C65D9E8C2DC7FEBE6E7D9654BBE864E300D49',
+      44239:[
+        h'\
+   24D5B0A296CC05CBD8068C5067C5BD473B770DDA6AE082FE3BA30ABE3F9A6AB1',
+        h'\
+   788FC090BFC6B8ED903152BA8414E73DAF5B8C7BB1E79AD502AB0699B659ED16',
+        h'\
+   DAC46A58415DC3A00D7A741852008E9CAE64F52D03B9F76D76F4B3644FEFC416',
+        h'\
+    32C6AFC627E55585C03155359F331A0E225F6840DB947DD96EFAB81BE2671939'
+      ]
+    } &gt;&gt;,
+    h'\
+580B1DEA32D30AC6884C86B39CBE0FCB03BD00DF5103F9BAB01386A46A3BA8143E27\
+ED6D4EB0D0A2724ABDF9640C09462FACE6DF186909DFA6EB131E3A7918276077ACDA\
+            B8A8BDECA6B0EAAFAB66E1439C1371F4FB1D6AAC047481B5DC75DD46'
+  ]) &gt;&gt;
+})
+</pre><a href="#appendix-A.1.5-2" class="pilcrow">¶</a>
+</div>
+<p id="appendix-A.1.5-3">which has the following base16 encoding:<a href="#appendix-A.1.5-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="appendix-A.1.5-4">
+<pre>
+d9018fa219acca5905eed28444a1013822a0590581a91901097823746167
+3a61726d2e636f6d2c323032333a6363615f706c6174666f726d23312e30
+2e300a58200d22e08a98469058486318283489bdb36f09dbefeb1864df43
+3fa6e54ea2d71119095c58207f454c460201010000000000000000000300
+3e0001000000505800000000000019010058210107060504030201000f0e
+0d0c0b0a090817161514131211101f1e1d1c1b1a191819096144cfcfcfcf
+19095b193003190962677368612d323536190960783a68747470733a2f2f
+7665726169736f6e2e6578616d706c652f2e77656c6c2d6b6e6f776e2f76
+65726169736f6e2f766572696669636174696f6e19095f8da40169525345
+5f424c315f320558205378796307535df3ec8d8b15a2e2dc5641419c3d30
+60cfe32238c0fa973f7aa30258209a271f2a916b0b6ee6cecb2426f0b320
+6ef074578be55d9bc94f6f3fe3ab86aa06677368612d323536a401675253
+455f424c320558205378796307535df3ec8d8b15a2e2dc5641419c3d3060
+cfe32238c0fa973f7aa302582053c234e5e8472b6ac51c1ae1cab3fe06fa
+d053beb8ebfd8977b010655bfdd3c306677368612d323536a40165525345
+5f530558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe322
+38c0fa973f7aa30258201121cfccd5913f0a63fec40a6ffd44ea64f9dc13
+5c66634ba001d10bcf4302a206677368612d323536a4016641505f424c31
+0558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0
+fa973f7aa30258201571b5ec78bd68512bf7830bb6a2a44b2047c7df57bc
+e79eb8a1c0e5bea0a50106677368612d323536a4016641505f424c320558
+205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa97
+3f7aa302582010159baf262b43a92d95db59dae1f72c645127301661e0a3
+ce4e38b295a97c5806677368612d323536a401675343505f424c31055820
+5378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f
+7aa302582010122e856b3fcd49f063636317476149cb730a1aa1cfaad818
+552b72f56d6f6806677368612d323536a401675343505f424c32055820f1
+4b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b
+56025820aa67a169b0bba217aa0aa88a65346920c84c42447c36ba5f7ea6
+5f422c1fe5d806677368612d323536a4016741505f424c33310558205378
+796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7aa3
+0258202e6d31a5983a91251bfae5aefa1c0a19d8ba3cf601d0e8a706b4cf
+a9661a6b8a06677368612d323536a40163524d4d0558205378796307535d
+f3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7aa3025820a1fb
+50e6c86fae1679ef3351296fd6713411a08cf8dd1790a4fd05fae8688164
+06677368612d323536a4016948575f434f4e464947055820537879630753
+5df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7aa30258201a
+252402972f6057fa53cc172b52b9ffca698e18311facd0f3b06ecaaef79e
+1706677368612d323536a4016946575f434f4e4649470558205378796307
+535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7aa3025820
+9a92adbc0cee38ef658c71ce1b1bf8c65668f166bfb213644c895ccb1ad0
+7a2506677368612d323536a4016c54425f46575f434f4e46494705582053
+78796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7a
+a3025820238903180cc104ec2c5d8b3f20c5bc61b389ec0a967df8cc208c
+dc7cd454174f06677368612d323536a4016d534f435f46575f434f4e4649
+470558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238
+c0fa973f7aa3025820e6c21e8d260fe71882debdb339d2402a2ca7648529
+bc2303f48649bce038001706677368612d323536586031d04d52ccde952c
+1e32cba181885a40b8cc38e0528c1e89589807642aa5e3f2bc37f9537450
+6bff4d2e4be7063c4d72419270c722e8d4d93ee8b6c9face3b43c9761a49
+941ab6f38ffdff496ad463b4cbfa11d83e23e31f7f62329de30c1cc819ac
+d159024ed28444a1013822a05901e1a8190109781c7461673a61726d2e63
+6f6d2c323032333a7265616c6d23312e302e300a58406e86d6d97cc713bc
+6dd43dbce491a6b40311c027a8bf85a39da63e9ce44c132a8a119d296fae
+6a6999e9bf3e4471b0ce01245d889424c31e89793b3b1d6b150419accc67
+7368612d32353619acd0677368612d32353619accb584054686520717569
+636b2062726f776e20666f78206a756d7073206f766572203133206c617a
+7920646f67732e54686520717569636b2062726f776e20666f782019accd
+586ba40102200221583076f988091be585ed41801aecfab858548c63057e
+16b0e676120bbd0d2f9c29e056c5d41a0130eb9c21517899dc23146b2258
+3028e1b062bd3ea4b315fd219f1cbb528cb6e74ca49be16773734f61a1ca
+61031b2bbf3d918f2f94ffc4228e50919544ae19acce5820311314ab7362
+0350cf758834ae5c65d9e8c2dc7febe6e7d9654bbe864e300d4919accf84
+582024d5b0a296cc05cbd8068c5067c5bd473b770dda6ae082fe3ba30abe
+3f9a6ab15820788fc090bfc6b8ed903152ba8414e73daf5b8c7bb1e79ad5
+02ab0699b659ed165820dac46a58415dc3a00d7a741852008e9cae64f52d
+03b9f76d76f4b3644fefc416582032c6afc627e55585c03155359f331a0e
+225f6840db947dd96efab81be26719395860580b1dea32d30ac6884c86b3
+9cbe0fcb03bd00df5103f9bab01386a46a3ba8143e27ed6d4eb0d0a2724a
+bdf9640c09462face6df186909dfa6eb131e3a7918276077acdab8a8bdec
+a6b0eaafab66e1439c1371f4fb1d6aac047481b5dc75dd46
+</pre><a href="#appendix-A.1.5-4" class="pilcrow">¶</a>
+</div>
+</section>
+</div>
+</section>
+</div>
+<div id="direct-mode">
 <section id="appendix-A.2">
-        <h3 id="name-cose-sign1-token">
-<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-cose-sign1-token" class="section-name selfRef">COSE Sign1 Token</a>
+        <h3 id="name-direct-mode">
+<a href="#appendix-A.2" class="section-number selfRef">A.2. </a><a href="#name-direct-mode" class="section-name selfRef">Direct Mode</a>
         </h3>
-<div class="alignLeft art-text artwork" id="appendix-A.2-1">
-<pre>
-TODO...include cddl/example/sign1-claims.diag
-</pre><a href="#appendix-A.2-1" class="pilcrow">¶</a>
-</div>
-<p id="appendix-A.2-2">The JWK representation of the PAK used for creating the COSE Sign1 signature
-over the PSA token is:<a href="#appendix-A.2-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.2-3">
-<pre>
-TODO...include cddl/example/tfm-es-iak.json
-</pre><a href="#appendix-A.2-3" class="pilcrow">¶</a>
-</div>
-<p id="appendix-A.2-4">The resulting COSE object is:<a href="#appendix-A.2-4" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.2-5">
-<pre>
-TODO...include cddl/example/psa-sign1.diag
-</pre><a href="#appendix-A.2-5" class="pilcrow">¶</a>
-</div>
-<p id="appendix-A.2-6">which has the following base16 encoding:<a href="#appendix-A.2-6" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="appendix-A.2-7">
-<pre>
-TODO...include cddl/example/psa-sign1.hex
-</pre><a href="#appendix-A.2-7" class="pilcrow">¶</a>
-</div>
+<p id="appendix-A.2-1">The following sample claim sets and the resulting CCA Token are representative of a CCA Token using "direct mode" (<a href="#direct" class="auto internal xref">Section 3.1</a>).<a href="#appendix-A.2-1" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-2">In "direct mode" the <code>eat_nonce</code> claim in the Platform token contains a hash of the Realm claims set, which includes verifier-provided challenge data.<a href="#appendix-A.2-2" class="pilcrow">¶</a></p>
+<p id="appendix-A.2-3">TODO<a href="#appendix-A.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
