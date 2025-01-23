@@ -424,7 +424,9 @@ Table of Contents
    claim independent of encoding.  The following CDDL type(s) are reused
    by different claims:
 
-arm-platform-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
+   arm-platform-hash-type = bytes .size 32 /
+                            bytes .size 48 /
+                            bytes .size 64
 
    Two conventions are used to encode the Right-Hand-Side (RHS) of a
    claim: the postfix -label is used for EAT-defined claims, and the
@@ -437,12 +439,13 @@ arm-platform-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
    bstr encoding of the CCA Platform token and the other for a bstr
    encoding of the Realm state token/
 
-cca-token = #6.399(cca-token-collection) ; CMW (draft-ietf-rats-msg-wrap) Collection
+ ; CMW (draft-ietf-rats-msg-wrap) Collection
+ cca-token = #6.399(cca-token-collection)
 
-cca-token-collection = {
-    44234 => bytes .cbor COSE_Sign1<arm-platform-claims> ; 44234 = 0xACCA
-    44241 => bytes .cbor COSE_Sign1<cca-realm-claims>
-}
+ cca-token-collection = {
+     44234 => bytes .cbor COSE_Sign1<arm-platform-claims> ; 44234=0xACCA
+     44241 => bytes .cbor COSE_Sign1<cca-realm-claims>
+ }
 
 4.2.  CCA Platform token Claims
 
@@ -490,15 +493,15 @@ cca-token-collection = {
 
    This claim MUST be present in a CCA Platform attestation token.
 
-arm-platform-instance-id-label = 256 ; EAT ueid
+ arm-platform-instance-id-label = 256 ; EAT ueid
 
-; TODO: require that the first byte of arm-platform-instance-id-type is 0x01
-; EAT UEIDs need to be 7 - 33 bytes
-arm-platform-instance-id-type = bytes .size 33
+ ; TODO: require that the first byte of arm-platform-instance-id-type is
+ ; 0x01
+ arm-platform-instance-id-type = bytes .size 33
 
-arm-platform-instance-id = (
-    arm-platform-instance-id-label => arm-platform-instance-id-type
-)
+ arm-platform-instance-id = (
+     arm-platform-instance-id-label => arm-platform-instance-id-type
+ )
 
 4.4.2.  CCA Platform Implementation ID
 
@@ -520,12 +523,13 @@ arm-platform-instance-id = (
    particular instance.  To uniquely identify an instance, see the
    Instance ID claim Section 4.4.1.
 
-arm-platform-implementation-id-label = 2396 ; PSA implementation ID
-arm-platform-implementation-id-type = bytes .size 32
+   arm-platform-implementation-id-label = 2396 ; PSA implementation ID
+   arm-platform-implementation-id-type = bytes .size 32
 
-arm-platform-implementation-id = (
-    arm-platform-implementation-id-label => arm-platform-implementation-id-type
-)
+   arm-platform-implementation-id = (
+       arm-platform-implementation-id-label =>
+           arm-platform-implementation-id-type
+   )
 
 4.5.  Target State Claims
 
@@ -794,13 +798,14 @@ arm-platform-lifecycle = (
    specifying the address of the verification service API).  A Relying
    Party may choose to ignore this claim in favor of other information.
 
-arm-platform-verification-service-label = 2400 ; PSA verification service
-arm-platform-verification-service-type = text
+   ; PSA verification service
+   arm-platform-verification-service-label = 2400
+   arm-platform-verification-service-type = text
 
-arm-platform-verification-service = (
-    arm-platform-verification-service-label =>
-        arm-platform-verification-service-type
-)
+   arm-platform-verification-service = (
+       arm-platform-verification-service-label =>
+           arm-platform-verification-service-type
+   )
 
    It is assumed that the relying party is pre-configured with a list of
    trusted verification services and that the contents of this hint can
@@ -896,12 +901,13 @@ arm-platform-verification-service = (
 
    This claim MUST be present in a CCA Realm state attestation token.
 
-cca-realm-personalization-value-label = 44235
-cca-realm-personalization-value-type = bytes .size 64
+   cca-realm-personalization-value-label = 44235
+   cca-realm-personalization-value-type = bytes .size 64
 
-cca-realm-personalization-value = (
-    cca-realm-personalization-value-label => cca-realm-personalization-value-type
-)
+   cca-realm-personalization-value = (
+       cca-realm-personalization-value-label =>
+           cca-realm-personalization-value-type
+   )
 
 4.8.4.  Realm Initial Measurement
 

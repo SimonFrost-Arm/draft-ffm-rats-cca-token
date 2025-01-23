@@ -1837,8 +1837,9 @@ independent of encoding.  The following CDDL type(s) are reused by different
 claims:<a href="#section-4-6" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4-7">
 <pre>
-arm-platform-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64
-
+arm-platform-hash-type = bytes .size 32 /
+                         bytes .size 48 /
+                         bytes .size 64
 </pre><a href="#section-4-7" class="pilcrow">¶</a>
 </div>
 <p id="section-4-8">Two conventions are used to encode the Right-Hand-Side (RHS) of a claim: the postfix <code>-label</code> is used for EAT-defined claims, and the postfix <code>-key</code> for PSA-originated claims.<a href="#section-4-8" class="pilcrow">¶</a></p>
@@ -1852,10 +1853,11 @@ The collection map has two entries, one for a bstr encoding of the CCA Platform 
 the other for a bstr encoding of the Realm state token/<a href="#section-4.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.1-2">
 <pre>
-cca-token = #6.399(cca-token-collection) ; CMW (draft-ietf-rats-msg-wrap) Collection
+; CMW (draft-ietf-rats-msg-wrap) Collection
+cca-token = #6.399(cca-token-collection)
 
 cca-token-collection = {
-    44234 =&gt; bytes .cbor COSE_Sign1&lt;arm-platform-claims&gt; ; 44234 = 0xACCA
+    44234 =&gt; bytes .cbor COSE_Sign1&lt;arm-platform-claims&gt; ; 44234=0xACCA
     44241 =&gt; bytes .cbor COSE_Sign1&lt;cca-realm-claims&gt;
 }
 </pre><a href="#section-4.1-2" class="pilcrow">¶</a>
@@ -1936,8 +1938,8 @@ apply to the <code>ueid-type</code>:<a href="#section-4.4.1-1" class="pilcrow">�
 <pre>
 arm-platform-instance-id-label = 256 ; EAT ueid
 
-; TODO: require that the first byte of arm-platform-instance-id-type is 0x01
-; EAT UEIDs need to be 7 - 33 bytes
+; TODO: require that the first byte of arm-platform-instance-id-type is
+; 0x01
 arm-platform-instance-id-type = bytes .size 33
 
 arm-platform-instance-id = (
@@ -1971,7 +1973,8 @@ arm-platform-implementation-id-label = 2396 ; PSA implementation ID
 arm-platform-implementation-id-type = bytes .size 32
 
 arm-platform-implementation-id = (
-    arm-platform-implementation-id-label =&gt; arm-platform-implementation-id-type
+    arm-platform-implementation-id-label =&gt;
+        arm-platform-implementation-id-type
 )
 
 </pre><a href="#section-4.4.2-5" class="pilcrow">¶</a>
@@ -2387,7 +2390,8 @@ the verification service API). A Relying Party may choose to ignore this claim
 in favor of other information.<a href="#section-4.7.1-1" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.7.1-2">
 <pre>
-arm-platform-verification-service-label = 2400 ; PSA verification service
+; PSA verification service
+arm-platform-verification-service-label = 2400
 arm-platform-verification-service-type = text
 
 arm-platform-verification-service = (
@@ -2514,7 +2518,8 @@ cca-realm-personalization-value-label = 44235
 cca-realm-personalization-value-type = bytes .size 64
 
 cca-realm-personalization-value = (
-    cca-realm-personalization-value-label =&gt; cca-realm-personalization-value-type
+    cca-realm-personalization-value-label =&gt;
+        cca-realm-personalization-value-type
 )
 </pre><a href="#section-4.8.3-3" class="pilcrow">¶</a>
 </div>
