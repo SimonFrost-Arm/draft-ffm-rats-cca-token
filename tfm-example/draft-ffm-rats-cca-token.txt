@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 27 July 2025                                             Linaro
+Expires: 28 July 2025                                             Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                         23 January 2025
+                                                         24 January 2025
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 July 2025.
+   This Internet-Draft will expire on 28 July 2025.
 
 Copyright Notice
 
@@ -491,17 +491,25 @@ Table of Contents
    *  The first byte MUST be 0x01 (RAND) followed by the 32-byte unique
       identifier of the PAK.
 
+   eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
+
+   eat-ueid-rand-fmt = [
+     ; the type byte is 0x01
+     ueid-rand-typ
+     bytes .size 32
+   ]
+
+   ueid-rand-typ = h'01'
+
    This claim MUST be present in a CCA Platform attestation token.
 
- arm-platform-instance-id-label = 256 ; EAT ueid
+   arm-platform-instance-id-label = 256 ; EAT ueid
 
- ; TODO: require that the first byte of arm-platform-instance-id-type is
- ; 0x01
- arm-platform-instance-id-type = bytes .size 33
+   arm-platform-instance-id-type = eat-ueid-rand-type
 
- arm-platform-instance-id = (
-     arm-platform-instance-id-label => arm-platform-instance-id-type
- )
+   arm-platform-instance-id = (
+       arm-platform-instance-id-label => arm-platform-instance-id-type
+   )
 
 4.4.2.  CCA Platform Implementation ID
 
@@ -931,11 +939,12 @@ arm-platform-lifecycle = (
 
    This claim MUST be present in a CCA Realm state attestation token.
 
-cca-realm-extensible-measurements-label = 44239
+   cca-realm-extensible-measurements-label = 44239
 
-cca-realm-extensible-measurements = (
-    cca-realm-extensible-measurements-label => [ 4*4 cca-realm-measurement-type ]
-)
+   cca-realm-extensible-measurements = (
+       cca-realm-extensible-measurements-label =>
+           [ 4*4 cca-realm-measurement-type ]
+   )
 
 4.8.6.  Realm Hash Algorithm Measurements
 
