@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-23T01:07:51.556462+00:00",
+  "timestamp": "2025-01-26T01:10:08.429074+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -333,6 +333,22 @@
       "body": "Current draft does not register new media types, despite a new EAT profile being defined in the draft.  Should we consider the following:\r\n\r\na) Register new media type for the profile as per guidance in https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-12#name-a-media-type-parameter-for-\r\nb) Refine said media type to differentiate between delegated and direct models.   One way to do this is to create two EAT profiles for CCA.",
       "createdAt": "2025-01-06T18:04:35Z",
       "updatedAt": "2025-01-06T18:04:35Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 24,
+      "id": "I_kwDOMRXjbM6nWDXB",
+      "title": "add example of complete CCA token",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/24",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Use the one in [tf-m-tools's test data](https://github.com/TrustedFirmware-M/tf-m-tools/blob/main/iat-verifier/tests/data/cca_example_token.cbor), to align with the reference implementation.",
+      "createdAt": "2025-01-23T18:02:35Z",
+      "updatedAt": "2025-01-23T18:02:35Z",
       "closedAt": null,
       "comments": []
     }
@@ -866,6 +882,61 @@
               "body": "The long lines in the diag file are going to drive idnits crazy ;-)\r\n\r\nI suggest using `include-fold` instead of plain `include`:\r\n\r\n```suggestion\r\n{::include-fold cddl/sample_tokens/platform.diag}\r\n```\r\n\r\nI haven't personally tested the output though, it may be horrible.\r\n",
               "createdAt": "2025-01-03T17:29:32Z",
               "updatedAt": "2025-01-03T17:31:14Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 25,
+      "id": "PR_kwDOMRXjbM6IzGYH",
+      "title": "Add complete example",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/25",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix #24",
+      "createdAt": "2025-01-23T18:03:34Z",
+      "updatedAt": "2025-01-24T12:45:32Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "9338a5f2d2a1efa974267d43dd756dd8610f3e86",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "tfm-example",
+      "headRefOid": "dbc50be61fba926388dee2783d7f2365f9b67da0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "cc @gmandyam ",
+          "createdAt": "2025-01-23T18:08:07Z",
+          "updatedAt": "2025-01-23T18:08:07Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM6ZOOKw",
+          "commit": {
+            "abbreviatedOid": "30a0653"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-23T18:07:22Z",
+          "updatedAt": "2025-01-23T18:07:22Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "NOTE: I had to relax this because the TF-M example does not include the MEC policy claim. Maybe we could explicitly mark this as \"temporary workaround\".",
+              "createdAt": "2025-01-23T18:07:22Z",
+              "updatedAt": "2025-01-23T18:07:22Z"
             }
           ]
         }
