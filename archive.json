@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-28T01:07:45.161456+00:00",
+  "timestamp": "2025-01-30T01:06:40.472214+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -899,13 +899,13 @@
       "labels": [],
       "body": "Fix #24",
       "createdAt": "2025-01-23T18:03:34Z",
-      "updatedAt": "2025-01-24T12:45:32Z",
+      "updatedAt": "2025-01-29T13:21:25Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "9338a5f2d2a1efa974267d43dd756dd8610f3e86",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "tfm-example",
-      "headRefOid": "dbc50be61fba926388dee2783d7f2365f9b67da0",
+      "headRefOid": "8c2acf791a4f5348c7361c9137eb93099e8ebbe9",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -939,6 +939,132 @@
               "updatedAt": "2025-01-23T18:07:22Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM6Z1l5m",
+          "commit": {
+            "abbreviatedOid": "30a0653"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-29T12:58:56Z",
+          "updatedAt": "2025-01-29T12:58:56Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Yes - this is new in 1.1 (where it is mandatory). Let's mark this as a workaround until full upgrade to 1.1 can be done (later)",
+              "createdAt": "2025-01-29T12:58:56Z",
+              "updatedAt": "2025-01-29T12:58:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM6Z1mgM",
+          "commit": {
+            "abbreviatedOid": "dbc50be"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-01-29T13:00:00Z",
+          "updatedAt": "2025-01-29T13:00:00Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM6Z1o-_",
+          "commit": {
+            "abbreviatedOid": "30a0653"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-29T13:04:12Z",
+          "updatedAt": "2025-01-29T13:04:12Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Or we could drop the claim for now and reintroduce it when we do 1.1?",
+              "createdAt": "2025-01-29T13:04:12Z",
+              "updatedAt": "2025-01-29T13:04:12Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM6Z1sbK",
+          "commit": {
+            "abbreviatedOid": "30a0653"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-29T13:08:24Z",
+          "updatedAt": "2025-01-29T13:08:24Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "you're right, that's probably cleaner",
+              "createdAt": "2025-01-29T13:08:24Z",
+              "updatedAt": "2025-01-29T13:08:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM6Z1vtX",
+          "commit": {
+            "abbreviatedOid": "30a0653"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-29T13:12:37Z",
+          "updatedAt": "2025-01-29T13:12:37Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "OK, I'll remove it.",
+              "createdAt": "2025-01-29T13:12:37Z",
+              "updatedAt": "2025-01-29T13:12:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM6Z1xmt",
+          "commit": {
+            "abbreviatedOid": "30a0653"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-01-29T13:15:51Z",
+          "updatedAt": "2025-01-29T13:15:51Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "done in [8c2acf7](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/25/commits/8c2acf791a4f5348c7361c9137eb93099e8ebbe9)",
+              "createdAt": "2025-01-29T13:15:51Z",
+              "updatedAt": "2025-01-29T13:15:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM6Z117E",
+          "commit": {
+            "abbreviatedOid": "8c2acf7"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-01-29T13:21:25Z",
+          "updatedAt": "2025-01-29T13:21:25Z",
+          "comments": []
         }
       ]
     }
