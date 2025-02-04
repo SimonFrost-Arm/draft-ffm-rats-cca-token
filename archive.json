@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T01:06:40.472214+00:00",
+  "timestamp": "2025-02-04T01:08:04.098489+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -341,15 +341,15 @@
       "id": "I_kwDOMRXjbM6nWDXB",
       "title": "add example of complete CCA token",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/24",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Use the one in [tf-m-tools's test data](https://github.com/TrustedFirmware-M/tf-m-tools/blob/main/iat-verifier/tests/data/cca_example_token.cbor), to align with the reference implementation.",
       "createdAt": "2025-01-23T18:02:35Z",
-      "updatedAt": "2025-01-23T18:02:35Z",
-      "closedAt": null,
+      "updatedAt": "2025-02-03T14:42:36Z",
+      "closedAt": "2025-02-03T14:42:36Z",
       "comments": []
     }
   ],
@@ -892,24 +892,26 @@
       "id": "PR_kwDOMRXjbM6IzGYH",
       "title": "Add complete example",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/25",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Fix #24",
       "createdAt": "2025-01-23T18:03:34Z",
-      "updatedAt": "2025-01-29T13:21:25Z",
+      "updatedAt": "2025-02-03T14:42:39Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "9338a5f2d2a1efa974267d43dd756dd8610f3e86",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "tfm-example",
       "headRefOid": "8c2acf791a4f5348c7361c9137eb93099e8ebbe9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-02-03T14:42:35Z",
+      "mergedAt": "2025-02-03T14:42:35Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "781e5f7ed0e4c537c86cf0a63662923fc165e34b"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -1067,6 +1069,34 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 26,
+      "id": "PR_kwDOMRXjbM6J25ol",
+      "title": "Artifactory v3 now deprecated, switch to v4",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/26",
+      "state": "MERGED",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "GH actions now failing, update artifactory usage",
+      "createdAt": "2025-02-03T14:23:18Z",
+      "updatedAt": "2025-02-03T14:23:33Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "9338a5f2d2a1efa974267d43dd756dd8610f3e86",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "artif4",
+      "headRefOid": "46ea60ae0d47feaeb13418db096eff4dcab16c7a",
+      "closedAt": "2025-02-03T14:23:28Z",
+      "mergedAt": "2025-02-03T14:23:28Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "91dd54654286c5c4a5f88c90edac3cf29de6d3a3"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
