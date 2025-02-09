@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-02-06T01:09:08.541254+00:00",
+  "timestamp": "2025-02-09T01:12:35.621872+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -372,23 +372,185 @@
       "labels": [],
       "body": "I'm reviewing the attestation design for our ARM silicon and I see\n\n> The CCA platform hash algorithm ID claim is a text string that identifies the algorithm used to calculate the extended measurements in the CCA platform token.\n> The string SHOULD be encoded according to \"Hash Name String\" in the \"Named Information Hash Algorithm Registry\" [IANA.named-information].\n\nMy understanding from Henk is that the text is discouraged and the number in [[IANA.named-information](https://www.ietf.org/archive/id/draft-ffm-rats-cca-token-00.html#IANA.named-information)] is preferred. I'd like the text to allow for both with `text / int` and say\n\nThe CCA platform hash algorithm ID claim is a text string or integer that identifies the algorithm used to calculate the extended measurements int the CCA platform token.\n> If the identifier is an integer, it MUST denote to the corresponding algorithm in the IANA.named-information hash algorithm registry.\n> If the identifier is a string, it SHOULD be encoded according to \"Hash Name String\" in the \"Named Information Hash Algorithm Registry\" [IANA.named-information].\n\n\nSimilar for `cca-realm-hash-algo-id-label`, `cca-realm-public-key-hash-algo-id-label`.",
       "createdAt": "2025-02-05T19:42:23Z",
-      "updatedAt": "2025-02-05T19:44:41Z",
+      "updatedAt": "2025-02-06T17:26:34Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "I'll review, but background is that pinning down a standard naming that corresponds to an IANA registry proved difficult. The named hash algo was a recommendation from IANA expert review. RFC6920, which established that registry, is text based and notes that the numeric ID is optional. Do you have a ref for the deprecation? We'll need a stable ref & usage for further IANA registration of evidence claims.",
+          "createdAt": "2025-02-06T15:41:43Z",
+          "updatedAt": "2025-02-06T15:41:43Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\n> Do you have a ref for the deprecation?\n\nI am not aware of any plans to deprecate the textual version in favor of its numeric counterpart.\n\nThe reason ID is optional is that the codepoint space is severely limited, with only 63 possible IDs, of which 12 are already allocated.\n\nIf the registry wants to have any chance of long-term survival, it **must** allow text.\n\nI am unsure why this decision was made initially; it seems quite short-sighted, but we can't (easily) change that.",
+          "createdAt": "2025-02-06T16:23:15Z",
+          "updatedAt": "2025-02-06T16:23:15Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "This was a comment from Henk, so perhaps it was a pet peeve and not the IETF zeitgeist.",
+          "createdAt": "2025-02-06T17:25:34Z",
+          "updatedAt": "2025-02-06T17:25:34Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "/cc @henkbirkholz",
+          "createdAt": "2025-02-06T17:26:32Z",
+          "updatedAt": "2025-02-06T17:26:32Z"
+        }
+      ]
     },
     {
       "number": 29,
       "id": "I_kwDOMRXjbM6o6M-r",
       "title": "tf-rmm algorithms don't include sha-384",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/29",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "cddl/realm/cca-realm-measurement.cddl includes `bytes .size 48` but the tf-rmm only supports sha-256 and sha-512. Is sha-384 going to be supported or can we trim this?\n\n[lib/attestation/src/attestation_token.c](https://git.trustedfirmware.org/plugins/gitiles/TF-RMM/tf-rmm.git/+/refs/heads/main/lib/attestation/src/attestation_token.c)",
       "createdAt": "2025-02-05T19:50:25Z",
-      "updatedAt": "2025-02-05T19:50:25Z",
+      "updatedAt": "2025-02-06T17:29:14Z",
+      "closedAt": "2025-02-06T17:29:04Z",
+      "comments": [
+        {
+          "author": "gmandyam",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Not all implementations will use the TF-A implementation as is.  Moreover SHA-256 is not acceptable per CNSA 2.0 but SHA-384 is:  see https://media.defense.gov/2022/Sep/07/2003071836/-1/-1/0/CSI_CNSA_2.0_FAQ_.PDF.",
+          "createdAt": "2025-02-06T02:11:31Z",
+          "updatedAt": "2025-02-06T02:11:31Z"
+        },
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "\nTF-A was written this way because the reference RMM implementation only specifies support for SHA-256 & SHA-512 for this purpose (see RMM section B4.4.17 RmiHashAlgorithm type). That corresponds to current partner conversations. Is SHA-384 needed for your use cases or are you more pointing out the inconsistency?\n",
+          "createdAt": "2025-02-06T15:31:50Z",
+          "updatedAt": "2025-02-06T15:31:50Z"
+        },
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "Just inconsistency.",
+          "createdAt": "2025-02-06T17:29:13Z",
+          "updatedAt": "2025-02-06T17:29:13Z"
+        }
+      ]
+    },
+    {
+      "number": 30,
+      "id": "I_kwDOMRXjbM6pDUhF",
+      "title": "Signer ID for platform software",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/30",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> This attribute MUST be present in a CCA Platform software component.\n\nI understand this as being the CoRIM signer for the component, so does that mean there is some presupposed format that embeds the manifest with the binary for the loader to make note of in the certificate chain? What's the communication mechanism?",
+      "createdAt": "2025-02-06T17:56:54Z",
+      "updatedAt": "2025-02-06T19:30:07Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "ARM-DEN-0072 appears to suggest anything is fine, but what does the reference software do?",
+          "createdAt": "2025-02-06T18:06:51Z",
+          "updatedAt": "2025-02-06T18:06:51Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Maybe [this](https://ietf-rats-wg.github.io/draft-ietf-rats-eat-measured-component/draft-ietf-rats-eat-measured-component.html#name-signer) can help clarifying the semantics of the signer ID.\n\nTL;DR. It is not the signer of the CoRIM, it's the signer of the installed payload. The two may be the same entity, but they are different roles.",
+          "createdAt": "2025-02-06T19:30:05Z",
+          "updatedAt": "2025-02-06T19:30:05Z"
+        }
+      ]
+    },
+    {
+      "number": 31,
+      "id": "I_kwDOMRXjbM6pDjaq",
+      "title": "Token Encoding and Signing IoT narrative",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/31",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Moving the ..TODO.. to a tracked issue.\n\n> Given that a PSA Attester is typically found in a constrained device, it MAY\nNOT emit CBOR preferred serializations ({{Section 4.1 of STD94}}).\nTherefore, the Verifier MUST be a variation-tolerant CBOR decoder. \n> ..TODO.. need different narrative from IoT reasons",
+      "createdAt": "2025-02-06T18:24:16Z",
+      "updatedAt": "2025-02-06T18:24:16Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 32,
+      "id": "I_kwDOMRXjbM6pDl0h",
+      "title": "Drop \"CAs are expensive\" ?",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/32",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": ">  perhaps lose this justification section \n>\n> Certified public keys require the manufacturer to run the certification                                                                                                                                                                                                                                                                                                   \nauthority (CA) that issues X.509 certs for the PAKs.  (Note that operating a CA                                                                                                                                                                                                                                                                                           \nis a complex and expensive task that may be unaffordable to certain                                                                                                                                                                                                                                                                                                       \nmanufacturers.)                                                                                                                                                                                                                                                                                                                                                           \n                   ",
+      "createdAt": "2025-02-06T18:29:30Z",
+      "updatedAt": "2025-02-06T18:29:30Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 33,
+      "id": "I_kwDOMRXjbM6pDmS6",
+      "title": "Lose network bandwidth concerns for certs?",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/33",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> TODO...lose following as IoT centric?? ::                                                                                                                                                                                                                                                                                                                                 \n> Constraints around network bandwidth and computing resources available to endpoints,                                                                                                                                                                                                                                                                                      \nsuch as network buffers, may dictate a reasonable split point.                                                                                                                                                                                                                                                                                                            \n                                                               ",
+      "createdAt": "2025-02-06T18:30:34Z",
+      "updatedAt": "2025-02-06T18:30:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 34,
+      "id": "I_kwDOMRXjbM6pDmxk",
+      "title": "Identify a change controller",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/34",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> * Change Controller: Hannes Tschofenig      TODO... find document centric change controller...                                                                                                                                                                                                                                                                            \n",
+      "createdAt": "2025-02-06T18:31:41Z",
+      "updatedAt": "2025-02-06T18:31:41Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 35,
+      "id": "I_kwDOMRXjbM6pDn6y",
+      "title": "unclear todo near PAK certificate chain text",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/35",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> ...to here..\n>\n> The PAK's X.509 cert can be inlined in the CCA Platform token using the `x5chain` COSE                                                                                                                                                                                                                                                                                    \nheader parameter {{COSE-X509}} at the cost of an increase in the CCA Platform token                                                                                                                                                                                                                                                                                       \nsize.",
+      "createdAt": "2025-02-06T18:34:27Z",
+      "updatedAt": "2025-02-06T18:34:27Z",
       "closedAt": null,
       "comments": []
     }
@@ -1150,13 +1312,47 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-02-05T13:18:31Z",
-      "updatedAt": "2025-02-05T13:18:31Z",
+      "updatedAt": "2025-02-06T18:34:55Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "781e5f7ed0e4c537c86cf0a63662923fc165e34b",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "collated-cddl",
       "headRefOid": "b64ee420c20e2bca7b407dfdedf535f5166b4154",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "deeglaze",
+          "authorAssociation": "NONE",
+          "body": "+1",
+          "createdAt": "2025-02-06T18:34:55Z",
+          "updatedAt": "2025-02-06T18:34:55Z"
+        }
+      ],
+      "reviews": []
+    },
+    {
+      "number": 36,
+      "id": "PR_kwDOMRXjbM6KUc9D",
+      "title": "Add issues for remaining todos.",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/36",
+      "state": "OPEN",
+      "author": "deeglaze",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-02-06T18:36:14Z",
+      "updatedAt": "2025-02-06T18:36:14Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "781e5f7ed0e4c537c86cf0a63662923fc165e34b",
+      "headRepository": "deeglaze/draft-ffm-rats-cca-token",
+      "headRefName": "todos",
+      "headRefOid": "07c5ff71f53889623b168a322c1bb21fc5343abc",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
