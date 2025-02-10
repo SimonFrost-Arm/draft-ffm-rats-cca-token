@@ -2816,9 +2816,160 @@ For use in CCA tokens, it must be possible to encode the epoch handle as an opaq
       <h2 id="name-collated-cddl">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-collated-cddl" class="section-name selfRef">Collated CDDL</a>
       </h2>
-<div class="alignLeft art-text artwork" id="section-5-1">
+<div class="breakable lang-cddl sourcecode" id="section-5-1">
 <pre>
-TODO...include cddl/cca-attestation.cddl
+=============== NOTE: '\' line wrapping per RFC 8792 ================
+
+cca-token = #6.399(cca-token-collection)
+cca-token-collection = {
+  44234 =&gt; bytes .cbor COSE_Sign1&lt;arm-platform-claims&gt;,
+  44241 =&gt; bytes .cbor COSE_Sign1&lt;cca-realm-claims&gt;,
+}
+COSE_Sign1&lt;C&gt; = #6.18([
+      Headers,
+      payload: bytes .cbor C,
+      signature: bytes,
+])
+cca-realm-claims = cca-realm-claim-map
+cca-realm-claim-map = {
+  cca-realm-challenge,
+  ? cca-realm-profile,
+  cca-realm-personalization-value,
+  cca-realm-initial-measurement,
+  cca-realm-extensible-measurements,
+  cca-realm-hash-algo-id,
+  cca-realm-public-key,
+  cca-realm-public-key-hash-algo-id,
+}
+cca-realm-challenge-label = 10
+cca-realm-challenge-type = bytes .size 64
+cca-realm-challenge = (cca-realm-challenge-label =&gt; cca-realm-\
+                                                      challenge-type)
+cca-realm-extensible-measurements-label = 44239
+cca-realm-extensible-measurements = (cca-realm-extensible-\
+               measurements-label =&gt; [4*4cca-realm-measurement-type])
+cca-realm-hash-algo-id-label = 44236
+cca-realm-hash-algo-id = (cca-realm-hash-algo-id-label =&gt; text)
+cca-realm-initial-measurement-label = 44238
+cca-realm-initial-measurement = (cca-realm-initial-measurement-\
+                                 label =&gt; cca-realm-measurement-type)
+cca-realm-measurement-type = bytes .size 32 / bytes .size 48 / \
+                                                       bytes .size 64
+cca-realm-personalization-value-label = 44235
+cca-realm-personalization-value-type = bytes .size 64
+cca-realm-personalization-value = (cca-realm-personalization-value-\
+                       label =&gt; cca-realm-personalization-value-type)
+cca-realm-profile-label = 265
+cca-realm-profile-type = "tag:arm.com,2023:realm#1.0.0"
+cca-realm-profile = (cca-realm-profile-label =&gt; cca-realm-profile-\
+                                                                type)
+cca-realm-public-key-hash-algo-id-label = 44240
+cca-realm-public-key-hash-algo-id = (cca-realm-public-key-hash-algo-\
+                                                    id-label =&gt; text)
+cca-realm-public-key-label = 44237
+cca-realm-public-key-type = bstr .cbor COSE_Key
+cca-realm-public-key = (cca-realm-public-key-label =&gt; cca-realm-\
+                                                     public-key-type)
+label = int / tstr
+values = any
+COSE_Key = {
+  1 =&gt; tstr / int,
+  ? 2 =&gt; bstr,
+  ? 3 =&gt; tstr / int,
+  ? 4 =&gt; [+ tstr / int],
+  ? 5 =&gt; bstr,
+  * label =&gt; values,
+}
+arm-platform-claims = arm-platform-claim-map
+arm-platform-claim-map = {
+  arm-platform-profile,
+  arm-platform-challenge,
+  arm-platform-implementation-id,
+  arm-platform-instance-id,
+  arm-platform-config,
+  arm-platform-lifecycle,
+  arm-platform-sw-components,
+  ? arm-platform-verification-service,
+  arm-platform-hash-algo-id,
+}
+arm-platform-challenge-label = 10
+arm-platform-challenge = (arm-platform-challenge-label =&gt; arm-\
+                                                  platform-hash-type)
+arm-platform-config-label = 2401
+arm-platform-config-type = bytes
+arm-platform-config = (arm-platform-config-label =&gt; arm-platform-\
+                                                         config-type)
+arm-platform-hash-algo-id-label = 2402
+arm-platform-hash-algo-id = (arm-platform-hash-algo-id-label =&gt; text)
+arm-platform-hash-type = bytes .size 32 / bytes .size 48 / bytes .\
+                                                              size 64
+arm-platform-implementation-id-label = 2396
+arm-platform-implementation-id-type = bytes .size 32
+arm-platform-implementation-id = (arm-platform-implementation-id-\
+                        label =&gt; arm-platform-implementation-id-type)
+arm-platform-instance-id-label = 256
+arm-platform-instance-id-type = eat-ueid-rand-type
+arm-platform-instance-id = (arm-platform-instance-id-label =&gt; arm-\
+                                           platform-instance-id-type)
+arm-platform-profile-label = 265
+arm-platform-profile-type = "tag:arm.com,2023:cca_platform#1.0.0"
+arm-platform-profile = (arm-platform-profile-label =&gt; arm-platform-\
+                                                        profile-type)
+arm-platform-lifecycle-label = 2395
+arm-platform-lifecycle-unknown-type = 0x0000 .. 0x00ff
+arm-platform-lifecycle-assembly-and-test-type = 0x1000 .. 0x10ff
+arm-platform-lifecycle-arm-platform-rot-provisioning-type = 0x2000 .\
+                                                             . 0x20ff
+arm-platform-lifecycle-secured-type = 0x3000 .. 0x30ff
+arm-platform-lifecycle-non-arm-platform-rot-debug-type = 0x4000 .. \
+                                                               0x40ff
+arm-platform-lifecycle-recoverable-arm-platform-rot-debug-type = \
+                                                     0x5000 .. 0x50ff
+arm-platform-lifecycle-decommissioned-type = 0x6000 .. 0x60ff
+arm-platform-lifecycle-type = arm-platform-lifecycle-unknown-type / \
+arm-platform-lifecycle-assembly-and-test-type / arm-platform-\
+lifecycle-arm-platform-rot-provisioning-type / arm-platform-\
+lifecycle-secured-type / arm-platform-lifecycle-non-arm-platform-rot\
+-debug-type / arm-platform-lifecycle-recoverable-arm-platform-rot-\
+              debug-type / arm-platform-lifecycle-decommissioned-type
+arm-platform-lifecycle = (arm-platform-lifecycle-label =&gt; arm-\
+                                             platform-lifecycle-type)
+arm-platform-sw-components-label = 2399
+arm-platform-sw-component = {
+  ? 1 =&gt; text,
+  2 =&gt; arm-platform-hash-type,
+  ? 4 =&gt; text,
+  5 =&gt; arm-platform-hash-type,
+  ? 6 =&gt; text,
+}
+arm-platform-sw-components = (arm-platform-sw-components-label =&gt; [\
+                                        + arm-platform-sw-component])
+arm-platform-verification-service-label = 2400
+arm-platform-verification-service-type = text
+arm-platform-verification-service = (arm-platform-verification-\
+             service-label =&gt; arm-platform-verification-service-type)
+eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
+eat-ueid-rand-fmt = [
+  ueid-rand-typ,
+  bytes .size 32,
+]
+ueid-rand-typ = h'01'
+Headers = (
+  protected: empty_or_serialized_map,
+  unprotected: header_map,
+  )
+empty_or_serialized_map = bstr .cbor header_map / bstr .size 0
+header_map = {
+  Generic_Headers,
+  * label =&gt; values,
+}
+Generic_Headers = (
+  ? 1 =&gt; int / tstr,
+  ? 2 =&gt; [+ label],
+  ? 3 =&gt; tstr / int,
+  ? 4 =&gt; bstr,
+  ? (5 =&gt; bstr // 6 =&gt; bstr),
+  )
 </pre><a href="#section-5-1" class="pilcrow">¶</a>
 </div>
 </section>
