@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 7 August 2025                                            Linaro
+Expires: 14 August 2025                                           Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                         3 February 2025
+                                                        10 February 2025
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 August 2025.
+   This Internet-Draft will expire on 14 August 2025.
 
 Copyright Notice
 
@@ -243,7 +243,8 @@ Table of Contents
 
 3.1.  Direct
 
-   TODO
+   TODO: Issue #16 (https://github.com/SimonFrost-Arm/draft-ffm-rats-
+   cca-token/issues/16)
 
 3.2.  Delegated
 
@@ -1053,7 +1054,9 @@ arm-platform-lifecycle = (
    Given that a PSA Attester is typically found in a constrained device,
    it MAY NOT emit CBOR preferred serializations (Section 4.1 of
    [STD94]).  Therefore, the Verifier MUST be a variation-tolerant CBOR
-   decoder.  TODO.... need different narrative from IoT reasons...
+   decoder.  TODO: Issue #31 (https://github.com/SimonFrost-Arm/draft-
+   ffm-rats-cca-token/issues/31) need different narrative from IoT
+   reasons
 
    Cryptographic protection is obtained by wrapping the CCA Platform and
    Realm state claims-set in a COSE Web Token (CWT) [RFC8392].  The
@@ -1135,12 +1138,13 @@ arm-platform-lifecycle = (
    In the CCA Platform reference design, PAKs (Section 3.4, Paragraph 2)
    are raw public keys.
 
-   Some implementations may choose to use an PAK that is a certified
+   Some implementations may choose to use a PAK that is a certified
    public key.  If this option is taken, the value of the CCA Platform
    Profile Definition claim Section 4.5.1 MUST be altered from the
    reference implementation value.
 
-   TODO... perhaps lose this justification section as...
+   TODO: Issue #32 (https://github.com/SimonFrost-Arm/draft-ffm-rats-
+   cca-token/issues/32) Cut the following block?
 
    Certified public keys require the manufacturer to run the
    certification authority (CA) that issues X.509 certs for the PAKs.
@@ -1160,7 +1164,8 @@ arm-platform-lifecycle = (
    Furthermore, existing and well-understood revocation mechanisms can
    be readily used.
 
-   TODO... ...to here
+   TODO: Issue #35 (https://github.com/SimonFrost-Arm/draft-ffm-rats-
+   cca-token/issues/35) improve cert description
 
    The PAK's X.509 cert can be inlined in the CCA Platform token using
    the x5chain COSE header parameter [COSE-X509] at the cost of an
@@ -1171,9 +1176,12 @@ arm-platform-lifecycle = (
    chain, or the EE and the full chain up to the trust anchor (see
    Section 2 of [COSE-X509] for the details).
 
-   TODO...lose following as IoT centric?? :: Constraints around network
-   bandwidth and computing resources available to endpoints, such as
-   network buffers, may dictate a reasonable split point.
+   TODO: Issue #33 (https://github.com/SimonFrost-Arm/draft-ffm-rats-
+   cca-token/issues/33) lose following as IoT centric??
+
+   Constraints around network bandwidth and computing resources
+   available to endpoints, such as network buffers, may dictate a
+   reasonable split point.
 
 7.  CCA Attestation Token Verification
 
@@ -1328,8 +1336,9 @@ arm-platform-lifecycle = (
 
    *  Claim Value Type(s): unsigned integer
 
-   *  Change Controller: Hannes Tschofenig TODO... find document centric
-      change controller...
+   *  Change Controller: Hannes Tschofenig TODO: Issue #34
+      (https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/
+      issues/34) find document centric change controller
 
    *  Specification Document(s): Section 4.5.2 of RFCthis
 
@@ -1696,9 +1705,9 @@ arm-platform-lifecycle = (
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
               Scarlata, "Attestation Results for Secure Interactions",
               Work in Progress, Internet-Draft, draft-ietf-rats-ar4si-
-              07, 2 September 2024,
+              08, 6 February 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              ar4si-07>.
+              ar4si-08>.
 
    [RATS-CoRIM]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
