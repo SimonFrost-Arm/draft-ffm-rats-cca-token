@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-04T01:12:30.399364+00:00",
+  "timestamp": "2025-03-06T01:12:23.853514+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -558,6 +558,22 @@
       "body": "> ...to here..\n>\n> The PAK's X.509 cert can be inlined in the CCA Platform token using the `x5chain` COSE                                                                                                                                                                                                                                                                                    \nheader parameter {{COSE-X509}} at the cost of an increase in the CCA Platform token                                                                                                                                                                                                                                                                                       \nsize.",
       "createdAt": "2025-02-06T18:34:27Z",
       "updatedAt": "2025-02-06T18:34:27Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 37,
+      "id": "I_kwDOMRXjbM6svy64",
+      "title": "check IANA registration requests",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/37",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Check the IANA section for inconsistencies, e.g.:\n\n* Claims\n  * Requests for claims that are already registered\n  * Missing requests\n* Media types\n  * CMW compliance",
+      "createdAt": "2025-03-05T19:08:21Z",
+      "updatedAt": "2025-03-05T19:08:21Z",
       "closedAt": null,
       "comments": []
     }
