@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-03-20T01:12:53.811618+00:00",
+  "timestamp": "2025-03-23T01:18:37.795794+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -1411,6 +1411,46 @@
           "body": "Thanks for capturing these",
           "createdAt": "2025-02-10T16:20:24Z",
           "updatedAt": "2025-02-10T16:20:24Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOMRXjbM6PoNqv",
+      "title": "Fix typo and duplicate paragraph",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/38",
+      "state": "OPEN",
+      "author": "jpbrucker",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "A couple of minor fixes: remove a duplicate paragraph about Measurement Description attribute (key=6), and fix a typo",
+      "createdAt": "2025-03-21T14:30:51Z",
+      "updatedAt": "2025-03-21T14:50:16Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "4d04f3d76ee112b742e326400e53a21a65af7514",
+      "headRepository": "jpbrucker/draft-ffm-rats-cca-token",
+      "headRefName": "main",
+      "headRefOid": "abd4073b76d88bad4f256abf5bfa0fc9ea7d0b55",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM6hTd1D",
+          "commit": {
+            "abbreviatedOid": "abd4073"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2025-03-21T14:50:16Z",
+          "updatedAt": "2025-03-21T14:50:16Z",
           "comments": []
         }
       ]
