@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-27T01:21:41.896034+00:00",
+  "timestamp": "2025-06-03T01:21:46.316261+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -1427,7 +1427,7 @@
       "labels": [],
       "body": "A couple of minor fixes: remove a duplicate paragraph about Measurement Description attribute (key=6), and fix a typo",
       "createdAt": "2025-03-21T14:30:51Z",
-      "updatedAt": "2025-03-21T14:50:16Z",
+      "updatedAt": "2025-06-02T21:17:31Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "4d04f3d76ee112b742e326400e53a21a65af7514",
@@ -1451,6 +1451,19 @@
           "body": "Thanks!",
           "createdAt": "2025-03-21T14:50:16Z",
           "updatedAt": "2025-03-21T14:50:16Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM6sQWW0",
+          "commit": {
+            "abbreviatedOid": "abd4073"
+          },
+          "author": "steven-bellock",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "I was going to fix this and then saw it was already fixed. @thomas-fossati @SimonFrost-Arm can you please merge this?",
+          "createdAt": "2025-06-02T21:17:31Z",
+          "updatedAt": "2025-06-02T21:17:31Z",
           "comments": []
         }
       ]
