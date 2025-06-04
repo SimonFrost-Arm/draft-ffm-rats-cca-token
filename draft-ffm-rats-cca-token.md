@@ -539,11 +539,6 @@ The Measurement Description attribute (key=6) contains a string identifying the
 hash algorithm used to compute the corresponding Measurement Value.  The string
 SHOULD be encoded according to "Hash Name String" in the "Named Information Hash Algorithm Registry" {{!IANA.named-information}}.
 
-#### Measurement Description
-
-The Measurement Description attribute (key=6) contains a string identifying the
-hash algorithm used to compute the corresponding Measurement Value.  The string
-SHOULD be encoded according to "Hash Name String" in the "Named Information Hash Algorithm Registry" {{!IANA.named-information}}.
 
 ## Verification Claims
 
