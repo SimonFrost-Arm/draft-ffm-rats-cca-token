@@ -284,7 +284,7 @@ Target Environment elements:
 The two sections use inter-related claims to bind together into a single logical unit.
 See {{sec-security-consideration}} for more details.
 
-The above tokens are presented to the requester within a top level Conceptual Message WWrapper (CMW) collection {{CMW}}.
+The above tokens are presented to the requester within a top level Conceptual Message Wrapper (CMW) collection {{CMW}}.
 
 
 
@@ -532,12 +532,6 @@ entry in the original manifest for the component. This can be used by a
 Verifier to ensure the components were signed by an expected trusted source.
 
 This attribute MUST be present in a CCA Platform software component.
-
-#### Measurement Description
-
-The Measurement Description attribute (key=6) contains a string identifying the
-hash algorithm used to compute the corresponding Measurement Value.  The string
-SHOULD be encoded according to "Hash Name String" in the "Named Information Hash Algorithm Registry" {{!IANA.named-information}}.
 
 #### Measurement Description
 
