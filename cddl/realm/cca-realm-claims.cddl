@@ -9,4 +9,5 @@ cca-realm-claim-map = {
     cca-realm-hash-algo-id
     cca-realm-public-key
     cca-realm-public-key-hash-algo-id
+    cca-realm-mec-policy
 }
