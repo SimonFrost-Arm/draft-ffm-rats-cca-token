@@ -1,7 +1,16 @@
 ; CMW (draft-ietf-rats-msg-wrap) Collection
-cca-token = #6.399(cca-token-collection)
+cca-token = #6.907(cca-token-cmw)
 
-cca-token-collection = {
-    44234 => bytes .cbor COSE_Sign1<arm-platform-claims> ; 44234=0xACCA
-    44241 => bytes .cbor COSE_Sign1<cca-realm-claims>
+; CoAP Content-Format for "application/eat+cwt"
+eat-cwt-coap-cf = 263
+
+cca-token-cmw = {
+  0xACCA => [
+    eat-cwt-coap-cf
+    bytes .cbor COSE_Sign1<arm-platform-claims>
+  ]
+  0xACD1 => [
+    eat-cwt-coap-cf
+    bytes .cbor COSE_Sign1<cca-realm-claims>
+  ]
 }
