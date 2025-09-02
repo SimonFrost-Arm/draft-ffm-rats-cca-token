@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 27 October 2025                                          Linaro
+Expires: 6 March 2026                                             Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                           25 April 2025
+                                                        2 September 2025
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 27 October 2025.
+   This Internet-Draft will expire on 6 March 2026.
 
 Copyright Notice
 
@@ -419,7 +419,7 @@ Table of Contents
    single logical unit.  See Section 9 for more details.
 
    The above tokens are presented to the requester within a top level
-   Conceptual Message WWrapper (CMW) collection [CMW].
+   Conceptual Message Wrapper (CMW) collection [CMW].
 
    CDDL [RFC8610] along with text descriptions is used to define each
    claim independent of encoding.  The following CDDL type(s) are reused
@@ -786,14 +786,6 @@ arm-platform-lifecycle = (
    This attribute MUST be present in a CCA Platform software component.
 
 4.6.1.5.  Measurement Description
-
-   The Measurement Description attribute (key=6) contains a string
-   identifying the hash algorithm used to compute the corresponding
-   Measurement Value.  The string SHOULD be encoded according to "Hash
-   Name String" in the "Named Information Hash Algorithm Registry"
-   [IANA.named-information].
-
-4.6.1.6.  Measurement Description
 
    The Measurement Description attribute (key=6) contains a string
    identifying the hash algorithm used to compute the corresponding
@@ -1169,6 +1161,7 @@ arm-platform-lifecycle = (
      cca-realm-hash-algo-id,
      cca-realm-public-key,
      cca-realm-public-key-hash-algo-id,
+     cca-realm-mec-policy,
    }
    cca-realm-challenge-label = 10
    cca-realm-challenge-type = bytes .size 64
@@ -1199,6 +1192,9 @@ arm-platform-lifecycle = (
    cca-realm-public-key-type = bstr .cbor COSE_Key
    cca-realm-public-key = (cca-realm-public-key-label => cca-realm-\
                                                         public-key-type)
+   cca-realm-mec-policy-label = 44243
+   cca-realm-mec-policy = (cca-realm-mec-policy-label => "shared" / "\
+                                                               private")
    label = int / tstr
    values = any
    COSE_Key = {
@@ -1766,9 +1762,9 @@ arm-platform-lifecycle = (
 
    [CMW]      Birkholz, H., Smith, N., Fossati, T., Tschofenig, H., and
               D. Glaze, "RATS Conceptual Messages Wrapper (CMW)", Work
-              in Progress, Internet-Draft, draft-ietf-rats-msg-wrap-13,
-              15 April 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-msg-wrap-13>.
+              in Progress, Internet-Draft, draft-ietf-rats-msg-wrap-17,
+              12 August 2025, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-msg-wrap-17>.
 
    [COSE-ALGS]
               Schaad, J., "CBOR Object Signing and Encryption (COSE):
@@ -1836,12 +1832,12 @@ arm-platform-lifecycle = (
 11.2.  Informative References
 
    [CCA-ENDORSEMENTS]
-              Deshpande, Y. and T. Fossati, "Arm's Confidential
-              Computing Architecture (Arm CCA) Attestation Verifier
-              Endorsements", Work in Progress, Internet-Draft, draft-
-              ydb-rats-cca-endorsements-01, 3 March 2025,
+              Deshpande, Y. and T. Fossati, "A CoRIM Profile for Arm's
+              Confidential Computing Architecture (CCA) Endorsements",
+              Work in Progress, Internet-Draft, draft-ydb-rats-cca-
+              endorsements-02, 4 July 2025,
               <https://datatracker.ietf.org/doc/html/draft-ydb-rats-cca-
-              endorsements-01>.
+              endorsements-02>.
 
    [COSE-X509]
               Schaad, J., "CBOR Object Signing and Encryption (COSE):
@@ -1872,16 +1868,16 @@ arm-platform-lifecycle = (
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
               Scarlata, "Attestation Results for Secure Interactions",
               Work in Progress, Internet-Draft, draft-ietf-rats-ar4si-
-              08, 6 February 2025,
+              09, 15 August 2025,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
-              ar4si-08>.
+              ar4si-09>.
 
    [RATS-CoRIM]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-07, 3
-              March 2025, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-rats-corim-07>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-08, 7 July
+              2025, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              rats-corim-08>.
 
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
@@ -2079,7 +2075,7 @@ A.1.2.  Realm Claims Set
    32C6AFC627E55585C03155359F331A0E225F6840DB947DD96EFAB81BE2671939'  \
                                                               / REM[3] /
        ],
-       44241: "private"  / MEC policy /
+       44243: "private"  / MEC policy /
    }
 
 A.1.3.  Platform Attestation Key
@@ -2295,7 +2291,8 @@ A.1.5.  Signed and Bound Assembly
       DAC46A58415DC3A00D7A741852008E9CAE64F52D03B9F76D76F4B3644FEFC416',
              h'\
        32C6AFC627E55585C03155359F331A0E225F6840DB947DD96EFAB81BE2671939'
-           ]
+           ],
+           44243: "private"  / MEC policy /
          } >>,
          h'\
    580B1DEA32D30AC6884C86B39CBE0FCB03BD00DF5103F9BAB01386A46A3BA8143E27\
@@ -2358,7 +2355,7 @@ A.1.5.  Signed and Bound Assembly
    ccde952c1e32cba181885a40b8cc38e0528c1e89589807642aa5e3f2bc37
    f95374506bff4d2e4be7063c4d72419270c722e8d4d93ee8b6c9face3b43
    c9761a49941ab6f38ffdff496ad463b4cbfa11d83e23e31f7f62329de30c
-   1cc819acd18219010759024ed28444a1013822a05901e1a8190109781c74
+   1cc819acd182190107590259d28444a1013822a05901eca9190109781c74
    61673a61726d2e636f6d2c323032333a7265616c6d23312e302e300a5840
    6e86d6d97cc713bc6dd43dbce491a6b40311c027a8bf85a39da63e9ce44c
    132a8a119d296fae6a6999e9bf3e4471b0ce01245d889424c31e89793b3b
@@ -2374,11 +2371,11 @@ A.1.5.  Signed and Bound Assembly
    6ae082fe3ba30abe3f9a6ab15820788fc090bfc6b8ed903152ba8414e73d
    af5b8c7bb1e79ad502ab0699b659ed165820dac46a58415dc3a00d7a7418
    52008e9cae64f52d03b9f76d76f4b3644fefc416582032c6afc627e55585
-   c03155359f331a0e225f6840db947dd96efab81be26719395860580b1dea
-   32d30ac6884c86b39cbe0fcb03bd00df5103f9bab01386a46a3ba8143e27
-   ed6d4eb0d0a2724abdf9640c09462face6df186909dfa6eb131e3a791827
-   6077acdab8a8bdeca6b0eaafab66e1439c1371f4fb1d6aac047481b5dc75
-   dd46
+   c03155359f331a0e225f6840db947dd96efab81be267193919acd3677072
+   69766174655860580b1dea32d30ac6884c86b39cbe0fcb03bd00df5103f9
+   bab01386a46a3ba8143e27ed6d4eb0d0a2724abdf9640c09462face6df18
+   6909dfa6eb131e3a7918276077acdab8a8bdeca6b0eaafab66e1439c1371
+   f4fb1d6aac047481b5dc75dd46
 
 A.2.  Direct Mode
 
