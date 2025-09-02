@@ -1,6 +1,8 @@
-# Arm's Confidential Computing Architecture (CCA) Attestation Token
+<!-- regenerate: on (set to off if you edit this file) -->
 
-This is the working area for the individual Internet-Draft, "Arm's Confidential Computing Architecture (CCA) Attestation Token".
+# Arm's Confidential Compute Architecture Reference Attestation Token
+
+This is the working area for the individual Internet-Draft, "Arm's Confidential Compute Architecture Reference Attestation Token".
 
 * [Editor's Copy](https://SimonFrost-Arm.github.io/draft-ffm-rats-cca-token/#go.draft-ffm-rats-cca-token.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ffm-rats-cca-token)
@@ -11,11 +13,10 @@ This is the working area for the individual Internet-Draft, "Arm's Confidential 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/thomas-fossati/draft-ffm-rats-cca-token/blob/master/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/blob/main/CONTRIBUTING.md).
 
-Contributions can be made by creating pull requests.
-The GitHub interface supports creating pull requests using the Edit (✏) button.
-
+The contributing file also has tips on how to make contributions, if you
+don't already know how to do that.
 
 ## Command Line Usage
 
