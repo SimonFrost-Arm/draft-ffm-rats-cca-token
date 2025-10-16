@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-04T00:40:42.998927+00:00",
+  "timestamp": "2025-10-16T00:43:11.893061+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -574,6 +574,22 @@
       "body": "Check the IANA section for inconsistencies, e.g.:\n\n* Claims\n  * Requests for claims that are already registered\n  * Missing requests\n* Media types\n  * CMW compliance",
       "createdAt": "2025-03-05T19:08:21Z",
       "updatedAt": "2025-03-05T19:08:21Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 43,
+      "id": "I_kwDOMRXjbM7RuS6y",
+      "title": "Allow the CMW to include optional entries",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/43",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "The CMW collection should allow optional entries, e.g., to accommodate assigned devices, below-platform RoTs, etc.",
+      "createdAt": "2025-10-15T15:34:33Z",
+      "updatedAt": "2025-10-15T15:34:33Z",
       "closedAt": null,
       "comments": []
     }
