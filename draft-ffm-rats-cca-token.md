@@ -193,7 +193,7 @@ unmodified.  An example of a RoT suitable
  for CCA would be an isolated
 Trusted subsystem responsible for initial measurements, lifecycle state
 management, identity and attestation services.  The services that the RoT
-provides for securitization of the CCA environment are described as 
+provides for securitization of the CCA environment are described as
 Hardware-Enforced Security (HES) - see Section B4.1.5 of {{RME-SYSARCH}}.
 
 Realm-World:
@@ -255,7 +255,7 @@ The structure of the CCA delegated Attester is illustrated in {{fig-cca-delegate
 
 In the delegated model, the RMM uses its own private key called RAK (Realm Attestation Key) to sign the claims regarding the requesting Realm.
 
-The RAK keypair is derived within the HES. The RAK is transferred over a trusted channel to the RMM. 
+The RAK keypair is derived within the HES. The RAK is transferred over a trusted channel to the RMM.
 The platform evidence include a claim containg a hash of the RAK public key. The platform evidence is signed using the CCA Platform Attestation Key (CPAK).
 
 The CCA Evidence produced in delegated mode comprises two separately signed EATs, one for the platform, another for the realm, wrapped in a CMW {{CMW}} collection.
@@ -334,7 +334,7 @@ claims:
 
 The above tokens are presented to the requester within a top level CMW collection {{CMW}}.
 The collection map has two entries, one for a bstr encoding of the CCA Platform token and
-the other for a bstr encoding of the Realm state token. 
+the other for a bstr encoding of the Realm state token.
 The type aof the CMW entry will vary for the Realm state token depending on whether
 the delegated or direct models are used by an implementation.
 
@@ -396,7 +396,7 @@ This claim MUST be present in a CCA Platform attestation token.
 {: #sec-implementation-id}
 
 The Implementation ID claim uniquely identifies the implementation of the
-CCA Platform. The value of the CCA platform Implementation ID claim can be 
+CCA Platform. The value of the CCA platform Implementation ID claim can be
 used by a verification service to locate the details of the CCA platform
 implementation from an endorser or manufacture.
 Such details are used by a verification service to determine the security properties
@@ -711,13 +711,17 @@ The CCA platform manufacturing config claim is OPTIONAL in a CCA platform token
 
 In the event that the CCA platform consists of multiple peer RoTs which are unable to establish a
 single attestation signing entity at boot time, it is necessary for an attestation report produced by one of
-those RoTs to identify its peers where execution may be subsequently scheduled. 
+those RoTs to identify its peers where execution may be subsequently scheduled.
 The CCA platform peer signers claim is used to provide this information to a verifier.
 
 The CCA platform peer signers claim is OPTIONAL in a CCA platform token
 
 The data type for this claim is Implementation Defined as different underlying RoT technologies or provisioning schemes are likely.
 
+
+~~~
+{::include cddl/platform/arm-platform-peer-signers.cddl}
+~~~
 
 ### CCA Platform TBB ROTPK
 {: #sec-arm-platform-tbb-rotpk}
@@ -867,7 +871,7 @@ This claim MUST be present in a CCA Realm state attestation token.
 {: #sec-backwards-compat}
 
 This profile conforms to the claims in the Beta release of the 2.0 release of the
-Realm Management Monitor specification. {{RMM}}. 
+Realm Management Monitor specification. {{RMM}}.
 
 TODO Backwards compat incl notes 1.1./2.0 with note that 1.0 is theoretical
 
@@ -1131,7 +1135,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 907
 * Claim Value Type(s): unsigned integer
-* Change Controller: TBD      
+* Change Controller: TBD
 * Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
 
 ### Security Lifecycle Claim
@@ -1141,7 +1145,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2395
 * Claim Value Type(s): unsigned integer
-* Change Controller: TBD      
+* Change Controller: TBD
 * Specification Document(s): {{sec-security-lifecycle}} of {{&SELF}}
 
 ### Implementation ID Claim
