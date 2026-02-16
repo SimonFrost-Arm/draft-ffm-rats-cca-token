@@ -1,5 +1,5 @@
 {
-    265: "tag:arm.com,2023:realm#1.0.0", / eat_profile /
+    265: "tag:arm.com,2024:realm#2.0.0", / eat_profile /
     10: h'6E86D6D97CC713BC6DD43DBCE491A6B40311C027A8BF85A39DA63E9CE44C132A8A119D296FAE6A6999E9BF3E4471B0CE01245D889424C31E89793B3B1D6B1504', / eat_nonce /
     44236: "sha-256", / Realm hash algorithm /
     44240: "sha-256", / RAK hash algorithm /
