@@ -1,0 +1,16 @@
+arm-platform-tbb-rotpk-label = 2405
+
+arm-tbb-rotpk-type = [ * arm-rotpk-item ]
+
+arm-rotpk-item = {
+    1 => tstr,             ; e.g. "CM" or "DM"
+    2 => int,              ; active ROTPK array
+    3 => int,              ; index in the active array
+    4 => bytes .size 32    ; hash object
+}
+
+
+arm-platform-tbb-rotpk = {
+    arm-platform-tbb-rotpk-label => arm-tbb-rotpk-type
+}
+
