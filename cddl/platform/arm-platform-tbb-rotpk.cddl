@@ -1,6 +1,6 @@
 arm-platform-tbb-rotpk-label = 2405
 
-arm-tbb-rotpk-type = [ * arm-rotpk-item ]
+arm-tbb-rotpk-type = [ + arm-rotpk-item ]
 
 arm-rotpk-item = {
     1 => tstr,             ; e.g. "CM" or "DM"
@@ -13,4 +13,3 @@ arm-rotpk-item = {
 arm-platform-tbb-rotpk = {
     arm-platform-tbb-rotpk-label => arm-tbb-rotpk-type
 }
-

@@ -48,31 +48,31 @@ normative:
       org: Arm
     title: Learn the architecture - Introducing Arm Confidential Compute Architecture
     target: https://developer.arm.com/documentation/den0125/400
-    date: 19. March. 2025
+    date: 2025-03-19
   RMM:
     author:
       org: Arm
     title: Realm Management Monitor specification 2.0
     target: https://developer.arm.com/documentation/den0137/2-0bet0
-    date: 3. February. 2026
+    date: 2026-02-03
   RME:
     author:
       org: Arm
     title: Learn the architecture - Realm Management Extension
     target: https://developer.arm.com/documentation/den0126/0102
-    date: 26. September. 2025
+    date: 2025-09-26
   RME-SYSARCH:
     author:
       org: Arm
     title: Arm Realm Management Extension (RME) System Architecture
     target: https://developer.arm.com/documentation/den0129/ca
-    date: 15. December. 2025
+    date: 2025-12-15
   TBB:
     author:
       org: Arm
     title: Trusted Board Boot
     target: https://trustedfirmware-a.readthedocs.io/en/stable/design/trusted-board-boot.html
-    date: 30. December. 2024
+    date: 2024-12-30
   STD94:
     -: cbor
     =: RFC8949
@@ -498,22 +498,23 @@ of physical memory protection which is provided.
 
 The CCA platform config byte string contains implementation information that is
  provided by the chip vendor and the device vendor. This is expected to include
- the following system properties:
+ the following system properties (see {RME-SYSARCH}} for details):
 
 * Per-PAS encryption (all RME systems will require this property)
 * MEC
 * MPE Level
-    – L0 (none)
-    – L1 (encryption only)
-    – L2 (encryption and integrity)
-    – L3 (anti-replay)
+    * L0 (none)
+    * L1 (encryption only)
+    * L2 (encryption and integrity)
+    * L3 (anti-replay)
 * RME-DA support
 * RME-CDA support
 
 The layout and encoding of this information is IMPLEMENTATION DEFINED.
 
-An attestation verifier should use information from the relevant attestation
-profile document to understand the IMPLEMENTATION DEFINED choices made for
+An attestation verifier should use information from the an attestation
+profile document applicable to the implementation to understand the
+IMPLEMENTATION DEFINED choices made for
 this field. Reference values can be accompanied by a bitmask identifying
 the relevant portion of the platform config claim.
 

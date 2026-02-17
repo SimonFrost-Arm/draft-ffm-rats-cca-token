@@ -10,5 +10,10 @@ arm-platform-claim-map = {
     arm-platform-sw-components
     ? arm-platform-verification-service
     arm-platform-hash-algo-id
+    arm-platform-client-id
+    ? arm-platform-manufacturing-config
+    ? arm-platform-extension
+    ? arm-platform-peer-signers
+    ? arm-platform-tbb-rotpk
 }
 
