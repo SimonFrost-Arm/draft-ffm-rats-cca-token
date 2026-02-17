@@ -67,7 +67,7 @@ normative:
     title: Arm Realm Management Extension (RME) System Architecture
     target: https://developer.arm.com/documentation/den0129/ca
     date: 15. December. 2025
-TBB:
+  TBB:
     author:
       org: Arm
     title: Trusted Board Boot
@@ -230,6 +230,7 @@ The HES (Hardware Enforced Security) is the bottom layer Attesting Environment, 
 It attests to the executables and configuration contents of the "Monitor Security Domain", which includes the RMM, as well as the identity, configuration and state of the CCA platform. This produces a set of claims forming the CCA Platform evidence.
 
 The following architecture applies to both following attester models.
+
 ~~~ aasvg
 {::include art/cca-delegated.ascii-art}
 ~~~
@@ -237,7 +238,7 @@ The following architecture applies to both following attester models.
 
 ## Direct {#direct}
 
-The structure of the CCA direct Attester is illustrated in {{fig-cca-direct-attester}}.
+The structure of the CCA direct Attester is illustrated in TODO-fig-cca-direct-attester.
 
 In the direct model, the RMM creates a set of claims that represent the state of a Realm.
 This set of claims is hashed and that hash is passed to the HES when requesting the CCA Platform evidence.
@@ -992,7 +993,7 @@ value.
 Where the implementation uses a CPAK that is endorsed via an X.509 certificate chain,
 the endorsement artefacts can be included in the COSE_Sign1 envelope of the CCA platform
 token using parameters from CBOR Object Signing and Encryption (COSE) Header Parameters
-for Carrying and Referencing X.509 Certificates {{cose-x509}}. It is recommended that
+for Carrying and Referencing X.509 Certificates {{COSE-X509}}. It is recommended that
 this is done as follows:
 
 -  The CPAK certificate is identified by including an x5t thumbprint parameter in the COSE_Sign1 protected header.
