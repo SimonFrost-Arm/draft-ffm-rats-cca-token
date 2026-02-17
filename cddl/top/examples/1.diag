@@ -12,6 +12,7 @@
         2401:h'CFCFCFCF',
         2395:12291,
         2402:"sha-256",
+        2394: 1,
         2400:"https://veraison.example/.well-known/veraison/verification",
         2399:[
           {

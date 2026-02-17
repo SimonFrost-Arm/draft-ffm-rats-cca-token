@@ -12,5 +12,6 @@
     }
   ],
   2400: "https://veraison.example/v1/challenge-response",
-  2402: "sha-256"
+  2402: "sha-256",
+  2394: 1
 }
