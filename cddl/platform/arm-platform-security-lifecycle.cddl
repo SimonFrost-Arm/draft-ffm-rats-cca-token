@@ -2,18 +2,18 @@ arm-platform-lifecycle-label = 2395 ; PSA lifecycle
 
 arm-platform-lifecycle-unknown-type = 0x0000..0x00ff
 arm-platform-lifecycle-assembly-and-test-type = 0x1000..0x10ff
-arm-platform-lifecycle-arm-platform-rot-provisioning-type = 0x2000..0x20ff
+arm-platform-lifecycle-platform-rot-provisioning-type = 0x2000..0x20ff
 arm-platform-lifecycle-secured-type = 0x3000..0x30ff
-arm-platform-lifecycle-non-arm-platform-rot-debug-type = 0x4000..0x40ff
-arm-platform-lifecycle-recoverable-arm-platform-rot-debug-type = 0x5000..0x50ff
+arm-platform-lifecycle-non-platform-rot-debug-type = 0x4000..0x40ff
+arm-platform-lifecycle-recoverable-platform-rot-debug-type = 0x5000..0x50ff
 arm-platform-lifecycle-decommissioned-type = 0x6000..0x60ff
 
 arm-platform-lifecycle-type =
     arm-platform-lifecycle-unknown-type /
     arm-platform-lifecycle-assembly-and-test-type /
-    arm-platform-lifecycle-arm-platform-rot-provisioning-type /
+    arm-platform-lifecycle-platform-rot-provisioning-type /
     arm-platform-lifecycle-secured-type /
-    arm-platform-lifecycle-non-arm-platform-rot-debug-type /
+    arm-platform-lifecycle-non-platform-rot-debug-type /
     arm-platform-lifecycle-recoverable-arm-platform-rot-debug-type /
     arm-platform-lifecycle-decommissioned-type
 

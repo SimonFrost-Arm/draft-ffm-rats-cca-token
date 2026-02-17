@@ -245,7 +245,7 @@ This set of claims is hashed and that hash is passed to the HES when requesting 
 This hash is included in a claim within the CCA Platform evidence.
 The platform evidence is signed using the CCA Platform Attestation Key (CPAK).
 
-The CCA Evidence produced in direct mode comprises a signed EAT for the platform token and an unsigned EAT for the realm token, wrapped in a CMW {{CMW}} collection.
+The CCA Evidence produced with the direct model comprises a signed EAT for the platform token and an unsigned EAT for the realm token, wrapped in a CMW {{CMW}} collection.
 The intra-collection binding is detailed in {{sec-token-binding}}.
 
 change addresses: [Issue #16](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/16)
@@ -336,8 +336,8 @@ claims:
 The above tokens are presented to the requester within a top level CMW collection {{CMW}}.
 The collection map has two entries, one for a bstr encoding of the CCA Platform token and
 the other for a bstr encoding of the Realm state token.
-The type aof the CMW entry will vary for the Realm state token depending on whether
-the delegated or direct models are used by an implementation.
+The type of the CMW entry will vary for the Realm state token depending on whether
+the delegated or direct model is used by an implementation.
 
 ~~~
 {::include cddl/top/cca-top-claims.cddl}
@@ -399,7 +399,7 @@ This claim MUST be present in a CCA Platform attestation token.
 The Implementation ID claim uniquely identifies the implementation of the
 CCA Platform. The value of the CCA platform Implementation ID claim can be
 used by a verification service to locate the details of the CCA platform
-implementation from an endorser or manufacture.
+implementation from an endorser or manufacturer.
 Such details are used by a verification service to determine the security properties
 or certification status of the CCA Platform implementation.
 
@@ -453,13 +453,13 @@ The state is represented by an integer that is divided as follows:
 * minor\[7:0\] - IMPLEMENTATION DEFINED state.
 
 The CCA Platform lifecycle states are illustrated in {{fig-lifecycle-states}}.
-A non debugged CCA platform will be in cca-platform-lifecycle-secured state.
+A non debugged CCA platform will be in arm-platform-lifecycle-secured state.
 Realm Management Security Domain debug is always recoverable, and would
-therefore be represented by cca-platform-lifecycle-non-psa-rot-debug state. Root
+therefore be represented by arm-platform-lifecycle-non-platform-rot-debug state. Root
 world debug is recoverable on a HES system and would be represented by
-cca-platform-lifecycle-recoverable-psa-rot state. On a non-HES system Root world
+arm-platform-lifecycle-recoverable-platform-rot state. On a non-HES system Root world
 debug is usually non-recoverable, and would be represented by
-cca-platform-lifecycle-lifecycle-decommissioned state
+arm-platform-lifecycle-lifecycle-decommissioned state
 
 
 This claim MUST be present in a CCA Platform attestation token.
@@ -482,10 +482,10 @@ The CDDL representation is shown below.
 |------|------------------|
 | `arm-platform-lifecycle-unknown-type`                   | |
 | `arm-platform-lifecycle-assembly-and-test-type`         |  Assembly and Test |
-| `arm-platform-lifecycle-psa-rot-provisioning-type`      |  CCA Platform Provisioning |
+| `arm-platform-lifecycle-platform-rot-provisioning-type`      |  CCA Platform Provisioning |
 | `arm-platform-lifecycle-secured-type`                   |  Secured |
-| `arm-platform-lifecycle-non-psa-rot-debug-type`         |  Non-Recoverable CCA Platform Debug |
-| `arm-platform-lifecycle-recoverable-psa-rot-debug-type` |  Recoverable CCA Platform Debug |
+| `arm-platform-lifecycle-non-platform-rot-debug-type`         |  Non-Recoverable CCA Platform Debug |
+| `arm-platform-lifecycle-recoverable-platform-rot-debug-type` |  Recoverable CCA Platform Debug |
 | `arm-platform-lifecycle-decommissioned-type`            |  Decommissioned |
 {: #tab-states-map title="Lifecycle States Mappings"}
 
@@ -617,39 +617,6 @@ The Measurement Description attribute (key=6) contains a string identifying the
 hash algorithm used to compute the corresponding Measurement Value.  The string
 SHOULD be encoded according to "Hash Name String" in the "Named Information Hash Algorithm Registry" {{!IANA.named-information}}.
 
-## Verification Claims
-
-The following claims are part of the CCA Platform token (and therefore still Evidence)
-but aim to help receivers, including relying parties, with the
-processing of the received attestation Evidence.
-
-### Verification Service Indicator
-{: #sec-verification-service-indicator}
-
-The Verification Service Indicator claim is a hint used by a relying party to
-locate a verification service for the token. The value is a text string that
-can be used to locate the service (typically, a URL specifying the address of
-the verification service API). A Relying Party may choose to ignore this claim
-in favor of other information.
-
-~~~
-{::include cddl/platform/arm-platform-verification-service-indicator.cddl}
-~~~
-
-It is assumed that the relying party is pre-configured with a list of trusted
-verification services and that the contents of this hint can be used to look
-up the correct one. Under no circumstances must the relying party be tricked
-into contacting an unknown and untrusted verification service since the
-returned Attestation Result cannot be relied on.
-
-Note: This hint requires the relying party to parse the content of the
-CCA Platform token. Since the relying party may not be in possession of a trust
-anchor to verify the digital signature, it uses the hint in the same way
-as it would treat any other information provided by an external party,
-which includes attacker-provided data.
-
-The CCA platform verification service indicator claim is OPTIONAL in a CCA platform token.
-
 ### CCA Platform Hash Algorithm ID
 {: #sec-arm-platform-hash-algm-id}
 
@@ -737,6 +704,39 @@ The CCA platform tbb rotpk claim is OPTIONAL in a CCA platform token
 {::include cddl/platform/arm-platform-tbb-rotpk.cddl}
 ~~~
 
+## Verification Claims
+
+The following claims are part of the CCA Platform token (and therefore still Evidence)
+but aim to help receivers, including relying parties, with the
+processing of the received attestation Evidence.
+
+### Verification Service Indicator
+{: #sec-verification-service-indicator}
+
+The Verification Service Indicator claim is a hint used by a relying party to
+locate a verification service for the token. The value is a text string that
+can be used to locate the service (typically, a URL specifying the address of
+the verification service API). A Relying Party may choose to ignore this claim
+in favor of other information.
+
+~~~
+{::include cddl/platform/arm-platform-verification-service-indicator.cddl}
+~~~
+
+It is assumed that the relying party is pre-configured with a list of trusted
+verification services and that the contents of this hint can be used to look
+up the correct one. Under no circumstances must the relying party be tricked
+into contacting an unknown and untrusted verification service since the
+returned Attestation Result cannot be relied on.
+
+Note: This hint requires the relying party to parse the content of the
+CCA Platform token. Since the relying party may not be in possession of a trust
+anchor to verify the digital signature, it uses the hint in the same way
+as it would treat any other information provided by an external party,
+which includes attacker-provided data.
+
+The CCA platform verification service indicator claim is OPTIONAL in a CCA platform token.
+
 
 
 
@@ -765,7 +765,7 @@ This claim MUST be present in a CCA Realm state attestation token.
 {::include cddl/realm/cca-realm-challenge.cddl}
 ~~~
 
-### CCA Platform Profile Definition
+### Realm Profile Definition
 {: #sec-realm-profile-definition-claim}
 
 The Realm profile claim identifies the EAT profile to which the Realm token
@@ -775,7 +775,7 @@ found in the token.
 The EAT `eat_profile` (claim key 265) is used.
 
 The format of the CCA platform profile claim is defined as a text string of value
-"tag:arm.com,2023:realm#1.0.0".
+"tag:arm.com,2024:realm#2.0.0".
 
 This claim is OPTIONAL in a CCA Realm attestation token.
 If the Realm profile is not included in a CCA Realm token then the profile value

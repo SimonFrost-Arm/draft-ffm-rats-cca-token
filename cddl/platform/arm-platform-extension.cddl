@@ -1,6 +1,6 @@
 arm-platform-extension-label = 2404
 
-; protocols that support VCA
+; protocols that support VCA (Version-Capabilities-Algorithm message concatenation)
 $protocols-support-vca /= "spdm-1.2.0"
 $protocols-support-vca /= "spdm-1.2.1"
 $protocols-support-vca /= "spdm-1.2.2"
