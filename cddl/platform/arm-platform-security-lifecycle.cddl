@@ -14,7 +14,7 @@ arm-platform-lifecycle-type =
     arm-platform-lifecycle-platform-rot-provisioning-type /
     arm-platform-lifecycle-secured-type /
     arm-platform-lifecycle-non-platform-rot-debug-type /
-    arm-platform-lifecycle-recoverable-arm-platform-rot-debug-type /
+    arm-platform-lifecycle-recoverable-platform-rot-debug-type /
     arm-platform-lifecycle-decommissioned-type
 
 arm-platform-lifecycle = (
