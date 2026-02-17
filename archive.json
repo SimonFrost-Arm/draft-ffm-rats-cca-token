@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-16T00:43:11.893061+00:00",
+  "timestamp": "2026-02-17T02:02:18.593971+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -1630,6 +1630,40 @@
         "oid": "5a3fc72ff6aed608e01c1d27f11a2b0b3498d854"
       },
       "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 44,
+      "id": "PR_kwDOMRXjbM7EN16G",
+      "title": "first pass at updates for v2.0",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/44",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Catch up for 2.0, plus some tidy up. \r\nPR at this stage so that review is hopefully not too large.",
+      "createdAt": "2026-02-16T23:50:26Z",
+      "updatedAt": "2026-02-17T00:31:51Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "5a3fc72ff6aed608e01c1d27f11a2b0b3498d854",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "2.0update",
+      "headRefOid": "923bb3b63b1e0ec0895539c75b3c9c846d06a8c0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "NB: Pending update of cddl test files to fix checks",
+          "createdAt": "2026-02-17T00:09:50Z",
+          "updatedAt": "2026-02-17T00:10:18Z"
+        }
+      ],
       "reviews": []
     }
   ]
