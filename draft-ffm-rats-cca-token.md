@@ -700,7 +700,7 @@ and supplies verification hashes for evidence obtained from those components.
 
 An example of such a component is a coherent memory (CMEM) device
 
-The CCA platform manufacturing config claim is OPTIONAL in a CCA platform token
+The CCA platform extension claim is OPTIONAL in a CCA platform token
 
 ~~~
 {::include cddl/platform/arm-platform-extension.cddl}
