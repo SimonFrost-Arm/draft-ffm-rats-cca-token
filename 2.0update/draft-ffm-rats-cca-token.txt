@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 21 August 2026                                           Linaro
+Expires: 22 August 2026                                           Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                        17 February 2026
+                                                        18 February 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 August 2026.
+   This Internet-Draft will expire on 22 August 2026.
 
 Copyright Notice
 
@@ -86,17 +86,17 @@ Table of Contents
        4.5.4.  Platform Config
      4.6.  Software Inventory Claims
        4.6.1.  Software Components
+       4.6.2.  CCA Platform Hash Algorithm ID
+       4.6.3.  CCA Platform Client ID
+       4.6.4.  CCA Platform Manufacturing Config
+       4.6.5.  CCA Platform Extension
+       4.6.6.  CCA Platform Peer Signers
+       4.6.7.  CCA Platform TBB ROTPK
      4.7.  Verification Claims
        4.7.1.  Verification Service Indicator
-       4.7.2.  CCA Platform Hash Algorithm ID
-       4.7.3.  CCA Platform Client ID
-       4.7.4.  CCA Platform Manufacturing Config
-       4.7.5.  CCA Platform Extension
-       4.7.6.  CCA Platform Peer Signers
-       4.7.7.  CCA Platform TBB ROTPK
      4.8.  CCA Realm state token Claims
        4.8.1.  Realm Nonce
-       4.8.2.  CCA Platform Profile Definition
+       4.8.2.  Realm Profile Definition
        4.8.3.  Realm Personalisation Value
        4.8.4.  Realm Initial Measurement
        4.8.5.  Realm Extensible Measurements
@@ -328,10 +328,10 @@ Table of Contents
    platform evidence is signed using the CCA Platform Attestation Key
    (CPAK).
 
-   The CCA Evidence produced in direct mode comprises a signed EAT for
-   the platform token and an unsigned EAT for the realm token, wrapped
-   in a CMW [CMW] collection.  The intra-collection binding is detailed
-   in Section 4.10.
+   The CCA Evidence produced with the direct model comprises a signed
+   EAT for the platform token and an unsigned EAT for the realm token,
+   wrapped in a CMW [CMW] collection.  The intra-collection binding is
+   detailed in Section 4.10.
 
    change addresses: Issue #16 (https://github.com/SimonFrost-Arm/draft-
    ffm-rats-cca-token/issues/16)
@@ -470,9 +470,9 @@ Table of Contents
    The above tokens are presented to the requester within a top level
    CMW collection [CMW].  The collection map has two entries, one for a
    bstr encoding of the CCA Platform token and the other for a bstr
-   encoding of the Realm state token.  The type aof the CMW entry will
+   encoding of the Realm state token.  The type of the CMW entry will
    vary for the Realm state token depending on whether the delegated or
-   direct models are used by an implementation.
+   direct model is used by an implementation.
 
    ; CMW (draft-ietf-rats-msg-wrap) Collection
    cca-token = #6.907(cca-token-cmw)
@@ -560,7 +560,7 @@ Table of Contents
    The Implementation ID claim uniquely identifies the implementation of
    the CCA Platform.  The value of the CCA platform Implementation ID
    claim can be used by a verification service to locate the details of
-   the CCA platform implementation from an endorser or manufacture.
+   the CCA platform implementation from an endorser or manufacturer.
    Such details are used by a verification service to determine the
    security properties or certification status of the CCA Platform
    implementation.
@@ -622,14 +622,14 @@ Table of Contents
    *  minor[7:0] - IMPLEMENTATION DEFINED state.
 
    The CCA Platform lifecycle states are illustrated in Figure 4.  A non
-   debugged CCA platform will be in cca-platform-lifecycle-secured
+   debugged CCA platform will be in arm-platform-lifecycle-secured
    state.  Realm Management Security Domain debug is always recoverable,
-   and would therefore be represented by cca-platform-lifecycle-non-psa-
-   rot-debug state.  Root world debug is recoverable on a HES system and
-   would be represented by cca-platform-lifecycle-recoverable-psa-rot
-   state.  On a non-HES system Root world debug is usually non-
-   recoverable, and would be represented by cca-platform-lifecycle-
-   lifecycle-decommissioned state
+   and would therefore be represented by arm-platform-lifecycle-non-
+   platform-rot-debug state.  Root world debug is recoverable on a HES
+   system and would be represented by arm-platform-lifecycle-
+   recoverable-platform-rot state.  On a non-HES system Root world debug
+   is usually non-recoverable, and would be represented by arm-platform-
+   lifecycle-lifecycle-decommissioned state
 
    This claim MUST be present in a CCA Platform attestation token.
 
@@ -678,19 +678,19 @@ arm-platform-lifecycle-label = 2395 ; PSA lifecycle
 
 arm-platform-lifecycle-unknown-type = 0x0000..0x00ff
 arm-platform-lifecycle-assembly-and-test-type = 0x1000..0x10ff
-arm-platform-lifecycle-arm-platform-rot-provisioning-type = 0x2000..0x20ff
+arm-platform-lifecycle-platform-rot-provisioning-type = 0x2000..0x20ff
 arm-platform-lifecycle-secured-type = 0x3000..0x30ff
-arm-platform-lifecycle-non-arm-platform-rot-debug-type = 0x4000..0x40ff
-arm-platform-lifecycle-recoverable-arm-platform-rot-debug-type = 0x5000..0x50ff
+arm-platform-lifecycle-non-platform-rot-debug-type = 0x4000..0x40ff
+arm-platform-lifecycle-recoverable-platform-rot-debug-type = 0x5000..0x50ff
 arm-platform-lifecycle-decommissioned-type = 0x6000..0x60ff
 
 arm-platform-lifecycle-type =
     arm-platform-lifecycle-unknown-type /
     arm-platform-lifecycle-assembly-and-test-type /
-    arm-platform-lifecycle-arm-platform-rot-provisioning-type /
+    arm-platform-lifecycle-platform-rot-provisioning-type /
     arm-platform-lifecycle-secured-type /
-    arm-platform-lifecycle-non-arm-platform-rot-debug-type /
-    arm-platform-lifecycle-recoverable-arm-platform-rot-debug-type /
+    arm-platform-lifecycle-non-platform-rot-debug-type /
+    arm-platform-lifecycle-recoverable-platform-rot-debug-type /
     arm-platform-lifecycle-decommissioned-type
 
 arm-platform-lifecycle = (
@@ -708,16 +708,16 @@ arm-platform-lifecycle = (
        | arm-platform-lifecycle-assembly-    | Assembly and Test  |
        | and-test-type                       |                    |
        +-------------------------------------+--------------------+
-       | arm-platform-lifecycle-psa-rot-     | CCA Platform       |
-       | provisioning-type                   | Provisioning       |
+       | arm-platform-lifecycle-platform-    | CCA Platform       |
+       | rot-provisioning-type               | Provisioning       |
        +-------------------------------------+--------------------+
        | arm-platform-lifecycle-secured-type | Secured            |
        +-------------------------------------+--------------------+
-       | arm-platform-lifecycle-non-psa-rot- | Non-Recoverable    |
-       | debug-type                          | CCA Platform Debug |
+       | arm-platform-lifecycle-non-         | Non-Recoverable    |
+       | platform-rot-debug-type             | CCA Platform Debug |
        +-------------------------------------+--------------------+
        | arm-platform-lifecycle-recoverable- | Recoverable CCA    |
-       | psa-rot-debug-type                  | Platform Debug     |
+       | platform-rot-debug-type             | Platform Debug     |
        +-------------------------------------+--------------------+
        | arm-platform-lifecycle-             | Decommissioned     |
        | decommissioned-type                 |                    |
@@ -879,47 +879,7 @@ arm-platform-lifecycle = (
    Name String" in the "Named Information Hash Algorithm Registry"
    [IANA.named-information].
 
-4.7.  Verification Claims
-
-   The following claims are part of the CCA Platform token (and
-   therefore still Evidence) but aim to help receivers, including
-   relying parties, with the processing of the received attestation
-   Evidence.
-
-4.7.1.  Verification Service Indicator
-
-   The Verification Service Indicator claim is a hint used by a relying
-   party to locate a verification service for the token.  The value is a
-   text string that can be used to locate the service (typically, a URL
-   specifying the address of the verification service API).  A Relying
-   Party may choose to ignore this claim in favor of other information.
-
-   ; PSA verification service
-   arm-platform-verification-service-label = 2400
-   arm-platform-verification-service-type = text
-
-   arm-platform-verification-service = (
-       arm-platform-verification-service-label =>
-           arm-platform-verification-service-type
-   )
-
-   It is assumed that the relying party is pre-configured with a list of
-   trusted verification services and that the contents of this hint can
-   be used to look up the correct one.  Under no circumstances must the
-   relying party be tricked into contacting an unknown and untrusted
-   verification service since the returned Attestation Result cannot be
-   relied on.
-
-   Note: This hint requires the relying party to parse the content of
-   the CCA Platform token.  Since the relying party may not be in
-   possession of a trust anchor to verify the digital signature, it uses
-   the hint in the same way as it would treat any other information
-   provided by an external party, which includes attacker-provided data.
-
-   The CCA platform verification service indicator claim is OPTIONAL in
-   a CCA platform token.
-
-4.7.2.  CCA Platform Hash Algorithm ID
+4.6.2.  CCA Platform Hash Algorithm ID
 
    The CCA platform hash algorithm ID claim is a text string that
    identifies the algorithm used to calculate the extended measurements
@@ -938,7 +898,7 @@ arm-platform-lifecycle = (
       arm-platform-hash-algo-id-label => text
   )
 
-4.7.3.  CCA Platform Client ID
+4.6.3.  CCA Platform Client ID
 
    The CCA platform client ID claim identifies the security domain from
    which the attestation token was requested.
@@ -960,7 +920,7 @@ arm-platform-lifecycle = (
        arm-platform-client-id-label => arm-platform-client-id-type
    )
 
-4.7.4.  CCA Platform Manufacturing Config
+4.6.4.  CCA Platform Manufacturing Config
 
    The CCA platform manufacturing config claim represents a record of
    production phases and testing conducted during the manufacturing
@@ -979,7 +939,7 @@ arm-platform-lifecycle = (
            arm-platform-manufacturing-config-type
    )
 
-4.7.5.  CCA Platform Extension
+4.6.5.  CCA Platform Extension
 
    The CCA platform extension claim identifies components which have
    been added to the CCA platform at runtime and supplies verification
@@ -991,7 +951,7 @@ arm-platform-lifecycle = (
 
 arm-platform-extension-label = 2404
 
-; protocols that support VCA
+; protocols that support VCA (Version-Capabilities-Algorithm message concatenation)
 $protocols-support-vca /= "spdm-1.2.0"
 $protocols-support-vca /= "spdm-1.2.1"
 $protocols-support-vca /= "spdm-1.2.2"
@@ -1043,7 +1003,7 @@ arm-platform-extension = (
     arm-platform-extension-label => [ + arm-platform-extension-device ]
 )
 
-4.7.6.  CCA Platform Peer Signers
+4.6.6.  CCA Platform Peer Signers
 
    In the event that the CCA platform consists of multiple peer RoTs
    which are unable to establish a single attestation signing entity at
@@ -1066,7 +1026,7 @@ arm-platform-extension = (
        arm-platform-peer-signers-label => arm-platform-peer-signers-type
    )
 
-4.7.7.  CCA Platform TBB ROTPK
+4.6.7.  CCA Platform TBB ROTPK
 
    Where an implementation of the CCA platform follows the Trusted Board
    Boot specification [TBB], the platform will include several
@@ -1091,6 +1051,46 @@ arm-platform-extension = (
    arm-platform-tbb-rotpk = {
        arm-platform-tbb-rotpk-label => arm-tbb-rotpk-type
    }
+
+4.7.  Verification Claims
+
+   The following claims are part of the CCA Platform token (and
+   therefore still Evidence) but aim to help receivers, including
+   relying parties, with the processing of the received attestation
+   Evidence.
+
+4.7.1.  Verification Service Indicator
+
+   The Verification Service Indicator claim is a hint used by a relying
+   party to locate a verification service for the token.  The value is a
+   text string that can be used to locate the service (typically, a URL
+   specifying the address of the verification service API).  A Relying
+   Party may choose to ignore this claim in favor of other information.
+
+   ; PSA verification service
+   arm-platform-verification-service-label = 2400
+   arm-platform-verification-service-type = text
+
+   arm-platform-verification-service = (
+       arm-platform-verification-service-label =>
+           arm-platform-verification-service-type
+   )
+
+   It is assumed that the relying party is pre-configured with a list of
+   trusted verification services and that the contents of this hint can
+   be used to look up the correct one.  Under no circumstances must the
+   relying party be tricked into contacting an unknown and untrusted
+   verification service since the returned Attestation Result cannot be
+   relied on.
+
+   Note: This hint requires the relying party to parse the content of
+   the CCA Platform token.  Since the relying party may not be in
+   possession of a trust anchor to verify the digital signature, it uses
+   the hint in the same way as it would treat any other information
+   provided by an external party, which includes attacker-provided data.
+
+   The CCA platform verification service indicator claim is OPTIONAL in
+   a CCA platform token.
 
 4.8.  CCA Realm state token Claims
 
@@ -1120,7 +1120,7 @@ arm-platform-extension = (
        cca-realm-challenge-label => cca-realm-challenge-type
    )
 
-4.8.2.  CCA Platform Profile Definition
+4.8.2.  Realm Profile Definition
 
    The Realm profile claim identifies the EAT profile to which the Realm
    token conforms.  This allows a receiver to assign the intended
@@ -1129,7 +1129,7 @@ arm-platform-extension = (
    The EAT eat_profile (claim key 265) is used.
 
    The format of the CCA platform profile claim is defined as a text
-   string of value "tag:arm.com,2023:realm#1.0.0".
+   string of value "tag:arm.com,2024:realm#2.0.0".
 
    This claim is OPTIONAL in a CCA Realm attestation token.  If the
    Realm profile is not included in a CCA Realm token then the profile
@@ -1480,20 +1480,19 @@ arm-platform-extension = (
    arm-platform-lifecycle-label = 2395
    arm-platform-lifecycle-unknown-type = 0x0000 .. 0x00ff
    arm-platform-lifecycle-assembly-and-test-type = 0x1000 .. 0x10ff
-   arm-platform-lifecycle-arm-platform-rot-provisioning-type = 0x2000 .\
-                                                                . 0x20ff
+   arm-platform-lifecycle-platform-rot-provisioning-type = 0x2000 .. \
+                                                                  0x20ff
    arm-platform-lifecycle-secured-type = 0x3000 .. 0x30ff
-   arm-platform-lifecycle-non-arm-platform-rot-debug-type = 0x4000 .. \
-                                                                  0x40ff
-   arm-platform-lifecycle-recoverable-arm-platform-rot-debug-type = \
-                                                        0x5000 .. 0x50ff
+   arm-platform-lifecycle-non-platform-rot-debug-type = 0x4000 .. 0x40ff
+   arm-platform-lifecycle-recoverable-platform-rot-debug-type = 0x5000 \
+                                                               .. 0x50ff
    arm-platform-lifecycle-decommissioned-type = 0x6000 .. 0x60ff
    arm-platform-lifecycle-type = arm-platform-lifecycle-unknown-type / \
    arm-platform-lifecycle-assembly-and-test-type / arm-platform-\
-   lifecycle-arm-platform-rot-provisioning-type / arm-platform-\
-   lifecycle-secured-type / arm-platform-lifecycle-non-arm-platform-rot\
-   -debug-type / arm-platform-lifecycle-recoverable-arm-platform-rot-\
-                 debug-type / arm-platform-lifecycle-decommissioned-type
+   lifecycle-platform-rot-provisioning-type / arm-platform-lifecycle-\
+   secured-type / arm-platform-lifecycle-non-platform-rot-debug-type / \
+   arm-platform-lifecycle-recoverable-platform-rot-debug-type / arm-\
+                                  platform-lifecycle-decommissioned-type
    arm-platform-lifecycle = (arm-platform-lifecycle-label => arm-\
                                                 platform-lifecycle-type)
    arm-platform-sw-components-label = 2399
@@ -1826,7 +1825,7 @@ arm-platform-extension = (
 
    *  Change Controller: TBD
 
-   *  Specification Document(s): Section 4.7.2 of RFCthis
+   *  Specification Document(s): Section 4.6.2 of RFCthis
 
 10.1.8.  Platform Manufacturing Config
 
@@ -1842,7 +1841,7 @@ arm-platform-extension = (
 
    *  Change Controller: TBD
 
-   *  Specification Document(s): Section 4.7.4 of RFCthis
+   *  Specification Document(s): Section 4.6.4 of RFCthis
 
 10.1.9.  Platform Extension
 
@@ -1858,7 +1857,7 @@ arm-platform-extension = (
 
    *  Change Controller: TBD
 
-   *  Specification Document(s): Section 4.7.5 of RFCthis
+   *  Specification Document(s): Section 4.6.5 of RFCthis
 
 10.1.10.  Platform TBB RoTPK
 
@@ -1874,7 +1873,7 @@ arm-platform-extension = (
 
    *  Change Controller: TBD
 
-   *  Specification Document(s): Section 4.7.7 of RFCthis
+   *  Specification Document(s): Section 4.6.7 of RFCthis
 
 10.1.11.  Platform Peer Signers
 
@@ -1890,7 +1889,7 @@ arm-platform-extension = (
 
    *  Change Controller: TBD
 
-   *  Specification Document(s): Section 4.7.7 of RFCthis
+   *  Specification Document(s): Section 4.6.7 of RFCthis
 
 10.1.12.  CCA Token Platform Token Label
 
