@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 22 August 2026                                           Linaro
+Expires: 23 August 2026                                           Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                        18 February 2026
+                                                        19 February 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 August 2026.
+   This Internet-Draft will expire on 23 August 2026.
 
 Copyright Notice
 
@@ -734,14 +734,22 @@ arm-platform-lifecycle = (
 
    The CCA platform config byte string contains implementation
    information that is provided by the chip vendor and the device
-   vendor.  This is expected to include the following system properties:
+   vendor.  This is expected to include the following system properties
+   (see {RME-SYSARCH}} for details):
 
    *  Per-PAS encryption (all RME systems will require this property)
 
    *  MEC
 
-   *  MPE Level – L0 (none) – L1 (encryption only) – L2 (encryption and
-      integrity) – L3 (anti-replay)
+   *  MPE Level
+
+      -  L0 (none)
+
+      -  L1 (encryption only)
+
+      -  L2 (encryption and integrity)
+
+      -  L3 (anti-replay)
 
    *  RME-DA support
 
@@ -750,11 +758,11 @@ arm-platform-lifecycle = (
    The layout and encoding of this information is IMPLEMENTATION
    DEFINED.
 
-   An attestation verifier should use information from the relevant
-   attestation profile document to understand the IMPLEMENTATION DEFINED
-   choices made for this field.  Reference values can be accompanied by
-   a bitmask identifying the relevant portion of the platform config
-   claim.
+   An attestation verifier should use information from the an
+   attestation profile document applicable to the implementation to
+   understand the IMPLEMENTATION DEFINED choices made for this field.
+   Reference values can be accompanied by a bitmask identifying the
+   relevant portion of the platform config claim.
 
    This claim MUST be present in a CCA Platform attestation token.
 
@@ -776,6 +784,7 @@ arm-platform-lifecycle = (
    platform token
 
    arm-platform-manufacturing-config-label = 2403
+
    arm-platform-manufacturing-config-type = bytes
 
    arm-platform-manufacturing-config = (
@@ -932,6 +941,7 @@ arm-platform-lifecycle = (
    platform token
 
    arm-platform-manufacturing-config-label = 2403
+
    arm-platform-manufacturing-config-type = bytes
 
    arm-platform-manufacturing-config = (
@@ -1038,19 +1048,18 @@ arm-platform-extension = (
 
    arm-platform-tbb-rotpk-label = 2405
 
-   arm-tbb-rotpk-type = [ * arm-rotpk-item ]
+   arm-platform-tbb-rotpk-type = [ + arm-platform-tbb-rotpk-item ]
 
-   arm-rotpk-item = {
+   arm-platform-tbb-rotpk-item = {
        1 => tstr,             ; e.g. "CM" or "DM"
        2 => int,              ; active ROTPK array
        3 => int,              ; index in the active array
        4 => arm-platform-hash-type    ; hash object
    }
 
-
-   arm-platform-tbb-rotpk = {
-       arm-platform-tbb-rotpk-label => arm-tbb-rotpk-type
-   }
+   arm-platform-tbb-rotpk = (
+       arm-platform-tbb-rotpk-label => arm-platform-tbb-rotpk-type
+   )
 
 4.7.  Verification Claims
 
@@ -1453,6 +1462,11 @@ arm-platform-extension = (
      arm-platform-sw-components,
      ? arm-platform-verification-service,
      arm-platform-hash-algo-id,
+     arm-platform-client-id,
+     ? arm-platform-manufacturing-config,
+     ? arm-platform-extension,
+     ? arm-platform-peer-signers,
+     ? arm-platform-tbb-rotpk,
    }
    arm-platform-challenge-label = 10
    arm-platform-challenge = (arm-platform-challenge-label => arm-\
@@ -1509,6 +1523,58 @@ arm-platform-extension = (
    arm-platform-verification-service-type = text
    arm-platform-verification-service = (arm-platform-verification-\
                 service-label => arm-platform-verification-service-type)
+   arm-platform-client-id-label = 2394
+   arm-platform-client-id-rmsd = 1
+   arm-platform-client-id-type = arm-platform-client-id-rmsd
+   arm-platform-client-id = (arm-platform-client-id-label => arm-\
+                                                platform-client-id-type)
+   arm-platform-manufacturing-config-label = 2403
+   arm-platform-manufacturing-config-type = bytes
+   arm-platform-manufacturing-config = (arm-platform-manufacturing-\
+                 config-label => arm-platform-manufacturing-config-type)
+   arm-platform-extension-label = 2404
+   $protocols-support-vca /= "spdm-1.2.0" / "spdm-1.2.1" / "spdm-1.2.2\
+   " / "spdm-1.2.3" / "spdm-1.3.0" / "spdm-1.3.1" / "spdm-1.3.2" / "\
+                                                             spdm-1.4.0"
+   $type-with-encryption /= "cxl-type-3"
+   encryption-type = (
+     host-side-encryption: 0,
+     target-side-encryption: 1,
+     no-encryption: 2,
+     )
+   arm-platform-extension-device-common = (
+     ? 1 => text,
+     2 => arm-platform-hash-type,
+     3 => arm-platform-hash-type,
+     4 => bool,
+     )
+   arm-platform-extension-device = {
+     arm-platform-extension-device-common,
+     ((
+                       5 => $protocols-support-vca,
+                       6 => arm-platform-hash-type,
+                 ) // 5 => text),
+     ((
+                       7 => $type-with-encryption,
+                       8 => &encryption-type,
+                 ) // 7 => text),
+   }
+   arm-platform-extension = (arm-platform-extension-label => [+ arm-\
+                                             platform-extension-device])
+   arm-platform-peer-signers-label = 2406
+   arm-platform-peer-signers-type = bytes
+   arm-platform-peer-signers = (arm-platform-peer-signers-label => arm-\
+                                             platform-peer-signers-type)
+   arm-platform-tbb-rotpk-label = 2405
+   arm-platform-tbb-rotpk-type = [+ arm-platform-tbb-rotpk-item]
+   arm-platform-tbb-rotpk-item = {
+     1 => tstr,
+     2 => int,
+     3 => int,
+     4 => arm-platform-hash-type,
+   }
+   arm-platform-tbb-rotpk = (arm-platform-tbb-rotpk-label => arm-\
+                                                platform-tbb-rotpk-type)
    eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
    eat-ueid-rand-fmt = [
      ueid-rand-typ,
@@ -2063,7 +2129,7 @@ arm-platform-extension = (
 11.1.  Normative References
 
    [CCA-ARCH] Arm, "Learn the architecture - Introducing Arm
-              Confidential Compute Architecture", March 2025,
+              Confidential Compute Architecture", 19 March 2025,
               <https://developer.arm.com/documentation/den0125/400>.
 
    [CMW]      Birkholz, H., Smith, N., Fossati, T., Tschofenig, H., and
@@ -2118,15 +2184,15 @@ arm-platform-extension = (
               June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
 
    [RME]      Arm, "Learn the architecture - Realm Management
-              Extension", September 2025,
+              Extension", 26 September 2025,
               <https://developer.arm.com/documentation/den0126/0102>.
 
    [RME-SYSARCH]
               Arm, "Arm Realm Management Extension (RME) System
-              Architecture", December 2025,
+              Architecture", 15 December 2025,
               <https://developer.arm.com/documentation/den0129/ca>.
 
-   [RMM]      Arm, "Realm Management Monitor specification 2.0",
+   [RMM]      Arm, "Realm Management Monitor specification 2.0", 3
               February 2026,
               <https://developer.arm.com/documentation/den0137/2-0bet0>.
 
@@ -2140,7 +2206,7 @@ arm-platform-extension = (
               DOI 10.17487/RFC9052, August 2022,
               <https://www.rfc-editor.org/rfc/rfc9052>.
 
-   [TBB]      Arm, "Trusted Board Boot", December 2024,
+   [TBB]      Arm, "Trusted Board Boot", 30 December 2024,
               <https://trustedfirmware-
               a.readthedocs.io/en/stable/design/trusted-board-
               boot.html>.
@@ -2239,6 +2305,7 @@ A.1.1.  Platform Claims Set
      2395:12291,
      2402:"sha-256",
      2400:"https://veraison.example/.well-known/veraison/verification",
+     2394: 1,
      2399:[
        {
          1:"RSE_BL1_2",
@@ -2460,6 +2527,7 @@ A.1.5.  Signed and Bound Assembly
            2401:h'CFCFCFCF',
            2395:12291,
            2402:"sha-256",
+           2394: 1,
            2400:"https://veraison.example/.well-known/veraison/\
                                                           verification",
            2399:[
@@ -2620,78 +2688,78 @@ A.1.5.  Signed and Bound Assembly
 
    which has the following base16 encoding:
 
-   d9038ba219acca821901075905eed28444a1013822a0590581a919010978
+   d9038ba219acca821901075905f2d28444a1013822a0590585aa19010978
    237461673a61726d2e636f6d2c323032343a6363615f706c6174666f726d
    23322e302e300a58200d22e08a98469058486318283489bdb36f09dbefeb
    1864df433fa6e54ea2d71119095c58207f454c4602010100000000000000
    000003003e00010000005058000000000000190100582101070605040302
    01000f0e0d0c0b0a090817161514131211101f1e1d1c1b1a191819096144
-   cfcfcfcf19095b193003190962677368612d323536190960783a68747470
-   733a2f2f7665726169736f6e2e6578616d706c652f2e77656c6c2d6b6e6f
-   776e2f7665726169736f6e2f766572696669636174696f6e19095f8da401
-   695253455f424c315f320558205378796307535df3ec8d8b15a2e2dc5641
-   419c3d3060cfe32238c0fa973f7aa30258209a271f2a916b0b6ee6cecb24
-   26f0b3206ef074578be55d9bc94f6f3fe3ab86aa06677368612d323536a4
-   01675253455f424c320558205378796307535df3ec8d8b15a2e2dc564141
-   9c3d3060cfe32238c0fa973f7aa302582053c234e5e8472b6ac51c1ae1ca
-   b3fe06fad053beb8ebfd8977b010655bfdd3c306677368612d323536a401
-   655253455f530558205378796307535df3ec8d8b15a2e2dc5641419c3d30
-   60cfe32238c0fa973f7aa30258201121cfccd5913f0a63fec40a6ffd44ea
-   64f9dc135c66634ba001d10bcf4302a206677368612d323536a401664150
-   5f424c310558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cf
-   e32238c0fa973f7aa30258201571b5ec78bd68512bf7830bb6a2a44b2047
-   c7df57bce79eb8a1c0e5bea0a50106677368612d323536a4016641505f42
-   4c320558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe322
-   38c0fa973f7aa302582010159baf262b43a92d95db59dae1f72c64512730
-   1661e0a3ce4e38b295a97c5806677368612d323536a401675343505f424c
-   310558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238
-   c0fa973f7aa302582010122e856b3fcd49f063636317476149cb730a1aa1
-   cfaad818552b72f56d6f6806677368612d323536a401675343505f424c32
-   055820f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214d
-   cd28780b56025820aa67a169b0bba217aa0aa88a65346920c84c42447c36
-   ba5f7ea65f422c1fe5d806677368612d323536a4016741505f424c333105
+   cfcfcfcf19095b193003190962677368612d32353619095a01190960783a
+   68747470733a2f2f7665726169736f6e2e6578616d706c652f2e77656c6c
+   2d6b6e6f776e2f7665726169736f6e2f766572696669636174696f6e1909
+   5f8da401695253455f424c315f320558205378796307535df3ec8d8b15a2
+   e2dc5641419c3d3060cfe32238c0fa973f7aa30258209a271f2a916b0b6e
+   e6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa06677368612d
+   323536a401675253455f424c320558205378796307535df3ec8d8b15a2e2
+   dc5641419c3d3060cfe32238c0fa973f7aa302582053c234e5e8472b6ac5
+   1c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c306677368612d32
+   3536a401655253455f530558205378796307535df3ec8d8b15a2e2dc5641
+   419c3d3060cfe32238c0fa973f7aa30258201121cfccd5913f0a63fec40a
+   6ffd44ea64f9dc135c66634ba001d10bcf4302a206677368612d323536a4
+   016641505f424c310558205378796307535df3ec8d8b15a2e2dc5641419c
+   3d3060cfe32238c0fa973f7aa30258201571b5ec78bd68512bf7830bb6a2
+   a44b2047c7df57bce79eb8a1c0e5bea0a50106677368612d323536a40166
+   41505f424c320558205378796307535df3ec8d8b15a2e2dc5641419c3d30
+   60cfe32238c0fa973f7aa302582010159baf262b43a92d95db59dae1f72c
+   645127301661e0a3ce4e38b295a97c5806677368612d323536a401675343
+   505f424c310558205378796307535df3ec8d8b15a2e2dc5641419c3d3060
+   cfe32238c0fa973f7aa302582010122e856b3fcd49f063636317476149cb
+   730a1aa1cfaad818552b72f56d6f6806677368612d323536a40167534350
+   5f424c32055820f14b4987904bcb5814e4459a057ed4d20f58a633152288
+   a761214dcd28780b56025820aa67a169b0bba217aa0aa88a65346920c84c
+   42447c36ba5f7ea65f422c1fe5d806677368612d323536a4016741505f42
+   4c33310558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe3
+   2238c0fa973f7aa30258202e6d31a5983a91251bfae5aefa1c0a19d8ba3c
+   f601d0e8a706b4cfa9661a6b8a06677368612d323536a40163524d4d0558
+   205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa97
+   3f7aa3025820a1fb50e6c86fae1679ef3351296fd6713411a08cf8dd1790
+   a4fd05fae868816406677368612d323536a4016948575f434f4e46494705
    58205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa
-   973f7aa30258202e6d31a5983a91251bfae5aefa1c0a19d8ba3cf601d0e8
-   a706b4cfa9661a6b8a06677368612d323536a40163524d4d055820537879
-   6307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7aa302
-   5820a1fb50e6c86fae1679ef3351296fd6713411a08cf8dd1790a4fd05fa
-   e868816406677368612d323536a4016948575f434f4e4649470558205378
-   796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7aa3
-   0258201a252402972f6057fa53cc172b52b9ffca698e18311facd0f3b06e
-   caaef79e1706677368612d323536a4016946575f434f4e46494705582053
-   78796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa973f7a
-   a30258209a92adbc0cee38ef658c71ce1b1bf8c65668f166bfb213644c89
-   5ccb1ad07a2506677368612d323536a4016c54425f46575f434f4e464947
+   973f7aa30258201a252402972f6057fa53cc172b52b9ffca698e18311fac
+   d0f3b06ecaaef79e1706677368612d323536a4016946575f434f4e464947
    0558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0
-   fa973f7aa3025820238903180cc104ec2c5d8b3f20c5bc61b389ec0a967d
-   f8cc208cdc7cd454174f06677368612d323536a4016d534f435f46575f43
-   4f4e4649470558205378796307535df3ec8d8b15a2e2dc5641419c3d3060
-   cfe32238c0fa973f7aa3025820e6c21e8d260fe71882debdb339d2402a2c
-   a7648529bc2303f48649bce038001706677368612d323536586031d04d52
-   ccde952c1e32cba181885a40b8cc38e0528c1e89589807642aa5e3f2bc37
-   f95374506bff4d2e4be7063c4d72419270c722e8d4d93ee8b6c9face3b43
-   c9761a49941ab6f38ffdff496ad463b4cbfa11d83e23e31f7f62329de30c
-   1cc819acd182190107590259d28444a1013822a05901eca9190109781c74
-   61673a61726d2e636f6d2c323032343a7265616c6d23322e302e300a5840
-   6e86d6d97cc713bc6dd43dbce491a6b40311c027a8bf85a39da63e9ce44c
-   132a8a119d296fae6a6999e9bf3e4471b0ce01245d889424c31e89793b3b
-   1d6b150419accc677368612d32353619acd0677368612d32353619accb58
-   4054686520717569636b2062726f776e20666f78206a756d7073206f7665
-   72203133206c617a7920646f67732e54686520717569636b2062726f776e
-   20666f782019accd586ba40102200221583076f988091be585ed41801aec
-   fab858548c63057e16b0e676120bbd0d2f9c29e056c5d41a0130eb9c2151
-   7899dc23146b22583028e1b062bd3ea4b315fd219f1cbb528cb6e74ca49b
-   e16773734f61a1ca61031b2bbf3d918f2f94ffc4228e50919544ae19acce
-   5820311314ab73620350cf758834ae5c65d9e8c2dc7febe6e7d9654bbe86
-   4e300d4919accf84582024d5b0a296cc05cbd8068c5067c5bd473b770dda
-   6ae082fe3ba30abe3f9a6ab15820788fc090bfc6b8ed903152ba8414e73d
-   af5b8c7bb1e79ad502ab0699b659ed165820dac46a58415dc3a00d7a7418
-   52008e9cae64f52d03b9f76d76f4b3644fefc416582032c6afc627e55585
-   c03155359f331a0e225f6840db947dd96efab81be267193919acd3677072
-   69766174655860580b1dea32d30ac6884c86b39cbe0fcb03bd00df5103f9
-   bab01386a46a3ba8143e27ed6d4eb0d0a2724abdf9640c09462face6df18
-   6909dfa6eb131e3a7918276077acdab8a8bdeca6b0eaafab66e1439c1371
-   f4fb1d6aac047481b5dc75dd46
+   fa973f7aa30258209a92adbc0cee38ef658c71ce1b1bf8c65668f166bfb2
+   13644c895ccb1ad07a2506677368612d323536a4016c54425f46575f434f
+   4e4649470558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cf
+   e32238c0fa973f7aa3025820238903180cc104ec2c5d8b3f20c5bc61b389
+   ec0a967df8cc208cdc7cd454174f06677368612d323536a4016d534f435f
+   46575f434f4e4649470558205378796307535df3ec8d8b15a2e2dc564141
+   9c3d3060cfe32238c0fa973f7aa3025820e6c21e8d260fe71882debdb339
+   d2402a2ca7648529bc2303f48649bce038001706677368612d3235365860
+   31d04d52ccde952c1e32cba181885a40b8cc38e0528c1e89589807642aa5
+   e3f2bc37f95374506bff4d2e4be7063c4d72419270c722e8d4d93ee8b6c9
+   face3b43c9761a49941ab6f38ffdff496ad463b4cbfa11d83e23e31f7f62
+   329de30c1cc819acd182190107590259d28444a1013822a05901eca91901
+   09781c7461673a61726d2e636f6d2c323032343a7265616c6d23322e302e
+   300a58406e86d6d97cc713bc6dd43dbce491a6b40311c027a8bf85a39da6
+   3e9ce44c132a8a119d296fae6a6999e9bf3e4471b0ce01245d889424c31e
+   89793b3b1d6b150419accc677368612d32353619acd0677368612d323536
+   19accb584054686520717569636b2062726f776e20666f78206a756d7073
+   206f766572203133206c617a7920646f67732e54686520717569636b2062
+   726f776e20666f782019accd586ba40102200221583076f988091be585ed
+   41801aecfab858548c63057e16b0e676120bbd0d2f9c29e056c5d41a0130
+   eb9c21517899dc23146b22583028e1b062bd3ea4b315fd219f1cbb528cb6
+   e74ca49be16773734f61a1ca61031b2bbf3d918f2f94ffc4228e50919544
+   ae19acce5820311314ab73620350cf758834ae5c65d9e8c2dc7febe6e7d9
+   654bbe864e300d4919accf84582024d5b0a296cc05cbd8068c5067c5bd47
+   3b770dda6ae082fe3ba30abe3f9a6ab15820788fc090bfc6b8ed903152ba
+   8414e73daf5b8c7bb1e79ad502ab0699b659ed165820dac46a58415dc3a0
+   0d7a741852008e9cae64f52d03b9f76d76f4b3644fefc416582032c6afc6
+   27e55585c03155359f331a0e225f6840db947dd96efab81be267193919ac
+   d367707269766174655860580b1dea32d30ac6884c86b39cbe0fcb03bd00
+   df5103f9bab01386a46a3ba8143e27ed6d4eb0d0a2724abdf9640c09462f
+   ace6df186909dfa6eb131e3a7918276077acdab8a8bdeca6b0eaafab66e1
+   439c1371f4fb1d6aac047481b5dc75dd46
 
 A.2.  Direct Mode
 
