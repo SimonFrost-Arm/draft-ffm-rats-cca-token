@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-19T02:04:51.583971+00:00",
+  "timestamp": "2026-02-22T02:04:30.503753+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -269,9 +269,17 @@
       "labels": [],
       "body": "This is related to #14 because the direct mode is a different attester from delegated.",
       "createdAt": "2024-10-15T10:04:58Z",
-      "updatedAt": "2026-02-17T17:54:43Z",
+      "updatedAt": "2026-02-19T11:32:52Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Partly implemented in https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/44, more to do in a further PR",
+          "createdAt": "2026-02-19T11:32:52Z",
+          "updatedAt": "2026-02-19T11:32:52Z"
+        }
+      ]
     },
     {
       "number": 19,
@@ -1644,13 +1652,13 @@
       "labels": [],
       "body": "Catch up for 2.0, plus some tidy up. \r\nPR at this stage so that review is hopefully not too large.",
       "createdAt": "2026-02-16T23:50:26Z",
-      "updatedAt": "2026-02-18T18:26:09Z",
+      "updatedAt": "2026-02-19T12:34:23Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "5a3fc72ff6aed608e01c1d27f11a2b0b3498d854",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "2.0update",
-      "headRefOid": "ae6ab1f7b1c857769568c18a4483ead4862d15b6",
+      "headRefOid": "516e811b13b00638f10b2642312b9861e0a289c8",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2203,9 +2211,9 @@
             },
             {
               "originalPosition": 3,
-              "body": "Since the grammar allows an empty array, could the claim be made optional instead?",
+              "body": "Since the grammar allows an empty array, could the claim be made optional instead?\n\n---- \n\nEDIT: I see now that in the prose we say that the claim is optional.  So, to avoid ambiguity in the expression, I suppose we should require at least 1 ROTPK item:\n\n```suggestion\narm-tbb-rotpk-type = [ + arm-rotpk-item ]\n```",
               "createdAt": "2026-02-18T15:38:59Z",
-              "updatedAt": "2026-02-18T17:16:57Z"
+              "updatedAt": "2026-02-19T10:09:05Z"
             },
             {
               "originalPosition": 7,
@@ -2282,6 +2290,186 @@
               "body": "```suggestion\n the following system properties: (please refer to {{RME-SYSARCH}} for details on these features)\n```",
               "createdAt": "2026-02-18T18:26:09Z",
               "updatedAt": "2026-02-18T18:26:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7j97aq",
+          "commit": {
+            "abbreviatedOid": "ae6ab1f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T10:04:11Z",
+          "updatedAt": "2026-02-19T10:04:11Z",
+          "comments": [
+            {
+              "originalPosition": 368,
+              "body": "Ah, right, so this ties back to my comment on the related CDDL.  I'll go back and make an editorial suggestion there.",
+              "createdAt": "2026-02-19T10:04:11Z",
+              "updatedAt": "2026-02-19T10:04:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7j-G4o",
+          "commit": {
+            "abbreviatedOid": "ae6ab1f"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T10:11:19Z",
+          "updatedAt": "2026-02-19T10:11:19Z",
+          "comments": [
+            {
+              "originalPosition": 368,
+              "body": "BTW, at the moment, it looks like the claim is not yet attached to the platform's claims set.  Is this intentional or an oversight?",
+              "createdAt": "2026-02-19T10:11:19Z",
+              "updatedAt": "2026-02-19T10:11:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7j_g7k",
+          "commit": {
+            "abbreviatedOid": "ae6ab1f"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T11:06:19Z",
+          "updatedAt": "2026-02-19T11:06:20Z",
+          "comments": [
+            {
+              "originalPosition": 51,
+              "body": "I believe the current intent is that only devices will extend the platform so the usage is implicit. If that alters in the future we can make a clarifying change.",
+              "createdAt": "2026-02-19T11:06:19Z",
+              "updatedAt": "2026-02-19T11:06:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7j_twz",
+          "commit": {
+            "abbreviatedOid": "ae6ab1f"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T11:15:06Z",
+          "updatedAt": "2026-02-19T11:15:06Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "Will change to 1 or more (+) and make the claim optional (realising that claim map cddl also needs updating)",
+              "createdAt": "2026-02-19T11:15:06Z",
+              "updatedAt": "2026-02-19T11:15:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7j_z3J",
+          "commit": {
+            "abbreviatedOid": "ae6ab1f"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T11:19:04Z",
+          "updatedAt": "2026-02-19T11:19:04Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "Ack, but this form inherited from PSA doc!",
+              "createdAt": "2026-02-19T11:19:04Z",
+              "updatedAt": "2026-02-19T11:19:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7kAJgX",
+          "commit": {
+            "abbreviatedOid": "ae6ab1f"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T11:33:55Z",
+          "updatedAt": "2026-02-19T11:33:55Z",
+          "comments": [
+            {
+              "originalPosition": 55,
+              "body": "To be addressed in further PR for [Issue 16](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/16)",
+              "createdAt": "2026-02-19T11:33:55Z",
+              "updatedAt": "2026-02-19T11:33:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7kAJzZ",
+          "commit": {
+            "abbreviatedOid": "ae6ab1f"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T11:34:05Z",
+          "updatedAt": "2026-02-19T11:34:05Z",
+          "comments": [
+            {
+              "originalPosition": 78,
+              "body": "[Issue 16](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/16)",
+              "createdAt": "2026-02-19T11:34:05Z",
+              "updatedAt": "2026-02-19T11:34:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7kALD5",
+          "commit": {
+            "abbreviatedOid": "ae6ab1f"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T11:34:51Z",
+          "updatedAt": "2026-02-19T11:34:51Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "I'll defer in the interest of getting this PR completed.\r\nI've updated [Issue 16](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/16) which can cover this.",
+              "createdAt": "2026-02-19T11:34:51Z",
+              "updatedAt": "2026-02-19T11:34:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7kAUFH",
+          "commit": {
+            "abbreviatedOid": "ae6ab1f"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-19T11:41:17Z",
+          "updatedAt": "2026-02-19T11:41:17Z",
+          "comments": [
+            {
+              "originalPosition": 368,
+              "body": "Should be addressed in [d4f6927](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/44/commits/d4f69277918f393d706cc427c14c14568b255e8d)",
+              "createdAt": "2026-02-19T11:41:17Z",
+              "updatedAt": "2026-02-19T11:41:17Z"
             }
           ]
         }
