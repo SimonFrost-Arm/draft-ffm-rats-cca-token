@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-22T02:04:30.503753+00:00",
+  "timestamp": "2026-02-24T02:02:02.865444+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -598,6 +598,22 @@
       "body": "The CMW collection should allow optional entries, e.g., to accommodate assigned devices, below-platform RoTs, etc.",
       "createdAt": "2025-10-15T15:34:33Z",
       "updatedAt": "2025-10-15T15:34:33Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 45,
+      "id": "I_kwDOMRXjbM7tHfy_",
+      "title": "Add documentation of the Device (assignment) token",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/45",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "RMM 1.1 alp18 introduced the addition of a Device Token to hold data for device assignment. Needs commentary in profile",
+      "createdAt": "2026-02-23T13:20:35Z",
+      "updatedAt": "2026-02-23T13:21:59Z",
       "closedAt": null,
       "comments": []
     }
