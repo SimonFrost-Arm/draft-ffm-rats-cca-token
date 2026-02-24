@@ -9,6 +9,11 @@ PLATFORM_FRAGS += arm-platform-profile.cddl
 PLATFORM_FRAGS += arm-platform-security-lifecycle.cddl
 PLATFORM_FRAGS += arm-platform-software-components.cddl
 PLATFORM_FRAGS += arm-platform-verification-service-indicator.cddl
+PLATFORM_FRAGS += arm-platform-client-id.cddl
+PLATFORM_FRAGS += arm-platform-manufacturing-config.cddl
+PLATFORM_FRAGS += arm-platform-extension.cddl
+PLATFORM_FRAGS += arm-platform-peer-signers.cddl
+PLATFORM_FRAGS += arm-platform-tbb-rotpk.cddl
 PLATFORM_FRAGS += eat-ueid-rand.cddl
 
 PLATFORM_EXAMPLES := $(wildcard examples/*.diag)

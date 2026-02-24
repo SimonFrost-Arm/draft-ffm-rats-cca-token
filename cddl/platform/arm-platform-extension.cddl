@@ -1,0 +1,53 @@
+arm-platform-extension-label = 2404
+
+; protocols that support VCA (Version-Capabilities-Algorithm message concatenation)
+$protocols-support-vca /= "spdm-1.2.0"
+$protocols-support-vca /= "spdm-1.2.1"
+$protocols-support-vca /= "spdm-1.2.2"
+$protocols-support-vca /= "spdm-1.2.3"
+$protocols-support-vca /= "spdm-1.3.0"
+$protocols-support-vca /= "spdm-1.3.1"
+$protocols-support-vca /= "spdm-1.3.2"
+$protocols-support-vca /= "spdm-1.4.0"
+
+; device types requiring a form of encryption
+$type-with-encryption /= "cxl-type-3"
+
+encryption-type = (
+    host-side-encryption: 0
+    target-side-encryption: 1
+    no-encryption: 2
+)
+
+arm-platform-extension-device-common = (
+    ? 1 => text,            ; hash algorithm identifier
+    2 => arm-platform-hash-type,     ; device measurements exchange digest
+    3 => arm-platform-hash-type,     ; certificate chain digest
+    4 => bool,              ; indicates whether this PDEV uses IDE
+)
+
+arm-platform-extension-device = {
+    arm-platform-extension-device-common
+    (
+        ( ; ---- VCA digest required ----
+            5 => $protocols-support-vca,    ; protocol, e.g. "spdm-1.2.3"
+            6 => arm-platform-hash-type,             ; SPDM VCA digest
+        )
+     // ( ; ---- no VCA needed ----
+            5 => text                       ; protocol
+        )
+    )
+    (
+        (
+            7 => $type-with-encryption,     ; device type, e.g. "cxl-type-3
+            8 => &encryption-type,          ; indicates encryption type
+        )
+     // ( ; ---- no encryption type needed ----
+            7 => text
+        )
+    )
+}
+
+arm-platform-extension = (
+    arm-platform-extension-label => [ + arm-platform-extension-device ]
+)

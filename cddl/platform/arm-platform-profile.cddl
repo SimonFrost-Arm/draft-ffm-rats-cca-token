@@ -1,6 +1,6 @@
 arm-platform-profile-label = 265 ; EAT profile
 
-arm-platform-profile-type = "tag:arm.com,2023:cca_platform#1.0.0"
+arm-platform-profile-type = "tag:arm.com,2024:cca_platform#2.0.0"
 
 arm-platform-profile = (
     arm-platform-profile-label => arm-platform-profile-type

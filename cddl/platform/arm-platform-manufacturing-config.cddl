@@ -1,0 +1,8 @@
+arm-platform-manufacturing-config-label = 2403
+
+arm-platform-manufacturing-config-type = bytes
+
+arm-platform-manufacturing-config = (
+    arm-platform-manufacturing-config-label =>
+        arm-platform-manufacturing-config-type
+)

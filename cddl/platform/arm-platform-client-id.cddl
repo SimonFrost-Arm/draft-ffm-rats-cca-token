@@ -1,0 +1,10 @@
+arm-platform-client-id-label = 2394 ; PSA namespace
+
+arm-platform-client-id-rmsd = 1 ; Realm Management Security Domain
+
+arm-platform-client-id-type =
+    arm-platform-client-id-rmsd
+
+arm-platform-client-id = (
+    arm-platform-client-id-label => arm-platform-client-id-type
+)

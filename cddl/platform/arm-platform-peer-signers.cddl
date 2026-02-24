@@ -1,0 +1,7 @@
+arm-platform-peer-signers-label = 2406
+
+arm-platform-peer-signers-type = bytes
+
+arm-platform-peer-signers = (
+    arm-platform-peer-signers-label => arm-platform-peer-signers-type
+)
