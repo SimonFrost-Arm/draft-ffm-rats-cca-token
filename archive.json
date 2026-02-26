@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-24T02:02:02.865444+00:00",
+  "timestamp": "2026-02-26T01:59:48.366061+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -143,16 +143,24 @@
       "id": "I_kwDOMRXjbM6OaYvS",
       "title": "Consider adding discussion on simplifications to inline cert when verification service ID is present (Signing Key Implementation Alternatives)",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/6",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "It seems that a specific verifier may already have certs corresponding to trust anchors and intermediate CA's, so the manufacturer could just send the leaf cert (as already mentioned in the text).  Consider adding text such as \"If the inlined cert chain is partial (e.g. EE cert only , or EE and intermediate cert) then the attestation token may direct the Relying Party to a specific verifier already in possession of root certificates necessary to complete the full chain by use of the verification service ID.\"",
       "createdAt": "2024-07-03T19:16:12Z",
-      "updatedAt": "2024-07-03T19:16:12Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-02-24T14:42:49Z",
+      "closedAt": "2026-02-24T14:42:49Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Inline certificate text improved in [PR44](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/44)",
+          "createdAt": "2026-02-24T14:42:49Z",
+          "updatedAt": "2026-02-24T14:42:49Z"
+        }
+      ]
     },
     {
       "number": 8,
@@ -494,48 +502,72 @@
       "id": "I_kwDOMRXjbM6pDjaq",
       "title": "Token Encoding and Signing IoT narrative",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/31",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Moving the ..TODO.. to a tracked issue.\n\n> Given that a PSA Attester is typically found in a constrained device, it MAY\nNOT emit CBOR preferred serializations ({{Section 4.1 of STD94}}).\nTherefore, the Verifier MUST be a variation-tolerant CBOR decoder. \n> ..TODO.. need different narrative from IoT reasons",
       "createdAt": "2025-02-06T18:24:16Z",
-      "updatedAt": "2025-02-06T18:24:16Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-02-24T14:39:36Z",
+      "closedAt": "2026-02-24T14:39:36Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Addressed in [PR44](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/44), removing the reference to constrained devices. ",
+          "createdAt": "2026-02-24T14:39:33Z",
+          "updatedAt": "2026-02-24T14:39:33Z"
+        }
+      ]
     },
     {
       "number": 32,
       "id": "I_kwDOMRXjbM6pDl0h",
       "title": "Drop \"CAs are expensive\" ?",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/32",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": ">  perhaps lose this justification section \n>\n> Certified public keys require the manufacturer to run the certification                                                                                                                                                                                                                                                                                                   \nauthority (CA) that issues X.509 certs for the PAKs.  (Note that operating a CA                                                                                                                                                                                                                                                                                           \nis a complex and expensive task that may be unaffordable to certain                                                                                                                                                                                                                                                                                                       \nmanufacturers.)                                                                                                                                                                                                                                                                                                                                                           \n                   ",
       "createdAt": "2025-02-06T18:29:30Z",
-      "updatedAt": "2025-02-06T18:29:30Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-02-24T14:40:37Z",
+      "closedAt": "2026-02-24T14:40:37Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Justification removed in [PR44](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/44)",
+          "createdAt": "2026-02-24T14:40:37Z",
+          "updatedAt": "2026-02-24T14:40:37Z"
+        }
+      ]
     },
     {
       "number": 33,
       "id": "I_kwDOMRXjbM6pDmS6",
       "title": "Lose network bandwidth concerns for certs?",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/33",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "> TODO...lose following as IoT centric?? ::                                                                                                                                                                                                                                                                                                                                 \n> Constraints around network bandwidth and computing resources available to endpoints,                                                                                                                                                                                                                                                                                      \nsuch as network buffers, may dictate a reasonable split point.                                                                                                                                                                                                                                                                                                            \n                                                               ",
       "createdAt": "2025-02-06T18:30:34Z",
-      "updatedAt": "2025-02-06T18:30:34Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-02-24T14:41:09Z",
+      "closedAt": "2026-02-24T14:41:09Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Removed in [PR44](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/44)",
+          "createdAt": "2026-02-24T14:41:09Z",
+          "updatedAt": "2026-02-24T14:41:09Z"
+        }
+      ]
     },
     {
       "number": 34,
@@ -558,16 +590,24 @@
       "id": "I_kwDOMRXjbM6pDn6y",
       "title": "unclear todo near PAK certificate chain text",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/35",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "> ...to here..\n>\n> The PAK's X.509 cert can be inlined in the CCA Platform token using the `x5chain` COSE                                                                                                                                                                                                                                                                                    \nheader parameter {{COSE-X509}} at the cost of an increase in the CCA Platform token                                                                                                                                                                                                                                                                                       \nsize.",
       "createdAt": "2025-02-06T18:34:27Z",
-      "updatedAt": "2025-02-06T18:34:27Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-02-24T14:41:58Z",
+      "closedAt": "2026-02-24T14:41:58Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Cert inlining text improved in [PR44](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/44)",
+          "createdAt": "2026-02-24T14:41:58Z",
+          "updatedAt": "2026-02-24T14:41:58Z"
+        }
+      ]
     },
     {
       "number": 37,
@@ -613,9 +653,17 @@
       "labels": [],
       "body": "RMM 1.1 alp18 introduced the addition of a Device Token to hold data for device assignment. Needs commentary in profile",
       "createdAt": "2026-02-23T13:20:35Z",
-      "updatedAt": "2026-02-23T13:21:59Z",
+      "updatedAt": "2026-02-24T11:02:51Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "We may want to coordinate this one with https://github.com/rats-device-attestation/draft-poirier-rats-eat-da/issues/7 ",
+          "createdAt": "2026-02-24T11:02:51Z",
+          "updatedAt": "2026-02-24T11:02:51Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1661,24 +1709,26 @@
       "id": "PR_kwDOMRXjbM7EN16G",
       "title": "first pass at updates for v2.0",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/44",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SimonFrost-Arm",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Catch up for 2.0, plus some tidy up. \r\nPR at this stage so that review is hopefully not too large.",
       "createdAt": "2026-02-16T23:50:26Z",
-      "updatedAt": "2026-02-19T12:34:23Z",
+      "updatedAt": "2026-02-24T11:19:27Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "5a3fc72ff6aed608e01c1d27f11a2b0b3498d854",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "2.0update",
       "headRefOid": "516e811b13b00638f10b2642312b9861e0a289c8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-24T11:19:22Z",
+      "mergedAt": "2026-02-24T11:19:22Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "9e909ce197c33707dedb92647f326521abb0fd15"
+      },
       "comments": [
         {
           "author": "SimonFrost-Arm",
@@ -2488,6 +2538,19 @@
               "updatedAt": "2026-02-19T11:41:17Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7lSvdL",
+          "commit": {
+            "abbreviatedOid": "516e811"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks, \ud83d\udea2 it!",
+          "createdAt": "2026-02-24T11:03:58Z",
+          "updatedAt": "2026-02-24T11:03:58Z",
+          "comments": []
         }
       ]
     }
