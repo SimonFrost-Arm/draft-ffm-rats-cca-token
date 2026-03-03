@@ -1059,11 +1059,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CCA Reference Attestation Token</td>
-<td class="right">February 2026</td>
+<td class="right">March 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Frost, et al.</td>
-<td class="center">Expires 28 August 2026</td>
+<td class="center">Expires 4 September 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1076,12 +1076,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ffm-rats-cca-token-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-24" class="published">24 February 2026</time>
+<time datetime="2026-03-03" class="published">3 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-28">28 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-09-04">4 September 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1135,7 +1135,7 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 28 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 4 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2887,7 +2887,7 @@ cca-realm-hash-algo-id = (
           </h4>
 <p id="section-4.8.7-1">The Realm public key claim identifies the attestation key which is used to sign the Realm token<a href="#section-4.8.7-1" class="pilcrow">¶</a></p>
 <p id="section-4.8.7-2">The value of the Realm public key claim is a byte string representation of a COSE_Key.<a href="#section-4.8.7-2" class="pilcrow">¶</a></p>
-<p id="section-4.8.7-3">This claim MUST be present in a CCA Realm state attestation token.<a href="#section-4.8.7-3" class="pilcrow">¶</a></p>
+<p id="section-4.8.7-3">This claim MUST be present in a CCA Realm state attestation token. [ToDo: not in direct mode]<a href="#section-4.8.7-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.8.7-4">
 <pre>
 cca-realm-public-key-label = 44237
@@ -3545,8 +3545,7 @@ keys.<a href="#section-9-2" class="pilcrow">¶</a></p>
       <h2 id="name-iana-considerations">
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-10-1">TODO: <a href="https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/34">Issue #34</a> find document centric change controller
-TODO: additional top level claims<a href="#section-10-1" class="pilcrow">¶</a></p>
+<p id="section-10-1">TODO: additional top level claims<a href="#section-10-1" class="pilcrow">¶</a></p>
 <div id="cbor-web-token-claims-registration">
 <section id="section-10.1">
         <h3 id="name-cbor-web-token-claims-regis">
@@ -3574,10 +3573,10 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.1-1.4.1">Claim Key: 907<a href="#section-10.1.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.1-1.5">
-              <p id="section-10.1.1-1.5.1">Claim Value Type(s): unsigned integer<a href="#section-10.1.1-1.5.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.1-1.5.1">Claim Value Type(s): map<a href="#section-10.1.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.1-1.6">
-              <p id="section-10.1.1-1.6.1">Change Controller: TBD<a href="#section-10.1.1-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.1-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.1-1.7">
               <p id="section-10.1.1-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.1-1.7.1" class="pilcrow">¶</a></p>
@@ -3607,7 +3606,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.2-1.5.1">Claim Value Type(s): unsigned integer<a href="#section-10.1.2-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.2-1.6">
-              <p id="section-10.1.2-1.6.1">Change Controller: TBD<a href="#section-10.1.2-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.2-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.2-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.2-1.7">
               <p id="section-10.1.2-1.7.1">Specification Document(s): <a href="#sec-security-lifecycle" class="auto internal xref">Section 4.5.2</a> of RFCthis<a href="#section-10.1.2-1.7.1" class="pilcrow">¶</a></p>
@@ -3637,7 +3636,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.3-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.3-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.3-1.6">
-              <p id="section-10.1.3-1.6.1">Change Controller: TBD<a href="#section-10.1.3-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.3-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.3-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.3-1.7">
               <p id="section-10.1.3-1.7.1">Specification Document(s): <a href="#sec-implementation-id" class="auto internal xref">Section 4.4.2</a> of RFCthis<a href="#section-10.1.3-1.7.1" class="pilcrow">¶</a></p>
@@ -3667,7 +3666,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.4-1.5.1">Claim Value Type(s): array<a href="#section-10.1.4-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.4-1.6">
-              <p id="section-10.1.4-1.6.1">Change Controller: TBD<a href="#section-10.1.4-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.4-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.4-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.4-1.7">
               <p id="section-10.1.4-1.7.1">Specification Document(s): <a href="#sec-sw-components" class="auto internal xref">Section 4.6.1</a> of RFCthis<a href="#section-10.1.4-1.7.1" class="pilcrow">¶</a></p>
@@ -3697,7 +3696,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.5-1.5.1">Claim Value Type(s): text string<a href="#section-10.1.5-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.5-1.6">
-              <p id="section-10.1.5-1.6.1">Change Controller: TBD<a href="#section-10.1.5-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.5-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.5-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.5-1.7">
               <p id="section-10.1.5-1.7.1">Specification Document(s): <a href="#sec-verification-service-indicator" class="auto internal xref">Section 4.7.1</a> of RFCthis<a href="#section-10.1.5-1.7.1" class="pilcrow">¶</a></p>
@@ -3727,7 +3726,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.6-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.6-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.6-1.6">
-              <p id="section-10.1.6-1.6.1">Change Controller: TBD<a href="#section-10.1.6-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.6-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.6-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.6-1.7">
               <p id="section-10.1.6-1.7.1">Specification Document(s): <a href="#sec-platform-config" class="auto internal xref">Section 4.5.3</a> of RFCthis<a href="#section-10.1.6-1.7.1" class="pilcrow">¶</a></p>
@@ -3757,7 +3756,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.7-1.5.1">Claim Value Type(s): text string<a href="#section-10.1.7-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.7-1.6">
-              <p id="section-10.1.7-1.6.1">Change Controller: TBD<a href="#section-10.1.7-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.7-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.7-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.7-1.7">
               <p id="section-10.1.7-1.7.1">Specification Document(s): <a href="#sec-arm-platform-hash-algm-id" class="auto internal xref">Section 4.6.2</a> of RFCthis<a href="#section-10.1.7-1.7.1" class="pilcrow">¶</a></p>
@@ -3787,7 +3786,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.8-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.8-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.8-1.6">
-              <p id="section-10.1.8-1.6.1">Change Controller: TBD<a href="#section-10.1.8-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.8-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.8-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.8-1.7">
               <p id="section-10.1.8-1.7.1">Specification Document(s): <a href="#sec-arm-platform-manufacturing-config" class="auto internal xref">Section 4.6.4</a> of RFCthis<a href="#section-10.1.8-1.7.1" class="pilcrow">¶</a></p>
@@ -3817,7 +3816,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.9-1.5.1">Claim Value Type(s): array<a href="#section-10.1.9-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.9-1.6">
-              <p id="section-10.1.9-1.6.1">Change Controller: TBD<a href="#section-10.1.9-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.9-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.9-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.9-1.7">
               <p id="section-10.1.9-1.7.1">Specification Document(s): <a href="#sec-arm-platform-extension" class="auto internal xref">Section 4.6.5</a> of RFCthis<a href="#section-10.1.9-1.7.1" class="pilcrow">¶</a></p>
@@ -3847,7 +3846,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.10-1.5.1">Claim Value Type(s): array<a href="#section-10.1.10-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.10-1.6">
-              <p id="section-10.1.10-1.6.1">Change Controller: TBD<a href="#section-10.1.10-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.10-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.10-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.10-1.7">
               <p id="section-10.1.10-1.7.1">Specification Document(s): <a href="#sec-arm-platform-tbb-rotpk" class="auto internal xref">Section 4.6.7</a> of RFCthis<a href="#section-10.1.10-1.7.1" class="pilcrow">¶</a></p>
@@ -3877,7 +3876,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.11-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.11-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.11-1.6">
-              <p id="section-10.1.11-1.6.1">Change Controller: TBD<a href="#section-10.1.11-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.11-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.11-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.11-1.7">
               <p id="section-10.1.11-1.7.1">Specification Document(s): <a href="#sec-arm-platform-tbb-rotpk" class="auto internal xref">Section 4.6.7</a> of RFCthis<a href="#section-10.1.11-1.7.1" class="pilcrow">¶</a></p>
@@ -3907,7 +3906,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.12-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.12-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.12-1.6">
-              <p id="section-10.1.12-1.6.1">Change Controller: TBD<a href="#section-10.1.12-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.12-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.12-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.12-1.7">
               <p id="section-10.1.12-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.12-1.7.1" class="pilcrow">¶</a></p>
@@ -3937,7 +3936,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.13-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.13-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.13-1.6">
-              <p id="section-10.1.13-1.6.1">Change Controller: TBD<a href="#section-10.1.13-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.13-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.13-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.13-1.7">
               <p id="section-10.1.13-1.7.1">Specification Document(s): <a href="#sec-realm-personalisation-value-claim" class="auto internal xref">Section 4.8.3</a> of RFCthis<a href="#section-10.1.13-1.7.1" class="pilcrow">¶</a></p>
@@ -3967,7 +3966,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.14-1.5.1">Claim Value Type(s): text string<a href="#section-10.1.14-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.14-1.6">
-              <p id="section-10.1.14-1.6.1">Change Controller: TBD<a href="#section-10.1.14-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.14-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.14-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.14-1.7">
               <p id="section-10.1.14-1.7.1">Specification Document(s): <a href="#sec-realm-hash-algm-id-claim" class="auto internal xref">Section 4.8.6</a> of RFCthis<a href="#section-10.1.14-1.7.1" class="pilcrow">¶</a></p>
@@ -3997,7 +3996,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.15-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.15-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.15-1.6">
-              <p id="section-10.1.15-1.6.1">Change Controller: TBD<a href="#section-10.1.15-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.15-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.15-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.15-1.7">
               <p id="section-10.1.15-1.7.1">Specification Document(s): <a href="#sec-realm-public-key-claim" class="auto internal xref">Section 4.8.7</a> of RFCthis<a href="#section-10.1.15-1.7.1" class="pilcrow">¶</a></p>
@@ -4027,7 +4026,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.16-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.16-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.16-1.6">
-              <p id="section-10.1.16-1.6.1">Change Controller: TBD<a href="#section-10.1.16-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.16-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.16-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.16-1.7">
               <p id="section-10.1.16-1.7.1">Specification Document(s): <a href="#sec-realm-initial-measurement-claim" class="auto internal xref">Section 4.8.4</a> of RFCthis<a href="#section-10.1.16-1.7.1" class="pilcrow">¶</a></p>
@@ -4057,7 +4056,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.17-1.5.1">Claim Value Type(s): array<a href="#section-10.1.17-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.17-1.6">
-              <p id="section-10.1.17-1.6.1">Change Controller: TBD<a href="#section-10.1.17-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.17-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.17-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.17-1.7">
               <p id="section-10.1.17-1.7.1">Specification Document(s): <a href="#sec-realm-initial-measurement-claim" class="auto internal xref">Section 4.8.4</a> of RFCthis<a href="#section-10.1.17-1.7.1" class="pilcrow">¶</a></p>
@@ -4087,7 +4086,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.18-1.5.1">Claim Value Type(s): text string<a href="#section-10.1.18-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.18-1.6">
-              <p id="section-10.1.18-1.6.1">Change Controller: TBD<a href="#section-10.1.18-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.18-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.18-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.18-1.7">
               <p id="section-10.1.18-1.7.1">Specification Document(s): <a href="#sec-realm-public-key-hash-algo-id-claim" class="auto internal xref">Section 4.8.8</a> of RFCthis<a href="#section-10.1.18-1.7.1" class="pilcrow">¶</a></p>
@@ -4117,7 +4116,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
               <p id="section-10.1.19-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.19-1.5.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.19-1.6">
-              <p id="section-10.1.19-1.6.1">Change Controller: TBD<a href="#section-10.1.19-1.6.1" class="pilcrow">¶</a></p>
+              <p id="section-10.1.19-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.19-1.6.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-10.1.19-1.7">
               <p id="section-10.1.19-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.19-1.7.1" class="pilcrow">¶</a></p>
@@ -4304,7 +4303,7 @@ equal to "tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3-2.1.1" clas
 <dd class="break"></dd>
 <dt id="RATS-CoRIM">[RATS-CoRIM]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-09</span>, <time datetime="2025-10-20" class="refDate">20 October 2025</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-09">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-09</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-10</span>, <time datetime="2026-03-02" class="refDate">2 March 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-10">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-10</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9334">[RFC9334]</dt>
         <dd>

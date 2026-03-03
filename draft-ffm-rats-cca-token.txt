@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 28 August 2026                                           Linaro
+Expires: 4 September 2026                                         Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                        24 February 2026
+                                                            3 March 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 August 2026.
+   This Internet-Draft will expire on 4 September 2026.
 
 Copyright Notice
 
@@ -1223,6 +1223,7 @@ arm-platform-extension = (
    representation of a COSE_Key.
 
    This claim MUST be present in a CCA Realm state attestation token.
+   [ToDo: not in direct mode]
 
    cca-realm-public-key-label = 44237
 
@@ -1771,9 +1772,7 @@ arm-platform-extension = (
 
 10.  IANA Considerations
 
-   TODO: Issue #34 (https://github.com/SimonFrost-Arm/draft-ffm-rats-
-   cca-token/issues/34) find document centric change controller TODO:
-   additional top level claims
+   TODO: additional top level claims
 
 10.1.  CBOR Web Token Claims Registration
 
@@ -1791,9 +1790,9 @@ arm-platform-extension = (
 
    *  Claim Key: 907
 
-   *  Claim Value Type(s): unsigned integer
+   *  Claim Value Type(s): map
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.1 of RFCthis
 
@@ -1809,7 +1808,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): unsigned integer
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.5.2 of RFCthis
 
@@ -1825,7 +1824,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): byte string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.4.2 of RFCthis
 
@@ -1841,7 +1840,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): array
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.6.1 of RFCthis
 
@@ -1857,7 +1856,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): text string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.7.1 of RFCthis
 
@@ -1873,7 +1872,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): byte string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.5.3 of RFCthis
 
@@ -1889,7 +1888,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): text string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.6.2 of RFCthis
 
@@ -1905,7 +1904,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): byte string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.6.4 of RFCthis
 
@@ -1921,7 +1920,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): array
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.6.5 of RFCthis
 
@@ -1937,7 +1936,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): array
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.6.7 of RFCthis
 
@@ -1953,7 +1952,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): byte string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.6.7 of RFCthis
 
@@ -1969,7 +1968,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): byte string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.1 of RFCthis
 
@@ -1985,7 +1984,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): byte string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.8.3 of RFCthis
 
@@ -2001,7 +2000,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): text string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.8.6 of RFCthis
 
@@ -2017,7 +2016,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): byte string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.8.7 of RFCthis
 
@@ -2033,7 +2032,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): byte string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.8.4 of RFCthis
 
@@ -2049,7 +2048,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): array
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.8.4 of RFCthis
 
@@ -2065,7 +2064,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): text string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.8.8 of RFCthis
 
@@ -2081,7 +2080,7 @@ arm-platform-extension = (
 
    *  Claim Value Type(s): byte string
 
-   *  Change Controller: TBD
+   *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.1 of RFCthis
 
@@ -2257,9 +2256,9 @@ arm-platform-extension = (
    [RATS-CoRIM]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-09, 20
-              October 2025, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-corim-09>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-10, 2
+              March 2026, <https://datatracker.ietf.org/doc/html/draft-
+              ietf-rats-corim-10>.
 
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
