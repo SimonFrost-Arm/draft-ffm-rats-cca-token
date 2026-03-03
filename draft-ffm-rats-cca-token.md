@@ -847,7 +847,7 @@ The Realm public key claim identifies the attestation key which is used to sign 
 
 The value of the Realm public key claim is a byte string representation of a COSE_Key.
 
-This claim MUST be present in a CCA Realm state attestation token.
+This claim MUST be present in a CCA Realm state attestation token. [ToDo: not in direct mode]
 
 ~~~
 {::include cddl/realm/cca-realm-public-key.cddl}
@@ -1120,7 +1120,6 @@ keys.
 
 # IANA Considerations
 
-TODO: [Issue #34](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/34) find document centric change controller
 TODO: additional top level claims
 
 
@@ -1136,8 +1135,8 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Claim Description: Arm CCA Attestation CMW
 * JWT Claim Name: N/A
 * Claim Key: 907
-* Claim Value Type(s): unsigned integer
-* Change Controller: TBD
+* Claim Value Type(s): map
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
 
 ### Security Lifecycle Claim
@@ -1147,7 +1146,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2395
 * Claim Value Type(s): unsigned integer
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-security-lifecycle}} of {{&SELF}}
 
 ### Implementation ID Claim
@@ -1157,7 +1156,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2396
 * Claim Value Type(s): byte string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-implementation-id}} of {{&SELF}}
 
 ### Software Components Claim
@@ -1167,7 +1166,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2399
 * Claim Value Type(s): array
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-sw-components}} of {{&SELF}}
 
 ### Verification Service Indicator Claim
@@ -1177,7 +1176,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2400
 * Claim Value Type(s): text string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-verification-service-indicator}} of {{&SELF}}
 
 ### Platform Config Claim
@@ -1187,7 +1186,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2401
 * Claim Value Type(s): byte string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-platform-config}} of {{&SELF}}
 
 ### Platform Hash Algorithm ID Claim
@@ -1197,7 +1196,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2402
 * Claim Value Type(s): text string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-arm-platform-hash-algm-id}} of {{&SELF}}
 
 ### Platform Manufacturing Config
@@ -1207,7 +1206,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2403
 * Claim Value Type(s): byte string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-arm-platform-manufacturing-config}} of {{&SELF}}
 
 ### Platform Extension
@@ -1217,7 +1216,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2404
 * Claim Value Type(s): array
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-arm-platform-extension}} of {{&SELF}}
 
 ### Platform TBB RoTPK
@@ -1227,7 +1226,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2405
 * Claim Value Type(s): array
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-arm-platform-tbb-rotpk}} of {{&SELF}}
 
 ### Platform Peer Signers
@@ -1237,7 +1236,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 2406
 * Claim Value Type(s): byte string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-arm-platform-tbb-rotpk}} of {{&SELF}}
 
 ### CCA Token Platform Token Label
@@ -1247,7 +1246,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 44234
 * Claim Value Type(s): byte string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
 
 ### Realm Personalization Value Claim
@@ -1257,7 +1256,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 44235
 * Claim Value Type(s): byte string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-realm-personalisation-value-claim}} of {{&SELF}}
 
 ### Realm Hash Algorithm ID Claim
@@ -1267,7 +1266,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 44236
 * Claim Value Type(s): text string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-realm-hash-algm-id-claim}} of {{&SELF}}
 
 ### Realm Public Key Claim
@@ -1277,7 +1276,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 44237
 * Claim Value Type(s): byte string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-realm-public-key-claim}} of {{&SELF}}
 
 ### Realm Initial Measurement Claim
@@ -1287,7 +1286,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 44238
 * Claim Value Type(s): byte string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-realm-initial-measurement-claim}} of {{&SELF}}
 
 ### Realm Extensible Measurements Claim
@@ -1297,7 +1296,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 44239
 * Claim Value Type(s): array
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-realm-initial-measurement-claim}} of {{&SELF}}
 
 ### Realm Public Key Hash Algorithm ID Claim
@@ -1307,7 +1306,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 44240
 * Claim Value Type(s): text string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-realm-public-key-hash-algo-id-claim}} of {{&SELF}}
 
 ### CCA Token Delegated Realm Token Label
@@ -1317,7 +1316,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * JWT Claim Name: N/A
 * Claim Key: 44241
 * Claim Value Type(s): byte string
-* Change Controller: TBD
+* Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
 
 
