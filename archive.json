@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-26T01:59:48.366061+00:00",
+  "timestamp": "2026-03-05T02:01:18.139421+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -2551,6 +2551,55 @@
           "createdAt": "2026-02-24T11:03:58Z",
           "updatedAt": "2026-02-24T11:03:58Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 46,
+      "id": "PR_kwDOMRXjbM7HoenX",
+      "title": "Fix change controller to dedicated mailbox",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/46",
+      "state": "MERGED",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Replace Hannes with a shared mailbox ",
+      "createdAt": "2026-03-03T14:58:49Z",
+      "updatedAt": "2026-03-03T16:06:07Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "9e909ce197c33707dedb92647f326521abb0fd15",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "chgcont",
+      "headRefOid": "de8ab46f698bf9002adf562ef8073e3a094ec7ca",
+      "closedAt": "2026-03-03T16:06:00Z",
+      "mergedAt": "2026-03-03T16:06:00Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "e7f6e3f50f7f1499fdbd056068b0db98c052ea2b"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM7nduhR",
+          "commit": {
+            "abbreviatedOid": "de8ab46"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "\ud83d\udceb it!",
+          "createdAt": "2026-03-03T15:25:43Z",
+          "updatedAt": "2026-03-03T15:26:02Z",
+          "comments": [
+            {
+              "originalPosition": 24,
+              "body": "This will need to go in a separate sub-section of the IANA considerations, but we can do that separately.",
+              "createdAt": "2026-03-03T15:25:43Z",
+              "updatedAt": "2026-03-03T15:26:02Z"
+            }
+          ]
         }
       ]
     }
