@@ -1407,7 +1407,7 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-realm-lfa-policy}} of {{&SELF}}
 
-### Realm LFA Devices Token Hash
+### Realm Devices Token Hash
 
 * Claim Name: cca-realm-devices-token-hash
 * Claim Description: Realm Devices Token Hash
