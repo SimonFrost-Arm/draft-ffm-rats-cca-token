@@ -15,5 +15,6 @@ REALM_FRAGS += cca-realm-instance-id.cddl
 REALM_FRAGS += cca-realm-devices-token-hash.cddl
 REALM_FRAGS += COSE_Key.cddl
 REALM_FRAGS += ../platform/arm-platform-hash-types.cddl
+REALM_FRAGS += ../platform/eat-ueid-rand.cddl
 
 REALM_EXAMPLES := $(wildcard examples/*.diag)

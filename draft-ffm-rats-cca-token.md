@@ -696,14 +696,17 @@ The data type for this claim is Implementation Defined as different underlying R
 {: #sec-arm-platform-device-tpm-binding-data}
 
 The normal world of a device that supports CCA is outside the TCB of the confidential computing environment.
-In some implementations, it is seen to be desirable to be able to appraise measurements that indicate the untrusted hypervisor for the device.
+In some deployments, it is seen to be desirable to be able to appraise measurements that indicate the untrusted hypervisor for the device.
 This is done by requesting a TPM quote in the normal world and providing it to the Relying Party together with the CCA Attestation token.
 The Device TPM Binding Data claim holds data that can be used to prove that the TPM and the CCA HES belong to the same system.
 
 The CCA platform Device TPM Binding Data claim is OPTIONAL in a CCA platform token
 
-The type for this claim is BSTR.
 The details of the binding data within this claim are Implementation Defined, as different underlying TPM binding schemes may be available.
+
+~~~
+{::include cddl/platform/arm-platform-device-tpm-binding-data.cddl}
+~~~
 
 
 ### CCA Platform TBB ROTPK
@@ -912,6 +915,8 @@ This claim is OPTIONAL in a CCA Realm state attestation token.
 {: #sec-realm-instance-id}
 
 The Realm Instance ID claim is a random value generated using a cryptographic-quality entropy source.
+This claim distinguishes otherwise identical Realms.
+
 The claim is identified using the EAT {{EAT}} `ueid` label.
 To correspond with the `ueid RAND` type, the first byte of the Realm Instance ID value must be 0x01.
 
