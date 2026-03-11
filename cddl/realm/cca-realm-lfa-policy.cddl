@@ -1,0 +1,10 @@
+cca-realm-lfa-policy-label = 44244
+
+cca-realm-lfa-policy-disallow = 0
+cca-realm-lfa-policy-allow = 1
+
+cca-realm-lfa-policy = (
+    cca-realm-lfa-policy-label =>
+        cca-realm-lfa-policy-disallow /
+        cca-realm-lfa-policy-allow
+)
