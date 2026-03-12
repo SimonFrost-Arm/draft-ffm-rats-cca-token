@@ -1048,8 +1048,8 @@ arm-platform-extension = (
 4.6.7.  CCA Platform Device TPM Binding Data
 
    The normal world of a device that supports CCA is outside the TCB of
-   the confidential computing environment.  In some implementations, it
-   is seen to be desirable to be able to appraise measurements that
+   the confidential computing environment.  In some deployments, it is
+   seen to be desirable to be able to appraise measurements that
    indicate the untrusted hypervisor for the device.  This is done by
    requesting a TPM quote in the normal world and providing it to the
    Relying Party together with the CCA Attestation token.  The Device
@@ -1059,9 +1059,17 @@ arm-platform-extension = (
    The CCA platform Device TPM Binding Data claim is OPTIONAL in a CCA
    platform token
 
-   The type for this claim is BSTR.  The details of the binding data
-   within this claim are Implementation Defined, as different underlying
-   TPM binding schemes may be available.
+   The details of the binding data within this claim are Implementation
+   Defined, as different underlying TPM binding schemes may be
+   available.
+
+arm-platform-device-tpm-binding-data-label =  2407
+
+arm-platform-device-tpm-binding-data-type = bytes
+
+arm-platform-device-tpm-binding-data = (
+    arm-platform-device-tpm-binding-data-label => arm-platform-device-tpm-binding-data-type
+)
 
 4.6.8.  CCA Platform TBB ROTPK
 
@@ -1317,16 +1325,19 @@ arm-platform-extension = (
 4.8.11.  Realm Instance ID
 
    The Realm Instance ID claim is a random value generated using a
-   cryptographic-quality entropy source.  The claim is identified using
-   the EAT [EAT] ueid label.  To correspond with the ueid RAND type, the
-   first byte of the Realm Instance ID value must be 0x01.
+   cryptographic-quality entropy source.  This claim distinguishes
+   otherwise identical Realms.
+
+   The claim is identified using the EAT [EAT] ueid label.  To
+   correspond with the ueid RAND type, the first byte of the Realm
+   Instance ID value must be 0x01.
 
    This claim MUST be present in a CCA Realm state attestation token.
 
    cca-realm-instance-id-label = 256 ; EAT ueid
 
    ; EAT UEIDs need to be 7 - 33 bytes
-   cca-realm-instance-id-type = bytes .size 33
+   cca-realm-instance-id-type = eat-ueid-rand-type
 
    cca-realm-instance-id = (
        cca-realm-instance-id-label => cca-realm-instance-id-type
@@ -1552,7 +1563,7 @@ arm-platform-extension = (
    cca-realm-lfa-policy = (cca-realm-lfa-policy-label => cca-realm-lfa-\
                            policy-disallow / cca-realm-lfa-policy-allow)
    cca-realm-instance-id-label = 256
-   cca-realm-instance-id-type = bytes .size 33
+   cca-realm-instance-id-type = eat-ueid-rand-type
    cca-realm-instance-id = (cca-realm-instance-id-label => cca-realm-\
                                                        instance-id-type)
    cca-realm-devices-token-hash-label = 44257
@@ -1570,6 +1581,12 @@ arm-platform-extension = (
    }
    arm-platform-hash-type = bytes .size 32 / bytes .size 48 / bytes .\
                                                                  size 64
+   eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
+   eat-ueid-rand-fmt = [
+     ueid-rand-typ,
+     bytes .size 32,
+   ]
+   ueid-rand-typ = h'01'
    arm-platform-claims = arm-platform-claim-map
    arm-platform-claim-map = {
      arm-platform-profile,
@@ -1586,6 +1603,7 @@ arm-platform-extension = (
      ? arm-platform-extension,
      ? arm-platform-peer-signers,
      ? arm-platform-tbb-rotpk,
+     ? arm-platform-device-tpm-binding-data,
    }
    arm-platform-challenge-label = 10
    arm-platform-challenge = (arm-platform-challenge-label => arm-\
@@ -1692,12 +1710,10 @@ arm-platform-extension = (
    }
    arm-platform-tbb-rotpk = (arm-platform-tbb-rotpk-label => arm-\
                                                 platform-tbb-rotpk-type)
-   eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
-   eat-ueid-rand-fmt = [
-     ueid-rand-typ,
-     bytes .size 32,
-   ]
-   ueid-rand-typ = h'01'
+   arm-platform-device-tpm-binding-data-label = 2407
+   arm-platform-device-tpm-binding-data-type = bytes
+   arm-platform-device-tpm-binding-data = (arm-platform-device-tpm-\
+        binding-data-label => arm-platform-device-tpm-binding-data-type)
    Headers = (
      protected: empty_or_serialized_map,
      unprotected: header_map,

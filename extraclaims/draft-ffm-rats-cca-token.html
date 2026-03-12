@@ -2689,12 +2689,22 @@ arm-platform-peer-signers = (
 <a href="#section-4.6.7" class="section-number selfRef">4.6.7. </a><a href="#name-cca-platform-device-tpm-bin" class="section-name selfRef">CCA Platform Device TPM Binding Data</a>
           </h4>
 <p id="section-4.6.7-1">The normal world of a device that supports CCA is outside the TCB of the confidential computing environment.
-In some implementations, it is seen to be desirable to be able to appraise measurements that indicate the untrusted hypervisor for the device.
+In some deployments, it is seen to be desirable to be able to appraise measurements that indicate the untrusted hypervisor for the device.
 This is done by requesting a TPM quote in the normal world and providing it to the Relying Party together with the CCA Attestation token.
 The Device TPM Binding Data claim holds data that can be used to prove that the TPM and the CCA HES belong to the same system.<a href="#section-4.6.7-1" class="pilcrow">¶</a></p>
 <p id="section-4.6.7-2">The CCA platform Device TPM Binding Data claim is OPTIONAL in a CCA platform token<a href="#section-4.6.7-2" class="pilcrow">¶</a></p>
-<p id="section-4.6.7-3">The type for this claim is BSTR.
-The details of the binding data within this claim are Implementation Defined, as different underlying TPM binding schemes may be available.<a href="#section-4.6.7-3" class="pilcrow">¶</a></p>
+<p id="section-4.6.7-3">The details of the binding data within this claim are Implementation Defined, as different underlying TPM binding schemes may be available.<a href="#section-4.6.7-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.6.7-4">
+<pre>
+arm-platform-device-tpm-binding-data-label =  2407
+
+arm-platform-device-tpm-binding-data-type = bytes
+
+arm-platform-device-tpm-binding-data = (
+    arm-platform-device-tpm-binding-data-label =&gt; arm-platform-device-tpm-binding-data-type
+)
+</pre><a href="#section-4.6.7-4" class="pilcrow">¶</a>
+</div>
 </section>
 </div>
 <div id="sec-arm-platform-tbb-rotpk">
@@ -3018,20 +3028,21 @@ cca-realm-lfa-policy = (
 <a href="#section-4.8.11" class="section-number selfRef">4.8.11. </a><a href="#name-realm-instance-id" class="section-name selfRef">Realm Instance ID</a>
           </h4>
 <p id="section-4.8.11-1">The Realm Instance ID claim is a random value generated using a cryptographic-quality entropy source.
-The claim is identified using the EAT <span>[<a href="#EAT" class="cite xref">EAT</a>]</span> <code>ueid</code> label.
-To correspond with the <code>ueid RAND</code> type, the first byte of the Realm Instance ID value must be 0x01.<a href="#section-4.8.11-1" class="pilcrow">¶</a></p>
-<p id="section-4.8.11-2">This claim MUST be present in a CCA Realm state attestation token.<a href="#section-4.8.11-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4.8.11-3">
+This claim distinguishes otherwise identical Realms.<a href="#section-4.8.11-1" class="pilcrow">¶</a></p>
+<p id="section-4.8.11-2">The claim is identified using the EAT <span>[<a href="#EAT" class="cite xref">EAT</a>]</span> <code>ueid</code> label.
+To correspond with the <code>ueid RAND</code> type, the first byte of the Realm Instance ID value must be 0x01.<a href="#section-4.8.11-2" class="pilcrow">¶</a></p>
+<p id="section-4.8.11-3">This claim MUST be present in a CCA Realm state attestation token.<a href="#section-4.8.11-3" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4.8.11-4">
 <pre>
 cca-realm-instance-id-label = 256 ; EAT ueid
 
 ; EAT UEIDs need to be 7 - 33 bytes
-cca-realm-instance-id-type = bytes .size 33
+cca-realm-instance-id-type = eat-ueid-rand-type
 
 cca-realm-instance-id = (
     cca-realm-instance-id-label =&gt; cca-realm-instance-id-type
 )
-</pre><a href="#section-4.8.11-3" class="pilcrow">¶</a>
+</pre><a href="#section-4.8.11-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -3305,7 +3316,7 @@ cca-realm-lfa-policy-allow = 1
 cca-realm-lfa-policy = (cca-realm-lfa-policy-label =&gt; cca-realm-lfa-\
                         policy-disallow / cca-realm-lfa-policy-allow)
 cca-realm-instance-id-label = 256
-cca-realm-instance-id-type = bytes .size 33
+cca-realm-instance-id-type = eat-ueid-rand-type
 cca-realm-instance-id = (cca-realm-instance-id-label =&gt; cca-realm-\
                                                     instance-id-type)
 cca-realm-devices-token-hash-label = 44257
@@ -3323,6 +3334,12 @@ COSE_Key = {
 }
 arm-platform-hash-type = bytes .size 32 / bytes .size 48 / bytes .\
                                                               size 64
+eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
+eat-ueid-rand-fmt = [
+  ueid-rand-typ,
+  bytes .size 32,
+]
+ueid-rand-typ = h'01'
 arm-platform-claims = arm-platform-claim-map
 arm-platform-claim-map = {
   arm-platform-profile,
@@ -3339,6 +3356,7 @@ arm-platform-claim-map = {
   ? arm-platform-extension,
   ? arm-platform-peer-signers,
   ? arm-platform-tbb-rotpk,
+  ? arm-platform-device-tpm-binding-data,
 }
 arm-platform-challenge-label = 10
 arm-platform-challenge = (arm-platform-challenge-label =&gt; arm-\
@@ -3445,12 +3463,10 @@ arm-platform-tbb-rotpk-item = {
 }
 arm-platform-tbb-rotpk = (arm-platform-tbb-rotpk-label =&gt; arm-\
                                              platform-tbb-rotpk-type)
-eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
-eat-ueid-rand-fmt = [
-  ueid-rand-typ,
-  bytes .size 32,
-]
-ueid-rand-typ = h'01'
+arm-platform-device-tpm-binding-data-label = 2407
+arm-platform-device-tpm-binding-data-type = bytes
+arm-platform-device-tpm-binding-data = (arm-platform-device-tpm-\
+     binding-data-label =&gt; arm-platform-device-tpm-binding-data-type)
 Headers = (
   protected: empty_or_serialized_map,
   unprotected: header_map,
