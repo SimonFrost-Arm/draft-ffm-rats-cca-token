@@ -866,7 +866,7 @@ This claim MUST be present in a CCA Realm state attestation token.
 ToDo: not in direct mode
 
 ~~~
-{:/include cddl/realm/cca-realm-public-key.cddl}
+{::include cddl/realm/cca-realm-public-key.cddl}
 ~~~
 
 
