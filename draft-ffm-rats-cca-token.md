@@ -703,7 +703,7 @@ The Device TPM Binding Data claim holds data that can be used to prove that the 
 The CCA platform Device TPM Binding Data claim is OPTIONAL in a CCA platform token
 
 The type for this claim is BSTR.
-The details of the binding data within this claim is Implementation Defined as different underlying TPM binding schemes may be available.
+The details of the binding data within this claim are Implementation Defined, as different underlying TPM binding schemes may be available.
 
 
 ### CCA Platform TBB ROTPK
