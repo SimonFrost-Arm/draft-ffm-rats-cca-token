@@ -1060,7 +1060,7 @@ arm-platform-extension = (
    platform token
 
    The type for this claim is BSTR.  The details of the binding data
-   within this claim is Implementation Defined as different underlying
+   within this claim are Implementation Defined, as different underlying
    TPM binding schemes may be available.
 
 4.6.8.  CCA Platform TBB ROTPK
