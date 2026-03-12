@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-05T02:01:18.139421+00:00",
+  "timestamp": "2026-03-12T02:02:18.556297+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -2598,6 +2598,101 @@
               "body": "This will need to go in a separate sub-section of the IANA considerations, but we can do that separately.",
               "createdAt": "2026-03-03T15:25:43Z",
               "updatedAt": "2026-03-03T15:26:02Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 47,
+      "id": "PR_kwDOMRXjbM7Jiw5B",
+      "title": "Further claims updates incl missing realm claims",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/47",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Add missing realm claims\r\nSome tidying of existing claims",
+      "createdAt": "2026-03-11T00:19:31Z",
+      "updatedAt": "2026-03-11T13:31:40Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "e7f6e3f50f7f1499fdbd056068b0db98c052ea2b",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "extraclaims",
+      "headRefOid": "21bcc3e7a949a3b550e55c3ee9b2e7cf6885bdf7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM7qNrVr",
+          "commit": {
+            "abbreviatedOid": "21bcc3e"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "LGTM, a few comments inlined.",
+          "createdAt": "2026-03-11T13:03:41Z",
+          "updatedAt": "2026-03-11T13:31:40Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\nThe Device TPM Binding Data claim holds data that can be used to prove that the TPM and the CCA HES belong to the same system.\n```",
+              "createdAt": "2026-03-11T13:03:41Z",
+              "updatedAt": "2026-03-11T13:31:40Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\nThe details of the binding data within this claim are Implementation Defined, as different underlying TPM binding schemes may be available.\n```",
+              "createdAt": "2026-03-11T13:04:31Z",
+              "updatedAt": "2026-03-11T13:31:40Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "Is the missing CDDL intentional or an oversight?",
+              "createdAt": "2026-03-11T13:05:21Z",
+              "updatedAt": "2026-03-11T13:31:40Z"
+            },
+            {
+              "originalPosition": 14,
+              "body": "```suggestion\nThe type for this claim is `bstr`.\n```",
+              "createdAt": "2026-03-11T13:05:39Z",
+              "updatedAt": "2026-03-11T13:31:40Z"
+            },
+            {
+              "originalPosition": 41,
+              "body": "```suggestion\n{::include cddl/realm/cca-realm-public-key.cddl}\n```",
+              "createdAt": "2026-03-11T13:07:31Z",
+              "updatedAt": "2026-03-11T13:31:40Z"
+            },
+            {
+              "originalPosition": 4,
+              "body": "Since this type is exactly the same as the platform UEID (i.e., RAND), we can reuse `eat-ueid-rand-type` \u2014 which also happens to be more precisely defined.",
+              "createdAt": "2026-03-11T13:10:57Z",
+              "updatedAt": "2026-03-11T13:31:40Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\nREALM_FRAGS += cca-realm-devices-token-hash.cddl\n```",
+              "createdAt": "2026-03-11T13:11:07Z",
+              "updatedAt": "2026-03-11T13:31:40Z"
+            },
+            {
+              "originalPosition": 76,
+              "body": "Maybe we could provide more about its semantics.  E.g., what is it used for? What is the correlation between this claim and RIM (if any)?  And between this and REMs (again, if any)?",
+              "createdAt": "2026-03-11T13:14:00Z",
+              "updatedAt": "2026-03-11T13:31:40Z"
+            },
+            {
+              "originalPosition": 90,
+              "body": "AFAICS, \"cca-realm-devices-token\" is not defined anywhere",
+              "createdAt": "2026-03-11T13:27:01Z",
+              "updatedAt": "2026-03-11T13:31:40Z"
             }
           ]
         }
