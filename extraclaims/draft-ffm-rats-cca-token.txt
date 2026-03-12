@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 12 September 2026                                        Linaro
+Expires: 13 September 2026                                        Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                           11 March 2026
+                                                           12 March 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 September 2026.
+   This Internet-Draft will expire on 13 September 2026.
 
 Copyright Notice
 
@@ -1053,7 +1053,7 @@ arm-platform-extension = (
    indicate the untrusted hypervisor for the device.  This is done by
    requesting a TPM quote in the normal world and providing it to the
    Relying Party together with the CCA Attestation token.  The Device
-   TPM Binding Data claim holds data that can be used to show that the
+   TPM Binding Data claim holds data that can be used to prove that the
    TPM and the CCA HES belong to the same system.
 
    The CCA platform Device TPM Binding Data claim is OPTIONAL in a CCA
