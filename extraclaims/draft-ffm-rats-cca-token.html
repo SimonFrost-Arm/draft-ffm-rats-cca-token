@@ -2932,7 +2932,14 @@ cca-realm-hash-algo-id = (
 <p id="section-4.8.7-4">ToDo: not in direct mode<a href="#section-4.8.7-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.8.7-5">
 <pre>
-{:/include cddl/realm/cca-realm-public-key.cddl}
+cca-realm-public-key-label = 44237
+
+; See RFC8152 for definition of COSE_Key
+cca-realm-public-key-type = bstr .cbor COSE_Key
+
+cca-realm-public-key = (
+    cca-realm-public-key-label =&gt; cca-realm-public-key-type
+)
 </pre><a href="#section-4.8.7-5" class="pilcrow">¶</a>
 </div>
 </section>

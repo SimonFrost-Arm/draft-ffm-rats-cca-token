@@ -1253,7 +1253,14 @@ arm-platform-extension = (
 
    ToDo: not in direct mode
 
-   {:/include cddl/realm/cca-realm-public-key.cddl}
+   cca-realm-public-key-label = 44237
+
+   ; See RFC8152 for definition of COSE_Key
+   cca-realm-public-key-type = bstr .cbor COSE_Key
+
+   cca-realm-public-key = (
+       cca-realm-public-key-label => cca-realm-public-key-type
+   )
 
 4.8.8.  Realm Public Key Hash Algorithm ID
 
