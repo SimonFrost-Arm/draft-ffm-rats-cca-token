@@ -698,7 +698,7 @@ The data type for this claim is Implementation Defined as different underlying R
 The normal world of a device that supports CCA is outside the TCB of the confidential computing environment.
 In some implementations, it is seen to be desirable to be able to appraise measurements that indicate the untrusted hypervisor for the device.
 This is done by requesting a TPM quote in the normal world and providing it to the Relying Party together with the CCA Attestation token.
-The Device TPM Binding Data claim holds data that can be used to show that the TPM and the CCA HES belong to the same system.
+The Device TPM Binding Data claim holds data that can be used to prove that the TPM and the CCA HES belong to the same system.
 
 The CCA platform Device TPM Binding Data claim is OPTIONAL in a CCA platform token
 
