@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-12T02:02:18.556297+00:00",
+  "timestamp": "2026-03-15T02:22:32.470798+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -2615,13 +2615,13 @@
       "labels": [],
       "body": "Add missing realm claims\r\nSome tidying of existing claims",
       "createdAt": "2026-03-11T00:19:31Z",
-      "updatedAt": "2026-03-11T13:31:40Z",
+      "updatedAt": "2026-03-12T16:56:55Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "e7f6e3f50f7f1499fdbd056068b0db98c052ea2b",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "extraclaims",
-      "headRefOid": "21bcc3e7a949a3b550e55c3ee9b2e7cf6885bdf7",
+      "headRefOid": "81d0cf20dc0af8c7fb5bda587041ee5ebebad669",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2695,6 +2695,139 @@
               "updatedAt": "2026-03-11T13:31:40Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7qksHU",
+          "commit": {
+            "abbreviatedOid": "21bcc3e"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-12T10:29:00Z",
+          "updatedAt": "2026-03-12T10:29:00Z",
+          "comments": [
+            {
+              "originalPosition": 90,
+              "body": "We've a dedicated issue (#45) where this will get fixed ",
+              "createdAt": "2026-03-12T10:29:00Z",
+              "updatedAt": "2026-03-12T10:29:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7qkteO",
+          "commit": {
+            "abbreviatedOid": "21bcc3e"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-12T10:29:49Z",
+          "updatedAt": "2026-03-12T10:29:49Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "It was intentional, but with hindsight, will add",
+              "createdAt": "2026-03-12T10:29:49Z",
+              "updatedAt": "2026-03-12T10:29:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7qkuQy",
+          "commit": {
+            "abbreviatedOid": "21bcc3e"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-12T10:30:20Z",
+          "updatedAt": "2026-03-12T10:30:20Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Will add CDDL instead of this text",
+              "createdAt": "2026-03-12T10:30:20Z",
+              "updatedAt": "2026-03-12T10:30:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7qvADp",
+          "commit": {
+            "abbreviatedOid": "21bcc3e"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-12T16:49:44Z",
+          "updatedAt": "2026-03-12T16:49:44Z",
+          "comments": [
+            {
+              "originalPosition": 76,
+              "body": "Done in f8c6dc6",
+              "createdAt": "2026-03-12T16:49:44Z",
+              "updatedAt": "2026-03-12T16:49:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7qvAZa",
+          "commit": {
+            "abbreviatedOid": "21bcc3e"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-12T16:49:55Z",
+          "updatedAt": "2026-03-12T16:49:55Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Done in f8c6dc6",
+              "createdAt": "2026-03-12T16:49:55Z",
+              "updatedAt": "2026-03-12T16:49:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7qvAsy",
+          "commit": {
+            "abbreviatedOid": "21bcc3e"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-03-12T16:50:05Z",
+          "updatedAt": "2026-03-12T16:50:05Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Done in f8c6dc6",
+              "createdAt": "2026-03-12T16:50:05Z",
+              "updatedAt": "2026-03-12T16:50:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7qvMtK",
+          "commit": {
+            "abbreviatedOid": "81d0cf2"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks for addressing my comments!\n\n(I think I already approved, but if not, \ud83d\udea2 it!)",
+          "createdAt": "2026-03-12T16:56:55Z",
+          "updatedAt": "2026-03-12T16:56:55Z",
+          "comments": []
         }
       ]
     }
