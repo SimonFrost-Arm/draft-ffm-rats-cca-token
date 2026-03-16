@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 4 September 2026                                         Linaro
+Expires: 17 September 2026                                        Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                            3 March 2026
+                                                           16 March 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 September 2026.
+   This Internet-Draft will expire on 17 September 2026.
 
 Copyright Notice
 
@@ -91,7 +91,8 @@ Table of Contents
        4.6.4.  CCA Platform Manufacturing Config
        4.6.5.  CCA Platform Extension
        4.6.6.  CCA Platform Peer Signers
-       4.6.7.  CCA Platform TBB ROTPK
+       4.6.7.  CCA Platform Device TPM Binding Data
+       4.6.8.  CCA Platform TBB ROTPK
      4.7.  Verification Claims
        4.7.1.  Verification Service Indicator
      4.8.  CCA Realm state token Claims
@@ -103,6 +104,10 @@ Table of Contents
        4.8.6.  Realm Hash Algorithm Measurements
        4.8.7.  Realm Public Key
        4.8.8.  Realm Public Key Hash Algorithm ID
+       4.8.9.  Realm MEC Policy
+       4.8.10. Realm LFA Policy
+       4.8.11. Realm Instance ID
+       4.8.12. Realm Devices Token Hash
      4.9.  Backwards Compatibility Considerations
      4.10. Token Binding
      4.11. Reference Profile
@@ -130,14 +135,18 @@ Table of Contents
        10.1.9.  Platform Extension
        10.1.10. Platform TBB RoTPK
        10.1.11. Platform Peer Signers
-       10.1.12. CCA Token Platform Token Label
-       10.1.13. Realm Personalization Value Claim
-       10.1.14. Realm Hash Algorithm ID Claim
-       10.1.15. Realm Public Key Claim
-       10.1.16. Realm Initial Measurement Claim
-       10.1.17. Realm Extensible Measurements Claim
-       10.1.18. Realm Public Key Hash Algorithm ID Claim
-       10.1.19. CCA Token Delegated Realm Token Label
+       10.1.12. Platform Device TPM Binding Data
+       10.1.13. CCA Token Platform Token Label
+       10.1.14. Realm Personalization Value Claim
+       10.1.15. Realm Hash Algorithm ID Claim
+       10.1.16. Realm Public Key Claim
+       10.1.17. Realm Initial Measurement Claim
+       10.1.18. Realm Extensible Measurements Claim
+       10.1.19. Realm Public Key Hash Algorithm ID Claim
+       10.1.20. Realm MEC Policy
+       10.1.21. Realm LFA Policy
+       10.1.22. Realm Devices Token Hash
+       10.1.23. CCA Token Delegated Realm Token Label
      10.2.  Media Types
      10.3.  CoAP Content-Formats Registration
        10.3.1.  Registry Contents
@@ -1030,13 +1039,39 @@ arm-platform-extension = (
 
    arm-platform-peer-signers-label = 2406
 
-   arm-platform-peer-signers-type = bytes
+   arm-platform-peer-signers-type =  [ + bytes ]
 
    arm-platform-peer-signers = (
        arm-platform-peer-signers-label => arm-platform-peer-signers-type
    )
 
-4.6.7.  CCA Platform TBB ROTPK
+4.6.7.  CCA Platform Device TPM Binding Data
+
+   The normal world of a device that supports CCA is outside the TCB of
+   the confidential computing environment.  In some deployments, it is
+   seen to be desirable to be able to appraise measurements that
+   indicate the untrusted hypervisor for the device.  This is done by
+   requesting a TPM quote in the normal world and providing it to the
+   Relying Party together with the CCA Attestation token.  The Device
+   TPM Binding Data claim holds data that can be used to prove that the
+   TPM and the CCA HES belong to the same system.
+
+   The CCA platform Device TPM Binding Data claim is OPTIONAL in a CCA
+   platform token
+
+   The details of the binding data within this claim are Implementation
+   Defined, as different underlying TPM binding schemes may be
+   available.
+
+arm-platform-device-tpm-binding-data-label =  2407
+
+arm-platform-device-tpm-binding-data-type = bytes
+
+arm-platform-device-tpm-binding-data = (
+    arm-platform-device-tpm-binding-data-label => arm-platform-device-tpm-binding-data-type
+)
+
+4.6.8.  CCA Platform TBB ROTPK
 
    Where an implementation of the CCA platform follows the Trusted Board
    Boot specification [TBB], the platform will include several
@@ -1135,7 +1170,7 @@ arm-platform-extension = (
    token conforms.  This allows a receiver to assign the intended
    semantics to the rest of the claims found in the token.
 
-   The EAT eat_profile (claim key 265) is used.
+   The EAT [EAT] eat_profile (claim key 265) is used.
 
    The format of the CCA platform profile claim is defined as a text
    string of value "tag:arm.com,2024:realm#2.0.0".
@@ -1223,7 +1258,8 @@ arm-platform-extension = (
    representation of a COSE_Key.
 
    This claim MUST be present in a CCA Realm state attestation token.
-   [ToDo: not in direct mode]
+
+   ToDo: not in direct mode
 
    cca-realm-public-key-label = 44237
 
@@ -1247,6 +1283,80 @@ arm-platform-extension = (
 
    cca-realm-public-key-hash-algo-id = (
        cca-realm-public-key-hash-algo-id-label => text
+   )
+
+4.8.9.  Realm MEC Policy
+
+   The Realm MEC policy claim identifies the MEC policy of the Realm.
+   On a platform which does not implement FEAT_MEC, the value of the
+   Realm MEC policy claim shall be cca-realm-mec-policy-shared.
+
+   This claim MUST be present in a CCA Realm state attestation token.
+
+   cca-realm-mec-policy-label = 44243
+
+   cca-realm-mec-policy-shared = 0
+   cca-realm-mec-policy-private = 1
+
+   cca-realm-mec-policy = (
+       cca-realm-mec-policy-label =>
+           cca-realm-mec-policy-shared /
+           cca-realm-mec-policy-private
+   )
+
+4.8.10.  Realm LFA Policy
+
+   The Realm LFA policy identifies the Live Firmware Activation policy
+   of the Realm.
+
+   This claim is OPTIONAL in a CCA Realm state attestation token.
+
+   cca-realm-lfa-policy-label = 44244
+
+   cca-realm-lfa-policy-disallow = 0
+   cca-realm-lfa-policy-allow = 1
+
+   cca-realm-lfa-policy = (
+       cca-realm-lfa-policy-label =>
+           cca-realm-lfa-policy-disallow /
+           cca-realm-lfa-policy-allow
+   )
+
+4.8.11.  Realm Instance ID
+
+   The Realm Instance ID claim is a random value generated using a
+   cryptographic-quality entropy source.  This claim distinguishes
+   otherwise identical Realms.
+
+   The claim is identified using the EAT [EAT] ueid label.  To
+   correspond with the ueid RAND type, the first byte of the Realm
+   Instance ID value must be 0x01.
+
+   This claim MUST be present in a CCA Realm state attestation token.
+
+   cca-realm-instance-id-label = 256 ; EAT ueid
+
+   ; EAT UEIDs need to be 7 - 33 bytes
+   cca-realm-instance-id-type = eat-ueid-rand-type
+
+   cca-realm-instance-id = (
+       cca-realm-instance-id-label => cca-realm-instance-id-type
+   )
+
+4.8.12.  Realm Devices Token Hash
+
+   The Realm devices token hash claim contains a hash of the CBOR
+   encoding of cca-realm-devices-token that represents the set of
+   devices assigned to the Realm.
+
+   The Realm devices token hash claim MUST be present in a Realm token
+   whenever one or more devices are assigned to the Realm.  If no
+   devices are assigned, the claim must not be present.
+
+   cca-realm-devices-token-hash-label = 44257
+
+   cca-realm-devices-token-hash = (
+       cca-realm-devices-token-hash-label => arm-platform-hash-type
    )
 
 4.9.  Backwards Compatibility Considerations
@@ -1402,6 +1512,7 @@ arm-platform-extension = (
    cca-realm-claim-map = {
      cca-realm-challenge,
      ? cca-realm-profile,
+     cca-realm-instance-id,
      cca-realm-personalization-value,
      cca-realm-initial-measurement,
      cca-realm-extensible-measurements,
@@ -1409,6 +1520,8 @@ arm-platform-extension = (
      cca-realm-public-key,
      cca-realm-public-key-hash-algo-id,
      cca-realm-mec-policy,
+     ? cca-realm-lfa-policy,
+     ? cca-realm-devices-token-hash,
    }
    cca-realm-challenge-label = 10
    cca-realm-challenge-type = bytes .size 64
@@ -1440,8 +1553,22 @@ arm-platform-extension = (
    cca-realm-public-key = (cca-realm-public-key-label => cca-realm-\
                                                         public-key-type)
    cca-realm-mec-policy-label = 44243
-   cca-realm-mec-policy = (cca-realm-mec-policy-label => "shared" / "\
-                                                               private")
+   cca-realm-mec-policy-shared = 0
+   cca-realm-mec-policy-private = 1
+   cca-realm-mec-policy = (cca-realm-mec-policy-label => cca-realm-mec-\
+                           policy-shared / cca-realm-mec-policy-private)
+   cca-realm-lfa-policy-label = 44244
+   cca-realm-lfa-policy-disallow = 0
+   cca-realm-lfa-policy-allow = 1
+   cca-realm-lfa-policy = (cca-realm-lfa-policy-label => cca-realm-lfa-\
+                           policy-disallow / cca-realm-lfa-policy-allow)
+   cca-realm-instance-id-label = 256
+   cca-realm-instance-id-type = eat-ueid-rand-type
+   cca-realm-instance-id = (cca-realm-instance-id-label => cca-realm-\
+                                                       instance-id-type)
+   cca-realm-devices-token-hash-label = 44257
+   cca-realm-devices-token-hash = (cca-realm-devices-token-hash-label =\
+                                               > arm-platform-hash-type)
    label = int / tstr
    values = any
    COSE_Key = {
@@ -1452,6 +1579,14 @@ arm-platform-extension = (
      ? 5 => bstr,
      * label => values,
    }
+   arm-platform-hash-type = bytes .size 32 / bytes .size 48 / bytes .\
+                                                                 size 64
+   eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
+   eat-ueid-rand-fmt = [
+     ueid-rand-typ,
+     bytes .size 32,
+   ]
+   ueid-rand-typ = h'01'
    arm-platform-claims = arm-platform-claim-map
    arm-platform-claim-map = {
      arm-platform-profile,
@@ -1468,6 +1603,7 @@ arm-platform-extension = (
      ? arm-platform-extension,
      ? arm-platform-peer-signers,
      ? arm-platform-tbb-rotpk,
+     ? arm-platform-device-tpm-binding-data,
    }
    arm-platform-challenge-label = 10
    arm-platform-challenge = (arm-platform-challenge-label => arm-\
@@ -1478,8 +1614,6 @@ arm-platform-extension = (
                                                             config-type)
    arm-platform-hash-algo-id-label = 2402
    arm-platform-hash-algo-id = (arm-platform-hash-algo-id-label => text)
-   arm-platform-hash-type = bytes .size 32 / bytes .size 48 / bytes .\
-                                                                 size 64
    arm-platform-implementation-id-label = 2396
    arm-platform-implementation-id-type = bytes .size 32
    arm-platform-implementation-id = (arm-platform-implementation-id-\
@@ -1563,7 +1697,7 @@ arm-platform-extension = (
    arm-platform-extension = (arm-platform-extension-label => [+ arm-\
                                              platform-extension-device])
    arm-platform-peer-signers-label = 2406
-   arm-platform-peer-signers-type = bytes
+   arm-platform-peer-signers-type = [+ bytes]
    arm-platform-peer-signers = (arm-platform-peer-signers-label => arm-\
                                              platform-peer-signers-type)
    arm-platform-tbb-rotpk-label = 2405
@@ -1576,12 +1710,10 @@ arm-platform-extension = (
    }
    arm-platform-tbb-rotpk = (arm-platform-tbb-rotpk-label => arm-\
                                                 platform-tbb-rotpk-type)
-   eat-ueid-rand-type = bytes .join eat-ueid-rand-fmt
-   eat-ueid-rand-fmt = [
-     ueid-rand-typ,
-     bytes .size 32,
-   ]
-   ueid-rand-typ = h'01'
+   arm-platform-device-tpm-binding-data-label = 2407
+   arm-platform-device-tpm-binding-data-type = bytes
+   arm-platform-device-tpm-binding-data = (arm-platform-device-tpm-\
+        binding-data-label => arm-platform-device-tpm-binding-data-type)
    Headers = (
      protected: empty_or_serialized_map,
      unprotected: header_map,
@@ -1938,7 +2070,7 @@ arm-platform-extension = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.6.7 of RFCthis
+   *  Specification Document(s): Section 4.6.8 of RFCthis
 
 10.1.11.  Platform Peer Signers
 
@@ -1950,13 +2082,29 @@ arm-platform-extension = (
 
    *  Claim Key: 2406
 
+   *  Claim Value Type(s): array
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.6.6 of RFCthis
+
+10.1.12.  Platform Device TPM Binding Data
+
+   *  Claim Name: arm-platform-device-tpm-binding-data
+
+   *  Claim Description: Arm Platform Device TPM Binding Data
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 2407
+
    *  Claim Value Type(s): byte string
 
    *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.6.7 of RFCthis
 
-10.1.12.  CCA Token Platform Token Label
+10.1.13.  CCA Token Platform Token Label
 
    *  Claim Name: cca-platform-token-label
 
@@ -1972,7 +2120,7 @@ arm-platform-extension = (
 
    *  Specification Document(s): Section 4.1 of RFCthis
 
-10.1.13.  Realm Personalization Value Claim
+10.1.14.  Realm Personalization Value Claim
 
    *  Claim Name: cca-realm-personalization-value
 
@@ -1988,7 +2136,7 @@ arm-platform-extension = (
 
    *  Specification Document(s): Section 4.8.3 of RFCthis
 
-10.1.14.  Realm Hash Algorithm ID Claim
+10.1.15.  Realm Hash Algorithm ID Claim
 
    *  Claim Name: cca-realm-hash-algm-id
 
@@ -2004,7 +2152,7 @@ arm-platform-extension = (
 
    *  Specification Document(s): Section 4.8.6 of RFCthis
 
-10.1.15.  Realm Public Key Claim
+10.1.16.  Realm Public Key Claim
 
    *  Claim Name: cca-realm-public-key
 
@@ -2020,7 +2168,7 @@ arm-platform-extension = (
 
    *  Specification Document(s): Section 4.8.7 of RFCthis
 
-10.1.16.  Realm Initial Measurement Claim
+10.1.17.  Realm Initial Measurement Claim
 
    *  Claim Name: cca-realm-initial-measurement
 
@@ -2036,7 +2184,7 @@ arm-platform-extension = (
 
    *  Specification Document(s): Section 4.8.4 of RFCthis
 
-10.1.17.  Realm Extensible Measurements Claim
+10.1.18.  Realm Extensible Measurements Claim
 
    *  Claim Name: cca-realm-extensible-measurements
 
@@ -2052,7 +2200,7 @@ arm-platform-extension = (
 
    *  Specification Document(s): Section 4.8.4 of RFCthis
 
-10.1.18.  Realm Public Key Hash Algorithm ID Claim
+10.1.19.  Realm Public Key Hash Algorithm ID Claim
 
    *  Claim Name: cca-realm-public-key-hash-algm-id
 
@@ -2068,7 +2216,55 @@ arm-platform-extension = (
 
    *  Specification Document(s): Section 4.8.8 of RFCthis
 
-10.1.19.  CCA Token Delegated Realm Token Label
+10.1.20.  Realm MEC Policy
+
+   *  Claim Name: cca-realm-mec-policy
+
+   *  Claim Description: Realm MEC Policy
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 44243
+
+   *  Claim Value Type(s): unsigned integer
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.8.9 of RFCthis
+
+10.1.21.  Realm LFA Policy
+
+   *  Claim Name: cca-realm-lfa-policy
+
+   *  Claim Description: Realm LFA Policy
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 44244
+
+   *  Claim Value Type(s): unsigned integer
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.8.10 of RFCthis
+
+10.1.22.  Realm Devices Token Hash
+
+   *  Claim Name: cca-realm-devices-token-hash
+
+   *  Claim Description: Realm Devices Token Hash
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 44257
+
+   *  Claim Value Type(s): byte string
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.8.12 of RFCthis
+
+10.1.23.  CCA Token Delegated Realm Token Label
 
    *  Claim Name: cca-platform-delegated-realm-label
 
@@ -2457,7 +2653,10 @@ A.1.2.  Realm Claims Set
    32C6AFC627E55585C03155359F331A0E225F6840DB947DD96EFAB81BE2671939'  \
                                                               / REM[3] /
        ],
-       44243: "private"  / MEC policy /
+       44243: 1, / MEC policy /
+       256: h'\
+   013333333333333333333333333333333333333333333333333333333333333333\
+                                                     '   / Instance ID /
    }
 
 A.1.3.  Platform Attestation Key
@@ -2675,7 +2874,10 @@ A.1.5.  Signed and Bound Assembly
              h'\
        32C6AFC627E55585C03155359F331A0E225F6840DB947DD96EFAB81BE2671939'
            ],
-           44243: "private"  / MEC policy /
+           44243: 1,  / MEC policy /
+           256: h'\
+   013333333333333333333333333333333333333333333333333333333333333333\
+                                                     '   / Instance ID /
          } >>,
          h'\
    580B1DEA32D30AC6884C86B39CBE0FCB03BD00DF5103F9BAB01386A46A3BA8143E27\
@@ -2738,7 +2940,7 @@ A.1.5.  Signed and Bound Assembly
    31d04d52ccde952c1e32cba181885a40b8cc38e0528c1e89589807642aa5
    e3f2bc37f95374506bff4d2e4be7063c4d72419270c722e8d4d93ee8b6c9
    face3b43c9761a49941ab6f38ffdff496ad463b4cbfa11d83e23e31f7f62
-   329de30c1cc819acd182190107590259d28444a1013822a05901eca91901
+   329de30c1cc819acd182190107590278d28444a1013822a059020baa1901
    09781c7461673a61726d2e636f6d2c323032343a7265616c6d23322e302e
    300a58406e86d6d97cc713bc6dd43dbce491a6b40311c027a8bf85a39da6
    3e9ce44c132a8a119d296fae6a6999e9bf3e4471b0ce01245d889424c31e
@@ -2755,10 +2957,11 @@ A.1.5.  Signed and Bound Assembly
    8414e73daf5b8c7bb1e79ad502ab0699b659ed165820dac46a58415dc3a0
    0d7a741852008e9cae64f52d03b9f76d76f4b3644fefc416582032c6afc6
    27e55585c03155359f331a0e225f6840db947dd96efab81be267193919ac
-   d367707269766174655860580b1dea32d30ac6884c86b39cbe0fcb03bd00
-   df5103f9bab01386a46a3ba8143e27ed6d4eb0d0a2724abdf9640c09462f
-   ace6df186909dfa6eb131e3a7918276077acdab8a8bdeca6b0eaafab66e1
-   439c1371f4fb1d6aac047481b5dc75dd46
+   d30119010058210133333333333333333333333333333333333333333333
+   333333333333333333335860580b1dea32d30ac6884c86b39cbe0fcb03bd
+   00df5103f9bab01386a46a3ba8143e27ed6d4eb0d0a2724abdf9640c0946
+   2face6df186909dfa6eb131e3a7918276077acdab8a8bdeca6b0eaafab66
+   e1439c1371f4fb1d6aac047481b5dc75dd46
 
 A.2.  Direct Mode
 
