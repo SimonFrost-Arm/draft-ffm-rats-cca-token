@@ -692,6 +692,23 @@ The data type for this claim is Implementation Defined as different underlying R
 {::include cddl/platform/arm-platform-peer-signers.cddl}
 ~~~
 
+### CCA Platform Device TPM Binding Data
+{: #sec-arm-platform-device-tpm-binding-data}
+
+The normal world of a device that supports CCA is outside the TCB of the confidential computing environment.
+In some deployments, it is seen to be desirable to be able to appraise measurements that indicate the untrusted hypervisor for the device.
+This is done by requesting a TPM quote in the normal world and providing it to the Relying Party together with the CCA Attestation token.
+The Device TPM Binding Data claim holds data that can be used to prove that the TPM and the CCA HES belong to the same system.
+
+The CCA platform Device TPM Binding Data claim is OPTIONAL in a CCA platform token
+
+The details of the binding data within this claim are Implementation Defined, as different underlying TPM binding schemes may be available.
+
+~~~
+{::include cddl/platform/arm-platform-device-tpm-binding-data.cddl}
+~~~
+
+
 ### CCA Platform TBB ROTPK
 {: #sec-arm-platform-tbb-rotpk}
 
@@ -773,7 +790,7 @@ The Realm profile claim identifies the EAT profile to which the Realm token
 conforms. This allows a receiver to assign the intended semantics to the rest of the claims
 found in the token.
 
-The EAT `eat_profile` (claim key 265) is used.
+The EAT {{EAT}} `eat_profile` (claim key 265) is used.
 
 The format of the CCA platform profile claim is defined as a text string of value
 "tag:arm.com,2024:realm#2.0.0".
@@ -847,7 +864,9 @@ The Realm public key claim identifies the attestation key which is used to sign 
 
 The value of the Realm public key claim is a byte string representation of a COSE_Key.
 
-This claim MUST be present in a CCA Realm state attestation token. [ToDo: not in direct mode]
+This claim MUST be present in a CCA Realm state attestation token.
+
+ToDo: not in direct mode
 
 ~~~
 {::include cddl/realm/cca-realm-public-key.cddl}
@@ -867,6 +886,60 @@ This claim MUST be present in a CCA Realm state attestation token.
 ~~~
 {::include cddl/realm/cca-realm-public-key-hash-algo-id.cddl}
 ~~~
+
+### Realm MEC Policy
+{: #sec-realm-mec-policy}
+
+The Realm MEC policy claim identifies the MEC policy of the Realm.
+On a platform which does not implement `FEAT_MEC`, the value of the Realm MEC policy claim shall be `cca-realm-mec-policy-shared`.
+
+This claim MUST be present in a CCA Realm state attestation token.
+
+~~~
+{::include cddl/realm/cca-realm-mec-policy.cddl}
+~~~
+
+
+### Realm LFA Policy
+{: #sec-realm-lfa-policy}
+
+The Realm LFA policy identifies the Live Firmware Activation policy of the Realm.
+
+This claim is OPTIONAL in a CCA Realm state attestation token.
+
+~~~
+{::include cddl/realm/cca-realm-lfa-policy.cddl}
+~~~
+
+### Realm Instance ID
+{: #sec-realm-instance-id}
+
+The Realm Instance ID claim is a random value generated using a cryptographic-quality entropy source.
+This claim distinguishes otherwise identical Realms.
+
+The claim is identified using the EAT {{EAT}} `ueid` label.
+To correspond with the `ueid RAND` type, the first byte of the Realm Instance ID value must be 0x01.
+
+This claim MUST be present in a CCA Realm state attestation token.
+
+~~~
+{::include cddl/realm/cca-realm-instance-id.cddl}
+~~~
+
+### Realm Devices Token Hash
+{: #sec-realm-devices-token-hash}
+
+The Realm devices token hash claim contains a hash of the CBOR encoding of
+cca-realm-devices-token that represents the set of devices assigned to the Realm.
+
+The Realm devices token hash claim MUST be present in a Realm token whenever
+one or more devices are assigned to the Realm.
+If no devices are assigned, the claim must not be present.
+
+~~~
+{::include cddl/realm/cca-realm-devices-token-hash.cddl}
+~~~
+
 
 
 ## Backwards Compatibility Considerations
@@ -1235,9 +1308,19 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Claim Description: Arm Platform Peer Signers
 * JWT Claim Name: N/A
 * Claim Key: 2406
+* Claim Value Type(s): array
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-arm-platform-peer-signers}} of {{&SELF}}
+
+### Platform Device TPM Binding Data
+
+* Claim Name: arm-platform-device-tpm-binding-data
+* Claim Description: Arm Platform Device TPM Binding Data
+* JWT Claim Name: N/A
+* Claim Key: 2407
 * Claim Value Type(s): byte string
 * Change Controller: iana-request@arm.com
-* Specification Document(s): {{sec-arm-platform-tbb-rotpk}} of {{&SELF}}
+* Specification Document(s): {{sec-arm-platform-device-tpm-binding-data}} of {{&SELF}}
 
 ### CCA Token Platform Token Label
 
@@ -1308,6 +1391,37 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Claim Value Type(s): text string
 * Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-realm-public-key-hash-algo-id-claim}} of {{&SELF}}
+
+### Realm MEC Policy
+
+* Claim Name: cca-realm-mec-policy
+* Claim Description: Realm MEC Policy
+* JWT Claim Name: N/A
+* Claim Key: 44243
+* Claim Value Type(s): unsigned integer
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-realm-mec-policy}} of {{&SELF}}
+
+### Realm LFA Policy
+
+* Claim Name: cca-realm-lfa-policy
+* Claim Description: Realm LFA Policy
+* JWT Claim Name: N/A
+* Claim Key: 44244
+* Claim Value Type(s): unsigned integer
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-realm-lfa-policy}} of {{&SELF}}
+
+### Realm Devices Token Hash
+
+* Claim Name: cca-realm-devices-token-hash
+* Claim Description: Realm Devices Token Hash
+* JWT Claim Name: N/A
+* Claim Key: 44257
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-realm-devices-token-hash}} of {{&SELF}}
+
 
 ### CCA Token Delegated Realm Token Label
 

@@ -15,5 +15,6 @@ arm-platform-claim-map = {
     ? arm-platform-extension
     ? arm-platform-peer-signers
     ? arm-platform-tbb-rotpk
+    ? arm-platform-device-tpm-binding-data
 }
 

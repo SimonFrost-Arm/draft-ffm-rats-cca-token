@@ -1,0 +1,8 @@
+cca-realm-instance-id-label = 256 ; EAT ueid
+
+; EAT UEIDs need to be 7 - 33 bytes
+cca-realm-instance-id-type = eat-ueid-rand-type
+
+cca-realm-instance-id = (
+    cca-realm-instance-id-label => cca-realm-instance-id-type
+)

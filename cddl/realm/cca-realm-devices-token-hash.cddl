@@ -1,0 +1,5 @@
+cca-realm-devices-token-hash-label = 44257
+
+cca-realm-devices-token-hash = (
+    cca-realm-devices-token-hash-label => arm-platform-hash-type
+)

@@ -3,6 +3,7 @@ cca-realm-claims = (cca-realm-claim-map)
 cca-realm-claim-map = {
     cca-realm-challenge
     ? cca-realm-profile
+    cca-realm-instance-id
     cca-realm-personalization-value
     cca-realm-initial-measurement
     cca-realm-extensible-measurements
@@ -10,4 +11,6 @@ cca-realm-claim-map = {
     cca-realm-public-key
     cca-realm-public-key-hash-algo-id
     cca-realm-mec-policy
+    ? cca-realm-lfa-policy
+    ? cca-realm-devices-token-hash
 }

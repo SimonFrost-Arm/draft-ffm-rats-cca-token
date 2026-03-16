@@ -1,5 +1,10 @@
 cca-realm-mec-policy-label = 44243
 
+cca-realm-mec-policy-shared = 0
+cca-realm-mec-policy-private = 1
+
 cca-realm-mec-policy = (
-    cca-realm-mec-policy-label => "shared" / "private"
+    cca-realm-mec-policy-label =>
+        cca-realm-mec-policy-shared /
+        cca-realm-mec-policy-private
 )
