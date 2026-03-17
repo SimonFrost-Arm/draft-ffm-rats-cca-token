@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-15T02:22:32.470798+00:00",
+  "timestamp": "2026-03-17T02:02:58.431776+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -2608,24 +2608,26 @@
       "id": "PR_kwDOMRXjbM7Jiw5B",
       "title": "Further claims updates incl missing realm claims",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/47",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SimonFrost-Arm",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Add missing realm claims\r\nSome tidying of existing claims",
       "createdAt": "2026-03-11T00:19:31Z",
-      "updatedAt": "2026-03-12T16:56:55Z",
+      "updatedAt": "2026-03-16T23:31:54Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "e7f6e3f50f7f1499fdbd056068b0db98c052ea2b",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "extraclaims",
       "headRefOid": "81d0cf20dc0af8c7fb5bda587041ee5ebebad669",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-16T23:31:50Z",
+      "mergedAt": "2026-03-16T23:31:50Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "d92d25912bbc078aabe44fc6f9dea9060ea2b1c1"
+      },
       "comments": [],
       "reviews": [
         {
