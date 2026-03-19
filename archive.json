@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-17T02:02:58.431776+00:00",
+  "timestamp": "2026-03-19T02:07:43.871507+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -653,7 +653,7 @@
       "labels": [],
       "body": "RMM 1.1 alp18 introduced the addition of a Device Token to hold data for device assignment. Needs commentary in profile",
       "createdAt": "2026-02-23T13:20:35Z",
-      "updatedAt": "2026-02-24T11:02:51Z",
+      "updatedAt": "2026-03-18T15:58:45Z",
       "closedAt": null,
       "comments": [
         {
@@ -662,6 +662,13 @@
           "body": "We may want to coordinate this one with https://github.com/rats-device-attestation/draft-poirier-rats-eat-da/issues/7 ",
           "createdAt": "2026-02-24T11:02:51Z",
           "updatedAt": "2026-02-24T11:02:51Z"
+        },
+        {
+          "author": "gmandyam",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "DA token hash for TDISP devices doesn't seem to differentiate between  whether a TDI is bound to the CVM (realm) or not (https://datatracker.ietf.org/doc/html/draft-poirier-rats-eat-da-05#name-new-cwt-claims-registration).  \n\nShould there be a claim in addition to device-token-hash that indicates whether a TDI is bound to the realm?",
+          "createdAt": "2026-03-18T15:58:45Z",
+          "updatedAt": "2026-03-18T15:58:45Z"
         }
       ]
     }
