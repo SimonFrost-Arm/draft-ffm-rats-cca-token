@@ -6,6 +6,8 @@ arm-platform-sw-component = {
   ? 4 => text,                   ; version
     5 => arm-platform-hash-type, ; signer id
   ? 6 => text,                   ; hash algorithm identifier
+  ? 7 => bool,                   ; live firmware activation supported
+  ? 8 => [ + arm-platform-hash-type ],    ; list of countersigner ids
 }
 
 arm-platform-sw-components = (
