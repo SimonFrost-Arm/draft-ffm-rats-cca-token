@@ -638,7 +638,7 @@ which is identified by the CCA platform software component signer ID.
 Example use cases for CCA platform software component countersignatures include:
 
 * An indication of approval for the component, provided by the owner of the CCA platform
-* An indication of approval for the component, provided by a third party auditor
+* An indication of approval for the component, provided by a third-party auditor
 
 The order of multiple entries within the countersigner ID list may imply a hierarchy.
 The existence and meaning of any such hierarchy is IMPLEMENTATION DEFINED.
