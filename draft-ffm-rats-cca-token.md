@@ -625,8 +625,7 @@ the component is subject to Live Firmware Activation.
 If the attribute is set to `false`, the component will not be updated before the
 next CCA Platform software update.
 
-The CCA platform software component Live Firmware activation support
-attribute is optional in a CCA Platform software component.
+The Live Firmware Activation support attribute of the CCA Platform software component is optional.
 
 #### Software Component Countersigner ID List
 
