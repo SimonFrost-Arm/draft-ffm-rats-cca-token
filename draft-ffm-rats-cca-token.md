@@ -629,7 +629,7 @@ The Live Firmware Activation support attribute of the CCA Platform software comp
 
 #### Software Component Countersigner ID List
 
-The Live Firmware Activation support attribute (key=7) list contains
+The Software Component Countersigner ID List (key=8) contains
 hashes of public keys which identify signing authorities that provide
 additional trustworthiness information for the software component.
 These signatures are provided in addition to the primary signature,
