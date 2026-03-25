@@ -620,8 +620,8 @@ SHOULD be encoded according to "Hash Name String" in the "Named Information Hash
 
 #### Live Firmware Activation support
 
-The Live Firmware Activation support attribute (key=7) declares whether
-an individual component is subject to Live Firmware Activation.
+The Live Firmware Activation support attribute (key=7) indicates whether
+the component is subject to Live Firmware Activation.
 If the attribute is False, the component will not be updated before the
 next CCA Platform software component.
 
