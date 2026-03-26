@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-19T02:07:43.871507+00:00",
+  "timestamp": "2026-03-26T02:12:24.849502+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -2836,6 +2836,98 @@
           "body": "Thanks for addressing my comments!\n\n(I think I already approved, but if not, \ud83d\udea2 it!)",
           "createdAt": "2026-03-12T16:56:55Z",
           "updatedAt": "2026-03-12T16:56:55Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "id": "PR_kwDOMRXjbM7NCn-Z",
+      "title": "Missing RMM 2.0 attributes for sw-component",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/48",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "LFA supported + Countersigner list attributes",
+      "createdAt": "2026-03-24T15:07:12Z",
+      "updatedAt": "2026-03-25T13:53:38Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "d92d25912bbc078aabe44fc6f9dea9060ea2b1c1",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "extraclaims",
+      "headRefOid": "32f1de0b9ad02a795ef4bb68a8e30dab43d3e542",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Suggestions accepted.\r\nCI still failing and I've not been able to figure out why either yet - also works locally for me,",
+          "createdAt": "2026-03-25T13:07:39Z",
+          "updatedAt": "2026-03-25T13:07:39Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM7uuGjb",
+          "commit": {
+            "abbreviatedOid": "b2b1c3a"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "A few editorial comments inlined.\n\nI don\u2019t understand why the CI is failing.  Building the draft works for me locally \ud83e\udd37 ",
+          "createdAt": "2026-03-25T08:55:46Z",
+          "updatedAt": "2026-03-25T09:03:15Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "editorial suggestion\n\n```suggestion\nThe Live Firmware Activation support attribute (key=7) indicates whether\nthe component is subject to Live Firmware Activation.\n```",
+              "createdAt": "2026-03-25T08:55:46Z",
+              "updatedAt": "2026-03-25T09:03:15Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "possible typo: s/software component/software update/\n\n```suggestion\nIf the attribute is set to `false`, the component will not be updated before the\nnext CCA Platform software update.\n```",
+              "createdAt": "2026-03-25T08:57:19Z",
+              "updatedAt": "2026-03-25T09:03:15Z"
+            },
+            {
+              "originalPosition": 12,
+              "body": "streamline\n\n```suggestion\nThe Live Firmware Activation support attribute of the CCA Platform software component is optional.\n```",
+              "createdAt": "2026-03-25T08:58:14Z",
+              "updatedAt": "2026-03-25T09:03:15Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "c&p typo?\n\n```suggestion\nThe Software Component Countersigner ID List (key=8) contains\n```",
+              "createdAt": "2026-03-25T08:59:57Z",
+              "updatedAt": "2026-03-25T09:03:15Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\n* An indication of approval for the component, provided by a third-party auditor\n```",
+              "createdAt": "2026-03-25T09:01:47Z",
+              "updatedAt": "2026-03-25T09:03:15Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7u1Ac3",
+          "commit": {
+            "abbreviatedOid": "32f1de0"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "\ud83d\udea2 it!\r\n\r\n(Merging with a failing CI is not great, but a) it is not clear at all what is the cause, b) the local build environments seem to work fine.)",
+          "createdAt": "2026-03-25T13:53:21Z",
+          "updatedAt": "2026-03-25T13:53:38Z",
           "comments": []
         }
       ]
