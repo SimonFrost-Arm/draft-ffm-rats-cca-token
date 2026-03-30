@@ -23,22 +23,22 @@ wire, and how they are cryptographically protected.
 interoperability with Arm's architecture. It is not a standard nor
 a product of the IETF. 
     " name="description">
-<meta content="xml2rfc 3.31.0" name="generator">
+<meta content="xml2rfc 3.32.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ffm-rats-cca-token-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.31.0
+  xml2rfc 3.32.0
     Python 3.12.12
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.0.2
-    platformdirs 4.5.1
+    platformdirs 4.9.4
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.32.5
-    wcwidth 0.3.0
+    wcwidth 0.6.0
 -->
 <link href="draft-ffm-rats-cca-token.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1063,7 +1063,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Frost, et al.</td>
-<td class="center">Expires 13 September 2026</td>
+<td class="center">Expires 1 October 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1076,12 +1076,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ffm-rats-cca-token-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-03-12" class="published">12 March 2026</time>
+<time datetime="2026-03-30" class="published">30 March 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-09-13">13 September 2026</time></dd>
+<dd class="expires"><time datetime="2026-10-01">1 October 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1135,7 +1135,7 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 13 September 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 1 October 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -2449,6 +2449,8 @@ arm-platform-sw-component = {
   ? 4 =&gt; text,                   ; version
     5 =&gt; arm-platform-hash-type, ; signer id
   ? 6 =&gt; text,                   ; hash algorithm identifier
+  ? 7 =&gt; bool,                   ; live firmware activation supported
+  ? 8 =&gt; [ + arm-platform-hash-type ],    ; list of countersigner ids
 }
 
 arm-platform-sw-components = (
@@ -2517,6 +2519,42 @@ Verifier to ensure the components were signed by an expected trusted source.<a h
 <p id="section-4.6.1.5-1">The Measurement Description attribute (key=6) contains a string identifying the
 hash algorithm used to compute the corresponding Measurement Value.  The string
 SHOULD be encoded according to "Hash Name String" in the "Named Information Hash Algorithm Registry" <span>[<a href="#IANA.named-information" class="cite xref">IANA.named-information</a>]</span>.<a href="#section-4.6.1.5-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="live-firmware-activation-support">
+<section id="section-4.6.1.6">
+            <h5 id="name-live-firmware-activation-su">
+<a href="#section-4.6.1.6" class="section-number selfRef">4.6.1.6. </a><a href="#name-live-firmware-activation-su" class="section-name selfRef">Live Firmware Activation support</a>
+            </h5>
+<p id="section-4.6.1.6-1">The Live Firmware Activation support attribute (key=7) indicates whether
+the component is subject to Live Firmware Activation.
+If the attribute is set to <code>false</code>, the component will not be updated before the
+next CCA Platform software update.<a href="#section-4.6.1.6-1" class="pilcrow">¶</a></p>
+<p id="section-4.6.1.6-2">The Live Firmware Activation support attribute of the CCA Platform software component is optional.<a href="#section-4.6.1.6-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="software-component-countersigner-id-list">
+<section id="section-4.6.1.7">
+            <h5 id="name-software-component-counters">
+<a href="#section-4.6.1.7" class="section-number selfRef">4.6.1.7. </a><a href="#name-software-component-counters" class="section-name selfRef">Software Component Countersigner ID List</a>
+            </h5>
+<p id="section-4.6.1.7-1">The Software Component Countersigner ID List (key=8) contains
+hashes of public keys which identify signing authorities that provide
+additional trustworthiness information for the software component.
+These signatures are provided in addition to the primary signature,
+which is identified by the CCA platform software component signer ID.<a href="#section-4.6.1.7-1" class="pilcrow">¶</a></p>
+<p id="section-4.6.1.7-2">Example use cases for CCA platform software component countersignatures include:<a href="#section-4.6.1.7-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.6.1.7-3.1">
+                <p id="section-4.6.1.7-3.1.1">An indication of approval for the component, provided by the owner of the CCA platform<a href="#section-4.6.1.7-3.1.1" class="pilcrow">¶</a></p>
+</li>
+              <li class="normal" id="section-4.6.1.7-3.2">
+                <p id="section-4.6.1.7-3.2.1">An indication of approval for the component, provided by a third-party auditor<a href="#section-4.6.1.7-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            </ul>
+<p id="section-4.6.1.7-4">The order of multiple entries within the countersigner ID list may imply a hierarchy.
+The existence and meaning of any such hierarchy is IMPLEMENTATION DEFINED.<a href="#section-4.6.1.7-4" class="pilcrow">¶</a></p>
+<p id="section-4.6.1.7-5">The Software Component Countersigner ID List attribute is optional in a CCA Platform software component.<a href="#section-4.6.1.7-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -3404,6 +3442,8 @@ arm-platform-sw-component = {
   ? 4 =&gt; text,
   5 =&gt; arm-platform-hash-type,
   ? 6 =&gt; text,
+  ? 7 =&gt; bool,
+  ? 8 =&gt; [+ arm-platform-hash-type],
 }
 arm-platform-sw-components = (arm-platform-sw-components-label =&gt; [\
                                         + arm-platform-sw-component])
