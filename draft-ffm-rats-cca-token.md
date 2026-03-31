@@ -618,6 +618,34 @@ The Measurement Description attribute (key=6) contains a string identifying the
 hash algorithm used to compute the corresponding Measurement Value.  The string
 SHOULD be encoded according to "Hash Name String" in the "Named Information Hash Algorithm Registry" {{!IANA.named-information}}.
 
+#### Live Firmware Activation support
+
+The Live Firmware Activation support attribute (key=7) indicates whether
+the component is subject to Live Firmware Activation.
+If the attribute is set to `false`, the component will not be updated before the
+next CCA Platform software update.
+
+The Live Firmware Activation support attribute of the CCA Platform software component is optional.
+
+#### Software Component Countersigner ID List
+
+The Software Component Countersigner ID List (key=8) contains
+hashes of public keys which identify signing authorities that provide
+additional trustworthiness information for the software component.
+These signatures are provided in addition to the primary signature,
+which is identified by the CCA platform software component signer ID.
+
+Example use cases for CCA platform software component countersignatures include:
+
+* An indication of approval for the component, provided by the owner of the CCA platform
+* An indication of approval for the component, provided by a third-party auditor
+
+The order of multiple entries within the countersigner ID list may imply a hierarchy.
+The existence and meaning of any such hierarchy is IMPLEMENTATION DEFINED.
+
+The Software Component Countersigner ID List attribute is optional in a CCA Platform software component.
+
+
 ### CCA Platform Hash Algorithm ID
 {: #sec-arm-platform-hash-algm-id}
 
