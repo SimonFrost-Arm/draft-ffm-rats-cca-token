@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-26T02:12:24.849502+00:00",
+  "timestamp": "2026-03-31T02:21:46.032269+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -2852,13 +2852,13 @@
       "labels": [],
       "body": "LFA supported + Countersigner list attributes",
       "createdAt": "2026-03-24T15:07:12Z",
-      "updatedAt": "2026-03-25T13:53:38Z",
+      "updatedAt": "2026-03-30T21:10:29Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "d92d25912bbc078aabe44fc6f9dea9060ea2b1c1",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "extraclaims",
-      "headRefOid": "32f1de0b9ad02a795ef4bb68a8e30dab43d3e542",
+      "headRefOid": "97e71fa1163d4ebe1ec995a5271cd8bdeb0bdd7d",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -2870,6 +2870,13 @@
           "body": "Suggestions accepted.\r\nCI still failing and I've not been able to figure out why either yet - also works locally for me,",
           "createdAt": "2026-03-25T13:07:39Z",
           "updatedAt": "2026-03-25T13:07:39Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The problem with the failing CI appears to be caused by a newer version of `aasvg` installed in the CI development environment, which is incompatible with the newer version of `xml2rfc`.\r\n\r\n[Pinning the version](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/48/commits/97e71fa1163d4ebe1ec995a5271cd8bdeb0bdd7d) to one that is known not to upset `xml2rfc` fixes the problem.",
+          "createdAt": "2026-03-30T21:10:29Z",
+          "updatedAt": "2026-03-30T21:10:29Z"
         }
       ],
       "reviews": [
