@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 17 September 2026                                        Linaro
+Expires: 2 October 2026                                           Linaro
                                                               G. Mandyam
                                                             Mediatek Inc
-                                                           16 March 2026
+                                                           31 March 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 17 September 2026.
+   This Internet-Draft will expire on 2 October 2026.
 
 Copyright Notice
 
@@ -837,6 +837,8 @@ arm-platform-lifecycle = (
    ? 4 => text,                   ; version
      5 => arm-platform-hash-type, ; signer id
    ? 6 => text,                   ; hash algorithm identifier
+   ? 7 => bool,                   ; live firmware activation supported
+   ? 8 => [ + arm-platform-hash-type ],    ; list of countersigner ids
  }
 
  arm-platform-sw-components = (
@@ -896,6 +898,40 @@ arm-platform-lifecycle = (
    Measurement Value.  The string SHOULD be encoded according to "Hash
    Name String" in the "Named Information Hash Algorithm Registry"
    [IANA.named-information].
+
+4.6.1.6.  Live Firmware Activation support
+
+   The Live Firmware Activation support attribute (key=7) indicates
+   whether the component is subject to Live Firmware Activation.  If the
+   attribute is set to false, the component will not be updated before
+   the next CCA Platform software update.
+
+   The Live Firmware Activation support attribute of the CCA Platform
+   software component is optional.
+
+4.6.1.7.  Software Component Countersigner ID List
+
+   The Software Component Countersigner ID List (key=8) contains hashes
+   of public keys which identify signing authorities that provide
+   additional trustworthiness information for the software component.
+   These signatures are provided in addition to the primary signature,
+   which is identified by the CCA platform software component signer ID.
+
+   Example use cases for CCA platform software component
+   countersignatures include:
+
+   *  An indication of approval for the component, provided by the owner
+      of the CCA platform
+
+   *  An indication of approval for the component, provided by a third-
+      party auditor
+
+   The order of multiple entries within the countersigner ID list may
+   imply a hierarchy.  The existence and meaning of any such hierarchy
+   is IMPLEMENTATION DEFINED.
+
+   The Software Component Countersigner ID List attribute is optional in
+   a CCA Platform software component.
 
 4.6.2.  CCA Platform Hash Algorithm ID
 
@@ -1651,6 +1687,8 @@ arm-platform-device-tpm-binding-data = (
      ? 4 => text,
      5 => arm-platform-hash-type,
      ? 6 => text,
+     ? 7 => bool,
+     ? 8 => [+ arm-platform-hash-type],
    }
    arm-platform-sw-components = (arm-platform-sw-components-label => [\
                                            + arm-platform-sw-component])
