@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-03-31T02:21:46.032269+00:00",
+  "timestamp": "2026-04-02T02:10:26.168792+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -621,9 +621,17 @@
       "labels": [],
       "body": "Check the IANA section for inconsistencies, e.g.:\n\n* Claims\n  * Requests for claims that are already registered\n  * Missing requests\n* Media types\n  * CMW compliance",
       "createdAt": "2025-03-05T19:08:21Z",
-      "updatedAt": "2025-03-05T19:08:21Z",
+      "updatedAt": "2026-03-31T13:22:13Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "* CBOR tag 907 needs to be requested via the CBOR tag registration procedure, rather than the CWT registry - as [currently done](https://www.ietf.org/archive/id/draft-ffm-rats-cca-token-03.html#name-arm-cca-attestation-cmw)\n\n\n",
+          "createdAt": "2026-03-31T13:22:13Z",
+          "updatedAt": "2026-03-31T13:22:13Z"
+        }
+      ]
     },
     {
       "number": 43,
@@ -2845,24 +2853,26 @@
       "id": "PR_kwDOMRXjbM7NCn-Z",
       "title": "Missing RMM 2.0 attributes for sw-component",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/48",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SimonFrost-Arm",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "LFA supported + Countersigner list attributes",
       "createdAt": "2026-03-24T15:07:12Z",
-      "updatedAt": "2026-03-30T21:10:29Z",
+      "updatedAt": "2026-03-31T07:08:11Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "d92d25912bbc078aabe44fc6f9dea9060ea2b1c1",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "extraclaims",
       "headRefOid": "97e71fa1163d4ebe1ec995a5271cd8bdeb0bdd7d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-03-31T07:08:07Z",
+      "mergedAt": "2026-03-31T07:08:07Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "696204767ee8cd1b52ca9c72459f2bb815a32fa3"
+      },
       "comments": [
         {
           "author": "SimonFrost-Arm",
