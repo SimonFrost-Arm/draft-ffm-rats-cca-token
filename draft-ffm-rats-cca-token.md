@@ -32,8 +32,8 @@ author:
     organization: Linaro
     email: thomas.fossati@linaro.org
  -  name: Giri Mandyam
-    organization: Mediatek Inc
-    email: giridhar.mandyam@gmail.com
+    organization: Advanced Micro Devices Inc
+    email: gmandyam@amd.com
 contributor:
  -  name: Yogesh Deshpande
     organization: Arm Limited
