@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-02T02:10:26.168792+00:00",
+  "timestamp": "2026-04-09T02:09:45.396667+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -2945,6 +2945,46 @@
           "body": "\ud83d\udea2 it!\r\n\r\n(Merging with a failing CI is not great, but a) it is not clear at all what is the cause, b) the local build environments seem to work fine.)",
           "createdAt": "2026-03-25T13:53:21Z",
           "updatedAt": "2026-03-25T13:53:38Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "id": "PR_kwDOMRXjbM7Q8gVR",
+      "title": "Update G. Mandyam contact info",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/49",
+      "state": "OPEN",
+      "author": "gmandyam",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-04-08T21:40:32Z",
+      "updatedAt": "2026-04-08T23:27:05Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "696204767ee8cd1b52ca9c72459f2bb815a32fa3",
+      "headRepository": "gmandyam/draft-ffm-rats-cca-token",
+      "headRefName": "Update-Contact-Info",
+      "headRefOid": "f76f386628d01576b1572cfcf81cca0ff0f9002b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM7zHx5r",
+          "commit": {
+            "abbreviatedOid": "f76f386"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-04-08T23:27:05Z",
+          "updatedAt": "2026-04-08T23:27:05Z",
           "comments": []
         }
       ]
