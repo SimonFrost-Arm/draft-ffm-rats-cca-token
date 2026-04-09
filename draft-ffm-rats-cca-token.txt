@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 2 October 2026                                           Linaro
+Expires: 11 October 2026                                          Linaro
                                                               G. Mandyam
-                                                            Mediatek Inc
-                                                           31 March 2026
+                                              Advanced Micro Devices Inc
+                                                            9 April 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 October 2026.
+   This Internet-Draft will expire on 11 October 2026.
 
 Copyright Notice
 
@@ -3041,5 +3041,5 @@ Authors' Addresses
 
 
    Giri Mandyam
-   Mediatek Inc
-   Email: giridhar.mandyam@gmail.com
+   Advanced Micro Devices Inc
+   Email: gmandyam@amd.com
