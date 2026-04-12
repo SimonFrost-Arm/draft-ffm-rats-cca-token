@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-09T02:09:45.396667+00:00",
+  "timestamp": "2026-04-12T02:30:50.461793+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -2954,24 +2954,26 @@
       "id": "PR_kwDOMRXjbM7Q8gVR",
       "title": "Update G. Mandyam contact info",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/49",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "gmandyam",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-04-08T21:40:32Z",
-      "updatedAt": "2026-04-08T23:27:05Z",
+      "updatedAt": "2026-04-09T13:49:50Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "696204767ee8cd1b52ca9c72459f2bb815a32fa3",
       "headRepository": "gmandyam/draft-ffm-rats-cca-token",
       "headRefName": "Update-Contact-Info",
       "headRefOid": "f76f386628d01576b1572cfcf81cca0ff0f9002b",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-04-09T13:49:50Z",
+      "mergedAt": "2026-04-09T13:49:50Z",
+      "mergedBy": "thomas-fossati",
+      "mergeCommit": {
+        "oid": "557a6d6f967ab87df57a0902274118ad7349a503"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2985,6 +2987,19 @@
           "body": "LGTM",
           "createdAt": "2026-04-08T23:27:05Z",
           "updatedAt": "2026-04-08T23:27:05Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7zVlq9",
+          "commit": {
+            "abbreviatedOid": "f76f386"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-04-09T13:09:23Z",
+          "updatedAt": "2026-04-09T13:09:23Z",
           "comments": []
         }
       ]
