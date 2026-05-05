@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-04-12T02:30:50.461793+00:00",
+  "timestamp": "2026-05-05T02:38:57.143501+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -679,6 +679,22 @@
           "updatedAt": "2026-03-18T15:58:45Z"
         }
       ]
+    },
+    {
+      "number": 50,
+      "id": "I_kwDOMRXjbM8AAAABBOzumA",
+      "title": "Clarification needed: exact input bytes for the platform challenge (token binding) hash",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/50",
+      "state": "OPEN",
+      "author": "Ruach",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Problem Statement\n\nThe CCA token specification defines the platform challenge as a hash of the Realm Attestation Key (RAK), used to bind the platform and realm tokens. However, the spec does not state what byte representation of the RAK should be used as the hash input.\n\n```\ncca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64\ncca-platform-challenge-label = 10\ncca-platform-challenge = (\n    cca-platform-challenge-label => cca-hash-type\n)\n```\nWhat should be the correct input to be hashed?\n\nRaw uncompressed EC point: 0x04 || X || Y (97 bytes for P-384)\nCBOR-encoded COSE_Key: a CBOR map as defined by COSE\nRequest\nThe spec should explicitly state which byte representation of the RAK MUST be used as the input to the hash function when computing the cca-platform-challenge binding value.",
+      "createdAt": "2026-05-04T15:07:10Z",
+      "updatedAt": "2026-05-04T15:07:10Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
