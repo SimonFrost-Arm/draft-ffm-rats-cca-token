@@ -525,7 +525,7 @@ This claim MUST be present in a CCA Platform attestation token.
 ~~~
 
 
-### Platform Config
+### Platform Manufacturing Config
 {: #sec-platform-manufacturing-config }
 
 The CCA platform manufacturing config claim represents a record of production
