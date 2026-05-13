@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 11 October 2026                                          Linaro
+Expires: 14 November 2026                                         Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                            9 April 2026
+                                                             13 May 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 October 2026.
+   This Internet-Draft will expire on 14 November 2026.
 
 Copyright Notice
 
@@ -83,7 +83,7 @@ Table of Contents
        4.5.1.  CCA Platform Profile Definition
        4.5.2.  Security Lifecycle
        4.5.3.  Platform Config
-       4.5.4.  Platform Config
+       4.5.4.  Platform Manufacturing Config
      4.6.  Software Inventory Claims
        4.6.1.  Software Components
        4.6.2.  CCA Platform Hash Algorithm ID
@@ -783,7 +783,7 @@ arm-platform-lifecycle = (
        arm-platform-config-label => arm-platform-config-type
    )
 
-4.5.4.  Platform Config
+4.5.4.  Platform Manufacturing Config
 
    The CCA platform manufacturing config claim represents a record of
    production phases and testing conducted during the manufacturing
