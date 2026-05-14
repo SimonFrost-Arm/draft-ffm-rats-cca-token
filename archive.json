@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-05-05T02:38:57.143501+00:00",
+  "timestamp": "2026-05-14T03:21:23.146787+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -3016,6 +3016,61 @@
           "body": "LGTM",
           "createdAt": "2026-04-09T13:09:23Z",
           "updatedAt": "2026-04-09T13:09:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "id": "PR_kwDOMRXjbM7ax1Ov",
+      "title": "Fix section heading for Platform Manufacturing Config claim",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/51",
+      "state": "MERGED",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-05-12T17:21:23Z",
+      "updatedAt": "2026-05-13T08:51:53Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "557a6d6f967ab87df57a0902274118ad7349a503",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "wordsmith",
+      "headRefOid": "0f93312b8699df42323bfca984b6d59880e4077a",
+      "closedAt": "2026-05-13T08:51:48Z",
+      "mergedAt": "2026-05-13T08:51:48Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "663f3b09a7ba34ebe4f5268f6bbaa045b3e7e5b9"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM7-zEvQ",
+          "commit": {
+            "abbreviatedOid": "0f93312"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-12T17:43:51Z",
+          "updatedAt": "2026-05-12T17:43:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM7_GnN6",
+          "commit": {
+            "abbreviatedOid": "0f93312"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-05-13T08:51:38Z",
+          "updatedAt": "2026-05-13T08:51:38Z",
           "comments": []
         }
       ]
