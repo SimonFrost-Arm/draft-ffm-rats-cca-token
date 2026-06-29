@@ -375,13 +375,14 @@ This claim MUST be present in a CCA Platform attestation token.
 ### CCA Platform Instance ID
 {: #sec-instance-id-claim}
 
-The Instance ID claim represents the unique identifier of the Platform
-Attestation Key (PAK).
+The Instance ID claim is a unique identifier of this Platform instance.
+It can be used by a verifier to help locate an endorsement for the Attestation Key (PAK).
+
 The EAT `ueid` (claim key 256) of type RAND is used.  The following constraints
 apply to the `ueid-type`:
 
 * The length MUST be 33 bytes.
-* The first byte MUST be 0x01 (RAND) followed by the 32-byte unique identifier of the PAK.
+* The first byte MUST be 0x01 (RAND) followed by the 32-byte unique identifier.
 
 ~~~ cbor-diag
 {::include cddl/platform/eat-ueid-rand.cddl}
@@ -1067,7 +1068,7 @@ For use in CCA tokens, it must be possible to encode the epoch handle as an opaq
 | CBOR Serialization | Variant serialization MAY be used |
 | COSE Protection | COSE_Sign1 MUST be used |
 | Algorithms | {{COSE-ALGS}} SHOULD be used |
-| Detached EAT Bundle Usage | Detached EAT bundles MUST NOT be sent |
+| Detached EAT Bundle Usage | The CCA Claims set SHOULD not be carried in a Detached EAT bundle |
 | Verification Key Identification | Any identification method listed in {{Appendix F.1 of EAT}} |
 | Endorsements | See {{sec-cca-endorsements}} |
 | Freshness | nonce or epoch ID based |
