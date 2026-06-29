@@ -7,7 +7,7 @@ Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
 Expires: 31 December 2026                                         Linaro
                                                               G. Mandyam
-                                                            Mediatek Inc
+                                              Advanced Micro Devices Inc
                                                             29 June 2026
 
 
@@ -83,7 +83,7 @@ Table of Contents
        4.5.1.  CCA Platform Profile Definition
        4.5.2.  Security Lifecycle
        4.5.3.  Platform Config
-       4.5.4.  Platform Config
+       4.5.4.  Platform Manufacturing Config
      4.6.  Software Inventory Claims
        4.6.1.  Software Components
        4.6.2.  CCA Platform Hash Algorithm ID
@@ -786,7 +786,7 @@ arm-platform-lifecycle = (
        arm-platform-config-label => arm-platform-config-type
    )
 
-4.5.4.  Platform Config
+4.5.4.  Platform Manufacturing Config
 
    The CCA platform manufacturing config claim represents a record of
    production phases and testing conducted during the manufacturing
@@ -904,18 +904,18 @@ arm-platform-lifecycle = (
 
 4.6.1.6.  Live Firmware Activation support
 
-   The Live Firmware Activation support attribute (key=7) declares
-   whether an individual component is subject to Live Firmware
-   Activation.  If the attribute is False, the component will not be
-   updated before the next CCA Platform software component.
+   The Live Firmware Activation support attribute (key=7) indicates
+   whether the component is subject to Live Firmware Activation.  If the
+   attribute is set to false, the component will not be updated before
+   the next CCA Platform software update.
 
-   The CCA platform software component Live Firmware activation support
-   attribute is optional in a CCA Platform software component.
+   The Live Firmware Activation support attribute of the CCA Platform
+   software component is optional.
 
 4.6.1.7.  Software Component Countersigner ID List
 
-   The Live Firmware Activation support attribute (key=7) list contains
-   hashes of public keys which identify signing authorities that provide
+   The Software Component Countersigner ID List (key=8) contains hashes
+   of public keys which identify signing authorities that provide
    additional trustworthiness information for the software component.
    These signatures are provided in addition to the primary signature,
    which is identified by the CCA platform software component signer ID.
@@ -926,7 +926,7 @@ arm-platform-lifecycle = (
    *  An indication of approval for the component, provided by the owner
       of the CCA platform
 
-   *  An indication of approval for the component, provided by a third
+   *  An indication of approval for the component, provided by a third-
       party auditor
 
    The order of multiple entries within the countersigner ID list may
@@ -3043,5 +3043,5 @@ Authors' Addresses
 
 
    Giri Mandyam
-   Mediatek Inc
-   Email: giridhar.mandyam@gmail.com
+   Advanced Micro Devices Inc
+   Email: gmandyam@amd.com
