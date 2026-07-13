@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 31 December 2026                                         Linaro
+Expires: 14 January 2027                                          Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                            29 June 2026
+                                                            13 July 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 31 December 2026.
+   This Internet-Draft will expire on 14 January 2027.
 
 Copyright Notice
 
@@ -1815,7 +1815,7 @@ arm-platform-device-tpm-binding-data = (
    information that the key instance has been revoked and is no longer
    valid.
 
-   If an implementation has chosen to endorsed the CPAK via an X.509
+   If an implementation has chosen to endorse the CPAK via an X.509
    certificate chain, the ID claims may not be required to verify the
    CPAK.  Instead this is achieved by forming a full X.509 chain to the
    trusted Certificate Authority root and validating that chain.
@@ -1823,17 +1823,17 @@ arm-platform-device-tpm-binding-data = (
    Additional validation checks on the token are:
 
    *  Checking that the binding between the CCA Platform token and the
-      Realm state token is valid Section 4.10}. This has the side effect
+      Realm state token is valid Section 4.10.  This has the side effect
       of establishing the trustworthiness of the RAK public key.
 
    *  Validating that the Realm state token is correctly signed by the
       RAK.
 
-   *  Checking that the value of the lll claim is cca-platform-
-      lifecycle-secured state.  Note that some other values of this
-      claim (cca-platform-lifecycle-non-psa-rot-debug and cca-platform-
-      lifecycle-recoverable-psa-rot states) may indicate that the
-      attester is only temporarily unsuitable and the verifier may
+   *  Checking that the value of the Section 4.5.2 claim is cca-
+      platform-lifecycle-secured state.  Note that some other values of
+      this claim (cca-platform-lifecycle-non-psa-rot-debug and cca-
+      platform-lifecycle-recoverable-psa-rot states) may indicate that
+      the attester is only temporarily unsuitable and the verifier may
       choose the to indicate this as a contraindication rather than a
       full verification failure.  See discussion of the CCA platform
       lifecycle in [RMM].
@@ -2492,9 +2492,9 @@ arm-platform-device-tpm-binding-data = (
    [RATS-CoRIM]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-10, 2
-              March 2026, <https://datatracker.ietf.org/doc/html/draft-
-              ietf-rats-corim-10>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-11, 6 July
+              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              rats-corim-11>.
 
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
