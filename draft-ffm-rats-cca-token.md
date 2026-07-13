@@ -1119,7 +1119,7 @@ used to assist locating the key used to verify the signature covering the CCA Pl
 CWT token. The verifier can also be supplied with the information that the
 key instance has been revoked and is no longer valid.
 
-If an implementation has chosen to endorsed the CPAK via an X.509 certificate chain,
+If an implementation has chosen to endorse the CPAK via an X.509 certificate chain,
 the ID claims may not be required to verify the CPAK. Instead this is achieved
 by forming a full X.509 chain to the trusted Certificate Authority root and
 validating that chain.
@@ -1127,10 +1127,10 @@ validating that chain.
 Additional validation checks on the token are:
 
 * Checking that the binding between the CCA Platform token and the Realm state
-token is valid {{sec-token-binding}}}. This has the side effect of establishing
+token is valid {{sec-token-binding}}. This has the side effect of establishing
 the trustworthiness of the RAK public key.
 * Validating that the Realm state token is correctly signed by the RAK.
-* Checking that the value of the lll claim is cca-platform-lifecycle-secured state. Note
+* Checking that the value of the {{sec-security-lifecycle}} claim is cca-platform-lifecycle-secured state. Note
 that some other values of this claim (cca-platform-lifecycle-non-psa-rot-debug and
 cca-platform-lifecycle-recoverable-psa-rot states) may indicate that the attester
 is only temporarily unsuitable and the verifier may choose the to indicate
