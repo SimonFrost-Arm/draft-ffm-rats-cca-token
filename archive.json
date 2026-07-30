@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-19T02:34:33.623502+00:00",
+  "timestamp": "2026-07-30T02:12:26.162995+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -792,6 +792,44 @@
           "body": "Fixed in https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/55",
           "createdAt": "2026-07-13T13:16:20Z",
           "updatedAt": "2026-07-13T13:16:20Z"
+        }
+      ]
+    },
+    {
+      "number": 57,
+      "id": "I_kwDOMRXjbM8AAAABKnbDfA",
+      "title": "Clarify the requirement of LifeCycle value in arm-platform-tbb-rotpk-item",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/57",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "In the current specification:\n\narm-platform-tbb-rotpk-item first element, i.e. \n1=> tstr\n\nAllows users to set any arbitrary string value.\n\nWe need to change it to much more stringent requirement such as\nThe value of the string MUST be either \"CM\" or \"DM\"",
+      "createdAt": "2026-07-29T08:59:02Z",
+      "updatedAt": "2026-07-29T09:23:13Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think that would be a mistake.\nIf vendor X wants to use different names, the token specification should allow that.\nThe endorsement profile for vendor X will specify which names are valid for them.",
+          "createdAt": "2026-07-29T09:16:53Z",
+          "updatedAt": "2026-07-29T09:16:53Z"
+        },
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "body": "RoTPKs can ONLY be populated in the Device LifeCycle stage of Chip Manufacturing or Device Manufacturing",
+          "createdAt": "2026-07-29T09:20:59Z",
+          "updatedAt": "2026-07-29T09:20:59Z"
+        },
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "body": "\nhttps://trustedfirmware-a.readthedocs.io/en/stable/design/trusted-board-boot.html",
+          "createdAt": "2026-07-29T09:23:13Z",
+          "updatedAt": "2026-07-29T09:23:13Z"
         }
       ]
     }
