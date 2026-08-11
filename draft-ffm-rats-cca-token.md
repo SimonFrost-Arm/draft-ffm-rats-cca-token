@@ -320,12 +320,14 @@ See {{sec-security-consideration}} for more details.
 The above tokens are presented to the requester within a top level Conceptual Message Wrapper (CMW) collection {{CMW}}.
 
 This profile conforms to the claims in the Beta3 release of the 2.0 version of the
-Realm Management Monitor specification. {{RMM}}.
+Realm Management Monitor specification {{RMM}}.
+
+The CDDL within this draft conforms to the claim set at the latest profile version.
+See compatibility statements within the description of each claim to determine status in earlier profile versions.
 
 This profile does not include any coverage for CCA Platform or Realm claims
 prior to the Alpha 14 release of the 1.1 version of the Realm Management Monitor
-specification. {{RMM}}.
-
+specification {{RMM}}.
 
 
 CDDL {{!RFC8610}} along with text descriptions is used to define each claim
@@ -346,12 +348,13 @@ the other for a bstr encoding of the Realm state token.
 The type of the CMW entry will vary for the Realm state token depending on whether
 the delegated or direct attestation model is used by an implementation.
 
-Depending upon the features within a CCA implementation here may be additional entries within the CMW.
+Depending upon the features within a CCA implementation there may be additional entries within the CMW.
 These can include:
+
 * A Firmware Activity List (FAL), used to support verification of the effect of Live Firmware Activation on the CCA Platform {{sec-live-firmware-activation}}.
 * Device Token - where a Realm has device(s) selectively assigned, the Device Token provides binding hashes to the device evidence {{sec-device-token}}.
-* Selective Device Token - contains evidence obtained from selectively assigned devices {{sec-device-token}}.
-* Comprehensive Device Token - contains evidence obtained from comprehensively trusted devices {{sec-device-token}}.
+* Selective Device Token - contains evidence obtained from selectively assigned devices {{sec-device-token-selective}}.
+* Comprehensive Device Token - contains evidence obtained from comprehensively trusted devices {{sec-device-token-comp}}.
 * Certificate Chain information optionally included to support an inline leaf endorsement certificate {{sec-signing-keys}}.
 
 ~~~
@@ -366,7 +369,7 @@ These can include:
 ### CCA Platform Workload Binding
 {: #sec-platform-workload-binding-claim}
 
-The Workload Binding claim rovides the basis for a cryptographic binding to be established between the CCA Platform and CCA
+The Workload Binding claim provides the basis for a cryptographic binding to be established between the CCA Platform and CCA
 Realm attestation tokens.
 
 The value of the workload binding claim varies by the implemented attestation model.
@@ -394,7 +397,7 @@ This claim is OPTIONAL in a CCA Platform attestation token.
 
 See {{sec-token-binding-compatibility}} for further details on when the claim may be present.
 
-The {{EAT}} `nonce` (claim key 10) is used.  Since the EAT nonce claim offers flexiblity for different
+The {{EAT}} `eat_nonce` (claim key 10) is used.  Since the EAT nonce claim offers flexiblity for different
 attestation technologies, this specifications applies the following constraints
  to the `nonce-type`:
 
@@ -416,68 +419,68 @@ The claims used vary by profile version and attestation model implemented as out
 {: #prof-bind-11}
 
 * Attestation Model: Delegated
-* Binding Claim: eat-nonce
+* Binding Claim: eat_nonce
 * Claim Value: H(RAK public)
 
 #### Profile tag:arm.com,2024:cca_platform#2.0.0
 {: #prof-bind-20}
 
 * Attestation Model: Delegated
-* Binding Claim: eat-nonce
+* Binding Claim: eat_nonce
 * Claim Value: H(RAK public)
 
-#### Profile tag:arm.com,2024:cca_platform#2.0.0#direct
+#### Profile tag:arm.com,2024:cca_platform#2.0.0;direct
 {: #prof-bind-20-direct}
 
 * Attestation Model: Direct
-* Binding Claim: eat-nonce
+* Binding Claim: eat_nonce
 * Claim Value: H(realm claims)
 
 #### Profile tag:arm.com,2026:cca_platform#2.0.0
 {: #prof-bind-201}
 
 * Attestation Model: Delegated
-* Binding Claim: eat-nonce
+* Binding Claim: eat_nonce
 * Claim Value: H(RAK public)
-* Equivalent profile value: tag:arm.com,2026:cca_platform#2.0.0#delegated
+* Equivalent profile value: tag:arm.com,2026:cca_platform#2.0.0;delegated
 
-#### Profile tag:arm.com,2026:cca_platform#2.0.0#direct
+#### Profile tag:arm.com,2026:cca_platform#2.0.0;direct
 {: #prof-bind-201-direct}
 
 * Attestation Model: Direct
-* Binding Claim: eat-nonce
+* Binding Claim: eat_nonce
 * Claim Value: H(realm claims)
 
-#### Profile tag:arm.com,2026:cca_platform#2.0.0#HESRAK
+#### Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
 {: #prof-bind-201-hesrak}
 
 * Attestation Model: Delegated attestation, with the RAK kept within the HES
-* Binding Claim: eat-nonce
+* Binding Claim: eat_nonce
 * Claim Value: H(RAK public)
-* Note: for this attestation model, the PAT also contains an eat-nonce claim with the value equal to the CCA Realm challenge claim.
+* Note: for this attestation model, the PAT also contains an eat_nonce claim with the value equal to the CCA Realm challenge claim.
 
 #### Profile tag:arm.com,2026:cca_platform#2.1.0
 {: #prof-bind-211}
 
 * Attestation Model: Delegated
-* Binding Claim: eat-nonce
+* Binding Claim: eat_nonce
 * Claim Value: H(RAK public)
-* Equivalent profile value: tag:arm.com,2026:cca_platform#2.1.0#delegated
+* Equivalent profile value: tag:arm.com,2026:cca_platform#2.1.0;delegated
 
-#### Profile tag:arm.com,2026:cca_platform#2.1.0#direct
+#### Profile tag:arm.com,2026:cca_platform#2.1.0;direct
 {: #prof-bind-211-direct}
 
 * Attestation Model: Direct
-* Binding Claim: eat-nonce
+* Binding Claim: eat_nonce
 * Claim Value: H(realm claims)
 
-#### Profile tag:arm.com,2026:cca_platform#2.0.0#HESRAK
+#### Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
 {: #prof-bind-211-hesrak}
 
 * Attestation Model: Delegated attestation, with the RAK kept within the HES
-* Binding Claim: eat-nonce
+* Binding Claim: eat_nonce
 * Claim Value: H(RAK public)
-* Note: for this attestation model, the PAT also contains an eat-nonce claim with the value equal to the CCA Realm challenge claim.
+* Note: for this attestation model, the PAT also contains an `eat_nonce` claim with the value equal to the CCA Realm challenge claim.
 
 #### Binding claim Notes
 
@@ -487,14 +490,14 @@ The hash algorithm used to generate H(RAK public) is that detailed in cca-realm-
 For the direct attestation model, the Realm Claims are an Untagged Claims set as defined in https://datatracker.ietf.org/doc/draft-ietf-rats-uccs/.
 The hash algorithm used to generate H(realm claims) is that detailed in cca-realm-hash-algo-id.
 
-The CCA platform challenge claim MUST not be present when the CCA platform profile claim has any of the following values:
+The CCA platform challenge claim MUST NOT be present when the CCA platform profile claim has any of the following values:
 
 * tag:arm.com,2026:cca_platform#2.0.0
-* tag:arm.com,2026:cca_platform#2.0.0#delegated
-* tag:arm.com,2026:cca_platform#2.0.0#direct
+* tag:arm.com,2026:cca_platform#2.0.0;delegated
+* tag:arm.com,2026:cca_platform#2.0.0;direct
 * tag:arm.com,2026:cca_platform#2.1.0
-* tag:arm.com,2026:cca_platform#2.1.0#delegated
-* tag:arm.com,2026:cca_platform#2.1.0#direct
+* tag:arm.com,2026:cca_platform#2.1.0;delegated
+* tag:arm.com,2026:cca_platform#2.1.0;direct
 
 
 ## Target Identification Claims
@@ -974,7 +977,7 @@ found in the token.
 The EAT {{EAT}} `eat_profile` (claim key 265) is used.
 
 The format of the CCA Realm profile claim is defined as a text string of value
-"tag:arm.com,2024:realm#2.0.0".
+"tag:arm.com,2026:realm#2.0.0".
 
 This claim is OPTIONAL in a CCA Realm attestation token.
 If the Realm profile is not included in a CCA Realm token then the profile value
@@ -1116,7 +1119,7 @@ To correspond with the `ueid RAND` type, the first byte of the Realm Instance ID
 
 This claim MUST be present in a CCA Realm state attestation token.
 
-Compatibility: this claim can be present where realm profile values are at or newer than "tag:arm.com,2024:cca_realm#2.0.0".
+Compatibility: this claim can be present where realm profile values are at or newer than "tag:arm.com,2024:realm#2.0.0".
 
 
 ~~~
@@ -1131,9 +1134,9 @@ cca-realm-devices-token that represents the set of devices assigned to the Realm
 
 The Realm devices token hash claim MUST be present in a Realm token whenever
 one or more devices are assigned to the Realm.
-If no devices are assigned, the claim MUST not be present.
+If no devices are assigned, the claim MUST NOT be present.
 
-Compatibility: this claim can be present where realm profile values are at or newer than "tag:arm.com,2024:cca_realm#2.0.0".
+Compatibility: this claim can be present where realm profile values are at or newer than "tag:arm.com,2024:realm#2.0.0".
 
 ~~~
 {::include cddl/realm/cca-realm-devices-token-hash.cddl}
@@ -1142,6 +1145,12 @@ Compatibility: this claim can be present where realm profile values are at or ne
 ## Device Token
 {: #sec-device-token}
 ToDo in separate PR
+
+### Selectively Assigned Devices Token
+{: #sec-device-token-selective}
+
+### Comprehensive Trust Devices Token
+{: #sec-device-token-comp}
 
 ## Token Binding
 {: #sec-token-binding}
