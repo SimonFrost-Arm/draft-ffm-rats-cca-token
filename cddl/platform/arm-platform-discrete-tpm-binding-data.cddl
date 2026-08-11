@@ -1,0 +1,7 @@
+arm-platform-discrete-tpm-binding-data-label =  2407
+
+arm-platform-discrete-tpm-binding-data-type = bytes
+
+arm-platform-discrete-tpm-binding-data = (
+    arm-platform-discrete-tpm-binding-data-label => arm-platform-discrete-tpm-binding-data-type
+)

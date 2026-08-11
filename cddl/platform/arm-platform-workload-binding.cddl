@@ -1,0 +1,5 @@
+arm-platform-workload-binding-label = 2408
+
+arm-platform-workload-binding = (
+    arm-platform-workload-binding-label => arm-platform-hash-type
+)
