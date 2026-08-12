@@ -1059,7 +1059,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Frost, et al.</td>
-<td class="center">Expires 12 February 2027</td>
+<td class="center">Expires 13 February 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg {
 <dd class="internet-draft">draft-ffm-rats-cca-token-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-08-11" class="published">11 August 2026</time>
+<time datetime="2026-08-12" class="published">12 August 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-02-12">12 February 2027</time></dd>
+<dd class="expires"><time datetime="2027-02-13">13 February 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1131,7 +1131,7 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 12 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 February 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1311,6 +1311,14 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.9">
                 <p id="section-toc.1-1.4.2.9.1"><a href="#section-4.9" class="auto internal xref">4.9</a>.  <a href="#name-device-token" class="internal xref">Device Token</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.9.2.1">
+                    <p id="section-toc.1-1.4.2.9.2.1.1"><a href="#section-4.9.1" class="auto internal xref">4.9.1</a>.  <a href="#name-selectively-assigned-device" class="internal xref">Selectively Assigned Devices Token</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.9.2.2">
+                    <p id="section-toc.1-1.4.2.9.2.2.1"><a href="#section-4.9.2" class="auto internal xref">4.9.2</a>.  <a href="#name-comprehensive-trust-devices" class="internal xref">Comprehensive Trust Devices Token</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4.2.10">
                 <p id="section-toc.1-1.4.2.10.1"><a href="#section-4.10" class="auto internal xref">4.10</a>. <a href="#name-token-binding" class="internal xref">Token Binding</a></p>
@@ -1913,19 +1921,21 @@ Target Environment elements:<a href="#section-4-2" class="pilcrow">¶</a></p>
 See <a href="#sec-security-consideration" class="auto internal xref">Section 9</a> for more details.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <p id="section-4-5">The above tokens are presented to the requester within a top level Conceptual Message Wrapper (CMW) collection <span>[<a href="#CMW" class="cite xref">CMW</a>]</span>.<a href="#section-4-5" class="pilcrow">¶</a></p>
 <p id="section-4-6">This profile conforms to the claims in the Beta3 release of the 2.0 version of the
-Realm Management Monitor specification. <span>[<a href="#RMM" class="cite xref">RMM</a>]</span>.<a href="#section-4-6" class="pilcrow">¶</a></p>
-<p id="section-4-7">This profile does not include any coverage for CCA Platform or Realm claims
+Realm Management Monitor specification <span>[<a href="#RMM" class="cite xref">RMM</a>]</span>.<a href="#section-4-6" class="pilcrow">¶</a></p>
+<p id="section-4-7">The CDDL within this draft conforms to the claim set at the latest profile version.
+See compatibility statements within the description of each claim to determine status in earlier profile versions.<a href="#section-4-7" class="pilcrow">¶</a></p>
+<p id="section-4-8">This profile does not include any coverage for CCA Platform or Realm claims
 prior to the Alpha 14 release of the 1.1 version of the Realm Management Monitor
-specification. <span>[<a href="#RMM" class="cite xref">RMM</a>]</span>.<a href="#section-4-7" class="pilcrow">¶</a></p>
-<p id="section-4-8">CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> along with text descriptions is used to define each claim
+specification <span>[<a href="#RMM" class="cite xref">RMM</a>]</span>.<a href="#section-4-8" class="pilcrow">¶</a></p>
+<p id="section-4-9">CDDL <span>[<a href="#RFC8610" class="cite xref">RFC8610</a>]</span> along with text descriptions is used to define each claim
 independent of encoding.  The following CDDL type(s) are reused by different
-claims:<a href="#section-4-8" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4-9">
+claims:<a href="#section-4-9" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-4-10">
 <pre>
 arm-platform-hash-type = bytes .size 32 /
                          bytes .size 48 /
                          bytes .size 64
-</pre><a href="#section-4-9" class="pilcrow">¶</a>
+</pre><a href="#section-4-10" class="pilcrow">¶</a>
 </div>
 <div id="sec-cca-token-collection">
 <section id="section-4.1">
@@ -1937,14 +1947,26 @@ The collection map has two core entries, one for a bstr encoding of the CCA Plat
 the other for a bstr encoding of the Realm state token.
 The type of the CMW entry will vary for the Realm state token depending on whether
 the delegated or direct attestation model is used by an implementation.<a href="#section-4.1-1" class="pilcrow">¶</a></p>
-<p id="section-4.1-2">Depending upon the features within a CCA implementation here may be additional entries within the CMW.
-These can include:
-* A Firmware Activity List (FAL), used to support verification of the effect of Live Firmware Activation on the CCA Platform <a href="#sec-live-firmware-activation" class="auto internal xref">Section 7.1</a>.
-* Device Token - where a Realm has device(s) selectively assigned, the Device Token provides binding hashes to the device evidence <a href="#sec-device-token" class="auto internal xref">Section 4.9</a>.
-* Selective Device Token - contains evidence obtained from selectively assigned devices <a href="#sec-device-token" class="auto internal xref">Section 4.9</a>.
-* Comprehensive Device Token - contains evidence obtained from comprehensively trusted devices <a href="#sec-device-token" class="auto internal xref">Section 4.9</a>.
-* Certificate Chain information optionally included to support an inline leaf endorsement certificate <a href="#sec-signing-keys" class="auto internal xref">Section 6</a>.<a href="#section-4.1-2" class="pilcrow">¶</a></p>
-<div class="alignLeft art-text artwork" id="section-4.1-3">
+<p id="section-4.1-2">Depending upon the features within a CCA implementation there may be additional entries within the CMW.
+These can include:<a href="#section-4.1-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4.1-3.1">
+            <p id="section-4.1-3.1.1">A Firmware Activity List (FAL), used to support verification of the effect of Live Firmware Activation on the CCA Platform <a href="#sec-live-firmware-activation" class="auto internal xref">Section 7.1</a>.<a href="#section-4.1-3.1.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-3.2">
+            <p id="section-4.1-3.2.1">Device Token - where a Realm has device(s) selectively assigned, the Device Token provides binding hashes to the device evidence <a href="#sec-device-token" class="auto internal xref">Section 4.9</a>.<a href="#section-4.1-3.2.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-3.3">
+            <p id="section-4.1-3.3.1">Selective Device Token - contains evidence obtained from selectively assigned devices <a href="#sec-device-token-selective" class="auto internal xref">Section 4.9.1</a>.<a href="#section-4.1-3.3.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-3.4">
+            <p id="section-4.1-3.4.1">Comprehensive Device Token - contains evidence obtained from comprehensively trusted devices <a href="#sec-device-token-comp" class="auto internal xref">Section 4.9.2</a>.<a href="#section-4.1-3.4.1" class="pilcrow">¶</a></p>
+</li>
+          <li class="normal" id="section-4.1-3.5">
+            <p id="section-4.1-3.5.1">Certificate Chain information optionally included to support an inline leaf endorsement certificate <a href="#sec-signing-keys" class="auto internal xref">Section 6</a>.<a href="#section-4.1-3.5.1" class="pilcrow">¶</a></p>
+</li>
+        </ul>
+<div class="alignLeft art-text artwork" id="section-4.1-4">
 <pre>
 ; CMW (draft-ietf-rats-msg-wrap) Collection
 cca-token = #6.907(cca-token-cmw)
@@ -1962,7 +1984,7 @@ cca-token-cmw = {
     bytes .cbor COSE_Sign1&lt;cca-realm-claims&gt;
   ]
 }
-</pre><a href="#section-4.1-3" class="pilcrow">¶</a>
+</pre><a href="#section-4.1-4" class="pilcrow">¶</a>
 </div>
 </section>
 </div>
@@ -1983,7 +2005,7 @@ cca-token-cmw = {
           <h4 id="name-cca-platform-workload-bindi">
 <a href="#section-4.3.1" class="section-number selfRef">4.3.1. </a><a href="#name-cca-platform-workload-bindi" class="section-name selfRef">CCA Platform Workload Binding</a>
           </h4>
-<p id="section-4.3.1-1">The Workload Binding claim rovides the basis for a cryptographic binding to be established between the CCA Platform and CCA
+<p id="section-4.3.1-1">The Workload Binding claim provides the basis for a cryptographic binding to be established between the CCA Platform and CCA
 Realm attestation tokens.<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
 <p id="section-4.3.1-2">The value of the workload binding claim varies by the implemented attestation model.
 See <a href="#sec-token-binding-compatibility" class="auto internal xref">Section 4.3.3</a> for further details.<a href="#section-4.3.1-2" class="pilcrow">¶</a></p>
@@ -2011,7 +2033,7 @@ claim can be present in the platform attestation token.
 This claim is used to carry a challenge provided by the relying party to demonstrate freshness of the generated token.<a href="#section-4.3.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-2">This claim is OPTIONAL in a CCA Platform attestation token.<a href="#section-4.3.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.2-3">See <a href="#sec-token-binding-compatibility" class="auto internal xref">Section 4.3.3</a> for further details on when the claim may be present.<a href="#section-4.3.2-3" class="pilcrow">¶</a></p>
-<p id="section-4.3.2-4">The <span>[<a href="#EAT" class="cite xref">EAT</a>]</span> <code>nonce</code> (claim key 10) is used.  Since the EAT nonce claim offers flexiblity for different
+<p id="section-4.3.2-4">The <span>[<a href="#EAT" class="cite xref">EAT</a>]</span> <code>eat_nonce</code> (claim key 10) is used.  Since the EAT nonce claim offers flexiblity for different
 attestation technologies, this specifications applies the following constraints
  to the <code>nonce-type</code>:<a href="#section-4.3.2-4" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -2052,7 +2074,7 @@ The claims used vary by profile version and attestation model implemented as out
                 <p id="section-4.3.3.1-1.1.1">Attestation Model: Delegated<a href="#section-4.3.3.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.1-1.2">
-                <p id="section-4.3.3.1-1.2.1">Binding Claim: eat-nonce<a href="#section-4.3.3.1-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.1-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.1-1.3">
                 <p id="section-4.3.3.1-1.3.1">Claim Value: H(RAK public)<a href="#section-4.3.3.1-1.3.1" class="pilcrow">¶</a></p>
@@ -2070,7 +2092,7 @@ The claims used vary by profile version and attestation model implemented as out
                 <p id="section-4.3.3.2-1.1.1">Attestation Model: Delegated<a href="#section-4.3.3.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.2-1.2">
-                <p id="section-4.3.3.2-1.2.1">Binding Claim: eat-nonce<a href="#section-4.3.3.2-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.2-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.2-1.3">
                 <p id="section-4.3.3.2-1.3.1">Claim Value: H(RAK public)<a href="#section-4.3.3.2-1.3.1" class="pilcrow">¶</a></p>
@@ -2081,14 +2103,14 @@ The claims used vary by profile version and attestation model implemented as out
 <div id="prof-bind-20-direct">
 <section id="section-4.3.3.3">
             <h5 id="name-profile-tagarmcom2024cca_plat">
-<a href="#section-4.3.3.3" class="section-number selfRef">4.3.3.3. </a><a href="#name-profile-tagarmcom2024cca_plat" class="section-name selfRef">Profile tag:arm.com,2024:cca_platform#2.0.0#direct</a>
+<a href="#section-4.3.3.3" class="section-number selfRef">4.3.3.3. </a><a href="#name-profile-tagarmcom2024cca_plat" class="section-name selfRef">Profile tag:arm.com,2024:cca_platform#2.0.0;direct</a>
             </h5>
 <ul class="normal">
 <li class="normal" id="section-4.3.3.3-1.1">
                 <p id="section-4.3.3.3-1.1.1">Attestation Model: Direct<a href="#section-4.3.3.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.3-1.2">
-                <p id="section-4.3.3.3-1.2.1">Binding Claim: eat-nonce<a href="#section-4.3.3.3-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.3-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.3-1.3">
                 <p id="section-4.3.3.3-1.3.1">Claim Value: H(realm claims)<a href="#section-4.3.3.3-1.3.1" class="pilcrow">¶</a></p>
@@ -2106,13 +2128,13 @@ The claims used vary by profile version and attestation model implemented as out
                 <p id="section-4.3.3.4-1.1.1">Attestation Model: Delegated<a href="#section-4.3.3.4-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.4-1.2">
-                <p id="section-4.3.3.4-1.2.1">Binding Claim: eat-nonce<a href="#section-4.3.3.4-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.4-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.4-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.4-1.3">
                 <p id="section-4.3.3.4-1.3.1">Claim Value: H(RAK public)<a href="#section-4.3.3.4-1.3.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.4-1.4">
-                <p id="section-4.3.3.4-1.4.1">Equivalent profile value: tag:arm.com,2026:cca_platform#2.0.0#delegated<a href="#section-4.3.3.4-1.4.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.4-1.4.1">Equivalent profile value: tag:arm.com,2026:cca_platform#2.0.0;delegated<a href="#section-4.3.3.4-1.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </section>
@@ -2120,14 +2142,14 @@ The claims used vary by profile version and attestation model implemented as out
 <div id="prof-bind-201-direct">
 <section id="section-4.3.3.5">
             <h5 id="name-profile-tagarmcom2026cca_pla">
-<a href="#section-4.3.3.5" class="section-number selfRef">4.3.3.5. </a><a href="#name-profile-tagarmcom2026cca_pla" class="section-name selfRef">Profile tag:arm.com,2026:cca_platform#2.0.0#direct</a>
+<a href="#section-4.3.3.5" class="section-number selfRef">4.3.3.5. </a><a href="#name-profile-tagarmcom2026cca_pla" class="section-name selfRef">Profile tag:arm.com,2026:cca_platform#2.0.0;direct</a>
             </h5>
 <ul class="normal">
 <li class="normal" id="section-4.3.3.5-1.1">
                 <p id="section-4.3.3.5-1.1.1">Attestation Model: Direct<a href="#section-4.3.3.5-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.5-1.2">
-                <p id="section-4.3.3.5-1.2.1">Binding Claim: eat-nonce<a href="#section-4.3.3.5-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.5-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.5-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.5-1.3">
                 <p id="section-4.3.3.5-1.3.1">Claim Value: H(realm claims)<a href="#section-4.3.3.5-1.3.1" class="pilcrow">¶</a></p>
@@ -2138,20 +2160,20 @@ The claims used vary by profile version and attestation model implemented as out
 <div id="prof-bind-201-hesrak">
 <section id="section-4.3.3.6">
             <h5 id="name-profile-tagarmcom2026cca_plat">
-<a href="#section-4.3.3.6" class="section-number selfRef">4.3.3.6. </a><a href="#name-profile-tagarmcom2026cca_plat" class="section-name selfRef">Profile tag:arm.com,2026:cca_platform#2.0.0#HESRAK</a>
+<a href="#section-4.3.3.6" class="section-number selfRef">4.3.3.6. </a><a href="#name-profile-tagarmcom2026cca_plat" class="section-name selfRef">Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK</a>
             </h5>
 <ul class="normal">
 <li class="normal" id="section-4.3.3.6-1.1">
                 <p id="section-4.3.3.6-1.1.1">Attestation Model: Delegated attestation, with the RAK kept within the HES<a href="#section-4.3.3.6-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.6-1.2">
-                <p id="section-4.3.3.6-1.2.1">Binding Claim: eat-nonce<a href="#section-4.3.3.6-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.6-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.6-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.6-1.3">
                 <p id="section-4.3.3.6-1.3.1">Claim Value: H(RAK public)<a href="#section-4.3.3.6-1.3.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.6-1.4">
-                <p id="section-4.3.3.6-1.4.1">Note: for this attestation model, the PAT also contains an eat-nonce claim with the value equal to the CCA Realm challenge claim.<a href="#section-4.3.3.6-1.4.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.6-1.4.1">Note: for this attestation model, the PAT also contains an eat_nonce claim with the value equal to the CCA Realm challenge claim.<a href="#section-4.3.3.6-1.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </section>
@@ -2166,13 +2188,13 @@ The claims used vary by profile version and attestation model implemented as out
                 <p id="section-4.3.3.7-1.1.1">Attestation Model: Delegated<a href="#section-4.3.3.7-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.7-1.2">
-                <p id="section-4.3.3.7-1.2.1">Binding Claim: eat-nonce<a href="#section-4.3.3.7-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.7-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.7-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.7-1.3">
                 <p id="section-4.3.3.7-1.3.1">Claim Value: H(RAK public)<a href="#section-4.3.3.7-1.3.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.7-1.4">
-                <p id="section-4.3.3.7-1.4.1">Equivalent profile value: tag:arm.com,2026:cca_platform#2.1.0#delegated<a href="#section-4.3.3.7-1.4.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.7-1.4.1">Equivalent profile value: tag:arm.com,2026:cca_platform#2.1.0;delegated<a href="#section-4.3.3.7-1.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </section>
@@ -2180,14 +2202,14 @@ The claims used vary by profile version and attestation model implemented as out
 <div id="prof-bind-211-direct">
 <section id="section-4.3.3.8">
             <h5 id="name-profile-tagarmcom2026cca_platfo">
-<a href="#section-4.3.3.8" class="section-number selfRef">4.3.3.8. </a><a href="#name-profile-tagarmcom2026cca_platfo" class="section-name selfRef">Profile tag:arm.com,2026:cca_platform#2.1.0#direct</a>
+<a href="#section-4.3.3.8" class="section-number selfRef">4.3.3.8. </a><a href="#name-profile-tagarmcom2026cca_platfo" class="section-name selfRef">Profile tag:arm.com,2026:cca_platform#2.1.0;direct</a>
             </h5>
 <ul class="normal">
 <li class="normal" id="section-4.3.3.8-1.1">
                 <p id="section-4.3.3.8-1.1.1">Attestation Model: Direct<a href="#section-4.3.3.8-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.8-1.2">
-                <p id="section-4.3.3.8-1.2.1">Binding Claim: eat-nonce<a href="#section-4.3.3.8-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.8-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.8-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.8-1.3">
                 <p id="section-4.3.3.8-1.3.1">Claim Value: H(realm claims)<a href="#section-4.3.3.8-1.3.1" class="pilcrow">¶</a></p>
@@ -2198,20 +2220,20 @@ The claims used vary by profile version and attestation model implemented as out
 <div id="prof-bind-211-hesrak">
 <section id="section-4.3.3.9">
             <h5 id="name-profile-tagarmcom2026cca_platfor">
-<a href="#section-4.3.3.9" class="section-number selfRef">4.3.3.9. </a><a href="#name-profile-tagarmcom2026cca_platfor" class="section-name selfRef">Profile tag:arm.com,2026:cca_platform#2.0.0#HESRAK</a>
+<a href="#section-4.3.3.9" class="section-number selfRef">4.3.3.9. </a><a href="#name-profile-tagarmcom2026cca_platfor" class="section-name selfRef">Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK</a>
             </h5>
 <ul class="normal">
 <li class="normal" id="section-4.3.3.9-1.1">
                 <p id="section-4.3.3.9-1.1.1">Attestation Model: Delegated attestation, with the RAK kept within the HES<a href="#section-4.3.3.9-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.9-1.2">
-                <p id="section-4.3.3.9-1.2.1">Binding Claim: eat-nonce<a href="#section-4.3.3.9-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.9-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.9-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.9-1.3">
                 <p id="section-4.3.3.9-1.3.1">Claim Value: H(RAK public)<a href="#section-4.3.3.9-1.3.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.9-1.4">
-                <p id="section-4.3.3.9-1.4.1">Note: for this attestation model, the PAT also contains an eat-nonce claim with the value equal to the CCA Realm challenge claim.<a href="#section-4.3.3.9-1.4.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.9-1.4.1">Note: for this attestation model, the PAT also contains an <code>eat_nonce</code> claim with the value equal to the CCA Realm challenge claim.<a href="#section-4.3.3.9-1.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </section>
@@ -2225,25 +2247,25 @@ The claims used vary by profile version and attestation model implemented as out
 The hash algorithm used to generate H(RAK public) is that detailed in cca-realm-public-key-hash-algo-id.<a href="#section-4.3.3.10-1" class="pilcrow">¶</a></p>
 <p id="section-4.3.3.10-2">For the direct attestation model, the Realm Claims are an Untagged Claims set as defined in https://datatracker.ietf.org/doc/draft-ietf-rats-uccs/.
 The hash algorithm used to generate H(realm claims) is that detailed in cca-realm-hash-algo-id.<a href="#section-4.3.3.10-2" class="pilcrow">¶</a></p>
-<p id="section-4.3.3.10-3">The CCA platform challenge claim MUST not be present when the CCA platform profile claim has any of the following values:<a href="#section-4.3.3.10-3" class="pilcrow">¶</a></p>
+<p id="section-4.3.3.10-3">The CCA platform challenge claim MUST NOT be present when the CCA platform profile claim has any of the following values:<a href="#section-4.3.3.10-3" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4.3.3.10-4.1">
                 <p id="section-4.3.3.10-4.1.1">tag:arm.com,2026:cca_platform#2.0.0<a href="#section-4.3.3.10-4.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.10-4.2">
-                <p id="section-4.3.3.10-4.2.1">tag:arm.com,2026:cca_platform#2.0.0#delegated<a href="#section-4.3.3.10-4.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.10-4.2.1">tag:arm.com,2026:cca_platform#2.0.0;delegated<a href="#section-4.3.3.10-4.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.10-4.3">
-                <p id="section-4.3.3.10-4.3.1">tag:arm.com,2026:cca_platform#2.0.0#direct<a href="#section-4.3.3.10-4.3.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.10-4.3.1">tag:arm.com,2026:cca_platform#2.0.0;direct<a href="#section-4.3.3.10-4.3.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.10-4.4">
                 <p id="section-4.3.3.10-4.4.1">tag:arm.com,2026:cca_platform#2.1.0<a href="#section-4.3.3.10-4.4.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.10-4.5">
-                <p id="section-4.3.3.10-4.5.1">tag:arm.com,2026:cca_platform#2.1.0#delegated<a href="#section-4.3.3.10-4.5.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.10-4.5.1">tag:arm.com,2026:cca_platform#2.1.0;delegated<a href="#section-4.3.3.10-4.5.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.10-4.6">
-                <p id="section-4.3.3.10-4.6.1">tag:arm.com,2026:cca_platform#2.1.0#direct<a href="#section-4.3.3.10-4.6.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.10-4.6.1">tag:arm.com,2026:cca_platform#2.1.0;direct<a href="#section-4.3.3.10-4.6.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </section>
@@ -2361,7 +2383,9 @@ found in the token.<a href="#section-4.5.1-1" class="pilcrow">¶</a></p>
 arm-platform-profile-label = 265 ; EAT profile
 
 arm-platform-profile-type = "tag:arm.com,2026:cca_platform#2.0.0" /
-                            "tag:arm.com,2026:cca_platform#2.0.0#delegated"
+                            "tag:arm.com,2026:cca_platform#2.0.0;delegated" /
+                            "tag:arm.com,2026:cca_platform#2.0.0;HESRAK" /
+                            "tag:arm.com,2026:cca_platform#2.0.0;direct"
 
 arm-platform-profile = (
     arm-platform-profile-label =&gt; arm-platform-profile-type
@@ -3143,7 +3167,7 @@ conforms. This allows a receiver to assign the intended semantics to the rest of
 found in the token.<a href="#section-4.8.2-1" class="pilcrow">¶</a></p>
 <p id="section-4.8.2-2">The EAT <span>[<a href="#EAT" class="cite xref">EAT</a>]</span> <code>eat_profile</code> (claim key 265) is used.<a href="#section-4.8.2-2" class="pilcrow">¶</a></p>
 <p id="section-4.8.2-3">The format of the CCA Realm profile claim is defined as a text string of value
-"tag:arm.com,2024:realm#2.0.0".<a href="#section-4.8.2-3" class="pilcrow">¶</a></p>
+"tag:arm.com,2026:realm#2.0.0".<a href="#section-4.8.2-3" class="pilcrow">¶</a></p>
 <p id="section-4.8.2-4">This claim is OPTIONAL in a CCA Realm attestation token.
 If the Realm profile is not included in a CCA Realm token then the profile value
 used in the CCA Platform token should refer to a profile that describes both
@@ -3351,7 +3375,7 @@ This claim distinguishes otherwise identical Realms.<a href="#section-4.8.11-1" 
 <p id="section-4.8.11-2">The claim is identified using the EAT <span>[<a href="#EAT" class="cite xref">EAT</a>]</span> <code>ueid</code> label.
 To correspond with the <code>ueid RAND</code> type, the first byte of the Realm Instance ID value must be 0x01.<a href="#section-4.8.11-2" class="pilcrow">¶</a></p>
 <p id="section-4.8.11-3">This claim MUST be present in a CCA Realm state attestation token.<a href="#section-4.8.11-3" class="pilcrow">¶</a></p>
-<p id="section-4.8.11-4">Compatibility: this claim can be present where realm profile values are at or newer than "tag:arm.com,2024:cca_realm#2.0.0".<a href="#section-4.8.11-4" class="pilcrow">¶</a></p>
+<p id="section-4.8.11-4">Compatibility: this claim can be present where realm profile values are at or newer than "tag:arm.com,2024:realm#2.0.0".<a href="#section-4.8.11-4" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.8.11-5">
 <pre>
 cca-realm-instance-id-label = 256 ; EAT ueid
@@ -3375,8 +3399,8 @@ cca-realm-instance-id = (
 cca-realm-devices-token that represents the set of devices assigned to the Realm.<a href="#section-4.8.12-1" class="pilcrow">¶</a></p>
 <p id="section-4.8.12-2">The Realm devices token hash claim MUST be present in a Realm token whenever
 one or more devices are assigned to the Realm.
-If no devices are assigned, the claim MUST not be present.<a href="#section-4.8.12-2" class="pilcrow">¶</a></p>
-<p id="section-4.8.12-3">Compatibility: this claim can be present where realm profile values are at or newer than "tag:arm.com,2024:cca_realm#2.0.0".<a href="#section-4.8.12-3" class="pilcrow">¶</a></p>
+If no devices are assigned, the claim MUST NOT be present.<a href="#section-4.8.12-2" class="pilcrow">¶</a></p>
+<p id="section-4.8.12-3">Compatibility: this claim can be present where realm profile values are at or newer than "tag:arm.com,2024:realm#2.0.0".<a href="#section-4.8.12-3" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.8.12-4">
 <pre>
 cca-realm-devices-token-hash-label = 44257
@@ -3396,6 +3420,20 @@ cca-realm-devices-token-hash = (
 <a href="#section-4.9" class="section-number selfRef">4.9. </a><a href="#name-device-token" class="section-name selfRef">Device Token</a>
         </h3>
 <p id="section-4.9-1">ToDo in separate PR<a href="#section-4.9-1" class="pilcrow">¶</a></p>
+<div id="sec-device-token-selective">
+<section id="section-4.9.1">
+          <h4 id="name-selectively-assigned-device">
+<a href="#section-4.9.1" class="section-number selfRef">4.9.1. </a><a href="#name-selectively-assigned-device" class="section-name selfRef">Selectively Assigned Devices Token</a>
+        </h4>
+</section>
+</div>
+<div id="sec-device-token-comp">
+<section id="section-4.9.2">
+          <h4 id="name-comprehensive-trust-devices">
+<a href="#section-4.9.2" class="section-number selfRef">4.9.2. </a><a href="#name-comprehensive-trust-devices" class="section-name selfRef">Comprehensive Trust Devices Token</a>
+        </h4>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-token-binding">
@@ -3701,7 +3739,9 @@ arm-platform-instance-id = (arm-platform-instance-id-label =&gt; arm-\
                                            platform-instance-id-type)
 arm-platform-profile-label = 265
 arm-platform-profile-type = "tag:arm.com,2026:cca_platform#2.0.0" / \
-                      "tag:arm.com,2026:cca_platform#2.0.0#delegated"
+"tag:arm.com,2026:cca_platform#2.0.0;delegated" / "tag:arm.com,2026:\
+cca_platform#2.0.0;HESRAK" / "tag:arm.com,2026:cca_platform#2.0.0;\
+                                                              direct"
 arm-platform-profile = (arm-platform-profile-label =&gt; arm-platform-\
                                                         profile-type)
 arm-platform-lifecycle-label = 2395
