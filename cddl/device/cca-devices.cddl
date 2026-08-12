@@ -1,0 +1,13 @@
+cca-devices-label = 44259
+
+cca-device = {
+    1 => cca-hash-type,     ; device identity digest
+    2 => cca-hash-type,     ; device measurements exchange digest
+    ? 3 => cca-hash-type,   ; protocol negotiation data digest
+    4 => bool,              ; coherent traffic IDE protection
+    5 => bool,              ; non-coherent traffic IDE protection
+}
+
+cca-devices = (
+    cca-devices-label => [ + cca-device ]
+)
