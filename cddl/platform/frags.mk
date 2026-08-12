@@ -1,4 +1,5 @@
 PLATFORM_FRAGS := arm-platform-claims.cddl
+PLATFORM_FRAGS += arm-platform-workload-binding.cddl
 PLATFORM_FRAGS += arm-platform-challenge.cddl
 PLATFORM_FRAGS += arm-platform-config.cddl
 PLATFORM_FRAGS += arm-platform-hash-algm-id.cddl
@@ -14,7 +15,7 @@ PLATFORM_FRAGS += arm-platform-manufacturing-config.cddl
 PLATFORM_FRAGS += arm-platform-extension.cddl
 PLATFORM_FRAGS += arm-platform-peer-signers.cddl
 PLATFORM_FRAGS += arm-platform-tbb-rotpk.cddl
-PLATFORM_FRAGS += arm-platform-device-tpm-binding-data.cddl
+PLATFORM_FRAGS += arm-platform-discrete-tpm-binding-data.cddl
 PLATFORM_FRAGS += eat-ueid-rand.cddl
 
 PLATFORM_EXAMPLES := $(wildcard examples/*.diag)

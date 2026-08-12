@@ -53,8 +53,8 @@ normative:
     author:
       org: Arm
     title: Realm Management Monitor specification 2.0
-    target: https://developer.arm.com/documentation/den0137/2-0bet0
-    date: 2026-02-03
+    target: https://developer.arm.com/documentation/den0137/2-0bet3
+    date: 2026-08-03
   RME:
     author:
       org: Arm
@@ -167,7 +167,7 @@ describing the exact syntax and semantics of the attestation claims, and
 defining the way these claims are encoded and cryptographically protected.
 
 Further details on concepts expressed below can be found in the Realm Management Monitor
-specification 1.0 {{RMM}}.
+specification 2.0 {{RMM}}.
 
 As mentioned in the abstract, this memo documents a vendor extension
 to the RATS architecture, and is not a standard.
@@ -319,6 +319,15 @@ See {{sec-security-consideration}} for more details.
 
 The above tokens are presented to the requester within a top level Conceptual Message Wrapper (CMW) collection {{CMW}}.
 
+This profile conforms to the claims in the Beta3 release of the 2.0 version of the
+Realm Management Monitor specification {{RMM}}.
+
+The CDDL within this draft conforms to the claim set at the latest profile version.
+See compatibility statements within the description of each claim to determine status in earlier profile versions.
+
+This profile does not include any coverage for CCA Platform or Realm claims
+prior to the Alpha 14 release of the 1.1 version of the Realm Management Monitor
+specification {{RMM}}.
 
 
 CDDL {{!RFC8610}} along with text descriptions is used to define each claim
@@ -334,10 +343,19 @@ claims:
 
 
 The above tokens are presented to the requester within a top level CMW collection {{CMW}}.
-The collection map has two entries, one for a bstr encoding of the CCA Platform token and
+The collection map has two core entries, one for a bstr encoding of the CCA Platform token and
 the other for a bstr encoding of the Realm state token.
 The type of the CMW entry will vary for the Realm state token depending on whether
-the delegated or direct model is used by an implementation.
+the delegated or direct attestation model is used by an implementation.
+
+Depending upon the features within a CCA implementation there may be additional entries within the CMW.
+These can include:
+
+* A Firmware Activity List (FAL), used to support verification of the effect of Live Firmware Activation on the CCA Platform {{sec-live-firmware-activation}}.
+* Device Token - where a Realm has device(s) selectively assigned, the Device Token provides binding hashes to the device evidence {{sec-device-token}}.
+* Selective Device Token - contains evidence obtained from selectively assigned devices {{sec-device-token-selective}}.
+* Comprehensive Device Token - contains evidence obtained from comprehensively trusted devices {{sec-device-token-comp}}.
+* Certificate Chain information optionally included to support an inline leaf endorsement certificate {{sec-signing-keys}}.
 
 ~~~
 {::include cddl/top/cca-top-claims.cddl}
@@ -348,27 +366,139 @@ the delegated or direct model is used by an implementation.
 
 ## Caller Claims
 
-### CCA Platform Nonce
-{: #sec-platform-nonce-claim}
+### CCA Platform Workload Binding
+{: #sec-platform-workload-binding-claim}
 
-The Nonce claim is used to carry a challenge provided by the caller to demonstrate freshness of the generated token.
+The Workload Binding claim provides the basis for a cryptographic binding to be established between the CCA Platform and CCA
+Realm attestation tokens.
 
-The EAT {{EAT}} `nonce` (claim key 10) is used.  Since the EAT nonce claim offers flexiblity for different
+The value of the workload binding claim varies by the implemented attestation model.
+See {{sec-token-binding-compatibility}} for further details.
+
+The length of the value of the claim MUST be either 32, 48, or 64 bytes.
+
+This claim MUST be present in a CCA Platform attestation token.
+
+Compatibility: this claim will be present where profile values are at or newer than "tag:arm.com,2026:cca_platform#2.0.0".
+
+~~~
+{::include cddl/platform/arm-platform-workload-binding.cddl}
+~~~
+
+
+### CCA Platform Challenge
+{: #sec-platform-challenge-claim}
+
+If an implementation uses a different attestation model to the default delegated model, a CCA platform challenge
+claim can be present in the platform attestation token.
+This claim is used to carry a challenge provided by the relying party to demonstrate freshness of the generated token.
+
+This claim is OPTIONAL in a CCA Platform attestation token.
+
+See {{sec-token-binding-compatibility}} for further details on when the claim may be present.
+
+The {{EAT}} `eat_nonce` (claim key 10) is used.  Since the EAT nonce claim offers flexiblity for different
 attestation technologies, this specifications applies the following constraints
  to the `nonce-type`:
 
 * The length MUST be either 32, 48, or 64 bytes.
 * Only a single nonce value is conveyed. The array notation MUST NOT be used for encoding the nonce value.
 
-Where the CCA Platform implementation uses the Delegated Token signing model {{sec-token-binding}}, the
-value of the Nonce claim will be a hash of the Realm Public Key claim of the CCA Realm State token
-{{sec-realm-public-key-claim}}.
-
-This claim MUST be present in a CCA Platform attestation token.
-
 ~~~
 {::include cddl/platform/arm-platform-challenge.cddl}
 ~~~
+
+### Platform to Realm Binding compatibility
+{: #sec-token-binding-compatibility}
+
+All versions of the CCA profile have had a mechanism to hold a binding between the CCA Platform and CCA
+Realm attestation tokens.
+The claims used vary by profile version and attestation model implemented as outlined below.
+
+#### Profile tag:arm.com,2024:cca_platform#1.1.0
+{: #prof-bind-11}
+
+* Attestation Model: Delegated
+* Binding Claim: eat_nonce
+* Claim Value: H(RAK public)
+
+#### Profile tag:arm.com,2024:cca_platform#2.0.0
+{: #prof-bind-20}
+
+* Attestation Model: Delegated
+* Binding Claim: eat_nonce
+* Claim Value: H(RAK public)
+
+#### Profile tag:arm.com,2024:cca_platform#2.0.0;direct
+{: #prof-bind-20-direct}
+
+* Attestation Model: Direct
+* Binding Claim: eat_nonce
+* Claim Value: H(realm claims)
+
+#### Profile tag:arm.com,2026:cca_platform#2.0.0
+{: #prof-bind-201}
+
+* Attestation Model: Delegated
+* Binding Claim: eat_nonce
+* Claim Value: H(RAK public)
+* Equivalent profile value: tag:arm.com,2026:cca_platform#2.0.0;delegated
+
+#### Profile tag:arm.com,2026:cca_platform#2.0.0;direct
+{: #prof-bind-201-direct}
+
+* Attestation Model: Direct
+* Binding Claim: eat_nonce
+* Claim Value: H(realm claims)
+
+#### Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
+{: #prof-bind-201-hesrak}
+
+* Attestation Model: Delegated attestation, with the RAK kept within the HES
+* Binding Claim: eat_nonce
+* Claim Value: H(RAK public)
+* Note: for this attestation model, the PAT also contains an eat_nonce claim with the value equal to the CCA Realm challenge claim.
+
+#### Profile tag:arm.com,2026:cca_platform#2.1.0
+{: #prof-bind-211}
+
+* Attestation Model: Delegated
+* Binding Claim: eat_nonce
+* Claim Value: H(RAK public)
+* Equivalent profile value: tag:arm.com,2026:cca_platform#2.1.0;delegated
+
+#### Profile tag:arm.com,2026:cca_platform#2.1.0;direct
+{: #prof-bind-211-direct}
+
+* Attestation Model: Direct
+* Binding Claim: eat_nonce
+* Claim Value: H(realm claims)
+
+#### Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
+{: #prof-bind-211-hesrak}
+
+* Attestation Model: Delegated attestation, with the RAK kept within the HES
+* Binding Claim: eat_nonce
+* Claim Value: H(RAK public)
+* Note: for this attestation model, the PAT also contains an `eat_nonce` claim with the value equal to the CCA Realm challenge claim.
+
+#### Binding claim Notes
+
+For the delegated attestation models, RAK public is a COSE_Key structure.
+The hash algorithm used to generate H(RAK public) is that detailed in cca-realm-public-key-hash-algo-id.
+
+For the direct attestation model, the Realm Claims are an Untagged Claims set as defined in https://datatracker.ietf.org/doc/draft-ietf-rats-uccs/.
+The hash algorithm used to generate H(realm claims) is that detailed in cca-realm-hash-algo-id.
+
+The CCA platform challenge claim MUST NOT be present when the CCA platform profile claim has any of the following values:
+
+* tag:arm.com,2026:cca_platform#2.0.0
+* tag:arm.com,2026:cca_platform#2.0.0;delegated
+* tag:arm.com,2026:cca_platform#2.0.0;direct
+* tag:arm.com,2026:cca_platform#2.1.0
+* tag:arm.com,2026:cca_platform#2.1.0;delegated
+* tag:arm.com,2026:cca_platform#2.1.0;direct
+
 
 ## Target Identification Claims
 
@@ -390,6 +520,9 @@ apply to the `ueid-type`:
 
 This claim MUST be present in a CCA Platform attestation token.
 
+Compatibility: this claim will be present for all values of CCA Platform Profile.
+
+
 ~~~
 {::include cddl/platform/arm-platform-instance-id.cddl}
 ~~~
@@ -410,6 +543,8 @@ could take the form of a product serial number,
 database ID, or other appropriate identifier.
 
 This claim MUST be present in a CCA Platform attestation token.
+
+Compatibility: this claim will be present for all values of CCA Platform Profile.
 
 Note that this identifies the CCA Platform implementation, not a particular instance.
 To uniquely identify an instance, see the Instance ID claim {{sec-instance-id-claim}}.
@@ -434,8 +569,7 @@ The format of the CCA platform profile claim is defined as a text string of valu
 
 This claim MUST be present in a CCA Platform attestation token.
 
-See {{sec-backwards-compat}}, for considerations about backwards compatibility
-with previous versions of the CCA Platform attestation token format.
+Compatibility: this claim will be present for all values of CCA Platform Profile.
 
 ~~~
 {::include cddl/platform/arm-platform-profile.cddl}
@@ -464,6 +598,8 @@ arm-platform-lifecycle-lifecycle-decommissioned state
 
 
 This claim MUST be present in a CCA Platform attestation token.
+
+Compatibility: this claim will be present for all values of CCA Platform Profile.
 
 ~~~ aasvg
 {::include art/cca-lifecycle.ascii-art}
@@ -521,6 +657,8 @@ the relevant portion of the platform config claim.
 
 This claim MUST be present in a CCA Platform attestation token.
 
+Compatibility: this claim will be present for all values of CCA Platform Profile.
+
 ~~~
 {::include cddl/platform/arm-platform-config.cddl}
 ~~~
@@ -533,7 +671,9 @@ The CCA platform manufacturing config claim represents a record of production
 phases and testing conducted during the manufacturing process for this instance.
 
 
-The CCA platform manufacturing config claim is optional in a CCA platform token
+The CCA platform manufacturing config claim is OPTIONAL in a CCA platform token
+
+Compatibility: this claim can be present for all values of CCA Platform Profile.
 
 ~~~
 {::include cddl/platform/arm-platform-manufacturing-config.cddl}
@@ -549,6 +689,8 @@ The Software Components claim is a list of software components which can affect
 the behavior of the CCA platform.
 
 This claim MUST be present in a CCA Platform attestation token.
+
+Compatibility: this claim will be present for all values of CCA Platform Profile.
 
 Each entry in the Software Components list describes one software component
 using the attributes described in the following subsections.  Unless explicitly
@@ -658,6 +800,8 @@ Information Hash Algorithm Registry" {{!IANA.named-information}}.
 
 The CCA platform hash algorithm ID claim MUST be present in a CCA platform token.
 
+Compatibility: this claim will be present for all values of CCA Platform Profile.
+
 ~~~
 {::include cddl/platform/arm-platform-hash-algm-id.cddl}
 ~~~
@@ -670,6 +814,8 @@ The CCA platform client ID claim identifies the security domain from which the a
 In this profile, the only valid value for the CCA platform client ID claim is the Realm Management Security Domain (RMSD).
 
 The CCA platform client ID claim MUST be present in a CCA platform token.
+
+Compatibility: this claim will be present where profile values are at or newer than "tag:arm.com,2024:cca_platform#2.0.0".
 
 ~~~
 {::include cddl/platform/arm-platform-client-id.cddl}
@@ -685,6 +831,8 @@ The values encoding in this claim are implementation defined.
 
 The CCA platform manufacturing config claim is OPTIONAL in a CCA platform token
 
+Compatibility: this claim can be present for all values of CCA Platform Profile.
+
 ~~~
 {::include cddl/platform/arm-platform-manufacturing-config.cddl}
 ~~~
@@ -698,6 +846,8 @@ and supplies verification hashes for evidence obtained from those components.
 An example of such a component is a coherent memory (CMEM) device
 
 The CCA platform extension claim is OPTIONAL in a CCA platform token
+
+Compatibility: this claim can be present where profile values are at or newer than "tag:arm.com,2026:cca_platform#2.1.0".
 
 ~~~
 {::include cddl/platform/arm-platform-extension.cddl}
@@ -716,25 +866,28 @@ The CCA platform peer signers claim is OPTIONAL in a CCA platform token
 
 The data type for this claim is Implementation Defined as different underlying RoT technologies or provisioning schemes are likely.
 
+Note: this claim is not documented within the Realm Management Monitor specification {{RMM}} as it does not apply to the default implementation.
 
 ~~~
 {::include cddl/platform/arm-platform-peer-signers.cddl}
 ~~~
 
-### CCA Platform Device TPM Binding Data
-{: #sec-arm-platform-device-tpm-binding-data}
+### CCA Platform Discrete TPM Binding Data
+{: #sec-arm-platform-discrete-tpm-binding-data}
 
 The normal world of a device that supports CCA is outside the TCB of the confidential computing environment.
 In some deployments, it is seen to be desirable to be able to appraise measurements that indicate the untrusted hypervisor for the device.
 This is done by requesting a TPM quote in the normal world and providing it to the Relying Party together with the CCA Attestation token.
-The Device TPM Binding Data claim holds data that can be used to prove that the TPM and the CCA HES belong to the same system.
+The Discrete TPM Binding Data claim holds data that can be used to prove that the TPM and the CCA HES belong to the same system.
 
-The CCA platform Device TPM Binding Data claim is OPTIONAL in a CCA platform token
+The CCA platform Discrete TPM Binding Data claim is OPTIONAL in a CCA platform token
+
+Compatibility: this claim can be present where profile values are at or newer than "tag:arm.com,2024:cca_platform#2.0.0".
 
 The details of the binding data within this claim are Implementation Defined, as different underlying TPM binding schemes may be available.
 
 ~~~
-{::include cddl/platform/arm-platform-device-tpm-binding-data.cddl}
+{::include cddl/platform/arm-platform-discrete-tpm-binding-data.cddl}
 ~~~
 
 
@@ -746,6 +899,8 @@ will include several provisioned public key identifiers which are used to establ
 The CCA platform TBB ROTPK claim is used to provide this information to a verifier.
 
 The CCA platform tbb rotpk claim is OPTIONAL in a CCA platform token
+
+Compatibility: this claim can be present where profile values are at or newer than "tag:arm.com,2024:cca_platform#2.0.0".
 
 ~~~
 {::include cddl/platform/arm-platform-tbb-rotpk.cddl}
@@ -762,9 +917,11 @@ processing of the received attestation Evidence.
 
 The Verification Service Indicator claim is a hint used by a relying party to
 locate a verification service for the token. The value is a text string that
-can be used to locate the service (typically, a URL specifying the address of
+can be used to locate the service (typically, a URI specifying the address of
 the verification service API). A Relying Party may choose to ignore this claim
 in favor of other information.
+
+Compatibility: this claim will be present for all values of CCA Platform Profile.
 
 ~~~
 {::include cddl/platform/arm-platform-verification-service-indicator.cddl}
@@ -784,19 +941,15 @@ which includes attacker-provided data.
 
 The CCA platform verification service indicator claim is OPTIONAL in a CCA platform token.
 
-
-
-
-
 ## CCA Realm state token Claims
 
 The CCA Realm state token contains claims that represent the Target Environment
 that is the Realm that requested the attestation report.
 
-### Realm Nonce
-{: #sec-realm-nonce-claim}
+### CCA Realm Challenge
+{: #sec-cca-realm-challenge-claim}
 
-The Nonce claim is used to carry a challenge provided by the caller to demonstrate freshness of the generated token.
+The CCA Realm challenge is used to carry a challenge provided by the Relying Party to demonstrate freshness of the generated token.
 
 The EAT {{EAT}} `nonce` (claim key 10) is used.  Since the EAT nonce claim offers flexiblity for different
 attestation technologies, this specification applies the following constraints
@@ -805,8 +958,10 @@ attestation technologies, this specification applies the following constraints
 * The length MUST be 64 bytes.
 * Only a single nonce value is conveyed. The array notation MUST NOT be used for encoding the nonce value.
 
-
 This claim MUST be present in a CCA Realm state attestation token.
+
+Compatibility: this claim will be present for all values of CCA Realm Profile.
+
 
 ~~~
 {::include cddl/realm/cca-realm-challenge.cddl}
@@ -821,14 +976,13 @@ found in the token.
 
 The EAT {{EAT}} `eat_profile` (claim key 265) is used.
 
-The format of the CCA platform profile claim is defined as a text string of value
-"tag:arm.com,2024:realm#2.0.0".
+The format of the CCA Realm profile claim is defined as a text string of value
+"tag:arm.com,2026:realm#2.0.0".
 
 This claim is OPTIONAL in a CCA Realm attestation token.
 If the Realm profile is not included in a CCA Realm token then the profile value
 used in the CCA Platform token should refer to a profile that describes both
 Platform and Realm claims.
-
 
 ~~~
 {::include cddl/realm/cca-realm-profile.cddl}
@@ -842,6 +996,8 @@ at Realm creation.
 
 This claim MUST be present in a CCA Realm state attestation token.
 
+Compatibility: this claim will be present for all values of CCA Realm Profile.
+
 ~~~
 {::include cddl/realm/cca-realm-personalization-value.cddl}
 ~~~
@@ -853,6 +1009,8 @@ The Realm Initial Measurement claim contains the compound extension of
 measurements taken of Realm memory and state before the Realm is activated.
 
 This claim MUST be present in a CCA Realm state attestation token.
+
+Compatibility: this claim will be present for all values of CCA Realm Profile.
 
 ~~~
 {::include cddl/realm/cca-realm-initial-measurement.cddl}
@@ -866,6 +1024,8 @@ guest software and extended to the set of Realm Extensible Measurements
 maintained by the RMM.
 
 This claim MUST be present in a CCA Realm state attestation token.
+
+Compatibility: this claim will be present for all values of CCA Realm Profile.
 
 ~~~
 {::include cddl/realm/cca-realm-extensible-measurements.cddl}
@@ -882,6 +1042,8 @@ in the "Named Information Hash Algorithm Registry" {{!IANA.named-information}}.
 
 This claim MUST be present in a CCA Realm state attestation token.
 
+Compatibility: this claim will be present for all values of CCA Realm Profile.
+
 ~~~
 {::include cddl/realm/cca-realm-hash-algo-id.cddl}
 ~~~
@@ -893,9 +1055,9 @@ The Realm public key claim identifies the attestation key which is used to sign 
 
 The value of the Realm public key claim is a byte string representation of a COSE_Key.
 
-This claim MUST be present in a CCA Realm state attestation token.
+This claim MUST be present in a CCA Realm state attestation token when the attestation model is not Direct mode.
 
-ToDo: not in direct mode
+Compatibility: this claim can be present for all values of CCA Realm Profile.
 
 ~~~
 {::include cddl/realm/cca-realm-public-key.cddl}
@@ -910,7 +1072,9 @@ hash the value of the Realm Public Key claim {{sec-realm-public-key-claim}}
 such that it can be presented as a Challenge for the bound CCA Platform token
 {{sec-token-binding}}.
 
-This claim MUST be present in a CCA Realm state attestation token.
+This claim MUST be present in a CCA Realm state attestation token when the attestation model is not Direct mode.
+
+Compatibility: this claim can be present for all values of CCA Realm Profile.
 
 ~~~
 {::include cddl/realm/cca-realm-public-key-hash-algo-id.cddl}
@@ -924,6 +1088,8 @@ On a platform which does not implement `FEAT_MEC`, the value of the Realm MEC po
 
 This claim MUST be present in a CCA Realm state attestation token.
 
+Compatibility: this claim will be present for all values of CCA Realm Profile.
+
 ~~~
 {::include cddl/realm/cca-realm-mec-policy.cddl}
 ~~~
@@ -935,6 +1101,8 @@ This claim MUST be present in a CCA Realm state attestation token.
 The Realm LFA policy identifies the Live Firmware Activation policy of the Realm.
 
 This claim is OPTIONAL in a CCA Realm state attestation token.
+
+Compatibility: this claim can be present for all values of CCA Realm Profile.
 
 ~~~
 {::include cddl/realm/cca-realm-lfa-policy.cddl}
@@ -951,6 +1119,9 @@ To correspond with the `ueid RAND` type, the first byte of the Realm Instance ID
 
 This claim MUST be present in a CCA Realm state attestation token.
 
+Compatibility: this claim can be present where realm profile values are at or newer than "tag:arm.com,2024:realm#2.0.0".
+
+
 ~~~
 {::include cddl/realm/cca-realm-instance-id.cddl}
 ~~~
@@ -963,21 +1134,23 @@ cca-realm-devices-token that represents the set of devices assigned to the Realm
 
 The Realm devices token hash claim MUST be present in a Realm token whenever
 one or more devices are assigned to the Realm.
-If no devices are assigned, the claim must not be present.
+If no devices are assigned, the claim MUST NOT be present.
+
+Compatibility: this claim can be present where realm profile values are at or newer than "tag:arm.com,2024:realm#2.0.0".
 
 ~~~
 {::include cddl/realm/cca-realm-devices-token-hash.cddl}
 ~~~
 
+## Device Token
+{: #sec-device-token}
+ToDo in separate PR
 
+### Selectively Assigned Devices Token
+{: #sec-device-token-selective}
 
-## Backwards Compatibility Considerations
-{: #sec-backwards-compat}
-
-This profile conforms to the claims in the Beta release of the 2.0 release of the
-Realm Management Monitor specification. {{RMM}}.
-
-TODO Backwards compat incl notes 1.1./2.0 with note that 1.0 is theoretical
+### Comprehensive Trust Devices Token
+{: #sec-device-token-comp}
 
 ## Token Binding
 {: #sec-token-binding}
@@ -1030,8 +1203,9 @@ Besides, only definite-length string, arrays, and maps are allowed.
 The CCA reference profile is designed to not emit CBOR preferred serializations ({{Section 4.1 of STD94}}).
 This profile assumes that the Verifier MUST be a variation-tolerant CBOR decoder.
 
-Cryptographic protection is obtained by wrapping the CCA Platform and Realm state claims-set each in a COSE
+Cryptographic protection is obtained by wrapping the CCA Platform claims set in a COSE
 Web Token (CWT) {{!RFC8392}}.  The signature structure MUST be a tagged (18) COSE_Sign1 {{STD96}}.
+In the Delegated and HESRAK attestation models, the Realm claims set will also be wrapped in a CWT.
 
 Acknowledging the variety of markets, regulations and use cases in which the
 CCA attestation token can be used, the baseline profile does not impose any
@@ -1108,6 +1282,7 @@ Alternatively, the other certificates in the chain that endorses the CPAK certif
 can be packaged in an additional entry within the RATS Conceptual Messages Wrapper {{CMW}} token
 
 # CCA Attestation Token Verification
+{: #sec-attestation-token-verification}
 
 To verify the token for the reference profile, the initial need is to check correct
 encoding for the token. Primary trust is established by checking the signing of
@@ -1158,6 +1333,10 @@ would include a policy with appraisal for the following claims:
   Value as above, by allowing a token to contain any firmware entries signed by
   a known Signer ID, without checking for a uniquely registered version.
 
+### Live Firmware Activation (LFA)
+{: #sec-live-firmware-activation}
+ToDo in separate PR
+
 ## AR4SI Trustworthiness Claims Mappings
 
 {{RATS-AR4SI}} defines an information model that Verifiers can employ to
@@ -1174,7 +1353,7 @@ deciding if and how to appraise a certain feature associated with the PSA
 Attester.
 
 TODO: Ar4SI
-TODO: LFA FAL
+
 
 Trustworthiness Vector claims | Related PSA claims
 ---|---
@@ -1343,13 +1522,23 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 
 ### Platform Device TPM Binding Data
 
-* Claim Name: arm-platform-device-tpm-binding-data
+* Claim Name: arm-platform-discrete-tpm-binding-data
 * Claim Description: Arm Platform Device TPM Binding Data
 * JWT Claim Name: N/A
 * Claim Key: 2407
 * Claim Value Type(s): byte string
 * Change Controller: iana-request@arm.com
-* Specification Document(s): {{sec-arm-platform-device-tpm-binding-data}} of {{&SELF}}
+* Specification Document(s): {{sec-arm-platform-discrete-tpm-binding-data}} of {{&SELF}}
+
+### Platform Workload Binding
+
+* Claim Name: arm-platform-workload-binding
+* Claim Description: Arm Platform Workload Binding
+* JWT Claim Name: N/A
+* Claim Key: 2408
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-platform-workload-binding-claim}} of {{&SELF}}
 
 ### CCA Token Platform Token Label
 

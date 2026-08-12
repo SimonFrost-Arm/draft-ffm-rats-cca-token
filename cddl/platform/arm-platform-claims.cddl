@@ -2,7 +2,8 @@ arm-platform-claims = (arm-platform-claim-map)
 
 arm-platform-claim-map = {
     arm-platform-profile
-    arm-platform-challenge
+    ? arm-platform-challenge
+    arm-platform-workload-binding
     arm-platform-implementation-id
     arm-platform-instance-id
     arm-platform-config
@@ -15,6 +16,6 @@ arm-platform-claim-map = {
     ? arm-platform-extension
     ? arm-platform-peer-signers
     ? arm-platform-tbb-rotpk
-    ? arm-platform-device-tpm-binding-data
+    ? arm-platform-discrete-tpm-binding-data
 }
 
