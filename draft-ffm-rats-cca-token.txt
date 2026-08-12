@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 14 January 2027                                          Linaro
+Expires: 13 February 2027                                         Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                            13 July 2026
+                                                          12 August 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 14 January 2027.
+   This Internet-Draft will expire on 13 February 2027.
 
 Copyright Notice
 
@@ -75,7 +75,9 @@ Table of Contents
      4.1.  CCA Attestation Token top level wrapper
      4.2.  CCA Platform token Claims
      4.3.  Caller Claims
-       4.3.1.  CCA Platform Nonce
+       4.3.1.  CCA Platform Workload Binding
+       4.3.2.  CCA Platform Challenge
+       4.3.3.  Platform to Realm Binding compatibility
      4.4.  Target Identification Claims
        4.4.1.  CCA Platform Instance ID
        4.4.2.  CCA Platform Implementation ID
@@ -91,12 +93,12 @@ Table of Contents
        4.6.4.  CCA Platform Manufacturing Config
        4.6.5.  CCA Platform Extension
        4.6.6.  CCA Platform Peer Signers
-       4.6.7.  CCA Platform Device TPM Binding Data
+       4.6.7.  CCA Platform Discrete TPM Binding Data
        4.6.8.  CCA Platform TBB ROTPK
      4.7.  Verification Claims
        4.7.1.  Verification Service Indicator
      4.8.  CCA Realm state token Claims
-       4.8.1.  Realm Nonce
+       4.8.1.  CCA Realm Challenge
        4.8.2.  Realm Profile Definition
        4.8.3.  Realm Personalisation Value
        4.8.4.  Realm Initial Measurement
@@ -108,7 +110,9 @@ Table of Contents
        4.8.10. Realm LFA Policy
        4.8.11. Realm Instance ID
        4.8.12. Realm Devices Token Hash
-     4.9.  Backwards Compatibility Considerations
+     4.9.  Device Token
+       4.9.1.  Selectively Assigned Devices Token
+       4.9.2.  Comprehensive Trust Devices Token
      4.10. Token Binding
      4.11. Reference Profile
        4.11.1.  Token Encoding and Signing
@@ -117,8 +121,9 @@ Table of Contents
    5.  Collated CDDL
    6.  Signing key implementation alternatives
    7.  CCA Attestation Token Verification
-     7.1.  AR4SI Trustworthiness Claims Mappings
-     7.2.  Endorsements, Reference Values and Verification Key
+     7.1.  Live Firmware Activation (LFA)
+     7.2.  AR4SI Trustworthiness Claims Mappings
+     7.3.  Endorsements, Reference Values and Verification Key
            Material
    8.  Implementation Status
    9.  Security and Privacy Considerations
@@ -136,17 +141,18 @@ Table of Contents
        10.1.10. Platform TBB RoTPK
        10.1.11. Platform Peer Signers
        10.1.12. Platform Device TPM Binding Data
-       10.1.13. CCA Token Platform Token Label
-       10.1.14. Realm Personalization Value Claim
-       10.1.15. Realm Hash Algorithm ID Claim
-       10.1.16. Realm Public Key Claim
-       10.1.17. Realm Initial Measurement Claim
-       10.1.18. Realm Extensible Measurements Claim
-       10.1.19. Realm Public Key Hash Algorithm ID Claim
-       10.1.20. Realm MEC Policy
-       10.1.21. Realm LFA Policy
-       10.1.22. Realm Devices Token Hash
-       10.1.23. CCA Token Delegated Realm Token Label
+       10.1.13. Platform Workload Binding
+       10.1.14. CCA Token Platform Token Label
+       10.1.15. Realm Personalization Value Claim
+       10.1.16. Realm Hash Algorithm ID Claim
+       10.1.17. Realm Public Key Claim
+       10.1.18. Realm Initial Measurement Claim
+       10.1.19. Realm Extensible Measurements Claim
+       10.1.20. Realm Public Key Hash Algorithm ID Claim
+       10.1.21. Realm MEC Policy
+       10.1.22. Realm LFA Policy
+       10.1.23. Realm Devices Token Hash
+       10.1.24. CCA Token Delegated Realm Token Label
      10.2.  Media Types
      10.3.  CoAP Content-Formats Registration
        10.3.1.  Registry Contents
@@ -199,7 +205,7 @@ Table of Contents
    encoded and cryptographically protected.
 
    Further details on concepts expressed below can be found in the Realm
-   Management Monitor specification 1.0 [RMM].
+   Management Monitor specification 2.0 [RMM].
 
    As mentioned in the abstract, this memo documents a vendor extension
    to the RATS architecture, and is not a standard.
@@ -466,6 +472,17 @@ Table of Contents
    The above tokens are presented to the requester within a top level
    Conceptual Message Wrapper (CMW) collection [CMW].
 
+   This profile conforms to the claims in the Beta3 release of the 2.0
+   version of the Realm Management Monitor specification [RMM].
+
+   The CDDL within this draft conforms to the claim set at the latest
+   profile version.  See compatibility statements within the description
+   of each claim to determine status in earlier profile versions.
+
+   This profile does not include any coverage for CCA Platform or Realm
+   claims prior to the Alpha 14 release of the 1.1 version of the Realm
+   Management Monitor specification [RMM].
+
    CDDL [RFC8610] along with text descriptions is used to define each
    claim independent of encoding.  The following CDDL type(s) are reused
    by different claims:
@@ -477,11 +494,31 @@ Table of Contents
 4.1.  CCA Attestation Token top level wrapper
 
    The above tokens are presented to the requester within a top level
-   CMW collection [CMW].  The collection map has two entries, one for a
-   bstr encoding of the CCA Platform token and the other for a bstr
-   encoding of the Realm state token.  The type of the CMW entry will
-   vary for the Realm state token depending on whether the delegated or
-   direct model is used by an implementation.
+   CMW collection [CMW].  The collection map has two core entries, one
+   for a bstr encoding of the CCA Platform token and the other for a
+   bstr encoding of the Realm state token.  The type of the CMW entry
+   will vary for the Realm state token depending on whether the
+   delegated or direct attestation model is used by an implementation.
+
+   Depending upon the features within a CCA implementation there may be
+   additional entries within the CMW.  These can include:
+
+   *  A Firmware Activity List (FAL), used to support verification of
+      the effect of Live Firmware Activation on the CCA Platform
+      Section 7.1.
+
+   *  Device Token - where a Realm has device(s) selectively assigned,
+      the Device Token provides binding hashes to the device evidence
+      Section 4.9.
+
+   *  Selective Device Token - contains evidence obtained from
+      selectively assigned devices Section 4.9.1.
+
+   *  Comprehensive Device Token - contains evidence obtained from
+      comprehensively trusted devices Section 4.9.2.
+
+   *  Certificate Chain information optionally included to support an
+      inline leaf endorsement certificate Section 6.
 
    ; CMW (draft-ietf-rats-msg-wrap) Collection
    cca-token = #6.907(cca-token-cmw)
@@ -504,12 +541,43 @@ Table of Contents
 
 4.3.  Caller Claims
 
-4.3.1.  CCA Platform Nonce
+4.3.1.  CCA Platform Workload Binding
 
-   The Nonce claim is used to carry a challenge provided by the caller
-   to demonstrate freshness of the generated token.
+   The Workload Binding claim provides the basis for a cryptographic
+   binding to be established between the CCA Platform and CCA Realm
+   attestation tokens.
 
-   The EAT [EAT] nonce (claim key 10) is used.  Since the EAT nonce
+   The value of the workload binding claim varies by the implemented
+   attestation model.  See Section 4.3.3 for further details.
+
+   The length of the value of the claim MUST be either 32, 48, or 64
+   bytes.
+
+   This claim MUST be present in a CCA Platform attestation token.
+
+   Compatibility: this claim will be present where profile values are at
+   or newer than "tag:arm.com,2026:cca_platform#2.0.0".
+
+   arm-platform-workload-binding-label = 2408
+
+   arm-platform-workload-binding = (
+       arm-platform-workload-binding-label => arm-platform-hash-type
+   )
+
+4.3.2.  CCA Platform Challenge
+
+   If an implementation uses a different attestation model to the
+   default delegated model, a CCA platform challenge claim can be
+   present in the platform attestation token.  This claim is used to
+   carry a challenge provided by the relying party to demonstrate
+   freshness of the generated token.
+
+   This claim is OPTIONAL in a CCA Platform attestation token.
+
+   See Section 4.3.3 for further details on when the claim may be
+   present.
+
+   The [EAT] eat_nonce (claim key 10) is used.  Since the EAT nonce
    claim offers flexiblity for different attestation technologies, this
    specifications applies the following constraints to the nonce-type:
 
@@ -518,18 +586,132 @@ Table of Contents
    *  Only a single nonce value is conveyed.  The array notation MUST
       NOT be used for encoding the nonce value.
 
-   Where the CCA Platform implementation uses the Delegated Token
-   signing model Section 4.10, the value of the Nonce claim will be a
-   hash of the Realm Public Key claim of the CCA Realm State token
-   Section 4.8.7.
-
-   This claim MUST be present in a CCA Platform attestation token.
-
    arm-platform-challenge-label = 10
 
    arm-platform-challenge = (
        arm-platform-challenge-label => arm-platform-hash-type
    )
+
+4.3.3.  Platform to Realm Binding compatibility
+
+   All versions of the CCA profile have had a mechanism to hold a
+   binding between the CCA Platform and CCA Realm attestation tokens.
+   The claims used vary by profile version and attestation model
+   implemented as outlined below.
+
+4.3.3.1.  Profile tag:arm.com,2024:cca_platform#1.1.0
+
+   *  Attestation Model: Delegated
+
+   *  Binding Claim: eat_nonce
+
+   *  Claim Value: H(RAK public)
+
+4.3.3.2.  Profile tag:arm.com,2024:cca_platform#2.0.0
+
+   *  Attestation Model: Delegated
+
+   *  Binding Claim: eat_nonce
+
+   *  Claim Value: H(RAK public)
+
+4.3.3.3.  Profile tag:arm.com,2024:cca_platform#2.0.0;direct
+
+   *  Attestation Model: Direct
+
+   *  Binding Claim: eat_nonce
+
+   *  Claim Value: H(realm claims)
+
+4.3.3.4.  Profile tag:arm.com,2026:cca_platform#2.0.0
+
+   *  Attestation Model: Delegated
+
+   *  Binding Claim: eat_nonce
+
+   *  Claim Value: H(RAK public)
+
+   *  Equivalent profile value:
+      tag:arm.com,2026:cca_platform#2.0.0;delegated
+
+4.3.3.5.  Profile tag:arm.com,2026:cca_platform#2.0.0;direct
+
+   *  Attestation Model: Direct
+
+   *  Binding Claim: eat_nonce
+
+   *  Claim Value: H(realm claims)
+
+4.3.3.6.  Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
+
+   *  Attestation Model: Delegated attestation, with the RAK kept within
+      the HES
+
+   *  Binding Claim: eat_nonce
+
+   *  Claim Value: H(RAK public)
+
+   *  Note: for this attestation model, the PAT also contains an
+      eat_nonce claim with the value equal to the CCA Realm challenge
+      claim.
+
+4.3.3.7.  Profile tag:arm.com,2026:cca_platform#2.1.0
+
+   *  Attestation Model: Delegated
+
+   *  Binding Claim: eat_nonce
+
+   *  Claim Value: H(RAK public)
+
+   *  Equivalent profile value:
+      tag:arm.com,2026:cca_platform#2.1.0;delegated
+
+4.3.3.8.  Profile tag:arm.com,2026:cca_platform#2.1.0;direct
+
+   *  Attestation Model: Direct
+
+   *  Binding Claim: eat_nonce
+
+   *  Claim Value: H(realm claims)
+
+4.3.3.9.  Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
+
+   *  Attestation Model: Delegated attestation, with the RAK kept within
+      the HES
+
+   *  Binding Claim: eat_nonce
+
+   *  Claim Value: H(RAK public)
+
+   *  Note: for this attestation model, the PAT also contains an
+      eat_nonce claim with the value equal to the CCA Realm challenge
+      claim.
+
+4.3.3.10.  Binding claim Notes
+
+   For the delegated attestation models, RAK public is a COSE_Key
+   structure.  The hash algorithm used to generate H(RAK public) is that
+   detailed in cca-realm-public-key-hash-algo-id.
+
+   For the direct attestation model, the Realm Claims are an Untagged
+   Claims set as defined in https://datatracker.ietf.org/doc/draft-ietf-
+   rats-uccs/. The hash algorithm used to generate H(realm claims) is
+   that detailed in cca-realm-hash-algo-id.
+
+   The CCA platform challenge claim MUST NOT be present when the CCA
+   platform profile claim has any of the following values:
+
+   *  tag:arm.com,2026:cca_platform#2.0.0
+
+   *  tag:arm.com,2026:cca_platform#2.0.0;delegated
+
+   *  tag:arm.com,2026:cca_platform#2.0.0;direct
+
+   *  tag:arm.com,2026:cca_platform#2.1.0
+
+   *  tag:arm.com,2026:cca_platform#2.1.0;delegated
+
+   *  tag:arm.com,2026:cca_platform#2.1.0;direct
 
 4.4.  Target Identification Claims
 
@@ -559,6 +741,9 @@ Table of Contents
 
    This claim MUST be present in a CCA Platform attestation token.
 
+   Compatibility: this claim will be present for all values of CCA
+   Platform Profile.
+
    arm-platform-instance-id-label = 256 ; EAT ueid
 
    arm-platform-instance-id-type = eat-ueid-rand-type
@@ -583,6 +768,9 @@ Table of Contents
    identifier.
 
    This claim MUST be present in a CCA Platform attestation token.
+
+   Compatibility: this claim will be present for all values of CCA
+   Platform Profile.
 
    Note that this identifies the CCA Platform implementation, not a
    particular instance.  To uniquely identify an instance, see the
@@ -611,16 +799,23 @@ Table of Contents
 
    This claim MUST be present in a CCA Platform attestation token.
 
-   See Section 4.9, for considerations about backwards compatibility
-   with previous versions of the CCA Platform attestation token format.
+   Compatibility: this claim will be present for all values of CCA
+   Platform Profile.
 
-   arm-platform-profile-label = 265 ; EAT profile
+arm-platform-profile-label = 265 ; EAT profile
 
-   arm-platform-profile-type = "tag:arm.com,2024:cca_platform#2.0.0"
+arm-platform-profile-type = "tag:arm.com,2026:cca_platform#2.0.0" /
+                            "tag:arm.com,2026:cca_platform#2.0.0;delegated" /
+                            "tag:arm.com,2026:cca_platform#2.0.0;HESRAK" /
+                            "tag:arm.com,2026:cca_platform#2.0.0;direct" /
+                            "tag:arm.com,2026:cca_platform#2.1.0" /
+                            "tag:arm.com,2026:cca_platform#2.1.0;delegated" /
+                            "tag:arm.com,2026:cca_platform#2.1.0;HESRAK" /
+                            "tag:arm.com,2026:cca_platform#2.1.0;direct"
 
-   arm-platform-profile = (
-       arm-platform-profile-label => arm-platform-profile-type
-   )
+arm-platform-profile = (
+    arm-platform-profile-label => arm-platform-profile-type
+)
 
 4.5.2.  Security Lifecycle
 
@@ -644,6 +839,9 @@ Table of Contents
    lifecycle-lifecycle-decommissioned state
 
    This claim MUST be present in a CCA Platform attestation token.
+
+   Compatibility: this claim will be present for all values of CCA
+   Platform Profile.
 
                     .--------------------------.
                     | Device Assembly and Test |
@@ -778,6 +976,9 @@ arm-platform-lifecycle = (
 
    This claim MUST be present in a CCA Platform attestation token.
 
+   Compatibility: this claim will be present for all values of CCA
+   Platform Profile.
+
    arm-platform-config-label = 2401 ; PSA platform range
                                     ; TBD: add to IANA registration
    arm-platform-config-type = bytes
@@ -792,8 +993,11 @@ arm-platform-lifecycle = (
    production phases and testing conducted during the manufacturing
    process for this instance.
 
-   The CCA platform manufacturing config claim is optional in a CCA
+   The CCA platform manufacturing config claim is OPTIONAL in a CCA
    platform token
+
+   Compatibility: this claim can be present for all values of CCA
+   Platform Profile.
 
    arm-platform-manufacturing-config-label = 2403
 
@@ -812,6 +1016,9 @@ arm-platform-lifecycle = (
    can affect the behavior of the CCA platform.
 
    This claim MUST be present in a CCA Platform attestation token.
+
+   Compatibility: this claim will be present for all values of CCA
+   Platform Profile.
 
    Each entry in the Software Components list describes one software
    component using the attributes described in the following
@@ -948,6 +1155,9 @@ arm-platform-lifecycle = (
    The CCA platform hash algorithm ID claim MUST be present in a CCA
    platform token.
 
+   Compatibility: this claim will be present for all values of CCA
+   Platform Profile.
+
   arm-platform-hash-algo-id-label = 2402 ; PSA platform range
                                          ; TBD: add to IANA registration
 
@@ -965,6 +1175,9 @@ arm-platform-lifecycle = (
 
    The CCA platform client ID claim MUST be present in a CCA platform
    token.
+
+   Compatibility: this claim will be present where profile values are at
+   or newer than "tag:arm.com,2024:cca_platform#2.0.0".
 
    arm-platform-client-id-label = 2394 ; PSA namespace
 
@@ -988,6 +1201,9 @@ arm-platform-lifecycle = (
    The CCA platform manufacturing config claim is OPTIONAL in a CCA
    platform token
 
+   Compatibility: this claim can be present for all values of CCA
+   Platform Profile.
+
    arm-platform-manufacturing-config-label = 2403
 
    arm-platform-manufacturing-config-type = bytes
@@ -1006,6 +1222,9 @@ arm-platform-lifecycle = (
    An example of such a component is a coherent memory (CMEM) device
 
    The CCA platform extension claim is OPTIONAL in a CCA platform token
+
+   Compatibility: this claim can be present where profile values are at
+   or newer than "tag:arm.com,2026:cca_platform#2.1.0".
 
 arm-platform-extension-label = 2404
 
@@ -1076,6 +1295,10 @@ arm-platform-extension = (
    The data type for this claim is Implementation Defined as different
    underlying RoT technologies or provisioning schemes are likely.
 
+   Note: this claim is not documented within the Realm Management
+   Monitor specification [RMM] as it does not apply to the default
+   implementation.
+
    arm-platform-peer-signers-label = 2406
 
    arm-platform-peer-signers-type =  [ + bytes ]
@@ -1084,30 +1307,33 @@ arm-platform-extension = (
        arm-platform-peer-signers-label => arm-platform-peer-signers-type
    )
 
-4.6.7.  CCA Platform Device TPM Binding Data
+4.6.7.  CCA Platform Discrete TPM Binding Data
 
    The normal world of a device that supports CCA is outside the TCB of
    the confidential computing environment.  In some deployments, it is
    seen to be desirable to be able to appraise measurements that
    indicate the untrusted hypervisor for the device.  This is done by
    requesting a TPM quote in the normal world and providing it to the
-   Relying Party together with the CCA Attestation token.  The Device
+   Relying Party together with the CCA Attestation token.  The Discrete
    TPM Binding Data claim holds data that can be used to prove that the
    TPM and the CCA HES belong to the same system.
 
-   The CCA platform Device TPM Binding Data claim is OPTIONAL in a CCA
+   The CCA platform Discrete TPM Binding Data claim is OPTIONAL in a CCA
    platform token
+
+   Compatibility: this claim can be present where profile values are at
+   or newer than "tag:arm.com,2024:cca_platform#2.0.0".
 
    The details of the binding data within this claim are Implementation
    Defined, as different underlying TPM binding schemes may be
    available.
 
-arm-platform-device-tpm-binding-data-label =  2407
+arm-platform-discrete-tpm-binding-data-label =  2407
 
-arm-platform-device-tpm-binding-data-type = bytes
+arm-platform-discrete-tpm-binding-data-type = bytes
 
-arm-platform-device-tpm-binding-data = (
-    arm-platform-device-tpm-binding-data-label => arm-platform-device-tpm-binding-data-type
+arm-platform-discrete-tpm-binding-data = (
+    arm-platform-discrete-tpm-binding-data-label => arm-platform-discrete-tpm-binding-data-type
 )
 
 4.6.8.  CCA Platform TBB ROTPK
@@ -1119,6 +1345,9 @@ arm-platform-device-tpm-binding-data = (
    this information to a verifier.
 
    The CCA platform tbb rotpk claim is OPTIONAL in a CCA platform token
+
+   Compatibility: this claim can be present where profile values are at
+   or newer than "tag:arm.com,2024:cca_platform#2.0.0".
 
    arm-platform-tbb-rotpk-label = 2405
 
@@ -1146,9 +1375,12 @@ arm-platform-device-tpm-binding-data = (
 
    The Verification Service Indicator claim is a hint used by a relying
    party to locate a verification service for the token.  The value is a
-   text string that can be used to locate the service (typically, a URL
+   text string that can be used to locate the service (typically, a URI
    specifying the address of the verification service API).  A Relying
    Party may choose to ignore this claim in favor of other information.
+
+   Compatibility: this claim will be present for all values of CCA
+   Platform Profile.
 
    ; PSA verification service
    arm-platform-verification-service-label = 2400
@@ -1180,10 +1412,10 @@ arm-platform-device-tpm-binding-data = (
    The CCA Realm state token contains claims that represent the Target
    Environment that is the Realm that requested the attestation report.
 
-4.8.1.  Realm Nonce
+4.8.1.  CCA Realm Challenge
 
-   The Nonce claim is used to carry a challenge provided by the caller
-   to demonstrate freshness of the generated token.
+   The CCA Realm challenge is used to carry a challenge provided by the
+   Relying Party to demonstrate freshness of the generated token.
 
    The EAT [EAT] nonce (claim key 10) is used.  Since the EAT nonce
    claim offers flexiblity for different attestation technologies, this
@@ -1195,6 +1427,9 @@ arm-platform-device-tpm-binding-data = (
       NOT be used for encoding the nonce value.
 
    This claim MUST be present in a CCA Realm state attestation token.
+
+   Compatibility: this claim will be present for all values of CCA Realm
+   Profile.
 
    cca-realm-challenge-label = 10
    cca-realm-challenge-type = bytes .size 64
@@ -1211,8 +1446,8 @@ arm-platform-device-tpm-binding-data = (
 
    The EAT [EAT] eat_profile (claim key 265) is used.
 
-   The format of the CCA platform profile claim is defined as a text
-   string of value "tag:arm.com,2024:realm#2.0.0".
+   The format of the CCA Realm profile claim is defined as a text string
+   of value "tag:arm.com,2026:realm#2.0.0".
 
    This claim is OPTIONAL in a CCA Realm attestation token.  If the
    Realm profile is not included in a CCA Realm token then the profile
@@ -1221,7 +1456,7 @@ arm-platform-device-tpm-binding-data = (
 
    cca-realm-profile-label = 265 ; EAT profile
 
-   cca-realm-profile-type = "tag:arm.com,2024:realm#2.0.0"
+   cca-realm-profile-type = "tag:arm.com,2026:realm#2.0.0"
 
    cca-realm-profile = (
        cca-realm-profile-label => cca-realm-profile-type
@@ -1233,6 +1468,9 @@ arm-platform-device-tpm-binding-data = (
    was provided at Realm creation.
 
    This claim MUST be present in a CCA Realm state attestation token.
+
+   Compatibility: this claim will be present for all values of CCA Realm
+   Profile.
 
    cca-realm-personalization-value-label = 44235
    cca-realm-personalization-value-type = bytes .size 64
@@ -1250,6 +1488,9 @@ arm-platform-device-tpm-binding-data = (
 
    This claim MUST be present in a CCA Realm state attestation token.
 
+   Compatibility: this claim will be present for all values of CCA Realm
+   Profile.
+
    cca-realm-initial-measurement-label = 44238
 
    cca-realm-initial-measurement = (
@@ -1263,6 +1504,9 @@ arm-platform-device-tpm-binding-data = (
    Extensible Measurements maintained by the RMM.
 
    This claim MUST be present in a CCA Realm state attestation token.
+
+   Compatibility: this claim will be present for all values of CCA Realm
+   Profile.
 
    cca-realm-extensible-measurements-label = 44239
 
@@ -1282,6 +1526,9 @@ arm-platform-device-tpm-binding-data = (
 
    This claim MUST be present in a CCA Realm state attestation token.
 
+   Compatibility: this claim will be present for all values of CCA Realm
+   Profile.
+
    cca-realm-hash-algo-id-label = 44236
 
    cca-realm-hash-algo-id = (
@@ -1296,9 +1543,11 @@ arm-platform-device-tpm-binding-data = (
    The value of the Realm public key claim is a byte string
    representation of a COSE_Key.
 
-   This claim MUST be present in a CCA Realm state attestation token.
+   This claim MUST be present in a CCA Realm state attestation token
+   when the attestation model is not Direct mode.
 
-   ToDo: not in direct mode
+   Compatibility: this claim can be present for all values of CCA Realm
+   Profile.
 
    cca-realm-public-key-label = 44237
 
@@ -1316,7 +1565,11 @@ arm-platform-device-tpm-binding-data = (
    Section 4.8.7 such that it can be presented as a Challenge for the
    bound CCA Platform token Section 4.10.
 
-   This claim MUST be present in a CCA Realm state attestation token.
+   This claim MUST be present in a CCA Realm state attestation token
+   when the attestation model is not Direct mode.
+
+   Compatibility: this claim can be present for all values of CCA Realm
+   Profile.
 
    cca-realm-public-key-hash-algo-id-label = 44240
 
@@ -1331,6 +1584,9 @@ arm-platform-device-tpm-binding-data = (
    Realm MEC policy claim shall be cca-realm-mec-policy-shared.
 
    This claim MUST be present in a CCA Realm state attestation token.
+
+   Compatibility: this claim will be present for all values of CCA Realm
+   Profile.
 
    cca-realm-mec-policy-label = 44243
 
@@ -1349,6 +1605,9 @@ arm-platform-device-tpm-binding-data = (
    of the Realm.
 
    This claim is OPTIONAL in a CCA Realm state attestation token.
+
+   Compatibility: this claim can be present for all values of CCA Realm
+   Profile.
 
    cca-realm-lfa-policy-label = 44244
 
@@ -1373,6 +1632,9 @@ arm-platform-device-tpm-binding-data = (
 
    This claim MUST be present in a CCA Realm state attestation token.
 
+   Compatibility: this claim can be present where realm profile values
+   are at or newer than "tag:arm.com,2024:realm#2.0.0".
+
    cca-realm-instance-id-label = 256 ; EAT ueid
 
    ; EAT UEIDs need to be 7 - 33 bytes
@@ -1390,7 +1652,10 @@ arm-platform-device-tpm-binding-data = (
 
    The Realm devices token hash claim MUST be present in a Realm token
    whenever one or more devices are assigned to the Realm.  If no
-   devices are assigned, the claim must not be present.
+   devices are assigned, the claim MUST NOT be present.
+
+   Compatibility: this claim can be present where realm profile values
+   are at or newer than "tag:arm.com,2024:realm#2.0.0".
 
    cca-realm-devices-token-hash-label = 44257
 
@@ -1398,13 +1663,13 @@ arm-platform-device-tpm-binding-data = (
        cca-realm-devices-token-hash-label => arm-platform-hash-type
    )
 
-4.9.  Backwards Compatibility Considerations
+4.9.  Device Token
 
-   This profile conforms to the claims in the Beta release of the 2.0
-   release of the Realm Management Monitor specification.  [RMM].
+   ToDo in separate PR
 
-   TODO Backwards compat incl notes 1.1./2.0 with note that 1.0 is
-   theoretical
+4.9.1.  Selectively Assigned Devices Token
+
+4.9.2.  Comprehensive Trust Devices Token
 
 4.10.  Token Binding
 
@@ -1455,9 +1720,11 @@ arm-platform-device-tpm-binding-data = (
    serializations (Section 4.1 of [STD94]).  This profile assumes that
    the Verifier MUST be a variation-tolerant CBOR decoder.
 
-   Cryptographic protection is obtained by wrapping the CCA Platform and
-   Realm state claims-set each in a COSE Web Token (CWT) [RFC8392].  The
-   signature structure MUST be a tagged (18) COSE_Sign1 [STD96].
+   Cryptographic protection is obtained by wrapping the CCA Platform
+   claims set in a COSE Web Token (CWT) [RFC8392].  The signature
+   structure MUST be a tagged (18) COSE_Sign1 [STD96].  In the Delegated
+   and HESRAK attestation models, the Realm claims set will also be
+   wrapped in a CWT.
 
    Acknowledging the variety of markets, regulations and use cases in
    which the CCA attestation token can be used, the baseline profile
@@ -1515,7 +1782,7 @@ arm-platform-device-tpm-binding-data = (
     | Verification Key | Any identification method listed in         |
     | Identification   | Appendix F.1 of [EAT]                       |
     +------------------+---------------------------------------------+
-    | Endorsements     | See Section 7.2                             |
+    | Endorsements     | See Section 7.3                             |
     +------------------+---------------------------------------------+
     | Freshness        | nonce or epoch ID based                     |
     +------------------+---------------------------------------------+
@@ -1581,7 +1848,7 @@ arm-platform-device-tpm-binding-data = (
    cca-realm-personalization-value = (cca-realm-personalization-value-\
                           label => cca-realm-personalization-value-type)
    cca-realm-profile-label = 265
-   cca-realm-profile-type = "tag:arm.com,2024:realm#2.0.0"
+   cca-realm-profile-type = "tag:arm.com,2026:realm#2.0.0"
    cca-realm-profile = (cca-realm-profile-label => cca-realm-profile-\
                                                                    type)
    cca-realm-public-key-hash-algo-id-label = 44240
@@ -1629,7 +1896,8 @@ arm-platform-device-tpm-binding-data = (
    arm-platform-claims = arm-platform-claim-map
    arm-platform-claim-map = {
      arm-platform-profile,
-     arm-platform-challenge,
+     ? arm-platform-challenge,
+     arm-platform-workload-binding,
      arm-platform-implementation-id,
      arm-platform-instance-id,
      arm-platform-config,
@@ -1642,8 +1910,11 @@ arm-platform-device-tpm-binding-data = (
      ? arm-platform-extension,
      ? arm-platform-peer-signers,
      ? arm-platform-tbb-rotpk,
-     ? arm-platform-device-tpm-binding-data,
+     ? arm-platform-discrete-tpm-binding-data,
    }
+   arm-platform-workload-binding-label = 2408
+   arm-platform-workload-binding = (arm-platform-workload-binding-\
+                                        label => arm-platform-hash-type)
    arm-platform-challenge-label = 10
    arm-platform-challenge = (arm-platform-challenge-label => arm-\
                                                      platform-hash-type)
@@ -1662,7 +1933,12 @@ arm-platform-device-tpm-binding-data = (
    arm-platform-instance-id = (arm-platform-instance-id-label => arm-\
                                               platform-instance-id-type)
    arm-platform-profile-label = 265
-   arm-platform-profile-type = "tag:arm.com,2024:cca_platform#2.0.0"
+   arm-platform-profile-type = "tag:arm.com,2026:cca_platform#2.0.0" / \
+   "tag:arm.com,2026:cca_platform#2.0.0;delegated" / "tag:arm.com,2026:\
+   cca_platform#2.0.0;HESRAK" / "tag:arm.com,2026:cca_platform#2.0.0;\
+   direct" / "tag:arm.com,2026:cca_platform#2.1.0" / "tag:arm.com,2026:\
+   cca_platform#2.1.0;delegated" / "tag:arm.com,2026:cca_platform#2.1.0\
+                 ;HESRAK" / "tag:arm.com,2026:cca_platform#2.1.0;direct"
    arm-platform-profile = (arm-platform-profile-label => arm-platform-\
                                                            profile-type)
    arm-platform-lifecycle-label = 2395
@@ -1751,10 +2027,10 @@ arm-platform-device-tpm-binding-data = (
    }
    arm-platform-tbb-rotpk = (arm-platform-tbb-rotpk-label => arm-\
                                                 platform-tbb-rotpk-type)
-   arm-platform-device-tpm-binding-data-label = 2407
-   arm-platform-device-tpm-binding-data-type = bytes
-   arm-platform-device-tpm-binding-data = (arm-platform-device-tpm-\
-        binding-data-label => arm-platform-device-tpm-binding-data-type)
+   arm-platform-discrete-tpm-binding-data-label = 2407
+   arm-platform-discrete-tpm-binding-data-type = bytes
+   arm-platform-discrete-tpm-binding-data = (arm-platform-discrete-tpm-\
+      binding-data-label => arm-platform-discrete-tpm-binding-data-type)
    Headers = (
      protected: empty_or_serialized_map,
      unprotected: header_map,
@@ -1864,7 +2140,11 @@ arm-platform-device-tpm-binding-data = (
       contain any firmware entries signed by a known Signer ID, without
       checking for a uniquely registered version.
 
-7.1.  AR4SI Trustworthiness Claims Mappings
+7.1.  Live Firmware Activation (LFA)
+
+   ToDo in separate PR
+
+7.2.  AR4SI Trustworthiness Claims Mappings
 
    [RATS-AR4SI] defines an information model that Verifiers can employ
    to produce Attestation Results.  AR4SI provides a set of standardized
@@ -1878,7 +2158,7 @@ arm-platform-device-tpm-binding-data = (
    consider when deciding if and how to appraise a certain feature
    associated with the PSA Attester.
 
-   TODO: Ar4SI TODO: LFA FAL
+   TODO: Ar4SI
 
     +===================+=============================================+
     | Trustworthiness   | Related PSA claims                          |
@@ -1916,7 +2196,7 @@ arm-platform-device-tpm-binding-data = (
    Claim values, an implementation is expected to follow the algorithm
    described in Section 2.3.3 of [RATS-AR4SI].
 
-7.2.  Endorsements, Reference Values and Verification Key Material
+7.3.  Endorsements, Reference Values and Verification Key Material
 
    The [CCA-ENDORSEMENTS] defines a protocol based on the [RATS-CoRIM]
    data model that can be used to convey CCA Endorsements, Reference
@@ -2131,7 +2411,7 @@ arm-platform-device-tpm-binding-data = (
 
 10.1.12.  Platform Device TPM Binding Data
 
-   *  Claim Name: arm-platform-device-tpm-binding-data
+   *  Claim Name: arm-platform-discrete-tpm-binding-data
 
    *  Claim Description: Arm Platform Device TPM Binding Data
 
@@ -2145,7 +2425,23 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.6.7 of RFCthis
 
-10.1.13.  CCA Token Platform Token Label
+10.1.13.  Platform Workload Binding
+
+   *  Claim Name: arm-platform-workload-binding
+
+   *  Claim Description: Arm Platform Workload Binding
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 2408
+
+   *  Claim Value Type(s): byte string
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.3.1 of RFCthis
+
+10.1.14.  CCA Token Platform Token Label
 
    *  Claim Name: cca-platform-token-label
 
@@ -2161,7 +2457,7 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.1 of RFCthis
 
-10.1.14.  Realm Personalization Value Claim
+10.1.15.  Realm Personalization Value Claim
 
    *  Claim Name: cca-realm-personalization-value
 
@@ -2177,7 +2473,7 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.8.3 of RFCthis
 
-10.1.15.  Realm Hash Algorithm ID Claim
+10.1.16.  Realm Hash Algorithm ID Claim
 
    *  Claim Name: cca-realm-hash-algm-id
 
@@ -2193,7 +2489,7 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.8.6 of RFCthis
 
-10.1.16.  Realm Public Key Claim
+10.1.17.  Realm Public Key Claim
 
    *  Claim Name: cca-realm-public-key
 
@@ -2209,7 +2505,7 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.8.7 of RFCthis
 
-10.1.17.  Realm Initial Measurement Claim
+10.1.18.  Realm Initial Measurement Claim
 
    *  Claim Name: cca-realm-initial-measurement
 
@@ -2225,7 +2521,7 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.8.4 of RFCthis
 
-10.1.18.  Realm Extensible Measurements Claim
+10.1.19.  Realm Extensible Measurements Claim
 
    *  Claim Name: cca-realm-extensible-measurements
 
@@ -2241,7 +2537,7 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.8.4 of RFCthis
 
-10.1.19.  Realm Public Key Hash Algorithm ID Claim
+10.1.20.  Realm Public Key Hash Algorithm ID Claim
 
    *  Claim Name: cca-realm-public-key-hash-algm-id
 
@@ -2257,7 +2553,7 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.8.8 of RFCthis
 
-10.1.20.  Realm MEC Policy
+10.1.21.  Realm MEC Policy
 
    *  Claim Name: cca-realm-mec-policy
 
@@ -2273,7 +2569,7 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.8.9 of RFCthis
 
-10.1.21.  Realm LFA Policy
+10.1.22.  Realm LFA Policy
 
    *  Claim Name: cca-realm-lfa-policy
 
@@ -2289,7 +2585,7 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.8.10 of RFCthis
 
-10.1.22.  Realm Devices Token Hash
+10.1.23.  Realm Devices Token Hash
 
    *  Claim Name: cca-realm-devices-token-hash
 
@@ -2305,7 +2601,7 @@ arm-platform-device-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.8.12 of RFCthis
 
-10.1.23.  CCA Token Delegated Realm Token Label
+10.1.24.  CCA Token Delegated Realm Token Label
 
    *  Claim Name: cca-platform-delegated-realm-label
 
@@ -2429,8 +2725,8 @@ arm-platform-device-tpm-binding-data = (
               <https://developer.arm.com/documentation/den0129/ca>.
 
    [RMM]      Arm, "Realm Management Monitor specification 2.0", 3
-              February 2026,
-              <https://developer.arm.com/documentation/den0137/2-0bet0>.
+              August 2026,
+              <https://developer.arm.com/documentation/den0137/2-0bet3>.
 
    [STD94]    Bormann, C. and P. Hoffman, "Concise Binary Object
               Representation (CBOR)", STD 94, RFC 8949,
@@ -2529,8 +2825,8 @@ A.1.1.  Platform Claims Set
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
    {
-     265:"tag:arm.com,2024:cca_platform#2.0.0",
-     10:h'\
+     265:"tag:arm.com,2026:cca_platform#2.0.0",
+     2408:h'\
       0D22E08A98469058486318283489BDB36F09DBEFEB1864DF433FA6E54EA2D711',
      2396:h'\
       7F454C4602010100000000000000000003003E00010000005058000000000000',
@@ -2656,7 +2952,7 @@ A.1.2.  Realm Claims Set
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
    {
-       265: "tag:arm.com,2024:realm#2.0.0", / eat_profile /
+       265: "tag:arm.com,2026:realm#2.0.0", / eat_profile /
        10: h'\
    6E86D6D97CC713BC6DD43DBCE491A6B40311C027A8BF85A39DA63E9CE44C132A8A11\
    9D296FAE6A6999E9BF3E4471B0CE01245D889424C31E89793B3B1D6B1504', / \
@@ -2755,8 +3051,8 @@ A.1.5.  Signed and Bound Assembly
          h'A1013822',
          {},
          << {
-           265:"tag:arm.com,2024:cca_platform#2.0.0",
-           10:h'\
+           265:"tag:arm.com,2026:cca_platform#2.0.0",
+           2408:h'\
       0D22E08A98469058486318283489BDB36F09DBEFEB1864DF433FA6E54EA2D711',
            2396:h'\
       7F454C4602010100000000000000000003003E00010000005058000000000000',
@@ -2888,7 +3184,7 @@ A.1.5.  Signed and Bound Assembly
          h'A1013822',
          {},
          << {
-           265:"tag:arm.com,2024:realm#2.0.0",
+           265:"tag:arm.com,2026:realm#2.0.0",
            10:h'\
    6E86D6D97CC713BC6DD43DBCE491A6B40311C027A8BF85A39DA63E9CE44C132A8A11\
           9D296FAE6A6999E9BF3E4471B0CE01245D889424C31E89793B3B1D6B1504',
@@ -2929,79 +3225,79 @@ A.1.5.  Signed and Bound Assembly
 
    which has the following base16 encoding:
 
-   d9038ba219acca821901075905f2d28444a1013822a0590585aa19010978
-   237461673a61726d2e636f6d2c323032343a6363615f706c6174666f726d
-   23322e302e300a58200d22e08a98469058486318283489bdb36f09dbefeb
-   1864df433fa6e54ea2d71119095c58207f454c4602010100000000000000
-   000003003e00010000005058000000000000190100582101070605040302
-   01000f0e0d0c0b0a090817161514131211101f1e1d1c1b1a191819096144
-   cfcfcfcf19095b193003190962677368612d32353619095a01190960783a
-   68747470733a2f2f7665726169736f6e2e6578616d706c652f2e77656c6c
-   2d6b6e6f776e2f7665726169736f6e2f766572696669636174696f6e1909
-   5f8da401695253455f424c315f320558205378796307535df3ec8d8b15a2
-   e2dc5641419c3d3060cfe32238c0fa973f7aa30258209a271f2a916b0b6e
-   e6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa06677368612d
-   323536a401675253455f424c320558205378796307535df3ec8d8b15a2e2
-   dc5641419c3d3060cfe32238c0fa973f7aa302582053c234e5e8472b6ac5
-   1c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c306677368612d32
-   3536a401655253455f530558205378796307535df3ec8d8b15a2e2dc5641
-   419c3d3060cfe32238c0fa973f7aa30258201121cfccd5913f0a63fec40a
-   6ffd44ea64f9dc135c66634ba001d10bcf4302a206677368612d323536a4
-   016641505f424c310558205378796307535df3ec8d8b15a2e2dc5641419c
-   3d3060cfe32238c0fa973f7aa30258201571b5ec78bd68512bf7830bb6a2
-   a44b2047c7df57bce79eb8a1c0e5bea0a50106677368612d323536a40166
-   41505f424c320558205378796307535df3ec8d8b15a2e2dc5641419c3d30
-   60cfe32238c0fa973f7aa302582010159baf262b43a92d95db59dae1f72c
-   645127301661e0a3ce4e38b295a97c5806677368612d323536a401675343
-   505f424c310558205378796307535df3ec8d8b15a2e2dc5641419c3d3060
-   cfe32238c0fa973f7aa302582010122e856b3fcd49f063636317476149cb
-   730a1aa1cfaad818552b72f56d6f6806677368612d323536a40167534350
-   5f424c32055820f14b4987904bcb5814e4459a057ed4d20f58a633152288
-   a761214dcd28780b56025820aa67a169b0bba217aa0aa88a65346920c84c
-   42447c36ba5f7ea65f422c1fe5d806677368612d323536a4016741505f42
-   4c33310558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe3
-   2238c0fa973f7aa30258202e6d31a5983a91251bfae5aefa1c0a19d8ba3c
-   f601d0e8a706b4cfa9661a6b8a06677368612d323536a40163524d4d0558
-   205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa97
-   3f7aa3025820a1fb50e6c86fae1679ef3351296fd6713411a08cf8dd1790
-   a4fd05fae868816406677368612d323536a4016948575f434f4e46494705
-   58205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0fa
-   973f7aa30258201a252402972f6057fa53cc172b52b9ffca698e18311fac
-   d0f3b06ecaaef79e1706677368612d323536a4016946575f434f4e464947
+   d9038ba219acca821901075905f4d28444a1013822a0590587aa19010978
+   237461673a61726d2e636f6d2c323032363a6363615f706c6174666f726d
+   23322e302e3019096858200d22e08a98469058486318283489bdb36f09db
+   efeb1864df433fa6e54ea2d71119095c58207f454c460201010000000000
+   0000000003003e0001000000505800000000000019010058210107060504
+   030201000f0e0d0c0b0a090817161514131211101f1e1d1c1b1a19181909
+   6144cfcfcfcf19095b193003190962677368612d32353619095a01190960
+   783a68747470733a2f2f7665726169736f6e2e6578616d706c652f2e7765
+   6c6c2d6b6e6f776e2f7665726169736f6e2f766572696669636174696f6e
+   19095f8da401695253455f424c315f320558205378796307535df3ec8d8b
+   15a2e2dc5641419c3d3060cfe32238c0fa973f7aa30258209a271f2a916b
+   0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa06677368
+   612d323536a401675253455f424c320558205378796307535df3ec8d8b15
+   a2e2dc5641419c3d3060cfe32238c0fa973f7aa302582053c234e5e8472b
+   6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c30667736861
+   2d323536a401655253455f530558205378796307535df3ec8d8b15a2e2dc
+   5641419c3d3060cfe32238c0fa973f7aa30258201121cfccd5913f0a63fe
+   c40a6ffd44ea64f9dc135c66634ba001d10bcf4302a206677368612d3235
+   36a4016641505f424c310558205378796307535df3ec8d8b15a2e2dc5641
+   419c3d3060cfe32238c0fa973f7aa30258201571b5ec78bd68512bf7830b
+   b6a2a44b2047c7df57bce79eb8a1c0e5bea0a50106677368612d323536a4
+   016641505f424c320558205378796307535df3ec8d8b15a2e2dc5641419c
+   3d3060cfe32238c0fa973f7aa302582010159baf262b43a92d95db59dae1
+   f72c645127301661e0a3ce4e38b295a97c5806677368612d323536a40167
+   5343505f424c310558205378796307535df3ec8d8b15a2e2dc5641419c3d
+   3060cfe32238c0fa973f7aa302582010122e856b3fcd49f0636363174761
+   49cb730a1aa1cfaad818552b72f56d6f6806677368612d323536a4016753
+   43505f424c32055820f14b4987904bcb5814e4459a057ed4d20f58a63315
+   2288a761214dcd28780b56025820aa67a169b0bba217aa0aa88a65346920
+   c84c42447c36ba5f7ea65f422c1fe5d806677368612d323536a401674150
+   5f424c33310558205378796307535df3ec8d8b15a2e2dc5641419c3d3060
+   cfe32238c0fa973f7aa30258202e6d31a5983a91251bfae5aefa1c0a19d8
+   ba3cf601d0e8a706b4cfa9661a6b8a06677368612d323536a40163524d4d
    0558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238c0
-   fa973f7aa30258209a92adbc0cee38ef658c71ce1b1bf8c65668f166bfb2
-   13644c895ccb1ad07a2506677368612d323536a4016c54425f46575f434f
-   4e4649470558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cf
-   e32238c0fa973f7aa3025820238903180cc104ec2c5d8b3f20c5bc61b389
-   ec0a967df8cc208cdc7cd454174f06677368612d323536a4016d534f435f
-   46575f434f4e4649470558205378796307535df3ec8d8b15a2e2dc564141
-   9c3d3060cfe32238c0fa973f7aa3025820e6c21e8d260fe71882debdb339
-   d2402a2ca7648529bc2303f48649bce038001706677368612d3235365860
-   31d04d52ccde952c1e32cba181885a40b8cc38e0528c1e89589807642aa5
-   e3f2bc37f95374506bff4d2e4be7063c4d72419270c722e8d4d93ee8b6c9
-   face3b43c9761a49941ab6f38ffdff496ad463b4cbfa11d83e23e31f7f62
-   329de30c1cc819acd182190107590278d28444a1013822a059020baa1901
-   09781c7461673a61726d2e636f6d2c323032343a7265616c6d23322e302e
-   300a58406e86d6d97cc713bc6dd43dbce491a6b40311c027a8bf85a39da6
-   3e9ce44c132a8a119d296fae6a6999e9bf3e4471b0ce01245d889424c31e
-   89793b3b1d6b150419accc677368612d32353619acd0677368612d323536
-   19accb584054686520717569636b2062726f776e20666f78206a756d7073
-   206f766572203133206c617a7920646f67732e54686520717569636b2062
-   726f776e20666f782019accd586ba40102200221583076f988091be585ed
-   41801aecfab858548c63057e16b0e676120bbd0d2f9c29e056c5d41a0130
-   eb9c21517899dc23146b22583028e1b062bd3ea4b315fd219f1cbb528cb6
-   e74ca49be16773734f61a1ca61031b2bbf3d918f2f94ffc4228e50919544
-   ae19acce5820311314ab73620350cf758834ae5c65d9e8c2dc7febe6e7d9
-   654bbe864e300d4919accf84582024d5b0a296cc05cbd8068c5067c5bd47
-   3b770dda6ae082fe3ba30abe3f9a6ab15820788fc090bfc6b8ed903152ba
-   8414e73daf5b8c7bb1e79ad502ab0699b659ed165820dac46a58415dc3a0
-   0d7a741852008e9cae64f52d03b9f76d76f4b3644fefc416582032c6afc6
-   27e55585c03155359f331a0e225f6840db947dd96efab81be267193919ac
-   d30119010058210133333333333333333333333333333333333333333333
-   333333333333333333335860580b1dea32d30ac6884c86b39cbe0fcb03bd
-   00df5103f9bab01386a46a3ba8143e27ed6d4eb0d0a2724abdf9640c0946
-   2face6df186909dfa6eb131e3a7918276077acdab8a8bdeca6b0eaafab66
-   e1439c1371f4fb1d6aac047481b5dc75dd46
+   fa973f7aa3025820a1fb50e6c86fae1679ef3351296fd6713411a08cf8dd
+   1790a4fd05fae868816406677368612d323536a4016948575f434f4e4649
+   470558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe32238
+   c0fa973f7aa30258201a252402972f6057fa53cc172b52b9ffca698e1831
+   1facd0f3b06ecaaef79e1706677368612d323536a4016946575f434f4e46
+   49470558205378796307535df3ec8d8b15a2e2dc5641419c3d3060cfe322
+   38c0fa973f7aa30258209a92adbc0cee38ef658c71ce1b1bf8c65668f166
+   bfb213644c895ccb1ad07a2506677368612d323536a4016c54425f46575f
+   434f4e4649470558205378796307535df3ec8d8b15a2e2dc5641419c3d30
+   60cfe32238c0fa973f7aa3025820238903180cc104ec2c5d8b3f20c5bc61
+   b389ec0a967df8cc208cdc7cd454174f06677368612d323536a4016d534f
+   435f46575f434f4e4649470558205378796307535df3ec8d8b15a2e2dc56
+   41419c3d3060cfe32238c0fa973f7aa3025820e6c21e8d260fe71882debd
+   b339d2402a2ca7648529bc2303f48649bce038001706677368612d323536
+   586031d04d52ccde952c1e32cba181885a40b8cc38e0528c1e8958980764
+   2aa5e3f2bc37f95374506bff4d2e4be7063c4d72419270c722e8d4d93ee8
+   b6c9face3b43c9761a49941ab6f38ffdff496ad463b4cbfa11d83e23e31f
+   7f62329de30c1cc819acd182190107590278d28444a1013822a059020baa
+   190109781c7461673a61726d2e636f6d2c323032363a7265616c6d23322e
+   302e300a58406e86d6d97cc713bc6dd43dbce491a6b40311c027a8bf85a3
+   9da63e9ce44c132a8a119d296fae6a6999e9bf3e4471b0ce01245d889424
+   c31e89793b3b1d6b150419accc677368612d32353619acd0677368612d32
+   353619accb584054686520717569636b2062726f776e20666f78206a756d
+   7073206f766572203133206c617a7920646f67732e54686520717569636b
+   2062726f776e20666f782019accd586ba40102200221583076f988091be5
+   85ed41801aecfab858548c63057e16b0e676120bbd0d2f9c29e056c5d41a
+   0130eb9c21517899dc23146b22583028e1b062bd3ea4b315fd219f1cbb52
+   8cb6e74ca49be16773734f61a1ca61031b2bbf3d918f2f94ffc4228e5091
+   9544ae19acce5820311314ab73620350cf758834ae5c65d9e8c2dc7febe6
+   e7d9654bbe864e300d4919accf84582024d5b0a296cc05cbd8068c5067c5
+   bd473b770dda6ae082fe3ba30abe3f9a6ab15820788fc090bfc6b8ed9031
+   52ba8414e73daf5b8c7bb1e79ad502ab0699b659ed165820dac46a58415d
+   c3a00d7a741852008e9cae64f52d03b9f76d76f4b3644fefc416582032c6
+   afc627e55585c03155359f331a0e225f6840db947dd96efab81be2671939
+   19acd3011901005821013333333333333333333333333333333333333333
+   3333333333333333333333335860580b1dea32d30ac6884c86b39cbe0fcb
+   03bd00df5103f9bab01386a46a3ba8143e27ed6d4eb0d0a2724abdf9640c
+   09462face6df186909dfa6eb131e3a7918276077acdab8a8bdeca6b0eaaf
+   ab66e1439c1371f4fb1d6aac047481b5dc75dd46
 
 A.2.  Direct Mode
 
