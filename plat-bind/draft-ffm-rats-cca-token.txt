@@ -807,7 +807,11 @@ arm-platform-profile-label = 265 ; EAT profile
 arm-platform-profile-type = "tag:arm.com,2026:cca_platform#2.0.0" /
                             "tag:arm.com,2026:cca_platform#2.0.0;delegated" /
                             "tag:arm.com,2026:cca_platform#2.0.0;HESRAK" /
-                            "tag:arm.com,2026:cca_platform#2.0.0;direct"
+                            "tag:arm.com,2026:cca_platform#2.0.0;direct" /
+                            "tag:arm.com,2026:cca_platform#2.1.0" /
+                            "tag:arm.com,2026:cca_platform#2.1.0;delegated" /
+                            "tag:arm.com,2026:cca_platform#2.1.0;HESRAK" /
+                            "tag:arm.com,2026:cca_platform#2.1.0;direct"
 
 arm-platform-profile = (
     arm-platform-profile-label => arm-platform-profile-type
@@ -1932,7 +1936,9 @@ arm-platform-discrete-tpm-binding-data = (
    arm-platform-profile-type = "tag:arm.com,2026:cca_platform#2.0.0" / \
    "tag:arm.com,2026:cca_platform#2.0.0;delegated" / "tag:arm.com,2026:\
    cca_platform#2.0.0;HESRAK" / "tag:arm.com,2026:cca_platform#2.0.0;\
-                                                                 direct"
+   direct" / "tag:arm.com,2026:cca_platform#2.1.0" / "tag:arm.com,2026:\
+   cca_platform#2.1.0;delegated" / "tag:arm.com,2026:cca_platform#2.1.0\
+                 ;HESRAK" / "tag:arm.com,2026:cca_platform#2.1.0;direct"
    arm-platform-profile = (arm-platform-profile-label => arm-platform-\
                                                            profile-type)
    arm-platform-lifecycle-label = 2395
