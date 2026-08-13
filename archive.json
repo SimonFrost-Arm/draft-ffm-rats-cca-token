@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-07-30T02:12:26.162995+00:00",
+  "timestamp": "2026-08-13T01:50:16.064792+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -3308,6 +3308,431 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 58,
+      "id": "PR_kwDOMRXjbM79ge3J",
+      "title": "Adding workload binding claim and updates to 2.0 claim set",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/58",
+      "state": "MERGED",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Addition of platform workload binding claim and according profile value updates\r\nAdd Compatibility commentary to claims\r\nMisc 2.0 claim tidy ups\r\n",
+      "createdAt": "2026-08-11T12:28:19Z",
+      "updatedAt": "2026-08-12T12:39:31Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "29d1e303b538e9bdf627eedfbe4c093d5ba111ef",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "plat-bind",
+      "headRefOid": "4285ea42394cf06ee8ff4393c148002792298bc3",
+      "closedAt": "2026-08-12T12:39:27Z",
+      "mergedAt": "2026-08-12T12:39:27Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "7323cfb3303364588602ed8c73d780d1b17e4435"
+      },
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "@thomas-fossati, many thanks for review.\r\nLast two commits should address comments. ",
+          "createdAt": "2026-08-12T09:44:28Z",
+          "updatedAt": "2026-08-12T09:44:28Z"
+        },
+        {
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> Last two commits should address comments.\r\n\r\nThanks, they look good to me.  I have left one last clarifying question inline.\r\n\r\n",
+          "createdAt": "2026-08-12T10:09:13Z",
+          "updatedAt": "2026-08-12T10:09:13Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJHMj3A",
+          "commit": {
+            "abbreviatedOid": "23522a2"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "A few comments inline",
+          "createdAt": "2026-08-11T13:03:03Z",
+          "updatedAt": "2026-08-11T13:51:25Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "spurious .\n\n```suggestion\nRealm Management Monitor specification {{RMM}}.\n```",
+              "createdAt": "2026-08-11T13:03:03Z",
+              "updatedAt": "2026-08-11T13:51:25Z"
+            },
+            {
+              "originalPosition": 29,
+              "body": "ditto\n\n```suggestion\nspecification {{RMM}}.\n```",
+              "createdAt": "2026-08-11T13:03:24Z",
+              "updatedAt": "2026-08-11T13:51:25Z"
+            },
+            {
+              "originalPosition": 45,
+              "body": "```suggestion\nDepending upon the features within a CCA implementation there may be additional entries within the CMW.\n```",
+              "createdAt": "2026-08-11T13:04:07Z",
+              "updatedAt": "2026-08-11T13:51:25Z"
+            },
+            {
+              "originalPosition": 46,
+              "body": "You need NL to activate the bulleted list environment.\n\n```suggestion\nThese can include:\n\n```",
+              "createdAt": "2026-08-11T13:04:42Z",
+              "updatedAt": "2026-08-11T13:51:25Z"
+            },
+            {
+              "originalPosition": 50,
+              "body": "The refs here should probably be updated when the \"Device Token\" section is tackled.  To avoid having to remember that, I would add three empty subsections to it (with anchors) and refer to the subsections rather than the top level.",
+              "createdAt": "2026-08-11T13:08:18Z",
+              "updatedAt": "2026-08-11T13:51:25Z"
+            },
+            {
+              "originalPosition": 94,
+              "body": "```suggestion\nThe {{EAT}} `eat_nonce` (claim key 10) is used.  Since the EAT nonce claim offers flexiblity for different\n```",
+              "createdAt": "2026-08-11T13:09:53Z",
+              "updatedAt": "2026-08-11T13:51:25Z"
+            },
+            {
+              "originalPosition": 122,
+              "body": "```suggestion\n* Binding Claim: eat_nonce\n```",
+              "createdAt": "2026-08-11T13:10:21Z",
+              "updatedAt": "2026-08-11T13:51:25Z"
+            },
+            {
+              "originalPosition": 129,
+              "body": "```suggestion\n* Binding Claim: eat_nonce\n```",
+              "createdAt": "2026-08-11T13:10:28Z",
+              "updatedAt": "2026-08-11T13:51:25Z"
+            },
+            {
+              "originalPosition": 136,
+              "body": "```suggestion\n* Binding Claim: eat_nonce\n```",
+              "createdAt": "2026-08-11T13:10:37Z",
+              "updatedAt": "2026-08-11T13:51:25Z"
+            },
+            {
+              "originalPosition": 143,
+              "body": "```suggestion\n* Binding Claim: eat_nonce\n```",
+              "createdAt": "2026-08-11T13:10:46Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 151,
+              "body": "```suggestion\n* Binding Claim: eat_nonce\n```",
+              "createdAt": "2026-08-11T13:10:53Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 158,
+              "body": "```suggestion\n* Binding Claim: eat_nonce\n```",
+              "createdAt": "2026-08-11T13:11:01Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 166,
+              "body": "```suggestion\n* Binding Claim: eat_nonce\n```",
+              "createdAt": "2026-08-11T13:11:08Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 174,
+              "body": "```suggestion\n* Binding Claim: eat_nonce\n```",
+              "createdAt": "2026-08-11T13:11:20Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 181,
+              "body": "```suggestion\n* Binding Claim: eat_nonce\n```",
+              "createdAt": "2026-08-11T13:11:27Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 183,
+              "body": "```suggestion\n* Note: for this attestation model, the PAT also contains an `eat_nonce` claim with the value equal to the CCA Realm challenge claim.\n```",
+              "createdAt": "2026-08-11T13:11:48Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 132,
+              "body": "\"2.0.0#direct\" is not a valid URI fragment because # is not allowed by the [fragment production](https://datatracker.ietf.org/doc/html/rfc3986#section-3.5).\n\nYou could use @, :, or anything else in `sub-delims`, but be careful of the potential clash with the SemVer grammar. Therefore, avoid +, - and .\n\n\ud83d\ude05 \n\n\n\n\n",
+              "createdAt": "2026-08-11T13:24:10Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 76,
+              "body": "deciding what \"newer\" means requires the specification of a comparison rule.\nI believe that'd based on the standard SemVer comparison of the two URI fragments, right?",
+              "createdAt": "2026-08-11T13:31:16Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 357,
+              "body": "URL is correct in this case.  It's effectively a resource locator.",
+              "createdAt": "2026-08-11T13:31:51Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "Subsequent prose says that it is only present for 2026+ profiles, so shouldn't we add a `?` here?",
+              "createdAt": "2026-08-11T13:40:26Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 5,
+              "body": "Should this include the full list?",
+              "createdAt": "2026-08-11T13:41:28Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 408,
+              "body": "The CDDL has been updated to 2026, so should we s/2024/2026/ here too?",
+              "createdAt": "2026-08-11T13:42:56Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 500,
+              "body": "```suggestion\nCompatibility: this claim can be present where realm profile values are at or newer than \"tag:arm.com,2024:realm#2.0.0\".\n```",
+              "createdAt": "2026-08-11T13:45:26Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 513,
+              "body": "```suggestion\nCompatibility: this claim can be present where realm profile values are at or newer than \"tag:arm.com,2024:realm#2.0.0\".\n```",
+              "createdAt": "2026-08-11T13:45:36Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 177,
+              "body": "This seems like a dup of L451",
+              "createdAt": "2026-08-11T13:48:47Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 193,
+              "body": "```suggestion\nThe CCA platform challenge claim MUST NOT be present when the CCA platform profile claim has any of the following values:\n```",
+              "createdAt": "2026-08-11T13:49:34Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 511,
+              "body": "```suggestion\nIf no devices are assigned, the claim MUST NOT be present.\n```",
+              "createdAt": "2026-08-11T13:49:45Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            },
+            {
+              "originalPosition": 65,
+              "body": "```suggestion\nThe Workload Binding claim provides the basis for a cryptographic binding to be established between the CCA Platform and CCA\n```",
+              "createdAt": "2026-08-11T13:50:44Z",
+              "updatedAt": "2026-08-11T13:51:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJL6h7w",
+          "commit": {
+            "abbreviatedOid": "23522a2"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-11T22:53:12Z",
+          "updatedAt": "2026-08-11T22:53:13Z",
+          "comments": [
+            {
+              "originalPosition": 132,
+              "body": "Thanks - that hadn't been noticed in previews for the change and RMM review! \r\nWill swap to semi colons:   ie.  tag:arm.com,2024:cca_platform#2.0.0;direct",
+              "createdAt": "2026-08-11T22:53:13Z",
+              "updatedAt": "2026-08-11T22:53:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJL8ggw",
+          "commit": {
+            "abbreviatedOid": "23522a2"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-11T22:59:17Z",
+          "updatedAt": "2026-08-11T22:59:17Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Intent is that CDDL is for the latest profile, in which case this isn't optional. I'll add some text to that effect. \r\nI played with several variants of the 'compatibility' communication including tables  (too many long strings) and adding claim map CDDL for each profile version (actually seemed more confusing than helpful).",
+              "createdAt": "2026-08-11T22:59:17Z",
+              "updatedAt": "2026-08-11T22:59:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJL85Qg",
+          "commit": {
+            "abbreviatedOid": "23522a2"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-11T23:00:35Z",
+          "updatedAt": "2026-08-11T23:00:35Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "Good point. The abbreviated list is probably relevant for RMM default implementation documentation, but not here.",
+              "createdAt": "2026-08-11T23:00:35Z",
+              "updatedAt": "2026-08-11T23:00:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJO7O7g",
+          "commit": {
+            "abbreviatedOid": "23522a2"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-12T08:40:26Z",
+          "updatedAt": "2026-08-12T08:40:26Z",
+          "comments": [
+            {
+              "originalPosition": 76,
+              "body": "I had assumed date (year) priority first, then apply semver, but that does need clarification in the text. \r\nI couldn't find any authoritative spec for tag ver comparison, RFC4151 deliberately dodges that.",
+              "createdAt": "2026-08-12T08:40:26Z",
+              "updatedAt": "2026-08-12T08:40:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJPAkhA",
+          "commit": {
+            "abbreviatedOid": "23522a2"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-12T08:51:03Z",
+          "updatedAt": "2026-08-12T08:51:03Z",
+          "comments": [
+            {
+              "originalPosition": 76,
+              "body": "ok, so something like:\r\n\r\n```python\r\nfunc profile_cmp(lhs, rhs):\r\n    if lhs.year == rhs.year:\r\n        return semver_cmp(lhs.semver, rhs.semver)\r\n    return lhs.year < rhs.year:\r\n```",
+              "createdAt": "2026-08-12T08:51:03Z",
+              "updatedAt": "2026-08-12T08:51:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJPSiHg",
+          "commit": {
+            "abbreviatedOid": "23522a2"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-12T09:26:51Z",
+          "updatedAt": "2026-08-12T09:26:51Z",
+          "comments": [
+            {
+              "originalPosition": 76,
+              "body": "Yes!",
+              "createdAt": "2026-08-12T09:26:51Z",
+              "updatedAt": "2026-08-12T09:26:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJPogpw",
+          "commit": {
+            "abbreviatedOid": "21098e7"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-12T10:07:46Z",
+          "updatedAt": "2026-08-12T10:07:46Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "what about the 2.1.0s?  Are they left out explicitly?",
+              "createdAt": "2026-08-12T10:07:46Z",
+              "updatedAt": "2026-08-12T10:07:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJQFZ-g",
+          "commit": {
+            "abbreviatedOid": "21098e7"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-12T11:11:32Z",
+          "updatedAt": "2026-08-12T11:11:32Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "Ah, good point. We're in the cleft of needing both 2.0 and 2.1 support.\nI'll add them in and when it's felt that the world has fully moved to 2.1 we can trim.",
+              "createdAt": "2026-08-12T11:11:32Z",
+              "updatedAt": "2026-08-12T11:11:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJQvZsA",
+          "commit": {
+            "abbreviatedOid": "4285ea4"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "Thanks!",
+          "createdAt": "2026-08-12T12:32:44Z",
+          "updatedAt": "2026-08-12T12:32:44Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 59,
+      "id": "PR_kwDOMRXjbM7-Tk0w",
+      "title": "Add Description of Devices evidence",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/59",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-08-12T22:45:10Z",
+      "updatedAt": "2026-08-12T22:45:10Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "7323cfb3303364588602ed8c73d780d1b17e4435",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "devices",
+      "headRefOid": "7dd97ff55c32fcc6d27c5a73cad4fc5cb7f128e9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
