@@ -1710,7 +1710,7 @@ arm-platform-discrete-tpm-binding-data = (
    The Device Token contains binding digests for device evidence
    obtained when selective trust devices are assigned to the Realm.  It
    is carried as a separate entity in the overall attestation token CMW
-   using the tag 44258.
+   using the collection key 44258.
 
    The device artifacts to which the binding digests apply can be found
    in the Selective Trust Devices token Section 4.9.3 which has a
