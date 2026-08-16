@@ -1172,7 +1172,7 @@ access to the Realm. For some Realm use cases, it can be desirable to also asses
 devices as part of the Realm remote attestation process.
 
 The mechanism for connecting to devices is controlled by the TEE Device Interface Security Protocol (TDISP) {{TDISP}}.
-The RMM {{RMM}} acts as the TDISP TEE Security Manager (TSM) that interacts with the Devices.
+The RMM {{RMM}} acts as the TDISP TEE Security Manager (TSM) that interacts with the devices.
 As part of these interactions, evidence artefacts are collected from the devices.
 These artefacts are used to assess the trustworthiness of the device.
 As the RMM does not provide long term data storage, these artefacts are sent to the untrusted host for storage.
