@@ -1178,7 +1178,7 @@ These artefacts are used to assess the trustworthiness of the device.
 As the RMM does not provide long term data storage, these artefacts are sent to the untrusted host for storage.
 These artefacts are later retrieved and added as attestation evidence.
 To ensure that the retrieved items are trustworthy, the RMM measures the artefacts before passing them to the host
-and either saves these binding digests in Realm state (selective trust devices) or sends them to the HES for secure
+and either saves these binding digests in Realm state (Selective Trust Devices) or sends them to the HES for secure
 storage (comprehensive trust devices).
 The binding digests are then included in the attestation evidence.
 
