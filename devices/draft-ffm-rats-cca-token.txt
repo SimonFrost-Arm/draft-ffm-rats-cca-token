@@ -1812,7 +1812,7 @@ arm-platform-discrete-tpm-binding-data = (
 
 4.9.3.  Selective Trust Devices Token
 
-   The Selective Trust devices token is used to hold artifacts or
+   The Selective Trust Devices token is used to hold artifacts or
    transcripts obtained by the TDISP TSM when communicating with
    assigned devices.
 
