@@ -1,0 +1,7 @@
+; CCA device token
+cca-device-claims = (cca-device-claim-map)
+
+cca-device-claim-map = {
+    cca-device-profile
+    cca-devices
+}

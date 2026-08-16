@@ -4,6 +4,9 @@ cca-token = #6.907(cca-token-cmw)
 ; CoAP Content-Format for "application/eat+cwt"
 eat-cwt-coap-cf = 263
 
+; CoAP Content-Format for "applcaiton/uccs+cbor"
+eat-uccs-coap-label = 601
+
 cca-token-cmw = {
   0xACCA => [
     eat-cwt-coap-cf
@@ -12,5 +15,9 @@ cca-token-cmw = {
   0xACD1 => [
     eat-cwt-coap-cf
     bytes .cbor COSE_Sign1<cca-realm-claims>
+  ]
+  ? 0xACE2 => [
+    eat-uccs-coap-label
+    bytes .cbor COSE_Sign1<cca-device-claims>
   ]
 }
