@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 13 February 2027                                         Linaro
+Expires: 17 February 2027                                         Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                          12 August 2026
+                                                          16 August 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 February 2027.
+   This Internet-Draft will expire on 17 February 2027.
 
 Copyright Notice
 
@@ -1667,19 +1667,19 @@ arm-platform-discrete-tpm-binding-data = (
 
 4.9.1.  Introduction
 
-   The TCB of CCA can be extended by hardware device attached to the
-   host platform.  These devices can either be provided to support
-   functions in all Realms (Comprehensive Trust Devices) or can be
-   assigned on a demand basis to an individual Realm (Selective Trust
-   Devices).  These devices provide assistance services to the software
-   within the Realm and can have access to Realm memory for data I/O.
-   To ensure that a device can be trusted to operate as expected, it is
-   necessary to appraise attestation evidence provided by that device to
-   ensure trustworthiness.  Comprehensive Trust Devices are made
-   available by the Platform to all Realms and the evidence to support
-   their usage is created independently of the Realm workload.
-   Assessment of the trustworthiness of such devices is normally
-   conducted as part of the Realm remote attestation process.
+   The TCB of a CCA system can be extended by one or more hardware
+   devices attached to the host platform.  These devices can either be
+   provided to support functions in all Realms (Comprehensive Trust
+   Devices) or can be assigned on a demand basis to an individual Realm
+   (Selective Trust Devices).  These devices provide assistance services
+   to the software within the Realm and can have access to Realm memory
+   for data I/O.  To ensure that a device can be trusted to operate as
+   expected, it is necessary to appraise attestation evidence provided
+   by that device to ensure trustworthiness.  Comprehensive Trust
+   Devices are made available by the Platform to all Realms and the
+   evidence to support their usage is created independently of the Realm
+   workload.  Assessment of the trustworthiness of such devices is
+   normally conducted as part of the Realm remote attestation process.
 
    Selective Trust Devices are assigned by a process executed within
    Realm software.  As part of the assignment process, evidence of the
