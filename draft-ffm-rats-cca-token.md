@@ -1222,7 +1222,7 @@ The device measurement digest contains an arm-platform-hash-type value represent
 evidence.
 Where the communication protocol used between the TSM and the device is SPDM, this digest is for an artifact containing
 the SPDM measurements exchange, request and response transcript.
-For other communication protocols, this digest is for an artifact containing measurements report by the device.
+For other communication protocols, this digest is for an artifact containing measurements reported by the device.
 
 This attribute MUST be present in a CCA device entry.
 
