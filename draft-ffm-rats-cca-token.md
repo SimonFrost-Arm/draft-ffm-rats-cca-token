@@ -1186,7 +1186,7 @@ The binding digests are then included in the attestation evidence.
 {: #sec-device-token}
 
 The Device Token contains binding digests for device evidence obtained when selective trust devices are assigned to the Realm.
-It is carried as a separate entity in the overall attestation token CMW using the tag 44258.
+It is carried as a separate entity in the overall attestation token CMW using the collection key 44258.
 
 The device artifacts to which the binding digests apply can be found in the Selective Trust Devices
 token {{sec-device-token-selective}} which has a separate entry in the overall attestation token CMW.
