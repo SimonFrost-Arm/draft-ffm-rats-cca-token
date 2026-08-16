@@ -1764,7 +1764,7 @@ arm-platform-discrete-tpm-binding-data = (
    is SPDM, this digest is for an artifact containing the SPDM
    measurements exchange, request and response transcript.  For other
    communication protocols, this digest is for an artifact containing
-   measurements report by the device.
+   measurements reported by the device.
 
    This attribute MUST be present in a CCA device entry.
 
