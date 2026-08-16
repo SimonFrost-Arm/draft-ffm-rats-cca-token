@@ -1702,7 +1702,7 @@ arm-platform-discrete-tpm-binding-data = (
    trustworthy, the RMM measures the artefacts before passing them to
    the host and either saves these binding digests in Realm state
    (Selective Trust Devices) or sends them to the HES for secure storage
-   (comprehensive trust devices).  The binding digests are then included
+   (Comprehensive Trust Devices).  The binding digests are then included
    in the attestation evidence.
 
 4.9.2.  Devices Token
