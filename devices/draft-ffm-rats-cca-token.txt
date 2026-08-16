@@ -155,6 +155,16 @@ Table of Contents
        10.1.22. Realm LFA Policy
        10.1.23. Realm Devices Token Hash
        10.1.24. CCA Token Delegated Realm Token Label
+       10.1.25. CCA Token Device Token CMW Collection Key
+       10.1.26. CCA Token Direct Realm Token CMW Collection Key
+       10.1.27. CCA Token Selective Device Evidence Token CMW
+               Collection Key
+       10.1.28. CCA Token Comprehensive Device Evidence Token CMW
+               Collection Key
+       10.1.29. CCA Token CPAK Certificate Chain CMW Collection Key
+       10.1.30. CCA Token CPAK Certificate Chain With Evidence CMW
+               Collection Key
+       10.1.31. CCA Token Firmware Activity Log CMW Collection Key
      10.2.  Media Types
      10.3.  CoAP Content-Formats Registration
        10.3.1.  Registry Contents
@@ -526,6 +536,9 @@ Table of Contents
    ; CoAP Content-Format for "application/eat+cwt"
    eat-cwt-coap-cf = 263
 
+   ; CoAP Content-Format for "applcaiton/uccs+cbor"
+   eat-uccs-coap-label = 601
+
    cca-token-cmw = {
      0xACCA => [
        eat-cwt-coap-cf
@@ -534,6 +547,10 @@ Table of Contents
      0xACD1 => [
        eat-cwt-coap-cf
        bytes .cbor COSE_Sign1<cca-realm-claims>
+     ]
+     ? 0xACE2 => [
+       eat-uccs-coap-label
+       bytes .cbor COSE_Sign1<cca-device-claims>
      ]
    }
 
@@ -1774,9 +1791,7 @@ arm-platform-discrete-tpm-binding-data = (
    hash-type value representing a digest of the data exchanged when
    negotiating the communication protocol with the device.  Where the
    communication protocol used between the TSM and the device is SPDM,
-   this digest is for an artifact containing the VCA.  For other
-   communication protocols, this digest is for an artifact containing
-   measurements reported by the device.
+   this digest is for an artifact containing the VCA.
 
    This attribute is OPTIONAL in a CCA device entry.
 
@@ -1796,19 +1811,19 @@ arm-platform-discrete-tpm-binding-data = (
 
    This attribute MUST be present in a CCA device entry.
 
-   cca-devices-label = 44259
+cca-devices-label = 44259
 
-   cca-device = {
-       1 => cca-hash-type,     ; device identity digest
-       2 => cca-hash-type,     ; device measurements exchange digest
-       ? 3 => cca-hash-type,   ; protocol negotiation data digest
-       4 => bool,              ; coherent traffic IDE protection
-       5 => bool,              ; non-coherent traffic IDE protection
-   }
+cca-device = {
+    1 => arm-platform-hash-type,     ; device identity digest
+    2 => arm-platform-hash-type,     ; device measurements exchange digest
+    ? 3 => arm-platform-hash-type,   ; protocol negotiation data digest
+    4 => bool,              ; coherent traffic IDE protection
+    5 => bool,              ; non-coherent traffic IDE protection
+}
 
-   cca-devices = (
-       cca-devices-label => [ + cca-device ]
-   )
+cca-devices = (
+    cca-devices-label => [ + cca-device ]
+)
 
 4.9.3.  Selective Trust Devices Token
 
@@ -1981,6 +1996,7 @@ arm-platform-discrete-tpm-binding-data = (
 
    cca-token = #6.907(cca-token-cmw)
    eat-cwt-coap-cf = 263
+   eat-uccs-coap-label = 601
    cca-token-cmw = {
      0xACCA => [
            eat-cwt-coap-cf,
@@ -1989,6 +2005,10 @@ arm-platform-discrete-tpm-binding-data = (
      0xACD1 => [
            eat-cwt-coap-cf,
            bytes .cbor COSE_Sign1<cca-realm-claims>,
+   ],
+     ? 0xACE2 => [
+             eat-uccs-coap-label,
+             bytes .cbor COSE_Sign1<cca-device-claims>,
    ],
    }
    COSE_Sign1<C> = #6.18([
@@ -2213,6 +2233,24 @@ arm-platform-discrete-tpm-binding-data = (
    arm-platform-discrete-tpm-binding-data-type = bytes
    arm-platform-discrete-tpm-binding-data = (arm-platform-discrete-tpm-\
       binding-data-label => arm-platform-discrete-tpm-binding-data-type)
+   cca-device-claims = cca-device-claim-map
+   cca-device-claim-map = {
+     cca-device-profile,
+     cca-devices,
+   }
+   cca-device-profile-label = 265
+   cca-device-profile-type = "tag:arm.com,2026:cca_device#2.0.0"
+   cca-device-profile = (cca-device-profile-label => cca-device-profile\
+                                                                  -type)
+   cca-devices-label = 44259
+   cca-device = {
+     1 => arm-platform-hash-type,
+     2 => arm-platform-hash-type,
+     ? 3 => arm-platform-hash-type,
+     4 => bool,
+     5 => bool,
+   }
+   cca-devices = (cca-devices-label => [+ cca-device])
    Headers = (
      protected: empty_or_serialized_map,
      unprotected: header_map,
@@ -2790,6 +2828,126 @@ arm-platform-discrete-tpm-binding-data = (
    *  JWT Claim Name: N/A
 
    *  Claim Key: 44241
+
+   *  Claim Value Type(s): byte string
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.1 of RFCthis
+
+10.1.25.  CCA Token Device Token CMW Collection Key
+
+   *  Claim Name: cca-device-token-collection-key
+
+   *  Claim Description: CCA Device Token Collection Key
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 44258
+
+   *  Claim Value Type(s): byte string
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.9.2 of RFCthis
+
+10.1.26.  CCA Token Direct Realm Token CMW Collection Key
+
+   *  Claim Name: cca-platform-direct-realm-label
+
+   *  Claim Description: CCA Token Direct Realm Token CMW Collection Key
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 44251
+
+   *  Claim Value Type(s): byte string
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.1 of RFCthis
+
+10.1.27.  CCA Token Selective Device Evidence Token CMW Collection Key
+
+   *  Claim Name: cca-platform-selective-device-evidence-label
+
+   *  Claim Description: CCA Token Selective Device Evidence Token CMW
+      Collection Key
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 44252
+
+   *  Claim Value Type(s): byte string
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.1 of RFCthis
+
+10.1.28.  CCA Token Comprehensive Device Evidence Token CMW Collection
+          Key
+
+   *  Claim Name: cca-platform-comprehensive-device-evidence-label
+
+   *  Claim Description: CCA Token Comprehensive Device Evidence Token
+      CMW Collection Key
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 44253
+
+   *  Claim Value Type(s): byte string
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.1 of RFCthis
+
+10.1.29.  CCA Token CPAK Certificate Chain CMW Collection Key
+
+   *  Claim Name: cca-platform-cpak-certificate-chain-label
+
+   *  Claim Description: CCA Token CPAK Certificate Chain CMW Collection
+      Key
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 44254
+
+   *  Claim Value Type(s): byte string
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.1 of RFCthis
+
+10.1.30.  CCA Token CPAK Certificate Chain With Evidence CMW Collection
+          Key
+
+   *  Claim Name: cca-platform-cpak-certificate-chain-with-evidence-
+      label
+
+   *  Claim Description: CCA Token CPAK Certificate Chain With Evidence
+      CMW Collection Key
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 44255
+
+   *  Claim Value Type(s): byte string
+
+   *  Change Controller: iana-request@arm.com
+
+   *  Specification Document(s): Section 4.1 of RFCthis
+
+10.1.31.  CCA Token Firmware Activity Log CMW Collection Key
+
+   *  Claim Name: cca-platform-firmware-activity-log-label
+
+   *  Claim Description: CCA Token Firmware Activity Log CMW Collection
+      Key
+
+   *  JWT Claim Name: N/A
+
+   *  Claim Key: 44256
 
    *  Claim Value Type(s): byte string
 

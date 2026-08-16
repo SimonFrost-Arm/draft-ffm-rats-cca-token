@@ -1449,6 +1449,27 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.24">
                     <p id="section-toc.1-1.10.2.1.2.24.1"><a href="#section-10.1.24" class="auto internal xref">10.1.24</a>. <a href="#name-cca-token-delegated-realm-t" class="internal xref">CCA Token Delegated Realm Token Label</a></p>
 </li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.25">
+                    <p id="section-toc.1-1.10.2.1.2.25.1"><a href="#section-10.1.25" class="auto internal xref">10.1.25</a>. <a href="#name-cca-token-device-token-cmw-" class="internal xref">CCA Token Device Token CMW Collection Key</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.26">
+                    <p id="section-toc.1-1.10.2.1.2.26.1"><a href="#section-10.1.26" class="auto internal xref">10.1.26</a>. <a href="#name-cca-token-direct-realm-toke" class="internal xref">CCA Token Direct Realm Token CMW Collection Key</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.27">
+                    <p id="section-toc.1-1.10.2.1.2.27.1"><a href="#section-10.1.27" class="auto internal xref">10.1.27</a>. <a href="#name-cca-token-selective-device-" class="internal xref">CCA Token Selective Device Evidence Token CMW Collection Key</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.28">
+                    <p id="section-toc.1-1.10.2.1.2.28.1"><a href="#section-10.1.28" class="auto internal xref">10.1.28</a>. <a href="#name-cca-token-comprehensive-dev" class="internal xref">CCA Token Comprehensive Device Evidence Token CMW Collection Key</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.29">
+                    <p id="section-toc.1-1.10.2.1.2.29.1"><a href="#section-10.1.29" class="auto internal xref">10.1.29</a>. <a href="#name-cca-token-cpak-certificate-" class="internal xref">CCA Token CPAK Certificate Chain CMW Collection Key</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.30">
+                    <p id="section-toc.1-1.10.2.1.2.30.1"><a href="#section-10.1.30" class="auto internal xref">10.1.30</a>. <a href="#name-cca-token-cpak-certificate-c" class="internal xref">CCA Token CPAK Certificate Chain With Evidence CMW Collection Key</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.31">
+                    <p id="section-toc.1-1.10.2.1.2.31.1"><a href="#section-10.1.31" class="auto internal xref">10.1.31</a>. <a href="#name-cca-token-firmware-activity" class="internal xref">CCA Token Firmware Activity Log CMW Collection Key</a></p>
+</li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
@@ -1979,6 +2000,9 @@ cca-token = #6.907(cca-token-cmw)
 ; CoAP Content-Format for "application/eat+cwt"
 eat-cwt-coap-cf = 263
 
+; CoAP Content-Format for "applcaiton/uccs+cbor"
+eat-uccs-coap-label = 601
+
 cca-token-cmw = {
   0xACCA =&gt; [
     eat-cwt-coap-cf
@@ -1987,6 +2011,10 @@ cca-token-cmw = {
   0xACD1 =&gt; [
     eat-cwt-coap-cf
     bytes .cbor COSE_Sign1&lt;cca-realm-claims&gt;
+  ]
+  ? 0xACE2 =&gt; [
+    eat-uccs-coap-label
+    bytes .cbor COSE_Sign1&lt;cca-device-claims&gt;
   ]
 }
 </pre><a href="#section-4.1-4" class="pilcrow">¶</a>
@@ -3524,8 +3552,7 @@ For other communication protocols, this digest is for an artifact containing mea
             </h5>
 <p id="section-4.9.2.3-1">The device protocol negotiation data digest contains an arm-platform-hash-type value representing
  a digest of the data exchanged when negotiating the communication protocol with the device.
-Where the communication protocol used between the TSM and the device is SPDM, this digest is for an artifact containing the VCA.
-For other communication protocols, this digest is for an artifact containing measurements reported by the device.<a href="#section-4.9.2.3-1" class="pilcrow">¶</a></p>
+Where the communication protocol used between the TSM and the device is SPDM, this digest is for an artifact containing the VCA.<a href="#section-4.9.2.3-1" class="pilcrow">¶</a></p>
 <p id="section-4.9.2.3-2">This attribute is OPTIONAL in a CCA device entry.<a href="#section-4.9.2.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3552,9 +3579,9 @@ whether non-coherent traffic between the host and the device is protected by IDE
 cca-devices-label = 44259
 
 cca-device = {
-    1 =&gt; cca-hash-type,     ; device identity digest
-    2 =&gt; cca-hash-type,     ; device measurements exchange digest
-    ? 3 =&gt; cca-hash-type,   ; protocol negotiation data digest
+    1 =&gt; arm-platform-hash-type,     ; device identity digest
+    2 =&gt; arm-platform-hash-type,     ; device measurements exchange digest
+    ? 3 =&gt; arm-platform-hash-type,   ; protocol negotiation data digest
     4 =&gt; bool,              ; coherent traffic IDE protection
     5 =&gt; bool,              ; non-coherent traffic IDE protection
 }
@@ -3767,6 +3794,7 @@ For use in CCA tokens, it must be possible to encode the epoch handle as an opaq
 
 cca-token = #6.907(cca-token-cmw)
 eat-cwt-coap-cf = 263
+eat-uccs-coap-label = 601
 cca-token-cmw = {
   0xACCA =&gt; [
         eat-cwt-coap-cf,
@@ -3775,6 +3803,10 @@ cca-token-cmw = {
   0xACD1 =&gt; [
         eat-cwt-coap-cf,
         bytes .cbor COSE_Sign1&lt;cca-realm-claims&gt;,
+],
+  ? 0xACE2 =&gt; [
+          eat-uccs-coap-label,
+          bytes .cbor COSE_Sign1&lt;cca-device-claims&gt;,
 ],
 }
 COSE_Sign1&lt;C&gt; = #6.18([
@@ -3999,6 +4031,24 @@ arm-platform-discrete-tpm-binding-data-label = 2407
 arm-platform-discrete-tpm-binding-data-type = bytes
 arm-platform-discrete-tpm-binding-data = (arm-platform-discrete-tpm-\
    binding-data-label =&gt; arm-platform-discrete-tpm-binding-data-type)
+cca-device-claims = cca-device-claim-map
+cca-device-claim-map = {
+  cca-device-profile,
+  cca-devices,
+}
+cca-device-profile-label = 265
+cca-device-profile-type = "tag:arm.com,2026:cca_device#2.0.0"
+cca-device-profile = (cca-device-profile-label =&gt; cca-device-profile\
+                                                               -type)
+cca-devices-label = 44259
+cca-device = {
+  1 =&gt; arm-platform-hash-type,
+  2 =&gt; arm-platform-hash-type,
+  ? 3 =&gt; arm-platform-hash-type,
+  4 =&gt; bool,
+  5 =&gt; bool,
+}
+cca-devices = (cca-devices-label =&gt; [+ cca-device])
 Headers = (
   protected: empty_or_serialized_map,
   unprotected: header_map,
@@ -4974,6 +5024,216 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 </li>
             <li class="normal" id="section-10.1.24-1.7">
               <p id="section-10.1.24-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.24-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="cca-token-device-token-cmw-collection-key">
+<section id="section-10.1.25">
+          <h4 id="name-cca-token-device-token-cmw-">
+<a href="#section-10.1.25" class="section-number selfRef">10.1.25. </a><a href="#name-cca-token-device-token-cmw-" class="section-name selfRef">CCA Token Device Token CMW Collection Key</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-10.1.25-1.1">
+              <p id="section-10.1.25-1.1.1">Claim Name: cca-device-token-collection-key<a href="#section-10.1.25-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.2">
+              <p id="section-10.1.25-1.2.1">Claim Description: CCA Device Token Collection Key<a href="#section-10.1.25-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.3">
+              <p id="section-10.1.25-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.25-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.4">
+              <p id="section-10.1.25-1.4.1">Claim Key: 44258<a href="#section-10.1.25-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.5">
+              <p id="section-10.1.25-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.25-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.6">
+              <p id="section-10.1.25-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.25-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.7">
+              <p id="section-10.1.25-1.7.1">Specification Document(s): <a href="#sec-device-token" class="auto internal xref">Section 4.9.2</a> of RFCthis<a href="#section-10.1.25-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="cca-token-direct-realm-token-cmw-collection-key">
+<section id="section-10.1.26">
+          <h4 id="name-cca-token-direct-realm-toke">
+<a href="#section-10.1.26" class="section-number selfRef">10.1.26. </a><a href="#name-cca-token-direct-realm-toke" class="section-name selfRef">CCA Token Direct Realm Token CMW Collection Key</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-10.1.26-1.1">
+              <p id="section-10.1.26-1.1.1">Claim Name: cca-platform-direct-realm-label<a href="#section-10.1.26-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.26-1.2">
+              <p id="section-10.1.26-1.2.1">Claim Description: CCA Token Direct Realm Token CMW Collection Key<a href="#section-10.1.26-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.26-1.3">
+              <p id="section-10.1.26-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.26-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.26-1.4">
+              <p id="section-10.1.26-1.4.1">Claim Key: 44251<a href="#section-10.1.26-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.26-1.5">
+              <p id="section-10.1.26-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.26-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.26-1.6">
+              <p id="section-10.1.26-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.26-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.26-1.7">
+              <p id="section-10.1.26-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.26-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="cca-token-selective-device-evidence-token-cmw-collection-key">
+<section id="section-10.1.27">
+          <h4 id="name-cca-token-selective-device-">
+<a href="#section-10.1.27" class="section-number selfRef">10.1.27. </a><a href="#name-cca-token-selective-device-" class="section-name selfRef">CCA Token Selective Device Evidence Token CMW Collection Key</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-10.1.27-1.1">
+              <p id="section-10.1.27-1.1.1">Claim Name: cca-platform-selective-device-evidence-label<a href="#section-10.1.27-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.27-1.2">
+              <p id="section-10.1.27-1.2.1">Claim Description: CCA Token Selective Device Evidence Token CMW Collection Key<a href="#section-10.1.27-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.27-1.3">
+              <p id="section-10.1.27-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.27-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.27-1.4">
+              <p id="section-10.1.27-1.4.1">Claim Key: 44252<a href="#section-10.1.27-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.27-1.5">
+              <p id="section-10.1.27-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.27-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.27-1.6">
+              <p id="section-10.1.27-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.27-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.27-1.7">
+              <p id="section-10.1.27-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.27-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="cca-token-comprehensive-device-evidence-token-cmw-collection-key">
+<section id="section-10.1.28">
+          <h4 id="name-cca-token-comprehensive-dev">
+<a href="#section-10.1.28" class="section-number selfRef">10.1.28. </a><a href="#name-cca-token-comprehensive-dev" class="section-name selfRef">CCA Token Comprehensive Device Evidence Token CMW Collection Key</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-10.1.28-1.1">
+              <p id="section-10.1.28-1.1.1">Claim Name: cca-platform-comprehensive-device-evidence-label<a href="#section-10.1.28-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.28-1.2">
+              <p id="section-10.1.28-1.2.1">Claim Description: CCA Token Comprehensive Device Evidence Token CMW Collection Key<a href="#section-10.1.28-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.28-1.3">
+              <p id="section-10.1.28-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.28-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.28-1.4">
+              <p id="section-10.1.28-1.4.1">Claim Key: 44253<a href="#section-10.1.28-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.28-1.5">
+              <p id="section-10.1.28-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.28-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.28-1.6">
+              <p id="section-10.1.28-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.28-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.28-1.7">
+              <p id="section-10.1.28-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.28-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="cca-token-cpak-certificate-chain-cmw-collection-key">
+<section id="section-10.1.29">
+          <h4 id="name-cca-token-cpak-certificate-">
+<a href="#section-10.1.29" class="section-number selfRef">10.1.29. </a><a href="#name-cca-token-cpak-certificate-" class="section-name selfRef">CCA Token CPAK Certificate Chain CMW Collection Key</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-10.1.29-1.1">
+              <p id="section-10.1.29-1.1.1">Claim Name: cca-platform-cpak-certificate-chain-label<a href="#section-10.1.29-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.29-1.2">
+              <p id="section-10.1.29-1.2.1">Claim Description:  CCA Token CPAK Certificate Chain CMW Collection Key<a href="#section-10.1.29-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.29-1.3">
+              <p id="section-10.1.29-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.29-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.29-1.4">
+              <p id="section-10.1.29-1.4.1">Claim Key: 44254<a href="#section-10.1.29-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.29-1.5">
+              <p id="section-10.1.29-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.29-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.29-1.6">
+              <p id="section-10.1.29-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.29-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.29-1.7">
+              <p id="section-10.1.29-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.29-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="cca-token-cpak-certificate-chain-with-evidence-cmw-collection-key">
+<section id="section-10.1.30">
+          <h4 id="name-cca-token-cpak-certificate-c">
+<a href="#section-10.1.30" class="section-number selfRef">10.1.30. </a><a href="#name-cca-token-cpak-certificate-c" class="section-name selfRef">CCA Token CPAK Certificate Chain With Evidence CMW Collection Key</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-10.1.30-1.1">
+              <p id="section-10.1.30-1.1.1">Claim Name: cca-platform-cpak-certificate-chain-with-evidence-label<a href="#section-10.1.30-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.30-1.2">
+              <p id="section-10.1.30-1.2.1">Claim Description:  CCA Token CPAK Certificate Chain With Evidence CMW Collection Key<a href="#section-10.1.30-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.30-1.3">
+              <p id="section-10.1.30-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.30-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.30-1.4">
+              <p id="section-10.1.30-1.4.1">Claim Key: 44255<a href="#section-10.1.30-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.30-1.5">
+              <p id="section-10.1.30-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.30-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.30-1.6">
+              <p id="section-10.1.30-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.30-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.30-1.7">
+              <p id="section-10.1.30-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.30-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
+<div id="cca-token-firmware-activity-log-cmw-collection-key">
+<section id="section-10.1.31">
+          <h4 id="name-cca-token-firmware-activity">
+<a href="#section-10.1.31" class="section-number selfRef">10.1.31. </a><a href="#name-cca-token-firmware-activity" class="section-name selfRef">CCA Token Firmware Activity Log CMW Collection Key</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-10.1.31-1.1">
+              <p id="section-10.1.31-1.1.1">Claim Name: cca-platform-firmware-activity-log-label<a href="#section-10.1.31-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.31-1.2">
+              <p id="section-10.1.31-1.2.1">Claim Description:  CCA Token Firmware Activity Log CMW Collection Key<a href="#section-10.1.31-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.31-1.3">
+              <p id="section-10.1.31-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.31-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.31-1.4">
+              <p id="section-10.1.31-1.4.1">Claim Key: 44256<a href="#section-10.1.31-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.31-1.5">
+              <p id="section-10.1.31-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.31-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.31-1.6">
+              <p id="section-10.1.31-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.31-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.31-1.7">
+              <p id="section-10.1.31-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.31-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
