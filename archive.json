@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-13T01:50:16.064792+00:00",
+  "timestamp": "2026-08-16T01:11:27.443343+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -3720,7 +3720,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-08-12T22:45:10Z",
-      "updatedAt": "2026-08-12T22:45:10Z",
+      "updatedAt": "2026-08-14T12:30:55Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "7323cfb3303364588602ed8c73d780d1b17e4435",
@@ -3732,7 +3732,106 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJkRGmQ",
+          "commit": {
+            "abbreviatedOid": "7dd97ff"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "A few comments inline.",
+          "createdAt": "2026-08-14T12:09:26Z",
+          "updatedAt": "2026-08-14T12:30:54Z",
+          "comments": [
+            {
+              "originalPosition": 39,
+              "body": "```suggestion\nThe TCB of a CCA system can be extended by one or more hardware devices attached to the host platform.\n```",
+              "createdAt": "2026-08-14T12:09:26Z",
+              "updatedAt": "2026-08-14T12:30:54Z"
+            },
+            {
+              "originalPosition": 54,
+              "body": "```suggestion\nThe mechanism for connecting to devices is controlled by the TEE Device Interface Security Protocol (TDISP) {{TDISP}}.\n```",
+              "createdAt": "2026-08-14T12:15:22Z",
+              "updatedAt": "2026-08-14T12:30:54Z"
+            },
+            {
+              "originalPosition": 55,
+              "body": "```suggestion\nThe RMM {{RMM}} acts as the TDISP TEE Security Manager (TSM) that interacts with the devices.\n```",
+              "createdAt": "2026-08-14T12:15:57Z",
+              "updatedAt": "2026-08-14T12:30:54Z"
+            },
+            {
+              "originalPosition": 61,
+              "body": "```suggestion\nand either saves these binding digests in Realm state (Selective Trust Devices) or sends them to the HES for secure\n```",
+              "createdAt": "2026-08-14T12:17:17Z",
+              "updatedAt": "2026-08-14T12:30:54Z"
+            },
+            {
+              "originalPosition": 62,
+              "body": "```suggestion\nstorage (Comprehensive Trust Devices).\n```",
+              "createdAt": "2026-08-14T12:17:27Z",
+              "updatedAt": "2026-08-14T12:30:54Z"
+            },
+            {
+              "originalPosition": 141,
+              "body": "```suggestion\nThe Selective Trust Devices token is used to hold artifacts or transcripts\n```",
+              "createdAt": "2026-08-14T12:21:30Z",
+              "updatedAt": "2026-08-14T12:30:54Z"
+            },
+            {
+              "originalPosition": 147,
+              "body": "```suggestion\nThe token is carried as a separate entity in the overall attestation token CMW using the collection key 44252.\n```",
+              "createdAt": "2026-08-14T12:22:06Z",
+              "updatedAt": "2026-08-14T12:30:54Z"
+            },
+            {
+              "originalPosition": 71,
+              "body": "```suggestion\nIt is carried as a separate entity in the overall attestation token CMW using the collection key 44258.\n```",
+              "createdAt": "2026-08-14T12:22:27Z",
+              "updatedAt": "2026-08-14T12:30:55Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "s/cca-hash-type/arm-platform-hash-type/g ?",
+              "createdAt": "2026-08-14T12:23:44Z",
+              "updatedAt": "2026-08-14T12:30:55Z"
+            },
+            {
+              "originalPosition": 11,
+              "body": "This should be attached to the top-level token alongside 0xACCA/0xACD1.",
+              "createdAt": "2026-08-14T12:25:37Z",
+              "updatedAt": "2026-08-14T12:30:55Z"
+            },
+            {
+              "originalPosition": 1,
+              "body": "`cca-devices-label` should have a IANA registration request, right?",
+              "createdAt": "2026-08-14T12:26:35Z",
+              "updatedAt": "2026-08-14T12:30:55Z"
+            },
+            {
+              "originalPosition": 166,
+              "body": "\ud83e\udd14 why the ref to selective here?",
+              "createdAt": "2026-08-14T12:28:21Z",
+              "updatedAt": "2026-08-14T12:30:55Z"
+            },
+            {
+              "originalPosition": 107,
+              "body": "```suggestion\nFor other communication protocols, this digest is for an artifact containing measurements reported by the device.\n```",
+              "createdAt": "2026-08-14T12:29:58Z",
+              "updatedAt": "2026-08-14T12:30:55Z"
+            },
+            {
+              "originalPosition": 116,
+              "body": "Is this correct?",
+              "createdAt": "2026-08-14T12:30:37Z",
+              "updatedAt": "2026-08-14T12:30:55Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
