@@ -1262,7 +1262,7 @@ obtained by the TDISP TSM when communicating with assigned devices.
 The entries in the token can be verified to be trustworthy and assigned to the
 current Realm by checking their bindings to the Devices Token {{sec-device-token}}.
 
-The token is carried as a separate entity in the overall attestation token CMW using the tag 44252.
+The token is carried as a separate entity in the overall attestation token CMW using the collection key 44252.
 
 For details of the format of the selective trust devices token, see {{EAT-DA}}.
 
