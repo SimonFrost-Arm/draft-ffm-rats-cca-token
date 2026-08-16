@@ -1256,7 +1256,7 @@ This attribute MUST be present in a CCA device entry.
 ### Selective Trust Devices Token
 {: #sec-device-token-selective}
 
-The Selective Trust devices token is used to hold artifacts or transcripts
+The Selective Trust Devices token is used to hold artifacts or transcripts
 obtained by the TDISP TSM when communicating with assigned devices.
 
 The entries in the token can be verified to be trustworthy and assigned to the
