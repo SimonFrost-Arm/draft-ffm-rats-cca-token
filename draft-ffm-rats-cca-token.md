@@ -1231,7 +1231,6 @@ This attribute MUST be present in a CCA device entry.
 The device protocol negotiation data digest contains an arm-platform-hash-type value representing
  a digest of the data exchanged when negotiating the communication protocol with the device.
 Where the communication protocol used between the TSM and the device is SPDM, this digest is for an artifact containing the VCA.
-For other communication protocols, this digest is for an artifact containing measurements reported by the device.
 
 This attribute is OPTIONAL in a CCA device entry.
 
@@ -1778,6 +1777,78 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Claim Description: CCA Token Platform Token Label
 * JWT Claim Name: N/A
 * Claim Key: 44241
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+
+### CCA Token Device Token CMW Collection Key
+
+* Claim Name: cca-device-token-collection-key
+* Claim Description: CCA Device Token Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44258
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-device-token}} of {{&SELF}}
+
+### CCA Token Direct Realm Token CMW Collection Key
+
+* Claim Name: cca-platform-direct-realm-label
+* Claim Description: CCA Token Direct Realm Token CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44251
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+### CCA Token Selective Device Evidence Token CMW Collection Key
+
+* Claim Name: cca-platform-selective-device-evidence-label
+* Claim Description: CCA Token Selective Device Evidence Token CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44252
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+### CCA Token Comprehensive Device Evidence Token CMW Collection Key
+
+* Claim Name: cca-platform-comprehensive-device-evidence-label
+* Claim Description: CCA Token Comprehensive Device Evidence Token CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44253
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+### CCA Token CPAK Certificate Chain CMW Collection Key
+
+* Claim Name: cca-platform-cpak-certificate-chain-label
+* Claim Description:  CCA Token CPAK Certificate Chain CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44254
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+
+### CCA Token CPAK Certificate Chain With Evidence CMW Collection Key
+
+* Claim Name: cca-platform-cpak-certificate-chain-with-evidence-label
+* Claim Description:  CCA Token CPAK Certificate Chain With Evidence CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44255
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+### CCA Token Firmware Activity Log CMW Collection Key
+
+* Claim Name: cca-platform-firmware-activity-log-label
+* Claim Description:  CCA Token Firmware Activity Log CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44256
 * Claim Value Type(s): byte string
 * Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
