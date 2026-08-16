@@ -1156,7 +1156,7 @@ Compatibility: this claim can be present where realm profile values are at or ne
 
 ### Introduction
 
-The TCB of CCA can be extended by hardware device attached to the host platform.
+The TCB of a CCA system can be extended by one or more hardware devices attached to the host platform.
 These devices can either be provided to support functions in all Realms (Comprehensive Trust Devices)
 or can be assigned on a demand basis to an individual Realm (Selective Trust Devices). These devices
 provide assistance services to the software within the Realm and can have access to Realm memory for data I/O. To
