@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-16T01:11:27.443343+00:00",
+  "timestamp": "2026-08-18T01:06:57.673804+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -3720,13 +3720,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-08-12T22:45:10Z",
-      "updatedAt": "2026-08-14T12:30:55Z",
+      "updatedAt": "2026-08-17T10:48:26Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "7323cfb3303364588602ed8c73d780d1b17e4435",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "devices",
-      "headRefOid": "7dd97ff55c32fcc6d27c5a73cad4fc5cb7f128e9",
+      "headRefOid": "637f640818142871c50fd8a8ad31923fa7f49794",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -3828,6 +3828,118 @@
               "body": "Is this correct?",
               "createdAt": "2026-08-14T12:30:37Z",
               "updatedAt": "2026-08-14T12:30:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJuSePg",
+          "commit": {
+            "abbreviatedOid": "7dd97ff"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-16T22:46:25Z",
+          "updatedAt": "2026-08-16T22:46:25Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Yes, will fix. However, is there a registry for CMW collection keys: currently the IANA registration section of the draft has ACCA & ACD1 in the CWT requests, which doesn't seem appropriate?",
+              "createdAt": "2026-08-16T22:46:25Z",
+              "updatedAt": "2026-08-16T22:46:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJuSgJw",
+          "commit": {
+            "abbreviatedOid": "7dd97ff"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-16T22:46:43Z",
+          "updatedAt": "2026-08-16T22:46:43Z",
+          "comments": [
+            {
+              "originalPosition": 166,
+              "body": "C&P typo, will fix",
+              "createdAt": "2026-08-16T22:46:43Z",
+              "updatedAt": "2026-08-16T22:46:43Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJuSpyw",
+          "commit": {
+            "abbreviatedOid": "7dd97ff"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-16T22:48:22Z",
+          "updatedAt": "2026-08-16T22:48:23Z",
+          "comments": [
+            {
+              "originalPosition": 116,
+              "body": "Good catch, C&P error.",
+              "createdAt": "2026-08-16T22:48:23Z",
+              "updatedAt": "2026-08-16T22:48:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJuSs2g",
+          "commit": {
+            "abbreviatedOid": "7dd97ff"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-16T22:48:52Z",
+          "updatedAt": "2026-08-16T22:48:53Z",
+          "comments": [
+            {
+              "originalPosition": 11,
+              "body": "ACK",
+              "createdAt": "2026-08-16T22:48:53Z",
+              "updatedAt": "2026-08-16T22:48:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJxVbUw",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Thanks for the changes.  A couple of CDDL-related comments inlined.",
+          "createdAt": "2026-08-17T10:31:47Z",
+          "updatedAt": "2026-08-17T10:48:26Z",
+          "comments": [
+            {
+              "originalPosition": 5,
+              "body": "As per https://datatracker.ietf.org/doc/html/rfc9782#section-6.9 \n\n```suggestion\neat-uccs-coap-cf = 267\n```",
+              "createdAt": "2026-08-17T10:31:48Z",
+              "updatedAt": "2026-08-17T10:48:26Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\n    eat-uccs-coap-cf\n```",
+              "createdAt": "2026-08-17T10:31:57Z",
+              "updatedAt": "2026-08-17T10:48:26Z"
+            },
+            {
+              "originalPosition": 16,
+              "body": "We can't use the `COSE_Sign1` macro in this case.\n\nWe should define a separate `UCCS` macro, e.g.:\n```\nUCCS<C> = #6.601(C)\n```\n\nand then use it:\n```suggestion\n    bytes .cbor UCCS<cca-device-claims>\n```",
+              "createdAt": "2026-08-17T10:47:44Z",
+              "updatedAt": "2026-08-17T10:48:26Z"
             }
           ]
         }
