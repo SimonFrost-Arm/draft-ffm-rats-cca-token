@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-18T01:06:57.673804+00:00",
+  "timestamp": "2026-08-20T01:07:09.368968+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -3720,7 +3720,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-08-12T22:45:10Z",
-      "updatedAt": "2026-08-17T10:48:26Z",
+      "updatedAt": "2026-08-19T23:15:24Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "7323cfb3303364588602ed8c73d780d1b17e4435",
@@ -3940,6 +3940,152 @@
               "body": "We can't use the `COSE_Sign1` macro in this case.\n\nWe should define a separate `UCCS` macro, e.g.:\n```\nUCCS<C> = #6.601(C)\n```\n\nand then use it:\n```suggestion\n    bytes .cbor UCCS<cca-device-claims>\n```",
               "createdAt": "2026-08-17T10:47:44Z",
               "updatedAt": "2026-08-17T10:48:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABJ7VnVQ",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-18T12:49:50Z",
+          "updatedAt": "2026-08-18T12:51:13Z",
+          "comments": [
+            {
+              "originalPosition": 193,
+              "body": "A CMW collection key needs no registration.  The overall cmwc_t determines which  collection entries are expected/optional.",
+              "createdAt": "2026-08-18T12:49:50Z",
+              "updatedAt": "2026-08-18T12:51:13Z"
+            },
+            {
+              "originalPosition": 195,
+              "body": "Likely a copy & paste error.\n\nStrictly speaking, this (and the following) are not \"CMW Collection Key\"s; they are CWT Claims.",
+              "createdAt": "2026-08-18T12:51:09Z",
+              "updatedAt": "2026-08-18T12:51:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKGUGfg",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-19T13:31:37Z",
+          "updatedAt": "2026-08-19T13:31:37Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "The way in which the binding with EAT DA works is not entirely clear to me.\n\nEAT DA translates the original SPDM artefacts and repackages them as EAT claims. Therefore, unless the RMM creates the EAT DA structures itself, the hashes may become unrelated to the EAT DA contents.",
+              "createdAt": "2026-08-19T13:31:37Z",
+              "updatedAt": "2026-08-19T13:31:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKHMZWw",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "paulhowardarm",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-19T15:02:37Z",
+          "updatedAt": "2026-08-19T15:02:38Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "I don't know if this is the answer, but [\u00a73.1.2 of the EAT-DA draft](https://www.ietf.org/archive/id/draft-poirier-rats-eat-da-10.html#name-spdm-challenge-claim) suggests that it's possible for a 3rd-party (e.g. verifier) to reconstruct the original SPDM transcripts. Does this potentially address the gap?",
+              "createdAt": "2026-08-19T15:02:37Z",
+              "updatedAt": "2026-08-19T15:02:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKKtyNQ",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "gmandyam",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-19T22:28:40Z",
+          "updatedAt": "2026-08-19T22:28:40Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": ">can have access to Realm memory\n\nDoes RME allow device to have access to all realm memory, or only the memory that the realm makes available to the device?",
+              "createdAt": "2026-08-19T22:28:40Z",
+              "updatedAt": "2026-08-19T22:28:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKKyFew",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "gmandyam",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-19T22:40:53Z",
+          "updatedAt": "2026-08-19T22:40:53Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "A.9.5.3.2 of https://support.arm.com/documentation/den0137/latest/ does not seem to require SPDM, which is mandatory for TDISP.  Does CCA token only support device measurements for TDISP only and not any other device measurements retrievable by RMM without the use of SPDM?",
+              "createdAt": "2026-08-19T22:40:53Z",
+              "updatedAt": "2026-08-19T22:40:53Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKKzE6g",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "gmandyam",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-19T22:43:04Z",
+          "updatedAt": "2026-08-19T22:43:04Z",
+          "comments": [
+            {
+              "originalPosition": 59,
+              "body": "Need to mention either here or in sec cons that these measurements may not be fresh.",
+              "createdAt": "2026-08-19T22:43:04Z",
+              "updatedAt": "2026-08-19T22:43:04Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKK_hHw",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "gmandyam",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-19T23:15:24Z",
+          "updatedAt": "2026-08-19T23:15:24Z",
+          "comments": [
+            {
+              "originalPosition": 97,
+              "body": "What is used for Device ID?  For instance, is it the PCIe identifier?  It may be answered in the RMM spec but I could not find it.",
+              "createdAt": "2026-08-19T23:15:24Z",
+              "updatedAt": "2026-08-19T23:15:24Z"
             }
           ]
         }
