@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-20T01:07:09.368968+00:00",
+  "timestamp": "2026-08-23T01:13:14.543350+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -3720,7 +3720,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-08-12T22:45:10Z",
-      "updatedAt": "2026-08-19T23:15:24Z",
+      "updatedAt": "2026-08-21T16:46:32Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "7323cfb3303364588602ed8c73d780d1b17e4435",
@@ -4086,6 +4086,306 @@
               "body": "What is used for Device ID?  For instance, is it the PCIe identifier?  It may be answered in the RMM spec but I could not find it.",
               "createdAt": "2026-08-19T23:15:24Z",
               "updatedAt": "2026-08-19T23:15:24Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKNaZ6Q",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T07:27:23Z",
+          "updatedAt": "2026-08-20T07:27:23Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "That _may_ be the answer, but I'd feel more comfortable if @mathieupoirier could confirm :-)\r\n\r\nNote that it puts a requirement on the EAT DA to include the spdm-signature claim, which is otherwise optional.\r\n\r\nI am wondering if it would be easier/more natural to attach the EAT DA directly into the Realm token (as submods) and have it signed by the RAK.\r\n",
+              "createdAt": "2026-08-20T07:27:23Z",
+              "updatedAt": "2026-08-20T07:27:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKNmZ2Q",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "paulhowardarm",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T07:52:05Z",
+          "updatedAt": "2026-08-20T07:52:06Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "I think the fundamental issue here is that the RMM cannot store the evidence bundles coming from the devices, so they get offloaded to storage available in the non-secure host. I would presume that this is why the EAT-DA is not directly embedded, and there is the need for this hash-based cross referencing to detect any kind of host-side tampering. The RMM can store the hashes, but not the data. This is called out in another part of the draft text:\n\n> As the RMM does not provide long term data storage, these artefacts are sent to the untrusted host for storage.\n> These artefacts are later retrieved and added as attestation evidence.",
+              "createdAt": "2026-08-20T07:52:05Z",
+              "updatedAt": "2026-08-20T07:52:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKNqZlg",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T07:59:19Z",
+          "updatedAt": "2026-08-20T07:59:19Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "Correct.  (Note that EAT DEB is an alternative for exactly this kind of situations, which has the advantage of making what is digested completely unambiguous to the receiver.)",
+              "createdAt": "2026-08-20T07:59:19Z",
+              "updatedAt": "2026-08-20T07:59:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKO0ujw",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T10:20:08Z",
+          "updatedAt": "2026-08-20T10:20:08Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "> The way in which the binding with EAT DA works is not entirely clear to me.\r\n\r\nAnother aspect that needs to be specified is how the devices in the hash table should be correlated with their respective claim sets in the EAT DA.",
+              "createdAt": "2026-08-20T10:20:08Z",
+              "updatedAt": "2026-08-20T10:20:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKO7npw",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T10:33:52Z",
+          "updatedAt": "2026-08-20T10:33:52Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "On second thoughts, though: this information should be signed by the RMM, shouldn't it?",
+              "createdAt": "2026-08-20T10:33:52Z",
+              "updatedAt": "2026-08-20T10:33:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKVPCiA",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T23:11:39Z",
+          "updatedAt": "2026-08-20T23:11:39Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "Whoops, really shows that I rushed this change before stepping out. Will fix the UCCS aspect.\r\n\r\nWe want to hash lock this token (into the signed RAT) rather than signing it independently. I originally wanted to inline the info into the RAT, but it was felt that separating it gave more opportunities for caching info while it was unchanged.",
+              "createdAt": "2026-08-20T23:11:39Z",
+              "updatedAt": "2026-08-20T23:32:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKVQJCQ",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T23:14:47Z",
+          "updatedAt": "2026-08-20T23:14:47Z",
+          "comments": [
+            {
+              "originalPosition": 195,
+              "body": "Ah, renamed this way as responding to an earlier comment of yours. \r\nSo to be clear (considering also a couple of the comments below), registering these points in CWT is the most appropriate action to reserve their usage?",
+              "createdAt": "2026-08-20T23:14:47Z",
+              "updatedAt": "2026-08-20T23:33:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKVSoWw",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T23:23:07Z",
+          "updatedAt": "2026-08-20T23:23:07Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "> > The way in which the binding with EAT DA works is not entirely clear to me.\r\n> \r\n> Another aspect that needs to be specified is how the devices in the hash table should be correlated with their respective claim sets in the EAT DA.\r\n\r\nSee 1209: Devices are listed in the CCA devices array in the order with which the corresponding VDEVs were created.\r\n\r\nAs the Realm code is on the hook to create the Selective EAT-DAT, it can follow that rule.",
+              "createdAt": "2026-08-20T23:23:07Z",
+              "updatedAt": "2026-08-20T23:23:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKVTL_g",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T23:24:58Z",
+          "updatedAt": "2026-08-20T23:24:58Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": "Devices only have access to their specific MMIO space.",
+              "createdAt": "2026-08-20T23:24:58Z",
+              "updatedAt": "2026-08-20T23:24:58Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKVT3og",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T23:27:06Z",
+          "updatedAt": "2026-08-20T23:27:07Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "CCA device assignment requires the TDISP interaction, as achieved with SPDM. The claims built up have attempted to generalise the concepts rather than being direct SPDM objects in order to make it easier to embrace any future alternative device communication protocols.",
+              "createdAt": "2026-08-20T23:27:06Z",
+              "updatedAt": "2026-08-20T23:27:07Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKVVKvg",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T23:31:47Z",
+          "updatedAt": "2026-08-20T23:31:47Z",
+          "comments": [
+            {
+              "originalPosition": 97,
+              "body": "This particular piece of attribute refers to (binding for) identity evidence presented by the device - so certificate for SPDM devices. ",
+              "createdAt": "2026-08-20T23:31:47Z",
+              "updatedAt": "2026-08-20T23:31:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKVXIxA",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-20T23:37:47Z",
+          "updatedAt": "2026-08-20T23:37:47Z",
+          "comments": [
+            {
+              "originalPosition": 146,
+              "body": "> The way in which the binding with EAT DA works is not entirely clear to me.\r\n> \r\n> EAT DA translates the original SPDM artefacts and repackages them as EAT claims. Therefore, unless the RMM creates the EAT DA structures itself, the hashes may become unrelated to the EAT DA contents.\r\n\r\nThe requirement presented was that the evidence collected from the device could either be the specific artefacts or the protocol transcripts. The RMM will collect either depending on the flags passed. The device token bindings are meant to be applicable to either forms.\r\n\r\n",
+              "createdAt": "2026-08-20T23:37:47Z",
+              "updatedAt": "2026-08-20T23:38:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKb2OpA",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "gmandyam",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-21T16:15:09Z",
+          "updatedAt": "2026-08-21T16:15:09Z",
+          "comments": [
+            {
+              "originalPosition": 42,
+              "body": ">These devices provide assistance services to the software within the Realm and can have access to Realm memory for data I/O.\n\nRecommend changing to \"and can have access to designated Realm memory regions for data I/O\".",
+              "createdAt": "2026-08-21T16:15:09Z",
+              "updatedAt": "2026-08-21T16:15:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKb37Ng",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "gmandyam",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-21T16:18:50Z",
+          "updatedAt": "2026-08-21T16:18:50Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": ">The mechanism for connecting to devices is controlled by the TEE Device Interface Security Protocol (TDISP) {{TDISP}}.\n\nRecommend changing to \"The mechanism for connecting to devices is controlled by the TEE Device Interface Security Protocol (TDISP) {{TDISP}}.  Non-TDISP mechanisms may be supported in a future version of this specification.\"",
+              "createdAt": "2026-08-21T16:18:50Z",
+              "updatedAt": "2026-08-21T16:18:50Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABKcFdZg",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "gmandyam",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-21T16:46:32Z",
+          "updatedAt": "2026-08-21T16:46:32Z",
+          "comments": [
+            {
+              "originalPosition": 97,
+              "body": "Can we be specific here then?  For instance, add \"The device identity digest is an implementation-specific hash of the the device certificate chain (excluding the trust anchor) retrieved using the SPDM GET_CERTIFICATE command\" or something like that.",
+              "createdAt": "2026-08-21T16:46:32Z",
+              "updatedAt": "2026-08-21T16:46:32Z"
             }
           ]
         }
