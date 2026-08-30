@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-23T01:13:14.543350+00:00",
+  "timestamp": "2026-08-30T03:44:53.322443+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -3720,7 +3720,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-08-12T22:45:10Z",
-      "updatedAt": "2026-08-21T16:46:32Z",
+      "updatedAt": "2026-08-27T14:39:04Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "7323cfb3303364588602ed8c73d780d1b17e4435",
@@ -4386,6 +4386,26 @@
               "body": "Can we be specific here then?  For instance, add \"The device identity digest is an implementation-specific hash of the the device certificate chain (excluding the trust anchor) retrieved using the SPDM GET_CERTIFICATE command\" or something like that.",
               "createdAt": "2026-08-21T16:46:32Z",
               "updatedAt": "2026-08-21T16:46:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABLIgE7A",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-08-27T14:39:04Z",
+          "updatedAt": "2026-08-27T14:39:04Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "Q: Is it hash-locked via the Realm token's nonce or through a dedicated claim?",
+              "createdAt": "2026-08-27T14:39:04Z",
+              "updatedAt": "2026-08-27T14:39:04Z"
             }
           ]
         }
