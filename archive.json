@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-08-30T03:44:53.322443+00:00",
+  "timestamp": "2026-09-06T03:01:17.929110+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -832,6 +832,22 @@
           "updatedAt": "2026-07-29T09:23:13Z"
         }
       ]
+    },
+    {
+      "number": 60,
+      "id": "I_kwDOMRXjbM8AAAABPgBmDw",
+      "title": "Media Type clarifications",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/60",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Clarify and state the correct Media Type for New CCA Platform and Realm Profiles:\n\nDo we need to register a new Media Type that clearly states the nature of CCA Token carried inside CMW.\n\nThis issue is originated from the discussion on:\n\nhttps://github.com/veraison/services/issues/452\n\n\n\n\n",
+      "createdAt": "2026-09-03T10:05:34Z",
+      "updatedAt": "2026-09-03T10:05:34Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
