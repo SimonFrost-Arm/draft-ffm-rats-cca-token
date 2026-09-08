@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-06T03:01:17.929110+00:00",
+  "timestamp": "2026-09-08T03:09:07.720754+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -3736,7 +3736,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-08-12T22:45:10Z",
-      "updatedAt": "2026-08-27T14:39:04Z",
+      "updatedAt": "2026-09-07T09:01:30Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "7323cfb3303364588602ed8c73d780d1b17e4435",
@@ -3747,7 +3747,15 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@SimonFrost-Arm I will review this PR during this week ( 07th -13th Sept) 2026",
+          "createdAt": "2026-09-07T08:30:25Z",
+          "updatedAt": "2026-09-07T08:30:25Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOMRXjbM8AAAABJkRGmQ",
@@ -4424,6 +4432,119 @@
               "updatedAt": "2026-08-27T14:39:04Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABMcPyfg",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-07T08:48:54Z",
+          "updatedAt": "2026-09-07T08:48:54Z",
+          "comments": [
+            {
+              "originalPosition": 44,
+              "body": "We do mention Comprehensive Trust Devices which is great. The reader is little bewildered, whether such attestaion process is in scope (or out of scope) of this specification, might be worth adding a sentence clarifying whether in scope but will be added as a separate profile or something similar!",
+              "createdAt": "2026-09-07T08:48:54Z",
+              "updatedAt": "2026-09-07T08:48:54Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABMcSFgQ",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-07T08:52:01Z",
+          "updatedAt": "2026-09-07T08:52:01Z",
+          "comments": [
+            {
+              "originalPosition": 52,
+              "body": "```suggestion\ndevices, by an independent Verifier, as part of the Realm remote attestation process.\n```",
+              "createdAt": "2026-09-07T08:52:01Z",
+              "updatedAt": "2026-09-07T08:52:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABMcTb4w",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-07T08:53:54Z",
+          "updatedAt": "2026-09-07T08:53:54Z",
+          "comments": [
+            {
+              "originalPosition": 56,
+              "body": "One general question, is it fair to call the evidence items as artefacts, or will be more aligned to call them as `evidence claims`, as they feed into trustworthy decisions (within a Realm) ?",
+              "createdAt": "2026-09-07T08:53:54Z",
+              "updatedAt": "2026-09-07T08:54:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABMcXBcw",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-07T08:59:08Z",
+          "updatedAt": "2026-09-07T08:59:08Z",
+          "comments": [
+            {
+              "originalPosition": 59,
+              "body": "Does these artefacts are always sent (regardless of local realm trustworthy decision), or for the case, where Remote Verification is required...? \n",
+              "createdAt": "2026-09-07T08:59:08Z",
+              "updatedAt": "2026-09-07T08:59:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABMcYI0g",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-07T09:00:57Z",
+          "updatedAt": "2026-09-07T09:00:57Z",
+          "comments": [
+            {
+              "originalPosition": 3,
+              "body": "Is there no freshness indicator in the cca-device claims?",
+              "createdAt": "2026-09-07T09:00:57Z",
+              "updatedAt": "2026-09-07T09:00:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABMcYeWw",
+          "commit": {
+            "abbreviatedOid": "637f640"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Some comments to ponder over",
+          "createdAt": "2026-09-07T09:01:29Z",
+          "updatedAt": "2026-09-07T09:01:29Z",
+          "comments": []
         }
       ]
     }
