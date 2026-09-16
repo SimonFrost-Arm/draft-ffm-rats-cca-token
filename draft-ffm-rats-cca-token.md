@@ -474,7 +474,7 @@ The claims used vary by profile version and attestation model implemented as out
 * Binding Claim: arm-platform-workload-binding
 * Claim Value: H(realm claims)
 
-#### Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
+#### Profile tag:arm.com,2026:cca_platform#2.1.0;HESRAK
 {: #prof-bind-211-hesrak}
 
 * Attestation Model: Delegated attestation, with the RAK kept within the HES
