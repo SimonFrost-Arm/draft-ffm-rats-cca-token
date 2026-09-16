@@ -674,7 +674,7 @@ Table of Contents
 
    *  Claim Value: H(realm claims)
 
-4.3.3.9.  Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
+4.3.3.9.  Profile tag:arm.com,2026:cca_platform#2.1.0;HESRAK
 
    *  Attestation Model: Delegated attestation, with the RAK kept within
       the HES
