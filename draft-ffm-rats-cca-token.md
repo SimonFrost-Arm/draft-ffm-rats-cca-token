@@ -379,7 +379,7 @@ The length of the value of the claim MUST be either 32, 48, or 64 bytes.
 
 This claim MUST be present in a CCA Platform attestation token.
 
-Compatibility: this claim will be present where profile values are at or newer than "tag:arm.com,2026:cca_platform#2.0.0".
+Compatibility: this claim will only be present where profile values are at or newer than "tag:arm.com,2026:cca_platform#2.0.0".
 
 ~~~
 {::include cddl/platform/arm-platform-workload-binding.cddl}
