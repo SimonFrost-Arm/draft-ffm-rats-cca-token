@@ -1359,7 +1359,7 @@ This digest is delivered in the CCA PAT `arm-platform-software-components` claim
 
 
 ### Live Firmware Activation Verification
-{: #sec-live-firmware-activation-intro}
+{: #sec-live-firmware-activation-verification}
 
 The use of LFA changes the verification process for the firmware elements of the CCA platform.
 Instead of comparing the measurement attribute for every component in the `arm-platform-sw-component` claim
