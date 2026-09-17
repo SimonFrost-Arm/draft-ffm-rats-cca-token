@@ -379,7 +379,7 @@ The length of the value of the claim MUST be either 32, 48, or 64 bytes.
 
 This claim MUST be present in a CCA Platform attestation token.
 
-Compatibility: this claim will be present where profile values are at or newer than "tag:arm.com,2026:cca_platform#2.0.0".
+Compatibility: this claim will only be present where profile values are at or newer than "tag:arm.com,2026:cca_platform#2.0.0".
 
 ~~~
 {::include cddl/platform/arm-platform-workload-binding.cddl}
@@ -440,7 +440,7 @@ The claims used vary by profile version and attestation model implemented as out
 {: #prof-bind-201}
 
 * Attestation Model: Delegated
-* Binding Claim: eat_nonce
+* Binding Claim: arm-platform-workload-binding
 * Claim Value: H(RAK public)
 * Equivalent profile value: tag:arm.com,2026:cca_platform#2.0.0;delegated
 
@@ -448,14 +448,14 @@ The claims used vary by profile version and attestation model implemented as out
 {: #prof-bind-201-direct}
 
 * Attestation Model: Direct
-* Binding Claim: eat_nonce
+* Binding Claim: arm-platform-workload-binding
 * Claim Value: H(realm claims)
 
 #### Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
 {: #prof-bind-201-hesrak}
 
 * Attestation Model: Delegated attestation, with the RAK kept within the HES
-* Binding Claim: eat_nonce
+* Binding Claim: arm-platform-workload-binding
 * Claim Value: H(RAK public)
 * Note: for this attestation model, the PAT also contains an eat_nonce claim with the value equal to the CCA Realm challenge claim.
 
@@ -463,7 +463,7 @@ The claims used vary by profile version and attestation model implemented as out
 {: #prof-bind-211}
 
 * Attestation Model: Delegated
-* Binding Claim: eat_nonce
+* Binding Claim: arm-platform-workload-binding
 * Claim Value: H(RAK public)
 * Equivalent profile value: tag:arm.com,2026:cca_platform#2.1.0;delegated
 
@@ -471,14 +471,14 @@ The claims used vary by profile version and attestation model implemented as out
 {: #prof-bind-211-direct}
 
 * Attestation Model: Direct
-* Binding Claim: eat_nonce
+* Binding Claim: arm-platform-workload-binding
 * Claim Value: H(realm claims)
 
-#### Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
+#### Profile tag:arm.com,2026:cca_platform#2.1.0;HESRAK
 {: #prof-bind-211-hesrak}
 
 * Attestation Model: Delegated attestation, with the RAK kept within the HES
-* Binding Claim: eat_nonce
+* Binding Claim: arm-platform-workload-binding
 * Claim Value: H(RAK public)
 * Note: for this attestation model, the PAT also contains an `eat_nonce` claim with the value equal to the CCA Realm challenge claim.
 
