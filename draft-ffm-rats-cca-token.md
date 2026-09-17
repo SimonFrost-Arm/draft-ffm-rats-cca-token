@@ -1335,7 +1335,57 @@ would include a policy with appraisal for the following claims:
 
 ### Live Firmware Activation (LFA)
 {: #sec-live-firmware-activation}
-ToDo in separate PR
+
+#### Introduction
+{: #sec-live-firmware-activation-intro}
+
+Where a CCA implementation has implemented Live Firmware Activation,
+firmware components within the CCA Platform can be updated while the
+host is running, without requiring a reset of the host.
+
+With LFA enabled, each live update made to a component needs to be captured and made available to the attestation report.
+Updates are captured in the Firmware Activation Log (FAL).
+FAL entries include measurements taken at boot time and measurements taken of new components that are activated after boot.
+The FAL may also contain other entries, such as changes to Security Version Numbers (SVN) or failures encountered during component activation.
+As the FAL captures updates to the CCA TCB, it needs to be included as part of the CCA Attestation Token.
+The Realm can obtain the FAL via an RHI call.
+The FAL is carried as a separate entity in the overall attestation token CMW using the tag 44256.
+
+FAL entries are prepared by a trusted component - the Live Firmware Activation agent.
+As the size of the FAL is unbounded, it is stored in the untrusted host.
+It therefore needs an additional security mechanism.
+This is achieved by extending a hash of each FAL entry to a digest kept in the HES.
+This digest is delivered in the CCA PAT `arm-platform-software-components` claim {{sec-sw-components}} for the entry with type "FAL".
+
+
+### Live Firmware Activation Verification
+{: #sec-live-firmware-activation-verification}
+
+The use of LFA changes the verification process for the firmware elements of the CCA platform.
+Instead of comparing the measurement attribute for every component in the `arm-platform-sw-component` claim
+against a single reference value, this measurement attribute becomes a compound value for all firmware digests that have been measured into an index.
+Note: if the `live firmware activation supported` attribute for a component is False, the single comparison value method still applies.
+This also implies that for such entries, only a single measurement entry for that index should be in the FAL, corresponding to the measurement taken at boot time.
+
+The method for verifying the LFA enabled components must take the following form.
+This method is independent from the format used to construct the FAL.
+
+* For each entry in the `arm-platform-sw-component` claim which has the `live firmware activation supported` attribute as True, initialise a compound digest value to 0
+* Initialise a FAL security hash to 0
+
+* For each entry in the FAL
+    * compute a hash for that entry using the hash algorithm from the `arm-platform-hash-algo-id` claim
+    * extend the FAL security hash with the event log hash
+    * if the entry is a measurement event, extract the new digest value from the event
+    * compare that event digest value against an appropriate reference value to confirm that it is trustworthy according to the supply chain.
+    * extend the compound digest value for that index with the event digest value
+
+When all entries from the FAL have been consumed, final integrity checks can be made:
+
+    * compare the FAL security hash with the measurement attribute of the `arm-platform-sw-component` claim which has type `FAL` - they must match.
+    * compare each compound digest value with the corresponding measurement attribute from the `arm-platform-sw-component` claim - they must match.
+
+Other implementation defined checks can be made against FAL entries.
 
 ## AR4SI Trustworthiness Claims Mappings
 
