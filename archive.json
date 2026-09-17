@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-08T03:09:07.720754+00:00",
+  "timestamp": "2026-09-17T03:31:20.592920+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -4545,6 +4545,221 @@
           "createdAt": "2026-09-07T09:01:29Z",
           "updatedAt": "2026-09-07T09:01:29Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 61,
+      "id": "PR_kwDOMRXjbM8AAAABDwADFg",
+      "title": "Fix binding claim values for ...2026 profiles in compatibility section",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/61",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Fix error in PR#58: platform/realm binding compatibility section did not introduce workload binding claim in correct (...2026...) profiles.",
+      "createdAt": "2026-09-16T10:34:59Z",
+      "updatedAt": "2026-09-16T22:26:43Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "7323cfb3303364588602ed8c73d780d1b17e4435",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "binding-fix",
+      "headRefOid": "e43b9934b873e4df9e2a7dbc7904ac559c94c41a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "Ruach",
+          "authorAssociation": "NONE",
+          "body": "Hi @SimonFrost-Arm,\r\n\r\nAre we planning to keep platform challenge claim as arm-platform-hash-type?\r\n\r\nOur original intent on the NVIDIA side was to make this claim spec-compliant nonce-type (with a size constraint of 8\u201364 bytes), in addition to introducing the binding claim. I noticed that the current spec still defines it as arm-platform-hash-type, with a length of 32, 48, or 64 bytes.\r\n\r\nCould you please confirm whether this still needs to be updated in the spec, or whether the intention is to keep the original platform challenge syntax as-is?\r\n\r\nARM profile\r\n>    The [EAT] eat_nonce (claim key 10) is used.  Since the EAT nonce\r\n>    claim offers flexiblity for different attestation technologies, this\r\n>    specifications applies the following constraints to the nonce-type:\r\n> \r\n>    *  The length MUST be either 32, 48, or 64 bytes.\r\n\r\n",
+          "createdAt": "2026-09-16T14:31:56Z",
+          "updatedAt": "2026-09-16T14:39:44Z"
+        },
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "> Are we planning to keep platform challenge claim as arm-platform-hash-type?\r\n...\r\n> Could you please confirm whether this still needs to be updated in the spec, or whether the intention is to keep the original platform challenge syntax as-is?\r\n\r\nI'm concerned that updating the type would affect backwards compat for implementations still using eat-nonce for a binding value.",
+          "createdAt": "2026-09-16T22:25:57Z",
+          "updatedAt": "2026-09-16T22:25:57Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABNzyvkQ",
+          "commit": {
+            "abbreviatedOid": "fd2f8b1"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "thanks!",
+          "createdAt": "2026-09-16T10:51:29Z",
+          "updatedAt": "2026-09-16T10:51:29Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABN0sEcA",
+          "commit": {
+            "abbreviatedOid": "fd2f8b1"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-16T12:29:18Z",
+          "updatedAt": "2026-09-16T12:29:19Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "```suggestion\nCompatibility: this claim will only be present where profile values are at or newer than \"tag:arm.com,2026:cca_platform#2.0.0\".\n```",
+              "createdAt": "2026-09-16T12:29:19Z",
+              "updatedAt": "2026-09-16T12:29:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABN0vPew",
+          "commit": {
+            "abbreviatedOid": "fd2f8b1"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-16T12:34:28Z",
+          "updatedAt": "2026-09-16T12:34:29Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "```suggestion\nThe claim used vary by profile version and attestation model implemented as outlined below.\n```",
+              "createdAt": "2026-09-16T12:34:29Z",
+              "updatedAt": "2026-09-16T12:34:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABN0x6mg",
+          "commit": {
+            "abbreviatedOid": "fd2f8b1"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-16T12:39:02Z",
+          "updatedAt": "2026-09-16T12:39:02Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "What is the difference between Profile at Line 477 & the one defined on Line 454",
+              "createdAt": "2026-09-16T12:39:02Z",
+              "updatedAt": "2026-09-16T12:39:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABN0zy6A",
+          "commit": {
+            "abbreviatedOid": "fd2f8b1"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-16T12:42:08Z",
+          "updatedAt": "2026-09-16T12:42:09Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "For super clarity, it would be nice to have a sub-section, where we have a heading known as #### Legacy profiles\n\nIn this section all 2024 profiles are covered.\n\nFor these profiles, only eat_nonce is applicable in the Platform token and acts as a binder to the Realm token. The value of the binder varies between deployment model, i.e. Direct versus Delegated, as illustrated below:",
+              "createdAt": "2026-09-16T12:42:09Z",
+              "updatedAt": "2026-09-16T12:42:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABN00bdw",
+          "commit": {
+            "abbreviatedOid": "fd2f8b1"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Some minor comments to be addressed before merging this PR",
+          "createdAt": "2026-09-16T12:43:14Z",
+          "updatedAt": "2026-09-16T12:43:30Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "I will work on a PR for my comment on Line 413 here, but rest of the comments are just typographical to quickly adopt and move this PR to closure!",
+              "createdAt": "2026-09-16T12:43:14Z",
+              "updatedAt": "2026-09-16T12:43:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABN6oIvQ",
+          "commit": {
+            "abbreviatedOid": "fd2f8b1"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-16T22:07:46Z",
+          "updatedAt": "2026-09-16T22:07:47Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "I think the plural is correct as there are multiple claims that are used for this purpose.",
+              "createdAt": "2026-09-16T22:07:46Z",
+              "updatedAt": "2026-09-16T22:07:47Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABN6okUA",
+          "commit": {
+            "abbreviatedOid": "fd2f8b1"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-16T22:08:47Z",
+          "updatedAt": "2026-09-16T22:08:48Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "Second instance should be 2.1, will fix",
+              "createdAt": "2026-09-16T22:08:47Z",
+              "updatedAt": "2026-09-16T22:08:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABN6v4ow",
+          "commit": {
+            "abbreviatedOid": "fd2f8b1"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-16T22:26:43Z",
+          "updatedAt": "2026-09-16T22:26:43Z",
+          "comments": [
+            {
+              "originalPosition": 43,
+              "body": "Done",
+              "createdAt": "2026-09-16T22:26:43Z",
+              "updatedAt": "2026-09-16T22:26:43Z"
+            }
+          ]
         }
       ]
     }
