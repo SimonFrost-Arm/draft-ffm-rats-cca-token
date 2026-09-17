@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 13 February 2027                                         Linaro
+Expires: 21 March 2027                                            Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                          12 August 2026
+                                                       17 September 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 February 2027.
+   This Internet-Draft will expire on 21 March 2027.
 
 Copyright Notice
 
@@ -555,8 +555,8 @@ Table of Contents
 
    This claim MUST be present in a CCA Platform attestation token.
 
-   Compatibility: this claim will be present where profile values are at
-   or newer than "tag:arm.com,2026:cca_platform#2.0.0".
+   Compatibility: this claim will only be present where profile values
+   are at or newer than "tag:arm.com,2026:cca_platform#2.0.0".
 
    arm-platform-workload-binding-label = 2408
 
@@ -627,7 +627,7 @@ Table of Contents
 
    *  Attestation Model: Delegated
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(RAK public)
 
@@ -638,7 +638,7 @@ Table of Contents
 
    *  Attestation Model: Direct
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(realm claims)
 
@@ -647,7 +647,7 @@ Table of Contents
    *  Attestation Model: Delegated attestation, with the RAK kept within
       the HES
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(RAK public)
 
@@ -659,7 +659,7 @@ Table of Contents
 
    *  Attestation Model: Delegated
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(RAK public)
 
@@ -670,16 +670,16 @@ Table of Contents
 
    *  Attestation Model: Direct
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(realm claims)
 
-4.3.3.9.  Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
+4.3.3.9.  Profile tag:arm.com,2026:cca_platform#2.1.0;HESRAK
 
    *  Attestation Model: Delegated attestation, with the RAK kept within
       the HES
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(RAK public)
 
