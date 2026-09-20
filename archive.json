@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-17T03:31:20.592920+00:00",
+  "timestamp": "2026-09-20T03:30:30.242625+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -4553,24 +4553,26 @@
       "id": "PR_kwDOMRXjbM8AAAABDwADFg",
       "title": "Fix binding claim values for ...2026 profiles in compatibility section",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/61",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SimonFrost-Arm",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Fix error in PR#58: platform/realm binding compatibility section did not introduce workload binding claim in correct (...2026...) profiles.",
       "createdAt": "2026-09-16T10:34:59Z",
-      "updatedAt": "2026-09-16T22:26:43Z",
+      "updatedAt": "2026-09-17T06:42:23Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "7323cfb3303364588602ed8c73d780d1b17e4435",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "binding-fix",
       "headRefOid": "e43b9934b873e4df9e2a7dbc7904ac559c94c41a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-09-17T06:42:18Z",
+      "mergedAt": "2026-09-17T06:42:18Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "ede212d015828a7cc6610c8696cb6150854e147f"
+      },
       "comments": [
         {
           "author": "Ruach",
@@ -4585,6 +4587,13 @@
           "body": "> Are we planning to keep platform challenge claim as arm-platform-hash-type?\r\n...\r\n> Could you please confirm whether this still needs to be updated in the spec, or whether the intention is to keep the original platform challenge syntax as-is?\r\n\r\nI'm concerned that updating the type would affect backwards compat for implementations still using eat-nonce for a binding value.",
           "createdAt": "2026-09-16T22:25:57Z",
           "updatedAt": "2026-09-16T22:25:57Z"
+        },
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "> > Are we planning to keep platform challenge claim as arm-platform-hash-type?\r\n> > ...\r\n> > Could you please confirm whether this still needs to be updated in the spec, or whether the intention is to keep the original platform challenge syntax as-is?\r\n> \r\n> I'm concerned that updating the type would affect backwards compat for implementations still using eat-nonce for a binding value.\r\n\r\nNote also that it must continue to match the realm challenge type.",
+          "createdAt": "2026-09-17T06:42:06Z",
+          "updatedAt": "2026-09-17T06:42:06Z"
         }
       ],
       "reviews": [
@@ -4758,6 +4767,83 @@
               "body": "Done",
               "createdAt": "2026-09-16T22:26:43Z",
               "updatedAt": "2026-09-16T22:26:43Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 62,
+      "id": "PR_kwDOMRXjbM8AAAABD6yA9A",
+      "title": "Add description of Firmware Activation Log and its verification process",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/62",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-09-17T11:33:59Z",
+      "updatedAt": "2026-09-17T13:58:12Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "ede212d015828a7cc6610c8696cb6150854e147f",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "fal",
+      "headRefOid": "4e10305dc760c28cfe090c302f3df5845421779b",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOBXfGA",
+          "commit": {
+            "abbreviatedOid": "4e10305"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "thanks!  A few (editorial) comments inline.",
+          "createdAt": "2026-09-17T12:58:00Z",
+          "updatedAt": "2026-09-17T13:58:11Z",
+          "comments": [
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\nWhere a CCA implementation has implemented Live Firmware Activation (LFA),\n```",
+              "createdAt": "2026-09-17T12:58:00Z",
+              "updatedAt": "2026-09-17T13:58:11Z"
+            },
+            {
+              "originalPosition": 18,
+              "body": "It would be worth stating explicitly that the Realm is responsible for adding the FAL to the CMW collection.",
+              "createdAt": "2026-09-17T13:01:28Z",
+              "updatedAt": "2026-09-17T13:58:11Z"
+            },
+            {
+              "originalPosition": 21,
+              "body": "```suggestion\nFAL entries are prepared by a trusted component - the Live Firmware Activation (LFA) agent.\n```",
+              "createdAt": "2026-09-17T13:01:59Z",
+              "updatedAt": "2026-09-17T13:58:11Z"
+            },
+            {
+              "originalPosition": 24,
+              "body": "editorial suggestion (slight reflow)\n\n```suggestion\nFAL entries are prepared by a trusted component, the Live Firmware Activation (LFA) agent.\nBecause the FAL's size is unbounded, entries are stored in the untrusted host, which requires an additional integrity mechanism: a hash of each entry is extended into a digest held in the HES.\n```",
+              "createdAt": "2026-09-17T13:04:14Z",
+              "updatedAt": "2026-09-17T13:58:11Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\nThis digest is delivered in the CCA PAT `arm-platform-software-components` claim {{sec-sw-components}} for the entry with component type \"FAL\".\n```",
+              "createdAt": "2026-09-17T13:05:43Z",
+              "updatedAt": "2026-09-17T13:58:11Z"
+            },
+            {
+              "originalPosition": 35,
+              "body": "editorial suggestion (slight reflow)\n\n```suggestion\nLFA changes how firmware elements of the CCA platform are verified.\nNormally, each component's measurement attribute in the `arm-platform-sw-component` claim is compared directly against a single reference value.\nFor a component where `live firmware activation supported` is True, however, this attribute instead holds a rolling digest, formed by extending a running value with every firmware measurement recorded for that component's index -- so it reflects the full sequence of updates, not just the current version.\nFor a component where `live firmware activation supported` is False, verification is unchanged: the measurement attribute remains a single value that is compared directly against a reference value.\nCorrespondingly, the FAL should contain only one entry for that component's index -- the measurement taken at boot.\n```",
+              "createdAt": "2026-09-17T13:54:29Z",
+              "updatedAt": "2026-09-17T13:58:11Z"
             }
           ]
         }
