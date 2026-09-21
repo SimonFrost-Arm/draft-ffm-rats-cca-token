@@ -1351,7 +1351,7 @@ As the FAL captures updates to the CCA TCB, it needs to be included as part of t
 The Realm can obtain the FAL via an RHI call.
 The FAL is carried as a separate entity in the overall attestation token CMW using the tag 44256.
 
-FAL entries are prepared by a trusted component - the Live Firmware Activation agent.
+FAL entries are prepared by a trusted component - the Live Firmware Activation (LFA) agent.
 As the size of the FAL is unbounded, it is stored in the untrusted host.
 It therefore needs an additional security mechanism.
 This is achieved by extending a hash of each FAL entry to a digest kept in the HES.
