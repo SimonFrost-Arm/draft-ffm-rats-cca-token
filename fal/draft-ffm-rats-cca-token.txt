@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 21 March 2027                                            Linaro
+Expires: 25 March 2027                                            Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                       17 September 2026
+                                                       21 September 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 21 March 2027.
+   This Internet-Draft will expire on 25 March 2027.
 
 Copyright Notice
 
@@ -2146,9 +2146,9 @@ arm-platform-discrete-tpm-binding-data = (
 
 7.1.1.  Introduction
 
-   Where a CCA implementation has implemented Live Firmware Activation,
-   firmware components within the CCA Platform can be updated while the
-   host is running, without requiring a reset of the host.
+   Where a CCA implementation has implemented Live Firmware Activation
+   (LFA), firmware components within the CCA Platform can be updated
+   while the host is running, without requiring a reset of the host.
 
    With LFA enabled, each live update made to a component needs to be
    captured and made available to the attestation report.  Updates are
