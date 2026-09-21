@@ -1372,6 +1372,7 @@ Normally, each component's `measurement` attribute in the `arm-platform-sw-compo
 For a component where `live firmware activation supported` is True, however, this attribute instead holds a rolling digest, formed by extending a running value with every firmware measurement recorded for that component's index -- so it reflects the full sequence of updates, not just the current version.
 For a component where `live firmware activation supported` is False, verification is unchanged: the `measurement` attribute remains a single value that is compared directly against a reference value.
 Correspondingly, the FAL should contain only one entry for that component's index -- the measurement taken at boot.
+Note that measurements stored in the HES at boot time are saved as an extend operation to an initial value of 0, which needs to be taken into account when recomputing measurement values for a component in the verifier.
 
 The method for verifying the LFA enabled components must take the following form.
 This method is independent from the format used to construct the FAL.
@@ -1381,7 +1382,7 @@ This method is independent from the format used to construct the FAL.
 
 * For each entry in the FAL
     * compute a hash for that entry using the hash algorithm from the `arm-platform-hash-algo-id` claim
-    * extend the FAL security hash with the event log hash
+    * extend the FAL security hash with the event hash computed in the previous step
     * if the entry is a measurement event, extract the index value for the component and the new digest value from the event
     * compare that event digest value against an appropriate reference value to confirm that it is trustworthy according to the supply chain.
     * extend the compound digest value for that index with the event digest value
@@ -1706,18 +1707,6 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Claim Value Type(s): byte string
 * Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
-
-
-### CCA Token Firmware Activation Log Label
-
-* Claim Name: cca-platform-firmware-activation-log-label
-* Claim Description: CCA Token Firmware Activation Log Label
-* JWT Claim Name: N/A
-* Claim Key: 44256
-* Claim Value Type(s): byte string
-* Change Controller: iana-request@arm.com
-* Specification Document(s): {{sec-live-firmware-activation}} of {{&SELF}}
-
 
 
 ## Media Types
