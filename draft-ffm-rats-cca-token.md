@@ -1383,7 +1383,7 @@ This method is independent from the format used to construct the FAL.
 * For each entry in the FAL
     * compute a hash for that entry using the hash algorithm from the `arm-platform-hash-algo-id` claim
     * extend the FAL security hash with the event hash computed in the previous step
-    * if the entry is a measurement event, extract the index value for the component and the new digest value from the event
+    * if the entry is a measurement event for a sw-component, extract the index value for the component and the new digest value from the event
     * compare that event digest value against an appropriate reference value to confirm that it is trustworthy according to the supply chain.
     * extend the compound digest value for that index with the event digest value
 
