@@ -67,6 +67,12 @@ normative:
     title: Arm Realm Management Extension (RME) System Architecture
     target: https://developer.arm.com/documentation/den0129/ca
     date: 2025-12-15
+  RHI:
+    author:
+      org: Arm
+    title: Arm Realm Host Interface specification
+    target: https://support.arm.com/documentation/den0148/latest
+    date: 2026-07-31
   TBB:
     author:
       org: Arm
@@ -282,7 +288,7 @@ The Main Bootloader, executing at boot-time, measures the trusted computing base
 
 The Realm Management Monitor (RMM), executing at run-time, maintains measurements for
 the state of a Realm. It can respond to requests issued from a Realm for an attestation
-token relevant for that Realm by obtaining a CCA Platform attestation token from the
+token relevant for that Realm by obtaining a CCA Platform attestation token (PAT) from the
 HES RoT and combining that with an attestation token containing Evidence reflecting
 Realm state.
 
@@ -763,12 +769,14 @@ SHOULD be encoded according to "Hash Name String" in the "Named Information Hash
 
 #### Live Firmware Activation support
 
-The Live Firmware Activation support attribute (key=7) indicates whether
+The Live Firmware Activation (LFA) support attribute (key=7) indicates whether
 the component is subject to Live Firmware Activation.
 If the attribute is set to `false`, the component will not be updated before the
 next CCA Platform software update.
 
 The Live Firmware Activation support attribute of the CCA Platform software component is optional.
+
+More details on LFA can be found at {{sec-live-firmware-activation-intro}}.
 
 #### Software Component Countersigner ID List
 
@@ -1348,24 +1356,22 @@ Updates are captured in the Firmware Activation Log (FAL).
 FAL entries include measurements taken at boot time and measurements taken of new components that are activated after boot.
 The FAL may also contain other entries, such as changes to Security Version Numbers (SVN) or failures encountered during component activation.
 As the FAL captures updates to the CCA TCB, it needs to be included as part of the CCA Attestation Token.
-The Realm can obtain the FAL via an RHI call.
-The FAL is carried as a separate entity in the overall attestation token CMW using the tag 44256.
+The Realm obtains the FAL via an {{RHI}} call.
+Realm code then adds the FAL as a separate entity in the overall attestation token CMW using the tag 44256.
 
 FAL entries are prepared by a trusted component - the Live Firmware Activation (LFA) agent.
-As the size of the FAL is unbounded, it is stored in the untrusted host.
-It therefore needs an additional security mechanism.
-This is achieved by extending a hash of each FAL entry to a digest kept in the HES.
+Because the FAL's size is unbounded, entries are stored in the untrusted host, which requires an additional integrity mechanism to be used: a hash of each entry is extended into a digest held in the HES.
 This digest is delivered in the CCA PAT `arm-platform-software-components` claim {{sec-sw-components}} for the entry with component type "FAL".
 
 
 ### Live Firmware Activation Verification
 {: #sec-live-firmware-activation-verification}
 
-The use of LFA changes the verification process for the firmware elements of the CCA platform.
-Instead of comparing the measurement attribute for every component in the `arm-platform-sw-component` claim
-against a single reference value, this measurement attribute becomes a compound value for all firmware digests that have been measured into an index.
-Note: if the `live firmware activation supported` attribute for a component is False, the single comparison value method still applies.
-This also implies that for such entries, only a single measurement entry for that index should be in the FAL, corresponding to the measurement taken at boot time.
+The use of LFA changes how firmware elements of the CCA platform are verified.
+Normally, each component's `measurement` attribute in the `arm-platform-sw-component` claim is compared directly against a single reference value.
+For a component where `live firmware activation supported` is True, however, this attribute instead holds a rolling digest, formed by extending a running value with every firmware measurement recorded for that component's index -- so it reflects the full sequence of updates, not just the current version.
+For a component where `live firmware activation supported` is False, verification is unchanged: the `measurement` attribute remains a single value that is compared directly against a reference value.
+Correspondingly, the FAL should contain only one entry for that component's index -- the measurement taken at boot.
 
 The method for verifying the LFA enabled components must take the following form.
 This method is independent from the format used to construct the FAL.
@@ -1376,7 +1382,7 @@ This method is independent from the format used to construct the FAL.
 * For each entry in the FAL
     * compute a hash for that entry using the hash algorithm from the `arm-platform-hash-algo-id` claim
     * extend the FAL security hash with the event log hash
-    * if the entry is a measurement event, extract the new digest value from the event
+    * if the entry is a measurement event, extract the index value for the component and the new digest value from the event
     * compare that event digest value against an appropriate reference value to confirm that it is trustworthy according to the supply chain.
     * extend the compound digest value for that index with the event digest value
 
@@ -1700,6 +1706,17 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Claim Value Type(s): byte string
 * Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+
+### CCA Token Firmware Activation Log Label
+
+* Claim Name: cca-platform-firmware-activation-log-label
+* Claim Description: CCA Token Firmware Activation Log Label
+* JWT Claim Name: N/A
+* Claim Key: 44256
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-live-firmware-activation}} of {{&SELF}}
 
 
 
