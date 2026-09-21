@@ -1355,7 +1355,7 @@ FAL entries are prepared by a trusted component - the Live Firmware Activation (
 As the size of the FAL is unbounded, it is stored in the untrusted host.
 It therefore needs an additional security mechanism.
 This is achieved by extending a hash of each FAL entry to a digest kept in the HES.
-This digest is delivered in the CCA PAT `arm-platform-software-components` claim {{sec-sw-components}} for the entry with type "FAL".
+This digest is delivered in the CCA PAT `arm-platform-software-components` claim {{sec-sw-components}} for the entry with component type "FAL".
 
 
 ### Live Firmware Activation Verification
