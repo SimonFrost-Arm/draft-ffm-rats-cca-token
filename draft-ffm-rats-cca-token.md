@@ -89,6 +89,18 @@ normative:
   EAT: I-D.ietf-rats-eat
   EAT-MEDIATYPES: I-D.ietf-rats-eat-media-type
   CMW: I-D.draft-ietf-rats-msg-wrap
+  TDISP:
+    author:
+      org: PCI SIG
+    title: TEE Device Interface Security Protocol (TDISP)
+    target: https://pcisig.com/PCI%20Express/ECN/Base/TEEDeviceInterfaceSecurityProtocol
+    date: 2026
+  EAT-DA:
+    author:
+      org: IETF
+    title: An EAT Profile for Trustworthy Device Assignment
+    target: https://datatracker.ietf.org/doc/draft-poirier-rats-eat-da/
+    date: 2026
 
 
 informative:
@@ -261,9 +273,6 @@ The platform evidence include a claim containg a hash of the RAK public key. The
 
 The CCA Evidence produced in delegated mode comprises two separately signed EATs, one for the platform, another for the realm, wrapped in a CMW {{CMW}} collection.
 The intra-collection binding is detailed in {{sec-token-binding}}.
-
-TODO: Device Token
-
 
 
 ## Boot Phase
@@ -1142,15 +1151,138 @@ Compatibility: this claim can be present where realm profile values are at or ne
 {::include cddl/realm/cca-realm-devices-token-hash.cddl}
 ~~~
 
-## Device Token
-{: #sec-device-token}
-ToDo in separate PR
+## Device Support
+{: #sec-devices}
 
-### Selectively Assigned Devices Token
+### Introduction
+
+The TCB of a CCA system can be extended by one or more hardware devices attached to the host platform.
+These devices can either be provided to support functions in all Realms (Comprehensive Trust Devices)
+or can be assigned on a demand basis to an individual Realm (Selective Trust Devices). These devices
+provide assistance services to the software within the Realm and can have access to Realm memory for data I/O. To
+ensure that a device can be trusted to operate as expected, it is necessary to appraise attestation evidence provided
+by that device to ensure trustworthiness. Comprehensive Trust Devices are made available by the Platform
+to all Realms and the evidence to support their usage is created independently of the Realm workload. Assessment
+of the trustworthiness of such devices is normally conducted as part of the Realm remote attestation process.
+
+Selective Trust Devices are assigned by a process executed within Realm software. As part of the
+assignment process, evidence of the device identity and configuration are collected. This evidence is appraised for
+trustworthiness within the Realm workload and only devices assessed as trustworthy by the Realm code are given
+access to the Realm. For some Realm use cases, it can be desirable to also assess the evidence for Selective Trust
+devices as part of the Realm remote attestation process.
+
+The mechanism for connecting to devices is controlled by the TEE Device Interface Security Protocol (TDISP) {{TDISP}}.
+The RMM {{RMM}} acts as the TDISP TEE Security Manager (TSM) that interacts with the devices.
+As part of these interactions, evidence artefacts are collected from the devices.
+These artefacts are used to assess the trustworthiness of the device.
+As the RMM does not provide long term data storage, these artefacts are sent to the untrusted host for storage.
+These artefacts are later retrieved and added as attestation evidence.
+To ensure that the retrieved items are trustworthy, the RMM measures the artefacts before passing them to the host
+and either saves these binding digests in Realm state (Selective Trust Devices) or sends them to the HES for secure
+storage (Comprehensive Trust Devices).
+The binding digests are then included in the attestation evidence.
+
+### Devices Token
+{: #sec-device-token}
+
+The Device Token contains binding digests for device evidence obtained when selective trust devices are assigned to the Realm.
+It is carried as a separate entity in the overall attestation token CMW using the collection key 44258.
+
+The device artifacts to which the binding digests apply can be found in the Selective Trust Devices
+token {{sec-device-token-selective}} which has a separate entry in the overall attestation token CMW.
+
+The Device token is bound to the Realm Attestation token using the cca-realm-devices-token-hash claim {{sec-realm-devices-token-hash}}.
+
+Compatibility: the Device Token can be present where realm profile values are at or newer than "tag:arm.com,2024:realm#2.0.0".
+
+The Device token contains a profile value to allow for versioning of the evidence.
+
+~~~
+{::include cddl/device/cca-device-claims.cddl}
+~~~
+~~~
+{::include cddl/device/cca-device-profile.cddl}
+~~~
+
+The Device token contains CCA devices array of binding data for each device assigned to the Realm.
+
+Devices are listed in the CCA devices array in the order with which the corresponding VDEVs were created.
+
+Each CCA device entry has the following attributes
+
+#### Device identity digest
+
+The device identity digest attribute contains an arm-platform-hash-type value which represents the digest of the device’s identity.
+
+This attribute MUST be present in a CCA device entry.
+
+#### Device measurements exchange digest
+
+The device measurement digest contains an arm-platform-hash-type value representing a digest of the device’s measurement
+evidence.
+Where the communication protocol used between the TSM and the device is SPDM, this digest is for an artifact containing
+the SPDM measurements exchange, request and response transcript.
+For other communication protocols, this digest is for an artifact containing measurements reported by the device.
+
+This attribute MUST be present in a CCA device entry.
+
+#### Device Protocol Negotiation Data Digest
+
+The device protocol negotiation data digest contains an arm-platform-hash-type value representing
+ a digest of the data exchanged when negotiating the communication protocol with the device.
+Where the communication protocol used between the TSM and the device is SPDM, this digest is for an artifact containing the VCA.
+
+This attribute is OPTIONAL in a CCA device entry.
+
+#### Device Coherent Traffic IDE Protection
+
+The device coherent traffic IDE protection attribute is a boolean value that states
+whether coherent traffic between the host and the device is protected by IDE.
+
+This attribute MUST be present in a CCA device entry.
+
+#### Device Non-coherent Traffic IDE Protection
+
+The device non-coherent traffic IDE protection attribute is a boolean value that states
+whether non-coherent traffic between the host and the device is protected by IDE.
+
+This attribute MUST be present in a CCA device entry.
+
+~~~
+{::include cddl/device/cca-devices.cddl}
+~~~
+
+### Selective Trust Devices Token
 {: #sec-device-token-selective}
+
+The Selective Trust Devices token is used to hold artifacts or transcripts
+obtained by the TDISP TSM when communicating with assigned devices.
+
+The entries in the token can be verified to be trustworthy and assigned to the
+current Realm by checking their bindings to the Devices Token {{sec-device-token}}.
+
+The token is carried as a separate entity in the overall attestation token CMW using the collection key 44252.
+
+For details of the format of the selective trust devices token, see {{EAT-DA}}.
+
+Compatibility: the selective trust devices token can be present where realm profile values are at or newer than "tag:arm.com,2024:realm#2.0.0".
+
 
 ### Comprehensive Trust Devices Token
 {: #sec-device-token-comp}
+
+The Comprehensive Trust devices token is used to hold artifacts or transcripts
+obtained by the TDISP TSM when communicating with devices made available to all Realms.
+Communication between the TSM and these devices occurs before any Realms execute.
+Digests of communication artifacts are sent to the HES and are included in the CCA Platform token.
+
+The token is carried as a separate entity in the overall attestation token CMW using the tag 44253.
+
+The entries in the token can be verified to be included in the CCA TCB by checking their bindings to digests in the arm-platform-extension claim {{sec-arm-platform-extension}}.
+
+For details of the format of the selective trust devices token, see {{EAT-DA}}.
+
+Compatibility: the comprehensive trust devices token can be present where profile values are at or newer than "tag:arm.com,2026:cca_platform#2.1.0".
 
 ## Token Binding
 {: #sec-token-binding}
@@ -1401,8 +1533,6 @@ keys.
 
 # IANA Considerations
 
-TODO: additional top level claims
-
 
 ## CBOR Web Token Claims Registration
 
@@ -1652,6 +1782,78 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
 
 
+### CCA Token Device Token CMW Collection Key
+
+* Claim Name: cca-device-token-collection-key
+* Claim Description: CCA Device Token Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44258
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-device-token}} of {{&SELF}}
+
+### CCA Token Direct Realm Token CMW Collection Key
+
+* Claim Name: cca-platform-direct-realm-label
+* Claim Description: CCA Token Direct Realm Token CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44251
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+### CCA Token Selective Device Evidence Token CMW Collection Key
+
+* Claim Name: cca-platform-selective-device-evidence-label
+* Claim Description: CCA Token Selective Device Evidence Token CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44252
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+### CCA Token Comprehensive Device Evidence Token CMW Collection Key
+
+* Claim Name: cca-platform-comprehensive-device-evidence-label
+* Claim Description: CCA Token Comprehensive Device Evidence Token CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44253
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+### CCA Token CPAK Certificate Chain CMW Collection Key
+
+* Claim Name: cca-platform-cpak-certificate-chain-label
+* Claim Description:  CCA Token CPAK Certificate Chain CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44254
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+
+### CCA Token CPAK Certificate Chain With Evidence CMW Collection Key
+
+* Claim Name: cca-platform-cpak-certificate-chain-with-evidence-label
+* Claim Description:  CCA Token CPAK Certificate Chain With Evidence CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44255
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+### CCA Token Firmware Activity Log CMW Collection Key
+
+* Claim Name: cca-platform-firmware-activity-log-label
+* Claim Description:  CCA Token Firmware Activity Log CMW Collection Key
+* JWT Claim Name: N/A
+* Claim Key: 44256
+* Claim Value Type(s): byte string
+* Change Controller: iana-request@arm.com
+* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+
 
 ## Media Types
 {: #sec-iana-media-types}
@@ -1750,7 +1952,7 @@ which has the following base16 encoding:
 
 The following sample claim sets and the resulting CCA Token are representative of a CCA Token using "direct mode" ({{direct}}).
 
-In "direct mode" the `eat_nonce` claim in the Platform token contains a hash of the Realm claims set, which includes verifier-provided challenge data.
+In "direct mode" the `arm-platform-workload-binding` claim in the Platform token contains a hash of the Realm claims set, which includes verifier-provided challenge data.
 
 TODO
 

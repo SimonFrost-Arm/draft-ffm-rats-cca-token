@@ -1,0 +1,7 @@
+cca-device-profile-label = 265 ; EAT profile
+
+cca-device-profile-type = "tag:arm.com,2026:cca_device#2.0.0"
+
+cca-device-profile = (
+    cca-device-profile-label => cca-device-profile-type
+)

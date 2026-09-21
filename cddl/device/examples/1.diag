@@ -1,0 +1,28 @@
+/ Device claim map /
+{
+    / cca-device-profile /
+    265: "tag:arm.com,2026:cca_device#2.0.0",
+
+    / cca-devices /
+    44259: [
+        {
+          / device identity digest /
+          1: h'000102030405060708090A0B0C0D0E0F
+               101112131415161718191A1B1C1D1E1F',
+
+          / device measurements digest /
+          2: h'202122232425262728292A2B2C2D2E2F
+               303132333435363738393A3B3C3D3E3F',
+
+          / protocol negotiation data digest /
+          3: h'404142434445464748494A4B4C4D4E4F
+               505152535455565758595A5B5C5D5E5F',
+
+          / coherent traffic IDE protection /
+          4: false,
+
+          / non-coherent traffic IDE protection /
+          5: true
+        }
+      ]
+}
