@@ -1339,7 +1339,7 @@ would include a policy with appraisal for the following claims:
 #### Introduction
 {: #sec-live-firmware-activation-intro}
 
-Where a CCA implementation has implemented Live Firmware Activation,
+Where a CCA implementation has implemented Live Firmware Activation (LFA),
 firmware components within the CCA Platform can be updated while the
 host is running, without requiring a reset of the host.
 
