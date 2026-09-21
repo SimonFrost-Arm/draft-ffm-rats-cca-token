@@ -2168,7 +2168,7 @@ arm-platform-discrete-tpm-binding-data = (
    security mechanism.  This is achieved by extending a hash of each FAL
    entry to a digest kept in the HES.  This digest is delivered in the
    CCA PAT arm-platform-software-components claim Section 4.6.1 for the
-   entry with type "FAL".
+   entry with component type "FAL".
 
 7.1.2.  Live Firmware Activation Verification
 
