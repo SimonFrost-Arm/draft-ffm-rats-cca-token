@@ -1059,7 +1059,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Frost, et al.</td>
-<td class="center">Expires 25 March 2027</td>
+<td class="center">Expires 26 March 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg {
 <dd class="internet-draft">draft-ffm-rats-cca-token-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-21" class="published">21 September 2026</time>
+<time datetime="2026-09-22" class="published">22 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-03-25">25 March 2027</time></dd>
+<dd class="expires"><time datetime="2027-03-26">26 March 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1131,7 +1131,7 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 26 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1450,6 +1450,9 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.24">
                     <p id="section-toc.1-1.10.2.1.2.24.1"><a href="#section-10.1.24" class="auto internal xref">10.1.24</a>. <a href="#name-cca-token-delegated-realm-t" class="internal xref">CCA Token Delegated Realm Token Label</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.25">
+                    <p id="section-toc.1-1.10.2.1.2.25.1"><a href="#section-10.1.25" class="auto internal xref">10.1.25</a>. <a href="#name-cca-token-firmware-activati" class="internal xref">CCA Token Firmware Activation Log Label</a></p>
 </li>
                 </ul>
 </li>
@@ -1831,7 +1834,7 @@ represented in CCA platform claims and to assemble them into Evidence.<a href="#
         </h3>
 <p id="section-3.4-1">The Realm Management Monitor (RMM), executing at run-time, maintains measurements for
 the state of a Realm. It can respond to requests issued from a Realm for an attestation
-token relevant for that Realm by obtaining a CCA Platform attestation token from the
+token relevant for that Realm by obtaining a CCA Platform attestation token (PAT) from the
 HES RoT and combining that with an attestation token containing Evidence reflecting
 Realm state.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <div id="para-pak-intro">
@@ -2827,11 +2830,12 @@ SHOULD be encoded according to "Hash Name String" in the "Named Information Hash
             <h5 id="name-live-firmware-activation-su">
 <a href="#section-4.6.1.6" class="section-number selfRef">4.6.1.6. </a><a href="#name-live-firmware-activation-su" class="section-name selfRef">Live Firmware Activation support</a>
             </h5>
-<p id="section-4.6.1.6-1">The Live Firmware Activation support attribute (key=7) indicates whether
+<p id="section-4.6.1.6-1">The Live Firmware Activation (LFA) support attribute (key=7) indicates whether
 the component is subject to Live Firmware Activation.
 If the attribute is set to <code>false</code>, the component will not be updated before the
 next CCA Platform software update.<a href="#section-4.6.1.6-1" class="pilcrow">¶</a></p>
 <p id="section-4.6.1.6-2">The Live Firmware Activation support attribute of the CCA Platform software component is optional.<a href="#section-4.6.1.6-2" class="pilcrow">¶</a></p>
+<p id="section-4.6.1.6-3">More details on LFA can be found at <a href="#sec-live-firmware-activation-intro" class="auto internal xref">Section 7.1.1</a>.<a href="#section-4.6.1.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="software-component-countersigner-id-list">
@@ -3981,12 +3985,10 @@ Updates are captured in the Firmware Activation Log (FAL).
 FAL entries include measurements taken at boot time and measurements taken of new components that are activated after boot.
 The FAL may also contain other entries, such as changes to Security Version Numbers (SVN) or failures encountered during component activation.
 As the FAL captures updates to the CCA TCB, it needs to be included as part of the CCA Attestation Token.
-The Realm can obtain the FAL via an RHI call.
-The FAL is carried as a separate entity in the overall attestation token CMW using the tag 44256.<a href="#section-7.1.1-2" class="pilcrow">¶</a></p>
+The Realm obtains the FAL via an <span>[<a href="#RHI" class="cite xref">RHI</a>]</span> call.
+Realm code then adds the FAL as a separate entity in the overall attestation token CMW using the tag 44256.<a href="#section-7.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-7.1.1-3">FAL entries are prepared by a trusted component - the Live Firmware Activation (LFA) agent.
-As the size of the FAL is unbounded, it is stored in the untrusted host.
-It therefore needs an additional security mechanism.
-This is achieved by extending a hash of each FAL entry to a digest kept in the HES.
+Because the FAL's size is unbounded, entries are stored in the untrusted host, which requires an additional integrity mechanism to be used: a hash of each entry is extended into a digest held in the HES.
 This digest is delivered in the CCA PAT <code>arm-platform-software-components</code> claim <a href="#sec-sw-components" class="auto internal xref">Section 4.6.1</a> for the entry with component type "FAL".<a href="#section-7.1.1-3" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -3995,11 +3997,11 @@ This digest is delivered in the CCA PAT <code>arm-platform-software-components</
           <h4 id="name-live-firmware-activation-ve">
 <a href="#section-7.1.2" class="section-number selfRef">7.1.2. </a><a href="#name-live-firmware-activation-ve" class="section-name selfRef">Live Firmware Activation Verification</a>
           </h4>
-<p id="section-7.1.2-1">The use of LFA changes the verification process for the firmware elements of the CCA platform.
-Instead of comparing the measurement attribute for every component in the <code>arm-platform-sw-component</code> claim
-against a single reference value, this measurement attribute becomes a compound value for all firmware digests that have been measured into an index.
-Note: if the <code>live firmware activation supported</code> attribute for a component is False, the single comparison value method still applies.
-This also implies that for such entries, only a single measurement entry for that index should be in the FAL, corresponding to the measurement taken at boot time.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-1">The use of LFA changes how firmware elements of the CCA platform are verified.
+Normally, each component's <code>measurement</code> attribute in the <code>arm-platform-sw-component</code> claim is compared directly against a single reference value.
+For a component where <code>live firmware activation supported</code> is True, however, this attribute instead holds a rolling digest, formed by extending a running value with every firmware measurement recorded for that component's index -- so it reflects the full sequence of updates, not just the current version.
+For a component where <code>live firmware activation supported</code> is False, verification is unchanged: the <code>measurement</code> attribute remains a single value that is compared directly against a reference value.
+Correspondingly, the FAL should contain only one entry for that component's index -- the measurement taken at boot.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-2">The method for verifying the LFA enabled components must take the following form.
 This method is independent from the format used to construct the FAL.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -4019,7 +4021,7 @@ This method is independent from the format used to construct the FAL.<a href="#s
                   <p id="section-7.1.2-3.3.2.2.1">extend the FAL security hash with the event log hash<a href="#section-7.1.2-3.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-7.1.2-3.3.2.3">
-                  <p id="section-7.1.2-3.3.2.3.1">if the entry is a measurement event, extract the new digest value from the event<a href="#section-7.1.2-3.3.2.3.1" class="pilcrow">¶</a></p>
+                  <p id="section-7.1.2-3.3.2.3.1">if the entry is a measurement event, extract the index value for the component and the new digest value from the event<a href="#section-7.1.2-3.3.2.3.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-7.1.2-3.3.2.4">
                   <p id="section-7.1.2-3.3.2.4.1">compare that event digest value against an appropriate reference value to confirm that it is trustworthy according to the supply chain.<a href="#section-7.1.2-3.3.2.4.1" class="pilcrow">¶</a></p>
@@ -4899,6 +4901,36 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
           </ul>
 </section>
 </div>
+<div id="cca-token-firmware-activation-log-label">
+<section id="section-10.1.25">
+          <h4 id="name-cca-token-firmware-activati">
+<a href="#section-10.1.25" class="section-number selfRef">10.1.25. </a><a href="#name-cca-token-firmware-activati" class="section-name selfRef">CCA Token Firmware Activation Log Label</a>
+          </h4>
+<ul class="normal">
+<li class="normal" id="section-10.1.25-1.1">
+              <p id="section-10.1.25-1.1.1">Claim Name: cca-platform-firmware-activation-log-label<a href="#section-10.1.25-1.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.2">
+              <p id="section-10.1.25-1.2.1">Claim Description: CCA Token Firmware Activation Log Label<a href="#section-10.1.25-1.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.3">
+              <p id="section-10.1.25-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.25-1.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.4">
+              <p id="section-10.1.25-1.4.1">Claim Key: 44256<a href="#section-10.1.25-1.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.5">
+              <p id="section-10.1.25-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.25-1.5.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.6">
+              <p id="section-10.1.25-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.25-1.6.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-10.1.25-1.7">
+              <p id="section-10.1.25-1.7.1">Specification Document(s): <a href="#sec-live-firmware-activation" class="auto internal xref">Section 7.1</a> of RFCthis<a href="#section-10.1.25-1.7.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-iana-media-types">
@@ -5018,6 +5050,10 @@ equal to "tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3-2.1.1" clas
 <dt id="RFC8610">[RFC8610]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Vigano, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures"</span>, <span class="seriesInfo">RFC 8610</span>, <span class="seriesInfo">DOI 10.17487/RFC8610</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8610">https://www.rfc-editor.org/rfc/rfc8610</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RHI">[RHI]</dt>
+        <dd>
+<span class="refAuthor">Arm</span>, <span class="refTitle">"Arm Realm Host Interface specification"</span>, <time datetime="2026-07-31" class="refDate">31 July 2026</time>, <span>&lt;<a href="https://support.arm.com/documentation/den0148/latest">https://support.arm.com/documentation/den0148/latest</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RME">[RME]</dt>
         <dd>
