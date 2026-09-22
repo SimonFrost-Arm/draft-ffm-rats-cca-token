@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-20T03:30:30.242625+00:00",
+  "timestamp": "2026-09-22T03:24:18.011017+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -3736,7 +3736,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-08-12T22:45:10Z",
-      "updatedAt": "2026-09-07T09:01:30Z",
+      "updatedAt": "2026-09-21T10:31:08Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "7323cfb3303364588602ed8c73d780d1b17e4435",
@@ -3754,6 +3754,13 @@
           "body": "@SimonFrost-Arm I will review this PR during this week ( 07th -13th Sept) 2026",
           "createdAt": "2026-09-07T08:30:25Z",
           "updatedAt": "2026-09-07T08:30:25Z"
+        },
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Please note that this PR is suspended for now as there is an active ECN being discussed that may change the approach to Device Assignment evidence.",
+          "createdAt": "2026-09-21T10:31:08Z",
+          "updatedAt": "2026-09-21T10:31:08Z"
         }
       ],
       "reviews": [
@@ -4784,13 +4791,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-09-17T11:33:59Z",
-      "updatedAt": "2026-09-17T13:58:12Z",
+      "updatedAt": "2026-09-21T12:21:01Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "ede212d015828a7cc6610c8696cb6150854e147f",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "fal",
-      "headRefOid": "4e10305dc760c28cfe090c302f3df5845421779b",
+      "headRefOid": "74d98985121173c68ebeaf26785c9a36664f4bd7",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -4846,6 +4853,117 @@
               "updatedAt": "2026-09-17T13:58:11Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOdsTkg",
+          "commit": {
+            "abbreviatedOid": "4e10305"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-21T10:38:57Z",
+          "updatedAt": "2026-09-21T10:38:57Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "I like the reflow, but want to make a couple of minor tweaks + gh auto apply now disabled so will apply manually.",
+              "createdAt": "2026-09-21T10:38:57Z",
+              "updatedAt": "2026-09-21T10:38:57Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOdvc6A",
+          "commit": {
+            "abbreviatedOid": "74d9898"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-21T10:43:16Z",
+          "updatedAt": "2026-09-21T12:16:51Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "I assume this is the first reference of RHI one must elaborate it and provide a reference to the details where one can get further details ",
+              "createdAt": "2026-09-21T10:43:16Z",
+              "updatedAt": "2026-09-21T12:16:52Z"
+            },
+            {
+              "originalPosition": 19,
+              "body": "The IANA section should be updated, to reflect this??",
+              "createdAt": "2026-09-21T12:06:55Z",
+              "updatedAt": "2026-09-21T12:16:51Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": "We need to update the example of FAL Entry in the list of `arm-platform-software-components`",
+              "createdAt": "2026-09-21T12:08:00Z",
+              "updatedAt": "2026-09-21T12:16:51Z"
+            },
+            {
+              "originalPosition": 37,
+              "body": "It is not clear from the description.\n\nIf there are two SW Components \"A\" and \"B\", which can be live updated,\n\nHow the Entry for Component \"A\" FAL be distinguished from the entry of Component \"B\" FAL?",
+              "createdAt": "2026-09-21T12:16:34Z",
+              "updatedAt": "2026-09-21T12:16:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOeie1g",
+          "commit": {
+            "abbreviatedOid": "74d9898"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-21T12:20:14Z",
+          "updatedAt": "2026-09-21T12:20:14Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "PLease see more details at {{sec-live-firmware-activation-intro}}",
+              "createdAt": "2026-09-21T12:20:14Z",
+              "updatedAt": "2026-09-21T12:20:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOeix3g",
+          "commit": {
+            "abbreviatedOid": "74d9898"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-21T12:20:48Z",
+          "updatedAt": "2026-09-21T12:20:49Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "```suggestion\nnext CCA Platform software update. Refer  {{sec-live-firmware-activation-intro}} for further details.\n```",
+              "createdAt": "2026-09-21T12:20:49Z",
+              "updatedAt": "2026-09-21T12:20:49Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOei48g",
+          "commit": {
+            "abbreviatedOid": "74d9898"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "see further comments!",
+          "createdAt": "2026-09-21T12:21:01Z",
+          "updatedAt": "2026-09-21T12:21:01Z",
+          "comments": []
         }
       ]
     }
