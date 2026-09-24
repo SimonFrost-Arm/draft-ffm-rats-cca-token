@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 26 March 2027                                            Linaro
+Expires: 28 March 2027                                            Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                       22 September 2026
+                                                       24 September 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 March 2027.
+   This Internet-Draft will expire on 28 March 2027.
 
 Copyright Notice
 
@@ -155,7 +155,6 @@ Table of Contents
        10.1.22. Realm LFA Policy
        10.1.23. Realm Devices Token Hash
        10.1.24. CCA Token Delegated Realm Token Label
-       10.1.25. CCA Token Firmware Activation Log Label
      10.2.  Media Types
      10.3.  CoAP Content-Formats Registration
        10.3.1.  Registry Contents
@@ -2187,7 +2186,11 @@ arm-platform-discrete-tpm-binding-data = (
    verification is unchanged: the measurement attribute remains a single
    value that is compared directly against a reference value.
    Correspondingly, the FAL should contain only one entry for that
-   component's index -- the measurement taken at boot.
+   component's index -- the measurement taken at boot.  Note that
+   measurements stored in the HES at boot time are saved as an extend
+   operation to an initial value of 0, which needs to be taken into
+   account when recomputing measurement values for a component in the
+   verifier.
 
    The method for verifying the LFA enabled components must take the
    following form.  This method is independent from the format used to
@@ -2204,7 +2207,8 @@ arm-platform-discrete-tpm-binding-data = (
       -  compute a hash for that entry using the hash algorithm from the
          arm-platform-hash-algo-id claim
 
-      -  extend the FAL security hash with the event log hash
+      -  extend the FAL security hash with the event hash computed in
+         the previous step
 
       -  if the entry is a measurement event, extract the index value
          for the component and the new digest value from the event
@@ -2696,22 +2700,6 @@ arm-platform-discrete-tpm-binding-data = (
    *  Change Controller: iana-request@arm.com
 
    *  Specification Document(s): Section 4.1 of RFCthis
-
-10.1.25.  CCA Token Firmware Activation Log Label
-
-   *  Claim Name: cca-platform-firmware-activation-log-label
-
-   *  Claim Description: CCA Token Firmware Activation Log Label
-
-   *  JWT Claim Name: N/A
-
-   *  Claim Key: 44256
-
-   *  Claim Value Type(s): byte string
-
-   *  Change Controller: iana-request@arm.com
-
-   *  Specification Document(s): Section 7.1 of RFCthis
 
 10.2.  Media Types
 

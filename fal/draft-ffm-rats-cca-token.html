@@ -1059,7 +1059,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Frost, et al.</td>
-<td class="center">Expires 26 March 2027</td>
+<td class="center">Expires 28 March 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg {
 <dd class="internet-draft">draft-ffm-rats-cca-token-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-22" class="published">22 September 2026</time>
+<time datetime="2026-09-24" class="published">24 September 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-03-26">26 March 2027</time></dd>
+<dd class="expires"><time datetime="2027-03-28">28 March 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1131,7 +1131,7 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 26 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1450,9 +1450,6 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.24">
                     <p id="section-toc.1-1.10.2.1.2.24.1"><a href="#section-10.1.24" class="auto internal xref">10.1.24</a>. <a href="#name-cca-token-delegated-realm-t" class="internal xref">CCA Token Delegated Realm Token Label</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.25">
-                    <p id="section-toc.1-1.10.2.1.2.25.1"><a href="#section-10.1.25" class="auto internal xref">10.1.25</a>. <a href="#name-cca-token-firmware-activati" class="internal xref">CCA Token Firmware Activation Log Label</a></p>
 </li>
                 </ul>
 </li>
@@ -4001,7 +3998,8 @@ This digest is delivered in the CCA PAT <code>arm-platform-software-components</
 Normally, each component's <code>measurement</code> attribute in the <code>arm-platform-sw-component</code> claim is compared directly against a single reference value.
 For a component where <code>live firmware activation supported</code> is True, however, this attribute instead holds a rolling digest, formed by extending a running value with every firmware measurement recorded for that component's index -- so it reflects the full sequence of updates, not just the current version.
 For a component where <code>live firmware activation supported</code> is False, verification is unchanged: the <code>measurement</code> attribute remains a single value that is compared directly against a reference value.
-Correspondingly, the FAL should contain only one entry for that component's index -- the measurement taken at boot.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
+Correspondingly, the FAL should contain only one entry for that component's index -- the measurement taken at boot.
+Note that measurements stored in the HES at boot time are saved as an extend operation to an initial value of 0, which needs to be taken into account when recomputing measurement values for a component in the verifier.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
 <p id="section-7.1.2-2">The method for verifying the LFA enabled components must take the following form.
 This method is independent from the format used to construct the FAL.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
@@ -4018,7 +4016,7 @@ This method is independent from the format used to construct the FAL.<a href="#s
                   <p id="section-7.1.2-3.3.2.1.1">compute a hash for that entry using the hash algorithm from the <code>arm-platform-hash-algo-id</code> claim<a href="#section-7.1.2-3.3.2.1.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-7.1.2-3.3.2.2">
-                  <p id="section-7.1.2-3.3.2.2.1">extend the FAL security hash with the event log hash<a href="#section-7.1.2-3.3.2.2.1" class="pilcrow">¶</a></p>
+                  <p id="section-7.1.2-3.3.2.2.1">extend the FAL security hash with the event hash computed in the previous step<a href="#section-7.1.2-3.3.2.2.1" class="pilcrow">¶</a></p>
 </li>
                 <li class="normal" id="section-7.1.2-3.3.2.3">
                   <p id="section-7.1.2-3.3.2.3.1">if the entry is a measurement event, extract the index value for the component and the new digest value from the event<a href="#section-7.1.2-3.3.2.3.1" class="pilcrow">¶</a></p>
@@ -4897,36 +4895,6 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 </li>
             <li class="normal" id="section-10.1.24-1.7">
               <p id="section-10.1.24-1.7.1">Specification Document(s): <a href="#sec-cca-token-collection" class="auto internal xref">Section 4.1</a> of RFCthis<a href="#section-10.1.24-1.7.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-</section>
-</div>
-<div id="cca-token-firmware-activation-log-label">
-<section id="section-10.1.25">
-          <h4 id="name-cca-token-firmware-activati">
-<a href="#section-10.1.25" class="section-number selfRef">10.1.25. </a><a href="#name-cca-token-firmware-activati" class="section-name selfRef">CCA Token Firmware Activation Log Label</a>
-          </h4>
-<ul class="normal">
-<li class="normal" id="section-10.1.25-1.1">
-              <p id="section-10.1.25-1.1.1">Claim Name: cca-platform-firmware-activation-log-label<a href="#section-10.1.25-1.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.1.25-1.2">
-              <p id="section-10.1.25-1.2.1">Claim Description: CCA Token Firmware Activation Log Label<a href="#section-10.1.25-1.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.1.25-1.3">
-              <p id="section-10.1.25-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.25-1.3.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.1.25-1.4">
-              <p id="section-10.1.25-1.4.1">Claim Key: 44256<a href="#section-10.1.25-1.4.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.1.25-1.5">
-              <p id="section-10.1.25-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.25-1.5.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.1.25-1.6">
-              <p id="section-10.1.25-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.25-1.6.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.1.25-1.7">
-              <p id="section-10.1.25-1.7.1">Specification Document(s): <a href="#sec-live-firmware-activation" class="auto internal xref">Section 7.1</a> of RFCthis<a href="#section-10.1.25-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
