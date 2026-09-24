@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-22T03:24:18.011017+00:00",
+  "timestamp": "2026-09-24T03:14:36.106252+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -4791,18 +4791,26 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-09-17T11:33:59Z",
-      "updatedAt": "2026-09-21T12:21:01Z",
+      "updatedAt": "2026-09-22T13:50:40Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "ede212d015828a7cc6610c8696cb6150854e147f",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "fal",
-      "headRefOid": "74d98985121173c68ebeaf26785c9a36664f4bd7",
+      "headRefOid": "63f6291e1d194e14e07b7b8593ec209db8b2d422",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Re-reviewing it again with the modifications",
+          "createdAt": "2026-09-22T11:02:05Z",
+          "updatedAt": "2026-09-22T11:02:05Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOMRXjbM8AAAABOBXfGA",
@@ -4964,6 +4972,179 @@
           "createdAt": "2026-09-21T12:21:01Z",
           "updatedAt": "2026-09-21T12:21:01Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOodKLQ",
+          "commit": {
+            "abbreviatedOid": "4e10305"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-22T10:37:47Z",
+          "updatedAt": "2026-09-22T10:37:47Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "RHI refs added",
+              "createdAt": "2026-09-22T10:37:47Z",
+              "updatedAt": "2026-09-22T10:37:48Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOodYWQ",
+          "commit": {
+            "abbreviatedOid": "4e10305"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-22T10:38:14Z",
+          "updatedAt": "2026-09-22T10:38:14Z",
+          "comments": [
+            {
+              "originalPosition": 35,
+              "body": "Done",
+              "createdAt": "2026-09-22T10:38:14Z",
+              "updatedAt": "2026-09-22T10:38:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOofNPg",
+          "commit": {
+            "abbreviatedOid": "74d9898"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-22T10:41:44Z",
+          "updatedAt": "2026-09-22T10:41:45Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "I think it reads OK to keep all discussion of FAL in a single section",
+              "createdAt": "2026-09-22T10:41:45Z",
+              "updatedAt": "2026-09-22T10:41:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOofkxQ",
+          "commit": {
+            "abbreviatedOid": "74d9898"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-22T10:42:31Z",
+          "updatedAt": "2026-09-22T10:42:31Z",
+          "comments": [
+            {
+              "originalPosition": 37,
+              "body": "Index comes from the log entry. Description updated in verification section",
+              "createdAt": "2026-09-22T10:42:31Z",
+              "updatedAt": "2026-09-22T10:42:31Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOogYzw",
+          "commit": {
+            "abbreviatedOid": "74d9898"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-22T10:44:11Z",
+          "updatedAt": "2026-09-22T10:44:11Z",
+          "comments": [
+            {
+              "originalPosition": 19,
+              "body": "Done",
+              "createdAt": "2026-09-22T10:44:11Z",
+              "updatedAt": "2026-09-22T10:44:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOpVLRQ",
+          "commit": {
+            "abbreviatedOid": "63f6291"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-22T12:12:01Z",
+          "updatedAt": "2026-09-22T12:12:01Z",
+          "comments": [
+            {
+              "originalPosition": 82,
+              "body": "Could you please clarify which parameter you mean by `event log hash`?",
+              "createdAt": "2026-09-22T12:12:01Z",
+              "updatedAt": "2026-09-22T12:12:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOpYKrw",
+          "commit": {
+            "abbreviatedOid": "63f6291"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I believe, the Verification logic can be improved to add more clarity!\n\nRest of the changes looks very good to me!",
+          "createdAt": "2026-09-22T12:16:36Z",
+          "updatedAt": "2026-09-22T12:16:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOqOG5Q",
+          "commit": {
+            "abbreviatedOid": "63f6291"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-22T13:31:05Z",
+          "updatedAt": "2026-09-22T13:31:05Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "This needs no registration (there is no registry for CMW collection entries).",
+              "createdAt": "2026-09-22T13:31:05Z",
+              "updatedAt": "2026-09-22T13:31:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABOqb_dw",
+          "commit": {
+            "abbreviatedOid": "63f6291"
+          },
+          "author": "tamasban",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-22T13:50:40Z",
+          "updatedAt": "2026-09-22T13:50:40Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "> measurement taken at boot time\n\nIf these are queried from the HES via the `measured_boot_read` API, then the values have already been initially extended. Meanwhile, the measurements corresponding to LFA events would be the raw hashes, without the initial zero-extension.\n\nIf the HES initiates the FAL and hands it off to the LFA Agent, then the values recorded in the log could instead be the raw measurements. The HES could expose an API to retrieve the FAL at the end of the boot phase. After boot, ownership of the FAL could be transferred to the host. This way, the same log could be continuously maintained across the boot and runtime phases.\n",
+              "createdAt": "2026-09-22T13:50:40Z",
+              "updatedAt": "2026-09-22T13:50:40Z"
+            }
+          ]
         }
       ]
     }
