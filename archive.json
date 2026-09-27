@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-24T03:14:36.106252+00:00",
+  "timestamp": "2026-09-27T03:46:32.655356+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -4791,13 +4791,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-09-17T11:33:59Z",
-      "updatedAt": "2026-09-22T13:50:40Z",
+      "updatedAt": "2026-09-24T15:23:42Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "ede212d015828a7cc6610c8696cb6150854e147f",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "fal",
-      "headRefOid": "63f6291e1d194e14e07b7b8593ec209db8b2d422",
+      "headRefOid": "aa3c8827cb66c2c17c7b691dc6524459458289fb",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -5145,6 +5145,119 @@
               "updatedAt": "2026-09-22T13:50:40Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABPCgIGw",
+          "commit": {
+            "abbreviatedOid": "63f6291"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-24T12:12:54Z",
+          "updatedAt": "2026-09-24T12:12:55Z",
+          "comments": [
+            {
+              "originalPosition": 109,
+              "body": "OK, I'll queue up a further PR that removes all CMW collection entries from the IANA section and instead collects a table of these entries in a CMW centric section",
+              "createdAt": "2026-09-24T12:12:54Z",
+              "updatedAt": "2026-09-24T12:12:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABPCggwA",
+          "commit": {
+            "abbreviatedOid": "63f6291"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-24T12:13:29Z",
+          "updatedAt": "2026-09-24T12:13:30Z",
+          "comments": [
+            {
+              "originalPosition": 82,
+              "body": "I meant the hash computed as described in 1383, will add a clarification",
+              "createdAt": "2026-09-24T12:13:29Z",
+              "updatedAt": "2026-09-24T12:13:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABPChj2A",
+          "commit": {
+            "abbreviatedOid": "63f6291"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-24T12:15:09Z",
+          "updatedAt": "2026-09-24T12:15:09Z",
+          "comments": [
+            {
+              "originalPosition": 54,
+              "body": "I would rather avoid having to synchonise FAL collection across another component to the LFAA.\r\nInstead I'll add some commentary that points out that original recorded hashes in the HES are extensions to a 0 base value",
+              "createdAt": "2026-09-24T12:15:09Z",
+              "updatedAt": "2026-09-24T12:15:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABPElkhQ",
+          "commit": {
+            "abbreviatedOid": "aa3c882"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-24T15:17:29Z",
+          "updatedAt": "2026-09-24T15:17:29Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "Line 1386 can be re-worded slightly with more clarity as below:\n`if the entry is a measurement event for that sw component`",
+              "createdAt": "2026-09-24T15:17:29Z",
+              "updatedAt": "2026-09-24T15:17:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABPEonkA",
+          "commit": {
+            "abbreviatedOid": "aa3c882"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-24T15:21:46Z",
+          "updatedAt": "2026-09-24T15:21:46Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Since we initialised the Verification Algorithm for a specific sw-component, we should simply say:\n\n`compare compound digest value for the component`, with the corresponding measurement attribute from the `arm-platform-sw-component` claim - they must match.",
+              "createdAt": "2026-09-24T15:21:46Z",
+              "updatedAt": "2026-09-24T15:21:46Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABPEpJMA",
+          "commit": {
+            "abbreviatedOid": "aa3c882"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "LGTM, I have suggested two very minor nits if you agree, please update it, then we are good to merge from my side!",
+          "createdAt": "2026-09-24T15:22:29Z",
+          "updatedAt": "2026-09-24T15:23:42Z",
+          "comments": []
         }
       ]
     }
