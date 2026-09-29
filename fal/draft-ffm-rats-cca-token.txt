@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 28 March 2027                                            Linaro
+Expires: 2 April 2027                                             Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                       24 September 2026
+                                                       29 September 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 March 2027.
+   This Internet-Draft will expire on 2 April 2027.
 
 Copyright Notice
 
@@ -2210,8 +2210,9 @@ arm-platform-discrete-tpm-binding-data = (
       -  extend the FAL security hash with the event hash computed in
          the previous step
 
-      -  if the entry is a measurement event, extract the index value
-         for the component and the new digest value from the event
+      -  if the entry is a measurement event for a sw-component, extract
+         the index value for the component and the new digest value from
+         the event
 
       -  compare that event digest value against an appropriate
          reference value to confirm that it is trustworthy according to
