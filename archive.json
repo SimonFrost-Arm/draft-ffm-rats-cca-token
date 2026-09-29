@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-27T03:46:32.655356+00:00",
+  "timestamp": "2026-09-29T04:20:50.209368+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -846,6 +846,22 @@
       "body": "Clarify and state the correct Media Type for New CCA Platform and Realm Profiles:\n\nDo we need to register a new Media Type that clearly states the nature of CCA Token carried inside CMW.\n\nThis issue is originated from the discussion on:\n\nhttps://github.com/veraison/services/issues/452\n\n\n\n\n",
       "createdAt": "2026-09-03T10:05:34Z",
       "updatedAt": "2026-09-03T10:05:34Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 63,
+      "id": "I_kwDOMRXjbM8AAAABTzZARA",
+      "title": "Direct-mode realm token disagrees between prose and CDDL",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/63",
+      "state": "OPEN",
+      "author": "Ruach",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The direct-mode realm token is not described consistently by the prose and CDDL.\n\n## Realm token signing\nThe Direct section says:\n> The CCA Evidence produced with the direct model comprises a signed EAT for the platform token and an unsigned EAT for the realm token, wrapped in a CMW collection.\n\nThe Token Encoding and Signing section says:\n> In the Delegated and HESRAK attestation models, the Realm claims set will also be wrapped in a CWT.\n\nHowever, `cddl/top/cca-top-claims.cddl` always requires the realm entry to be a `COSE_Sign1`:\n```\n    0xACD1 => [\n      eat-cwt-coap-cf\n      bytes .cbor COSE_Sign1<cca-realm-claims>\n    ]\n```\n\nIt also uses the label registered as `cca-platform-delegated-realm-label`. The Token Binding section says direct mode must use a different CMW map value, but the draft does not assign one or specify its content format.\n\n## Realm public-key claims\nFor the Realm Public Key claim (44237), the draft says:\n> This claim MUST be present in a CCA Realm state attestation token when the attestation model is not Direct mode.\n\nIt then says:\n> Compatibility: this claim can be present for all values of CCA Realm Profile.\nThe same wording appears for the Realm Public Key Hash Algorithm ID claim (44240).\n\nThe Token Binding section additionally says:\n> In such a profile, the Realm Public Key and Realm Public Key Hash Algorithm ID claims will not be used.\n\nThis leaves their direct-mode presence unclear:\n- \u201cMUST be present ... when ... not Direct\u201d means they are not mandatory in direct mode.\n- \u201ccan be present for all values of CCA Realm Profile\u201d appears to permit them in direct mode.\n- \u201cwill not be used\u201d says a direct-mode verifier ignores them, but does not say whether they must be omitted or may be included.\n\nThe current `cca-realm-claim-map` requires both claims unconditionally:\n    cca-realm-hash-algo-id\n    cca-realm-public-key\n    cca-realm-public-key-hash-algo-id\n    cca-realm-mec-policy\n\n## Questions\n\n1. Is the direct-mode realm entry an unsigned claims set, or must it still be a `COSE_Sign1`?\n2. What CMW map label and content format should identify a direct-mode realm entry?\n3. In direct mode, must claims 44237 and 44240 be absent, may they be present but ignored, or must they still be present?\n4. Should the CDDL define a direct-mode realm claim-map alternative that reflects the intended rule?\n\n## Possible CDDL direction\nFor illustration, the CDDL could distinguish signed and direct Realm entries:\n ```\n cca-token-cmw =\n    cca-delegated-realm-cmw /\n    cca-direct-realm-cmw\n  cca-platform-cmw-entry = [\n    eat-cwt-coap-cf\n    bytes .cbor COSE_Sign1<arm-platform-claims>\n  ]\n  ; Delegated/HESRAK mode: signed Realm token.\n  cca-delegated-realm-cmw = {\n    0xACCA => cca-platform-cmw-entry\n    0xACD1 => [\n      eat-cwt-coap-cf\n      bytes .cbor COSE_Sign1<cca-realm-claims>\n    ]\n  }\n  ; Direct mode: unsigned Realm claims.\n  ; The draft must assign these two values.\n  cca-direct-realm-label = TBD\n  cca-direct-realm-content-format = TBD\n  cca-direct-realm-cmw = {\n    0xACCA => cca-platform-cmw-entry\n    cca-direct-realm-label => [\n      cca-direct-realm-content-format\n      bytes .cbor cca-realm-direct-claims\n    ]\n  }\n  cca-realm-direct-claims = {\n    cca-realm-challenge\n    ? cca-realm-profile\n    cca-realm-instance-id\n    cca-realm-personalization-value\n    cca-realm-initial-measurement\n    cca-realm-extensible-measurements\n    cca-realm-hash-algo-id\n    cca-realm-mec-policy\n    ? cca-realm-lfa-policy\n    ? cca-realm-devices-token-hash\n  }\n```",
+      "createdAt": "2026-09-29T02:02:04Z",
+      "updatedAt": "2026-09-29T02:02:04Z",
       "closedAt": null,
       "comments": []
     }
