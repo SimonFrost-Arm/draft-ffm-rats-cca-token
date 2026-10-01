@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-09-29T04:20:50.209368+00:00",
+  "timestamp": "2026-10-01T04:16:21.318330+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -4800,24 +4800,26 @@
       "id": "PR_kwDOMRXjbM8AAAABD6yA9A",
       "title": "Add description of Firmware Activation Log and its verification process",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/62",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SimonFrost-Arm",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-09-17T11:33:59Z",
-      "updatedAt": "2026-09-24T15:23:42Z",
+      "updatedAt": "2026-09-29T10:39:45Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "ede212d015828a7cc6610c8696cb6150854e147f",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "fal",
-      "headRefOid": "aa3c8827cb66c2c17c7b691dc6524459458289fb",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "d2b8cd35dda81b3f15ac512a873193026bfb7c10",
+      "closedAt": "2026-09-29T10:39:39Z",
+      "mergedAt": "2026-09-29T10:39:39Z",
+      "mergedBy": "yogeshbdeshpande",
+      "mergeCommit": {
+        "oid": "a0525badcc4d9bc2dd3cb22e5f0cd4a9997ecc03"
+      },
       "comments": [
         {
           "author": "yogeshbdeshpande",
@@ -5274,6 +5276,26 @@
           "createdAt": "2026-09-24T15:22:29Z",
           "updatedAt": "2026-09-24T15:23:42Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABPvTY0A",
+          "commit": {
+            "abbreviatedOid": "aa3c882"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-09-29T10:36:45Z",
+          "updatedAt": "2026-09-29T10:36:46Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "I'm going to leave this as is - the 'every' provides emphasis that all measurements must be checked.",
+              "createdAt": "2026-09-29T10:36:45Z",
+              "updatedAt": "2026-09-29T10:36:46Z"
+            }
+          ]
         }
       ]
     }
