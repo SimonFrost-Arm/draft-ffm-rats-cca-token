@@ -23,23 +23,23 @@ wire, and how they are cryptographically protected.
 interoperability with Arm's architecture. It is not a standard nor
 a product of the IETF. 
     " name="description">
-<meta content="xml2rfc 3.34.0" name="generator">
+<meta content="xml2rfc 3.34.1" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ffm-rats-cca-token-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.0
-    Python 3.14.7
-    ConfigArgParse 1.7.5
+  xml2rfc 3.34.1
+    Python 3.14.8
+    ConfigArgParse 1.8.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.11.7
+    platformdirs 4.12.2
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.8.3
+    wcwidth 0.9.1
 -->
 <link href="draft-ffm-rats-cca-token.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1055,11 +1055,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CCA Reference Attestation Token</td>
-<td class="right">September 2026</td>
+<td class="right">October 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Frost, et al.</td>
-<td class="center">Expires 8 March 2027</td>
+<td class="center">Expires 11 April 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg {
 <dd class="internet-draft">draft-ffm-rats-cca-token-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-09-04" class="published">4 September 2026</time>
+<time datetime="2026-10-08" class="published">8 October 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-03-08">8 March 2027</time></dd>
+<dd class="expires"><time datetime="2027-04-11">11 April 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1131,7 +1131,7 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 March 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1350,6 +1350,14 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1">
                 <p id="section-toc.1-1.7.2.1.1"><a href="#section-7.1" class="auto internal xref">7.1</a>.  <a href="#name-live-firmware-activation-lf" class="internal xref">Live Firmware Activation (LFA)</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.1">
+                    <p id="section-toc.1-1.7.2.1.2.1.1"><a href="#section-7.1.1" class="auto internal xref">7.1.1</a>.  <a href="#name-introduction-2" class="internal xref">Introduction</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.1.2.2">
+                    <p id="section-toc.1-1.7.2.1.2.2.1"><a href="#section-7.1.2" class="auto internal xref">7.1.2</a>.  <a href="#name-live-firmware-activation-ve" class="internal xref">Live Firmware Activation Verification</a></p>
+</li>
+                </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7.2.2">
                 <p id="section-toc.1-1.7.2.2.1"><a href="#section-7.2" class="auto internal xref">7.2</a>.  <a href="#name-ar4si-trustworthiness-claim" class="internal xref">AR4SI Trustworthiness Claims Mappings</a></p>
@@ -1823,7 +1831,7 @@ represented in CCA platform claims and to assemble them into Evidence.<a href="#
         </h3>
 <p id="section-3.4-1">The Realm Management Monitor (RMM), executing at run-time, maintains measurements for
 the state of a Realm. It can respond to requests issued from a Realm for an attestation
-token relevant for that Realm by obtaining a CCA Platform attestation token from the
+token relevant for that Realm by obtaining a CCA Platform attestation token (PAT) from the
 HES RoT and combining that with an attestation token containing Evidence reflecting
 Realm state.<a href="#section-3.4-1" class="pilcrow">¶</a></p>
 <div id="para-pak-intro">
@@ -2011,7 +2019,7 @@ Realm attestation tokens.<a href="#section-4.3.1-1" class="pilcrow">¶</a></p>
 See <a href="#sec-token-binding-compatibility" class="auto internal xref">Section 4.3.3</a> for further details.<a href="#section-4.3.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.3.1-3">The length of the value of the claim MUST be either 32, 48, or 64 bytes.<a href="#section-4.3.1-3" class="pilcrow">¶</a></p>
 <p id="section-4.3.1-4">This claim MUST be present in a CCA Platform attestation token.<a href="#section-4.3.1-4" class="pilcrow">¶</a></p>
-<p id="section-4.3.1-5">Compatibility: this claim will be present where profile values are at or newer than "tag:arm.com,2026:cca_platform#2.0.0".<a href="#section-4.3.1-5" class="pilcrow">¶</a></p>
+<p id="section-4.3.1-5">Compatibility: this claim will only be present where profile values are at or newer than "tag:arm.com,2026:cca_platform#2.0.0".<a href="#section-4.3.1-5" class="pilcrow">¶</a></p>
 <div class="alignLeft art-text artwork" id="section-4.3.1-6">
 <pre>
 arm-platform-workload-binding-label = 2408
@@ -2128,7 +2136,7 @@ The claims used vary by profile version and attestation model implemented as out
                 <p id="section-4.3.3.4-1.1.1">Attestation Model: Delegated<a href="#section-4.3.3.4-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.4-1.2">
-                <p id="section-4.3.3.4-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.4-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.4-1.2.1">Binding Claim: arm-platform-workload-binding<a href="#section-4.3.3.4-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.4-1.3">
                 <p id="section-4.3.3.4-1.3.1">Claim Value: H(RAK public)<a href="#section-4.3.3.4-1.3.1" class="pilcrow">¶</a></p>
@@ -2149,7 +2157,7 @@ The claims used vary by profile version and attestation model implemented as out
                 <p id="section-4.3.3.5-1.1.1">Attestation Model: Direct<a href="#section-4.3.3.5-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.5-1.2">
-                <p id="section-4.3.3.5-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.5-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.5-1.2.1">Binding Claim: arm-platform-workload-binding<a href="#section-4.3.3.5-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.5-1.3">
                 <p id="section-4.3.3.5-1.3.1">Claim Value: H(realm claims)<a href="#section-4.3.3.5-1.3.1" class="pilcrow">¶</a></p>
@@ -2167,7 +2175,7 @@ The claims used vary by profile version and attestation model implemented as out
                 <p id="section-4.3.3.6-1.1.1">Attestation Model: Delegated attestation, with the RAK kept within the HES<a href="#section-4.3.3.6-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.6-1.2">
-                <p id="section-4.3.3.6-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.6-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.6-1.2.1">Binding Claim: arm-platform-workload-binding<a href="#section-4.3.3.6-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.6-1.3">
                 <p id="section-4.3.3.6-1.3.1">Claim Value: H(RAK public)<a href="#section-4.3.3.6-1.3.1" class="pilcrow">¶</a></p>
@@ -2188,7 +2196,7 @@ The claims used vary by profile version and attestation model implemented as out
                 <p id="section-4.3.3.7-1.1.1">Attestation Model: Delegated<a href="#section-4.3.3.7-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.7-1.2">
-                <p id="section-4.3.3.7-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.7-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.7-1.2.1">Binding Claim: arm-platform-workload-binding<a href="#section-4.3.3.7-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.7-1.3">
                 <p id="section-4.3.3.7-1.3.1">Claim Value: H(RAK public)<a href="#section-4.3.3.7-1.3.1" class="pilcrow">¶</a></p>
@@ -2209,7 +2217,7 @@ The claims used vary by profile version and attestation model implemented as out
                 <p id="section-4.3.3.8-1.1.1">Attestation Model: Direct<a href="#section-4.3.3.8-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.8-1.2">
-                <p id="section-4.3.3.8-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.8-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.8-1.2.1">Binding Claim: arm-platform-workload-binding<a href="#section-4.3.3.8-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.8-1.3">
                 <p id="section-4.3.3.8-1.3.1">Claim Value: H(realm claims)<a href="#section-4.3.3.8-1.3.1" class="pilcrow">¶</a></p>
@@ -2220,14 +2228,14 @@ The claims used vary by profile version and attestation model implemented as out
 <div id="prof-bind-211-hesrak">
 <section id="section-4.3.3.9">
             <h5 id="name-profile-tagarmcom2026cca_platfor">
-<a href="#section-4.3.3.9" class="section-number selfRef">4.3.3.9. </a><a href="#name-profile-tagarmcom2026cca_platfor" class="section-name selfRef">Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK</a>
+<a href="#section-4.3.3.9" class="section-number selfRef">4.3.3.9. </a><a href="#name-profile-tagarmcom2026cca_platfor" class="section-name selfRef">Profile tag:arm.com,2026:cca_platform#2.1.0;HESRAK</a>
             </h5>
 <ul class="normal">
 <li class="normal" id="section-4.3.3.9-1.1">
                 <p id="section-4.3.3.9-1.1.1">Attestation Model: Delegated attestation, with the RAK kept within the HES<a href="#section-4.3.3.9-1.1.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.9-1.2">
-                <p id="section-4.3.3.9-1.2.1">Binding Claim: eat_nonce<a href="#section-4.3.3.9-1.2.1" class="pilcrow">¶</a></p>
+                <p id="section-4.3.3.9-1.2.1">Binding Claim: arm-platform-workload-binding<a href="#section-4.3.3.9-1.2.1" class="pilcrow">¶</a></p>
 </li>
               <li class="normal" id="section-4.3.3.9-1.3">
                 <p id="section-4.3.3.9-1.3.1">Claim Value: H(RAK public)<a href="#section-4.3.3.9-1.3.1" class="pilcrow">¶</a></p>
@@ -2819,11 +2827,12 @@ SHOULD be encoded according to "Hash Name String" in the "Named Information Hash
             <h5 id="name-live-firmware-activation-su">
 <a href="#section-4.6.1.6" class="section-number selfRef">4.6.1.6. </a><a href="#name-live-firmware-activation-su" class="section-name selfRef">Live Firmware Activation support</a>
             </h5>
-<p id="section-4.6.1.6-1">The Live Firmware Activation support attribute (key=7) indicates whether
+<p id="section-4.6.1.6-1">The Live Firmware Activation (LFA) support attribute (key=7) indicates whether
 the component is subject to Live Firmware Activation.
 If the attribute is set to <code>false</code>, the component will not be updated before the
 next CCA Platform software update.<a href="#section-4.6.1.6-1" class="pilcrow">¶</a></p>
 <p id="section-4.6.1.6-2">The Live Firmware Activation support attribute of the CCA Platform software component is optional.<a href="#section-4.6.1.6-2" class="pilcrow">¶</a></p>
+<p id="section-4.6.1.6-3">More details on LFA can be found at <a href="#sec-live-firmware-activation-intro" class="auto internal xref">Section 7.1.1</a>.<a href="#section-4.6.1.6-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="software-component-countersigner-id-list">
@@ -3061,16 +3070,43 @@ arm-platform-tbb-rotpk-label = 2405
 arm-platform-tbb-rotpk-type = [ + arm-platform-tbb-rotpk-item ]
 
 arm-platform-tbb-rotpk-item = {
-    1 =&gt; tstr,             ; e.g. "CM" or "DM"
-    2 =&gt; int,              ; active ROTPK array
+    1 =&gt; tstr,             ; provisioning stage, e.g. "CM" or "DM"
+    2 =&gt; int,              ; reserved
     3 =&gt; int,              ; index in the active array
-    4 =&gt; arm-platform-hash-type    ; hash object
+    4 =&gt; arm-platform-hash-type    ; key digest
 }
 
 arm-platform-tbb-rotpk = (
     arm-platform-tbb-rotpk-label =&gt; arm-platform-tbb-rotpk-type
 )
 </pre><a href="#section-4.6.8-4" class="pilcrow">¶</a>
+</div>
+<div id="privisioning-stage">
+<section id="section-4.6.8.1">
+            <h5 id="name-privisioning-stage">
+<a href="#section-4.6.8.1" class="section-number selfRef">4.6.8.1. </a><a href="#name-privisioning-stage" class="section-name selfRef">Privisioning stage</a>
+            </h5>
+<p id="section-4.6.8.1-1">The provisioning stage, (key=1) , indicates the lifecycle provisioning stage of the CCA Platform TBB RoTPK keys.
+the permitted values are either "CM", indicating Chip Manufacturing Stage or "DM", indicating
+Device Manufacturing Stage of the platform.<a href="#section-4.6.8.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="index">
+<section id="section-4.6.8.2">
+            <h5 id="name-index">
+<a href="#section-4.6.8.2" class="section-number selfRef">4.6.8.2. </a><a href="#name-index" class="section-name selfRef">Index</a>
+            </h5>
+<p id="section-4.6.8.2-1">Index (key=3) denotes the current index within the active array on the CCA Platform.<a href="#section-4.6.8.2-1" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="key-digest">
+<section id="section-4.6.8.3">
+            <h5 id="name-key-digest">
+<a href="#section-4.6.8.3" class="section-number selfRef">4.6.8.3. </a><a href="#name-key-digest" class="section-name selfRef">Key digest</a>
+            </h5>
+<p id="section-4.6.8.3-1">The Key digest(key=4) represents the digest of a single Root of Trust public key.
+The size of the key digest can be ONLY one of 32, 48 or 64 bytes.<a href="#section-4.6.8.3-1" class="pilcrow">¶</a></p>
+</section>
 </div>
 </section>
 </div>
@@ -3960,7 +3996,77 @@ a known Signer ID, without checking for a uniquely registered version.<a href="#
         <h3 id="name-live-firmware-activation-lf">
 <a href="#section-7.1" class="section-number selfRef">7.1. </a><a href="#name-live-firmware-activation-lf" class="section-name selfRef">Live Firmware Activation (LFA)</a>
         </h3>
-<p id="section-7.1-1">ToDo in separate PR<a href="#section-7.1-1" class="pilcrow">¶</a></p>
+<div id="sec-live-firmware-activation-intro">
+<section id="section-7.1.1">
+          <h4 id="name-introduction-2">
+<a href="#section-7.1.1" class="section-number selfRef">7.1.1. </a><a href="#name-introduction-2" class="section-name selfRef">Introduction</a>
+          </h4>
+<p id="section-7.1.1-1">Where a CCA implementation has implemented Live Firmware Activation (LFA),
+firmware components within the CCA Platform can be updated while the
+host is running, without requiring a reset of the host.<a href="#section-7.1.1-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.1-2">With LFA enabled, each live update made to a component needs to be captured and made available to the attestation report.
+Updates are captured in the Firmware Activation Log (FAL).
+FAL entries include measurements taken at boot time and measurements taken of new components that are activated after boot.
+The FAL may also contain other entries, such as changes to Security Version Numbers (SVN) or failures encountered during component activation.
+As the FAL captures updates to the CCA TCB, it needs to be included as part of the CCA Attestation Token.
+The Realm obtains the FAL via an <span>[<a href="#RHI" class="cite xref">RHI</a>]</span> call.
+Realm code then adds the FAL as a separate entity in the overall attestation token CMW using the tag 44256.<a href="#section-7.1.1-2" class="pilcrow">¶</a></p>
+<p id="section-7.1.1-3">FAL entries are prepared by a trusted component - the Live Firmware Activation (LFA) agent.
+Because the FAL's size is unbounded, entries are stored in the untrusted host, which requires an additional integrity mechanism to be used: a hash of each entry is extended into a digest held in the HES.
+This digest is delivered in the CCA PAT <code>arm-platform-software-components</code> claim <a href="#sec-sw-components" class="auto internal xref">Section 4.6.1</a> for the entry with component type "FAL".<a href="#section-7.1.1-3" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="sec-live-firmware-activation-verification">
+<section id="section-7.1.2">
+          <h4 id="name-live-firmware-activation-ve">
+<a href="#section-7.1.2" class="section-number selfRef">7.1.2. </a><a href="#name-live-firmware-activation-ve" class="section-name selfRef">Live Firmware Activation Verification</a>
+          </h4>
+<p id="section-7.1.2-1">The use of LFA changes how firmware elements of the CCA platform are verified.
+Normally, each component's <code>measurement</code> attribute in the <code>arm-platform-sw-component</code> claim is compared directly against a single reference value.
+For a component where <code>live firmware activation supported</code> is True, however, this attribute instead holds a rolling digest, formed by extending a running value with every firmware measurement recorded for that component's index -- so it reflects the full sequence of updates, not just the current version.
+For a component where <code>live firmware activation supported</code> is False, verification is unchanged: the <code>measurement</code> attribute remains a single value that is compared directly against a reference value.
+Correspondingly, the FAL should contain only one entry for that component's index -- the measurement taken at boot.
+Note that measurements stored in the HES at boot time are saved as an extend operation to an initial value of 0, which needs to be taken into account when recomputing measurement values for a component in the verifier.<a href="#section-7.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-7.1.2-2">The method for verifying the LFA enabled components must take the following form.
+This method is independent from the format used to construct the FAL.<a href="#section-7.1.2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.1.2-3.1">
+              <p id="section-7.1.2-3.1.1">For each entry in the <code>arm-platform-sw-component</code> claim which has the <code>live firmware activation supported</code> attribute as True, initialise a compound digest value to 0<a href="#section-7.1.2-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-7.1.2-3.2">
+              <p id="section-7.1.2-3.2.1">Initialise a FAL security hash to 0<a href="#section-7.1.2-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-7.1.2-3.3">
+              <p id="section-7.1.2-3.3.1">For each entry in the FAL<a href="#section-7.1.2-3.3.1" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-7.1.2-3.3.2.1">
+                  <p id="section-7.1.2-3.3.2.1.1">compute a hash for that entry using the hash algorithm from the <code>arm-platform-hash-algo-id</code> claim<a href="#section-7.1.2-3.3.2.1.1" class="pilcrow">¶</a></p>
+</li>
+                <li class="normal" id="section-7.1.2-3.3.2.2">
+                  <p id="section-7.1.2-3.3.2.2.1">extend the FAL security hash with the event hash computed in the previous step<a href="#section-7.1.2-3.3.2.2.1" class="pilcrow">¶</a></p>
+</li>
+                <li class="normal" id="section-7.1.2-3.3.2.3">
+                  <p id="section-7.1.2-3.3.2.3.1">if the entry is a measurement event for a sw-component, extract the index value for the component and the new digest value from the event<a href="#section-7.1.2-3.3.2.3.1" class="pilcrow">¶</a></p>
+</li>
+                <li class="normal" id="section-7.1.2-3.3.2.4">
+                  <p id="section-7.1.2-3.3.2.4.1">compare that event digest value against an appropriate reference value to confirm that it is trustworthy according to the supply chain.<a href="#section-7.1.2-3.3.2.4.1" class="pilcrow">¶</a></p>
+</li>
+                <li class="normal" id="section-7.1.2-3.3.2.5">
+                  <p id="section-7.1.2-3.3.2.5.1">extend the compound digest value for that index with the event digest value<a href="#section-7.1.2-3.3.2.5.1" class="pilcrow">¶</a></p>
+</li>
+              </ul>
+</li>
+          </ul>
+<p id="section-7.1.2-4">When all entries from the FAL have been consumed, final integrity checks can be made:<a href="#section-7.1.2-4" class="pilcrow">¶</a></p>
+<div class="alignLeft art-text artwork" id="section-7.1.2-5">
+<pre>
+* compare the FAL security hash with the measurement attribute of the `arm-platform-sw-component` claim which has type `FAL` - they must match.
+* compare each compound digest value with the corresponding measurement attribute from the `arm-platform-sw-component` claim - they must match.
+</pre><a href="#section-7.1.2-5" class="pilcrow">¶</a>
+</div>
+<p id="section-7.1.2-6">Other implementation defined checks can be made against FAL entries.<a href="#section-7.1.2-6" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="ar4si-trustworthiness-claims-mappings">
@@ -4939,6 +5045,10 @@ equal to "tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3-2.1.1" clas
 <dt id="RFC8610">[RFC8610]</dt>
         <dd>
 <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Vigano, C.</span>, and <span class="refAuthor">C. Bormann</span>, <span class="refTitle">"Concise Data Definition Language (CDDL): A Notational Convention to Express Concise Binary Object Representation (CBOR) and JSON Data Structures"</span>, <span class="seriesInfo">RFC 8610</span>, <span class="seriesInfo">DOI 10.17487/RFC8610</span>, <time datetime="2019-06" class="refDate">June 2019</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc8610">https://www.rfc-editor.org/rfc/rfc8610</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="RHI">[RHI]</dt>
+        <dd>
+<span class="refAuthor">Arm</span>, <span class="refTitle">"Arm Realm Host Interface specification"</span>, <time datetime="2026-07-31" class="refDate">31 July 2026</time>, <span>&lt;<a href="https://support.arm.com/documentation/den0148/latest">https://support.arm.com/documentation/den0148/latest</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RME">[RME]</dt>
         <dd>

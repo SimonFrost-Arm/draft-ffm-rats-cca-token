@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 8 March 2027                                             Linaro
+Expires: 11 April 2027                                            Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                        4 September 2026
+                                                          8 October 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 March 2027.
+   This Internet-Draft will expire on 11 April 2027.
 
 Copyright Notice
 
@@ -122,6 +122,8 @@ Table of Contents
    6.  Signing key implementation alternatives
    7.  CCA Attestation Token Verification
      7.1.  Live Firmware Activation (LFA)
+       7.1.1.  Introduction
+       7.1.2.  Live Firmware Activation Verification
      7.2.  AR4SI Trustworthiness Claims Mappings
      7.3.  Endorsements, Reference Values and Verification Key
            Material
@@ -403,8 +405,8 @@ Table of Contents
    The Realm Management Monitor (RMM), executing at run-time, maintains
    measurements for the state of a Realm.  It can respond to requests
    issued from a Realm for an attestation token relevant for that Realm
-   by obtaining a CCA Platform attestation token from the HES RoT and
-   combining that with an attestation token containing Evidence
+   by obtaining a CCA Platform attestation token (PAT) from the HES RoT
+   and combining that with an attestation token containing Evidence
    reflecting Realm state.
 
    The HES RoT, executing at run-time, maintains measurements for the
@@ -555,8 +557,8 @@ Table of Contents
 
    This claim MUST be present in a CCA Platform attestation token.
 
-   Compatibility: this claim will be present where profile values are at
-   or newer than "tag:arm.com,2026:cca_platform#2.0.0".
+   Compatibility: this claim will only be present where profile values
+   are at or newer than "tag:arm.com,2026:cca_platform#2.0.0".
 
    arm-platform-workload-binding-label = 2408
 
@@ -627,7 +629,7 @@ Table of Contents
 
    *  Attestation Model: Delegated
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(RAK public)
 
@@ -638,7 +640,7 @@ Table of Contents
 
    *  Attestation Model: Direct
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(realm claims)
 
@@ -647,7 +649,7 @@ Table of Contents
    *  Attestation Model: Delegated attestation, with the RAK kept within
       the HES
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(RAK public)
 
@@ -659,7 +661,7 @@ Table of Contents
 
    *  Attestation Model: Delegated
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(RAK public)
 
@@ -670,16 +672,16 @@ Table of Contents
 
    *  Attestation Model: Direct
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(realm claims)
 
-4.3.3.9.  Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
+4.3.3.9.  Profile tag:arm.com,2026:cca_platform#2.1.0;HESRAK
 
    *  Attestation Model: Delegated attestation, with the RAK kept within
       the HES
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(RAK public)
 
@@ -1111,13 +1113,15 @@ arm-platform-lifecycle = (
 
 4.6.1.6.  Live Firmware Activation support
 
-   The Live Firmware Activation support attribute (key=7) indicates
-   whether the component is subject to Live Firmware Activation.  If the
-   attribute is set to false, the component will not be updated before
-   the next CCA Platform software update.
+   The Live Firmware Activation (LFA) support attribute (key=7)
+   indicates whether the component is subject to Live Firmware
+   Activation.  If the attribute is set to false, the component will not
+   be updated before the next CCA Platform software update.
 
    The Live Firmware Activation support attribute of the CCA Platform
    software component is optional.
+
+   More details on LFA can be found at Section 7.1.1.
 
 4.6.1.7.  Software Component Countersigner ID List
 
@@ -1354,15 +1358,33 @@ arm-platform-discrete-tpm-binding-data = (
    arm-platform-tbb-rotpk-type = [ + arm-platform-tbb-rotpk-item ]
 
    arm-platform-tbb-rotpk-item = {
-       1 => tstr,             ; e.g. "CM" or "DM"
-       2 => int,              ; active ROTPK array
+       1 => tstr,             ; provisioning stage, e.g. "CM" or "DM"
+       2 => int,              ; reserved
        3 => int,              ; index in the active array
-       4 => arm-platform-hash-type    ; hash object
+       4 => arm-platform-hash-type    ; key digest
    }
 
    arm-platform-tbb-rotpk = (
        arm-platform-tbb-rotpk-label => arm-platform-tbb-rotpk-type
    )
+
+4.6.8.1.  Privisioning stage
+
+   The provisioning stage, (key=1) , indicates the lifecycle
+   provisioning stage of the CCA Platform TBB RoTPK keys. the permitted
+   values are either "CM", indicating Chip Manufacturing Stage or "DM",
+   indicating Device Manufacturing Stage of the platform.
+
+4.6.8.2.  Index
+
+   Index (key=3) denotes the current index within the active array on
+   the CCA Platform.
+
+4.6.8.3.  Key digest
+
+   The Key digest(key=4) represents the digest of a single Root of Trust
+   public key.  The size of the key digest can be ONLY one of 32, 48 or
+   64 bytes.
 
 4.7.  Verification Claims
 
@@ -2142,7 +2164,88 @@ arm-platform-discrete-tpm-binding-data = (
 
 7.1.  Live Firmware Activation (LFA)
 
-   ToDo in separate PR
+7.1.1.  Introduction
+
+   Where a CCA implementation has implemented Live Firmware Activation
+   (LFA), firmware components within the CCA Platform can be updated
+   while the host is running, without requiring a reset of the host.
+
+   With LFA enabled, each live update made to a component needs to be
+   captured and made available to the attestation report.  Updates are
+   captured in the Firmware Activation Log (FAL).  FAL entries include
+   measurements taken at boot time and measurements taken of new
+   components that are activated after boot.  The FAL may also contain
+   other entries, such as changes to Security Version Numbers (SVN) or
+   failures encountered during component activation.  As the FAL
+   captures updates to the CCA TCB, it needs to be included as part of
+   the CCA Attestation Token.  The Realm obtains the FAL via an [RHI]
+   call.  Realm code then adds the FAL as a separate entity in the
+   overall attestation token CMW using the tag 44256.
+
+   FAL entries are prepared by a trusted component - the Live Firmware
+   Activation (LFA) agent.  Because the FAL's size is unbounded, entries
+   are stored in the untrusted host, which requires an additional
+   integrity mechanism to be used: a hash of each entry is extended into
+   a digest held in the HES.  This digest is delivered in the CCA PAT
+   arm-platform-software-components claim Section 4.6.1 for the entry
+   with component type "FAL".
+
+7.1.2.  Live Firmware Activation Verification
+
+   The use of LFA changes how firmware elements of the CCA platform are
+   verified.  Normally, each component's measurement attribute in the
+   arm-platform-sw-component claim is compared directly against a single
+   reference value.  For a component where live firmware activation
+   supported is True, however, this attribute instead holds a rolling
+   digest, formed by extending a running value with every firmware
+   measurement recorded for that component's index -- so it reflects the
+   full sequence of updates, not just the current version.  For a
+   component where live firmware activation supported is False,
+   verification is unchanged: the measurement attribute remains a single
+   value that is compared directly against a reference value.
+   Correspondingly, the FAL should contain only one entry for that
+   component's index -- the measurement taken at boot.  Note that
+   measurements stored in the HES at boot time are saved as an extend
+   operation to an initial value of 0, which needs to be taken into
+   account when recomputing measurement values for a component in the
+   verifier.
+
+   The method for verifying the LFA enabled components must take the
+   following form.  This method is independent from the format used to
+   construct the FAL.
+
+   *  For each entry in the arm-platform-sw-component claim which has
+      the live firmware activation supported attribute as True,
+      initialise a compound digest value to 0
+
+   *  Initialise a FAL security hash to 0
+
+   *  For each entry in the FAL
+
+      -  compute a hash for that entry using the hash algorithm from the
+         arm-platform-hash-algo-id claim
+
+      -  extend the FAL security hash with the event hash computed in
+         the previous step
+
+      -  if the entry is a measurement event for a sw-component, extract
+         the index value for the component and the new digest value from
+         the event
+
+      -  compare that event digest value against an appropriate
+         reference value to confirm that it is trustworthy according to
+         the supply chain.
+
+      -  extend the compound digest value for that index with the event
+         digest value
+
+   When all entries from the FAL have been consumed, final integrity
+   checks can be made:
+
+* compare the FAL security hash with the measurement attribute of the `arm-platform-sw-component` claim which has type `FAL` - they must match.
+* compare each compound digest value with the corresponding measurement attribute from the `arm-platform-sw-component` claim - they must match.
+
+   Other implementation defined checks can be made against FAL entries.
 
 7.2.  AR4SI Trustworthiness Claims Mappings
 
@@ -2714,6 +2817,10 @@ arm-platform-discrete-tpm-binding-data = (
               Express Concise Binary Object Representation (CBOR) and
               JSON Data Structures", RFC 8610, DOI 10.17487/RFC8610,
               June 2019, <https://www.rfc-editor.org/rfc/rfc8610>.
+
+   [RHI]      Arm, "Arm Realm Host Interface specification", 31 July
+              2026,
+              <https://support.arm.com/documentation/den0148/latest>.
 
    [RME]      Arm, "Learn the architecture - Realm Management
               Extension", 26 September 2025,
