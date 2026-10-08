@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-01T04:16:21.318330+00:00",
+  "timestamp": "2026-10-08T04:36:34.740150+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -862,6 +862,22 @@
       "body": "The direct-mode realm token is not described consistently by the prose and CDDL.\n\n## Realm token signing\nThe Direct section says:\n> The CCA Evidence produced with the direct model comprises a signed EAT for the platform token and an unsigned EAT for the realm token, wrapped in a CMW collection.\n\nThe Token Encoding and Signing section says:\n> In the Delegated and HESRAK attestation models, the Realm claims set will also be wrapped in a CWT.\n\nHowever, `cddl/top/cca-top-claims.cddl` always requires the realm entry to be a `COSE_Sign1`:\n```\n    0xACD1 => [\n      eat-cwt-coap-cf\n      bytes .cbor COSE_Sign1<cca-realm-claims>\n    ]\n```\n\nIt also uses the label registered as `cca-platform-delegated-realm-label`. The Token Binding section says direct mode must use a different CMW map value, but the draft does not assign one or specify its content format.\n\n## Realm public-key claims\nFor the Realm Public Key claim (44237), the draft says:\n> This claim MUST be present in a CCA Realm state attestation token when the attestation model is not Direct mode.\n\nIt then says:\n> Compatibility: this claim can be present for all values of CCA Realm Profile.\nThe same wording appears for the Realm Public Key Hash Algorithm ID claim (44240).\n\nThe Token Binding section additionally says:\n> In such a profile, the Realm Public Key and Realm Public Key Hash Algorithm ID claims will not be used.\n\nThis leaves their direct-mode presence unclear:\n- \u201cMUST be present ... when ... not Direct\u201d means they are not mandatory in direct mode.\n- \u201ccan be present for all values of CCA Realm Profile\u201d appears to permit them in direct mode.\n- \u201cwill not be used\u201d says a direct-mode verifier ignores them, but does not say whether they must be omitted or may be included.\n\nThe current `cca-realm-claim-map` requires both claims unconditionally:\n    cca-realm-hash-algo-id\n    cca-realm-public-key\n    cca-realm-public-key-hash-algo-id\n    cca-realm-mec-policy\n\n## Questions\n\n1. Is the direct-mode realm entry an unsigned claims set, or must it still be a `COSE_Sign1`?\n2. What CMW map label and content format should identify a direct-mode realm entry?\n3. In direct mode, must claims 44237 and 44240 be absent, may they be present but ignored, or must they still be present?\n4. Should the CDDL define a direct-mode realm claim-map alternative that reflects the intended rule?\n\n## Possible CDDL direction\nFor illustration, the CDDL could distinguish signed and direct Realm entries:\n ```\n cca-token-cmw =\n    cca-delegated-realm-cmw /\n    cca-direct-realm-cmw\n  cca-platform-cmw-entry = [\n    eat-cwt-coap-cf\n    bytes .cbor COSE_Sign1<arm-platform-claims>\n  ]\n  ; Delegated/HESRAK mode: signed Realm token.\n  cca-delegated-realm-cmw = {\n    0xACCA => cca-platform-cmw-entry\n    0xACD1 => [\n      eat-cwt-coap-cf\n      bytes .cbor COSE_Sign1<cca-realm-claims>\n    ]\n  }\n  ; Direct mode: unsigned Realm claims.\n  ; The draft must assign these two values.\n  cca-direct-realm-label = TBD\n  cca-direct-realm-content-format = TBD\n  cca-direct-realm-cmw = {\n    0xACCA => cca-platform-cmw-entry\n    cca-direct-realm-label => [\n      cca-direct-realm-content-format\n      bytes .cbor cca-realm-direct-claims\n    ]\n  }\n  cca-realm-direct-claims = {\n    cca-realm-challenge\n    ? cca-realm-profile\n    cca-realm-instance-id\n    cca-realm-personalization-value\n    cca-realm-initial-measurement\n    cca-realm-extensible-measurements\n    cca-realm-hash-algo-id\n    cca-realm-mec-policy\n    ? cca-realm-lfa-policy\n    ? cca-realm-devices-token-hash\n  }\n```",
       "createdAt": "2026-09-29T02:02:04Z",
       "updatedAt": "2026-09-29T02:02:04Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 64,
+      "id": "I_kwDOMRXjbM8AAAABVnIUfQ",
+      "title": "Ambiguity in CCA Platform Hash Alg ID",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/64",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Following Ambiguities needs clarification \n1.\nCCA Platform Hash Alg ID is 2402\n\nIt is mandatory.\n\nThe field is OPEN Text\n\nWe should perhaps map it to cca-platform-hash-type ??\n\nSHA256/384/512 ..?\n\n2. When it is always present does it uniquely align with all the Computed Hashes for below:\na. SW Components\nb. Other token claims like TBB RoTPKs\nc. Peer signer IDs etc//?\n\n3. If answer to 2. above is yes, then why one need a Hash Alg ID in the CCA Software Component and is kept Optional???\n\n",
+      "createdAt": "2026-10-07T12:53:25Z",
+      "updatedAt": "2026-10-07T12:54:17Z",
       "closedAt": null,
       "comments": []
     }
