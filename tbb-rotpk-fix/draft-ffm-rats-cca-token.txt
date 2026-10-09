@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 11 April 2027                                            Linaro
+Expires: 12 April 2027                                            Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                          8 October 2026
+                                                          9 October 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 April 2027.
+   This Internet-Draft will expire on 12 April 2027.
 
 Copyright Notice
 
@@ -1353,20 +1353,19 @@ arm-platform-discrete-tpm-binding-data = (
    Compatibility: this claim can be present where profile values are at
    or newer than "tag:arm.com,2024:cca_platform#2.0.0".
 
-   arm-platform-tbb-rotpk-label = 2405
+arm-platform-tbb-rotpk-label = 2405
 
-   arm-platform-tbb-rotpk-type = [ + arm-platform-tbb-rotpk-item ]
+arm-platform-tbb-rotpk-type = [ + arm-platform-tbb-rotpk-item ]
 
-   arm-platform-tbb-rotpk-item = {
-       1 => tstr,             ; provisioning stage, e.g. "CM" or "DM"
-       2 => int,              ; reserved
-       3 => int,              ; index in the active array
-       4 => arm-platform-hash-type    ; key digest
-   }
+arm-platform-tbb-rotpk-item = {
+    1 => tstr,                     ; provisioning stage, e.g. "CM" or "DM"
+    2 => int,                      ; index in the active array
+    3 => arm-platform-hash-type    ; key digest
+}
 
-   arm-platform-tbb-rotpk = (
-       arm-platform-tbb-rotpk-label => arm-platform-tbb-rotpk-type
-   )
+arm-platform-tbb-rotpk = (
+    arm-platform-tbb-rotpk-label => arm-platform-tbb-rotpk-type
+)
 
 4.6.8.1.  Privisioning stage
 
@@ -1377,12 +1376,12 @@ arm-platform-discrete-tpm-binding-data = (
 
 4.6.8.2.  Index
 
-   Index (key=3) denotes the current index within the active array on
+   Index (key=2) denotes the current index within the active array on
    the CCA Platform.
 
 4.6.8.3.  Key digest
 
-   The Key digest(key=4) represents the digest of a single Root of Trust
+   The Key digest(key=3) represents the digest of a single Root of Trust
    public key.  The size of the key digest can be ONLY one of 32, 48 or
    64 bytes.
 
@@ -2044,8 +2043,7 @@ arm-platform-discrete-tpm-binding-data = (
    arm-platform-tbb-rotpk-item = {
      1 => tstr,
      2 => int,
-     3 => int,
-     4 => arm-platform-hash-type,
+     3 => arm-platform-hash-type,
    }
    arm-platform-tbb-rotpk = (arm-platform-tbb-rotpk-label => arm-\
                                                 platform-tbb-rotpk-type)
