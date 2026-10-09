@@ -914,6 +914,18 @@ Compatibility: this claim can be present where profile values are at or newer th
 {::include cddl/platform/arm-platform-tbb-rotpk.cddl}
 ~~~
 
+#### Privisioning stage
+The provisioning stage, (key=1) , indicates the lifecycle provisioning stage of the CCA Platform TBB RoTPK keys.
+the permitted values are either "CM", indicating Chip Manufacturing Stage or "DM", indicating
+Device Manufacturing Stage of the platform.
+
+#### Index
+Index (key=2) denotes the current index within the active array on the CCA Platform.
+
+#### Key digest
+The Key digest(key=3) represents the digest of a single Root of Trust public key.
+The size of the key digest can be ONLY one of 32, 48 or 64 bytes.
+
 ## Verification Claims
 
 The following claims are part of the CCA Platform token (and therefore still Evidence)
