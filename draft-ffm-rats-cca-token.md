@@ -920,10 +920,10 @@ the permitted values are either "CM", indicating Chip Manufacturing Stage or "DM
 Device Manufacturing Stage of the platform.
 
 #### Index
-Index (key=3) denotes the current index within the active array on the CCA Platform.
+Index (key=2) denotes the current index within the active array on the CCA Platform.
 
 #### Key digest
-The Key digest(key=4) represents the digest of a single Root of Trust public key.
+The Key digest(key=3) represents the digest of a single Root of Trust public key.
 The size of the key digest can be ONLY one of 32, 48 or 64 bytes.
 
 ## Verification Claims
