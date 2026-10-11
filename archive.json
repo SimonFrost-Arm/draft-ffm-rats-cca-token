@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-08T04:36:34.740150+00:00",
+  "timestamp": "2026-10-11T04:07:13.781729+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -5314,6 +5314,40 @@
           ]
         }
       ]
+    },
+    {
+      "number": 65,
+      "id": "PR_kwDOMRXjbM8AAAABHXd-Cw",
+      "title": "Fix TBB RoTPK Claim",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/65",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-08T15:47:17Z",
+      "updatedAt": "2026-10-09T13:32:15Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "a0525badcc4d9bc2dd3cb22e5f0cd4a9997ecc03",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "tbb-rotpk-fix",
+      "headRefOid": "6c4d86fb5f34c4f959516921b060defdb746e1a1",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@tamasban for visibility",
+          "createdAt": "2026-10-08T15:49:51Z",
+          "updatedAt": "2026-10-08T15:49:51Z"
+        }
+      ],
+      "reviews": []
     }
   ]
 }
