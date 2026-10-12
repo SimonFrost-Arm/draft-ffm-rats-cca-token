@@ -972,7 +972,7 @@ Compatibility: this claim can be present where profile values are at or newer th
 {::include cddl/platform/arm-platform-tbb-rotpk.cddl}
 ~~~
 
-#### Privisioning stage
+#### Provisioning stage
 The provisioning stage, (key=1) , indicates the lifecycle provisioning stage of the CCA Platform TBB RoTPK keys.
 the permitted values are either "CM", indicating Chip Manufacturing Stage or "DM", indicating
 Device Manufacturing Stage of the platform.
