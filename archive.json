@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-11T04:07:13.781729+00:00",
+  "timestamp": "2026-10-13T05:33:52.360943+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -5320,24 +5320,26 @@
       "id": "PR_kwDOMRXjbM8AAAABHXd-Cw",
       "title": "Fix TBB RoTPK Claim",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/65",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-10-08T15:47:17Z",
-      "updatedAt": "2026-10-09T13:32:15Z",
+      "updatedAt": "2026-10-12T11:14:08Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "a0525badcc4d9bc2dd3cb22e5f0cd4a9997ecc03",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "tbb-rotpk-fix",
-      "headRefOid": "6c4d86fb5f34c4f959516921b060defdb746e1a1",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "a45b3ad87cf3855f12776e276011b4212acbab65",
+      "closedAt": "2026-10-12T11:14:04Z",
+      "mergedAt": "2026-10-12T11:14:04Z",
+      "mergedBy": "yogeshbdeshpande",
+      "mergeCommit": {
+        "oid": "eaa18f81446b4dbfdb8e74322e6cca9ff29d94da"
+      },
       "comments": [
         {
           "author": "yogeshbdeshpande",
@@ -5347,7 +5349,28 @@
           "updatedAt": "2026-10-08T15:49:51Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABRzgHvg",
+          "commit": {
+            "abbreviatedOid": "6c4d86f"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "One minor typo otherwise LGTM",
+          "createdAt": "2026-10-12T11:03:23Z",
+          "updatedAt": "2026-10-12T11:04:34Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\n#### Provisioning stage\n```",
+              "createdAt": "2026-10-12T11:03:24Z",
+              "updatedAt": "2026-10-12T11:04:35Z"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
