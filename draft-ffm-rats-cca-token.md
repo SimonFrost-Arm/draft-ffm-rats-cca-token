@@ -414,7 +414,7 @@ The following table captures the CMW cbor collection element labels and potentia
 
 Note 1: multiple FAL types are possible depending on implementation. As an example, the type may be the generic coap-octet-stream-label or a more specific type that targets a particular log format. Examples of these might be the (currently unregistered) / tcg-event-log-coap-label / tcg-canonical-event-log-coap-label / cc-event-log-coap-label.
 
-Note 2: If the outstanding DAT ECN determines that the DAT is to be removed, element 44252 (EAT-DA) will be deprecated and replaced by use of element 44260 (DA evidence log). The exact type of the latter is TBC.
+Note 2: If the outstanding DAT Engineering Change Notice (ECN) determines that the DAT is to be removed, element 44252 (EAT-DA) will be deprecated and replaced by use of element 44260 (DA evidence log). The exact type of the latter is TBC.
 
 Note 3: it is TBC whether it is sufficient to have a common CMW element for certificate chains that distinguishes the actual format by type alone, rather than having distinct elements for the formats.
 
