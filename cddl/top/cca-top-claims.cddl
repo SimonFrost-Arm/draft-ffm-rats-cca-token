@@ -1,16 +1,133 @@
-; CMW (draft-ietf-rats-msg-wrap) Collection
-cca-token = #6.907(cca-token-cmw)
+;# import rfc9052
 
-; CoAP Content-Format for "application/eat+cwt"
-eat-cwt-coap-cf = 263
+; CBOR-tagged CMW Collection, see draft-ietf-rats-msg-wrap
+cca-token = #6.907(cca-token-CMW)
 
-cca-token-cmw = {
-  0xACCA => [
-    eat-cwt-coap-cf
-    bytes .cbor COSE_Sign1<arm-platform-claims>
-  ]
-  0xACD1 => [
-    eat-cwt-coap-cf
-    bytes .cbor COSE_Sign1<cca-realm-claims>
-  ]
+; coap types
+coap-octet-stream-label = 42                                   ; application/octet-stream
+eat-cwt-coap-label = 263                            ; application/eat+cwt
+eat-uccs-coap-label = 601                           ; application/uccs+cbor
+cert-chain-coap-label = 900                         ; application/pkix-pkipath      LABEL-TBD
+cert-chain-with-evidence-coap-label = 901           ; application/dice-chain      LABEL-TBD
+tcg-event-log-coap-label = 902                      ; application/tcg-event-log  - type does not currently exist      LABEL-TBD
+tcg-canonical-event-log-coap-label = 903            ; application/tcg-canonical-log  - type does not currently exist      LABEL-TBD
+cc-event-log-coap-label = 904                       ; application/confidential-compute-event-log  - type does not currently exist      LABEL-TBD
+
+
+; CMW collection entry labels
+cca-platform-token-label = 44234
+cca-realm-delegated-token-label = 44241
+cca-realm-direct-token-label = 44251
+cca-platform-selective-device-evidence-label = 44252
+cca-platform-comprehensive-device-evidence-label =  44253
+cca-platform-cpak-cert-chain-label = 44254
+cca-platform-cpak-cert-chain-with-evidence-label = 44255    ; placeholder: type selection within cert chain element may be sufficient
+cca-platform-firmware-activity-log-label = 44256
+cca-device-token-label = 44258      ; placeholder until DAT ECN resolved
+cca-platform-selective-device-log-label = 44260
+confidential-compute-service-recipe-file-label = 44261
+cca-realm-vmm-construction-log-label = 44262
+discrete-TPM-quote-label = 44263
+
+; EAT entries
+EAT_CWT = (
+    bstr .cbor  COSE_Sign1_Tagged
+)
+
+; Common CMW element definition for EAT (signed) tokens
+CMW-CWT-element = (
+    [
+        eat-cwt-coap-label,
+        EAT_CWT
+    ]
+)
+
+; EAT non CWT (unsigned)
+CMW-EAT-claimset = (
+    [
+        eat-uccs-coap-label,         ; consider using a new type for EAT-CBOR-Untagged-Token 
+        bstr                         ; placeholder for bstr .cbor EAT-CBOR-Untagged-Token when available as cddlc include
+    ]
+)
+
+
+; CMW element used to carry Realm claims when the Direct Attestation model is implemented
+CMW-realm-direct-element = CMW-EAT-claimset
+
+; CMW element used to carry Device Assignment evidence using draft-poirier-rats-eat-da
+; Current use case for this element is holding evidence for Comprehensive Trust devices
+CMW-device-EAT-evidence-element = CMW-EAT-claimset
+
+; CMW element used to carry the Device Assignment evidence for Selective Trust devices
+; The format of this log is TBD, so using generic stream placeholder until this is resolved
+CMW-device-log-evidence-element = (
+    [
+        coap-octet-stream-label,
+        bstr
+    ]
+)
+
+; CMW element used to carry the Firmware Activation Log. Currently there are multiple possibilities for the format
+FAL-format-choices /= coap-octet-stream-label / tcg-event-log-coap-label / tcg-canonical-event-log-coap-label / cc-event-log-coap-label
+CMW-FAL-evidence-element = (
+    [
+        FAL-format-choices,
+        bstr
+    ]
+)
+
+; CMW element that can be used to provide any certificate elements not included in Platform token signing headers
+CMW-cert-chain-evidence-element = (
+    [
+        cert-chain-coap-label // cert-chain-with-evidence-coap-label,
+        bstr
+    ]
+)
+
+; placeholder for future work relating to including VMM 'recipe' files e.g. IGVM to assist workload verification
+CMW-recipe-file-evidence-element = (
+    [
+       coap-octet-stream-label
+       bstr
+    ]
+)
+
+; placeholder for future work
+; potential exists to collapse all log element definitions into a common log-element
+VMM-log-format-choices /= coap-octet-stream-label
+CMW-VMM-log-evidence-element = (
+    [
+        VMM-log-format-choices,
+        bstr
+    ]
+)
+
+; CMW element that can be used to provide a Quote received from the host's Discrete TPM
+CMW-discrete-tpm-quote-element = (
+    [
+        coap-octet-stream-label,
+        bstr
+    ]
+)
+
+; the realm token has a different claim set depending upon the attestation model implemented
+cca-realm-token-models =  (
+    cca-realm-delegated-token-label => CMW-CWT-element 
+    // cca-realm-direct-token-label => CMW-realm-direct-element
+)
+
+cca-token-CMW = {
+    cca-platform-token-label =>  CMW-CWT-element
+    cca-realm-token-models
+    ? cca-platform-firmware-activity-log-label => CMW-FAL-evidence-element
+    ? cca-platform-selective-device-evidence-label =>  CMW-device-EAT-evidence-element
+    ? cca-platform-selective-device-log-label =>  CMW-device-log-evidence-element
+    ? cca-platform-comprehensive-device-evidence-label =>  CMW-device-EAT-evidence-element
+    ? cca-platform-cpak-cert-chain-label => CMW-cert-chain-evidence-element
+    ? confidential-compute-service-recipe-file-label => CMW-recipe-file-evidence-element
+    ? cca-realm-vmm-construction-log-label => CMW-VMM-log-evidence-element
+    ? discrete-TPM-quote-label => CMW-discrete-tpm-quote-element
+
 }
+
+
