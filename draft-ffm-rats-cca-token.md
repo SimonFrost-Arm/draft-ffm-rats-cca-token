@@ -372,7 +372,7 @@ or additional elements relevant to the workload, for example evidence relating t
 ## CCA Attestation Token construction
 {: #sec-cca-token-collection-construction}
 The CCA RMM and HES will collaborate to produce the base CMW collection containing the platform and realm tokens.
-Where additional tokens need to be added to provide additional TCB elements, these tokens will either 
+Where additional tokens need to be added to provide additional TCB elements, these tokens will either
 
 * have been prepared as a result of host to RMM collaborations and be stored in the host
 * be prepared by Realm guest code
@@ -521,7 +521,6 @@ The claims used vary by profile version and attestation model implemented as out
 * Attestation Model: Delegated attestation, with the RAK kept within the HES
 * Binding Claim: arm-platform-workload-binding
 * Claim Value: H(RAK public)
-* Note: for this attestation model, the PAT also contains an eat_nonce claim with the value equal to the CCA Realm challenge claim.
 
 #### Profile tag:arm.com,2026:cca_platform#2.1.0
 {: #prof-bind-211}

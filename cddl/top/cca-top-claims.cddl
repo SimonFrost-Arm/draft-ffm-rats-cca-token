@@ -45,7 +45,7 @@ CMW-CWT-element = (
 ; EAT non CWT (unsigned)
 CMW-EAT-claimset = (
     [
-        eat-uccs-coap-label,         ; consider using a new type for EAT-CBOR-Untagged-Token 
+        eat-uccs-coap-label,         ; consider using a new type for EAT-CBOR-Untagged-Token
         bstr                         ; placeholder for bstr .cbor EAT-CBOR-Untagged-Token when available as cddlc include
     ]
 )
@@ -112,7 +112,7 @@ CMW-discrete-tpm-quote-element = (
 
 ; the realm token has a different claim set depending upon the attestation model implemented
 cca-realm-token-models =  (
-    cca-realm-delegated-token-label => CMW-CWT-element 
+    cca-realm-delegated-token-label => CMW-CWT-element
     // cca-realm-direct-token-label => CMW-realm-direct-element
 )
 
