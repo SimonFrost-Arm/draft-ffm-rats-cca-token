@@ -379,8 +379,8 @@ Where additional tokens need to be added to provide additional TCB elements, the
 
 Any elements added to the token collection MUST have a security binding to a controlling layer.
 
-Where Realm code is responsible for preparing or obtaining additional evidence it needs to perform the following steps
-to add that evidence as an additional element to the attestation token:
+Where Realm code is responsible for preparing or obtaining additional evidence, it is responsible for
+adding that evidence as an additional element to the attestation token by performing the following steps:
 
 * Prepare a CMW 'cbor-collection'{{CMW}} for the element. This consists of a labelled CBOR array containing an appropriate coap-content-format-type and the evidence converted to a cbor bstr.
 * Increment the number of elements in the CBOR map that holds the CCA Attestation token.
