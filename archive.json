@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-13T05:33:52.360943+00:00",
+  "timestamp": "2026-10-15T03:17:36.673872+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -5371,6 +5371,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 66,
+      "id": "PR_kwDOMRXjbM8AAAABIW71yg",
+      "title": "Improve description and CDDL for top level CMW",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/66",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-10-14T09:37:18Z",
+      "updatedAt": "2026-10-14T09:46:52Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "eaa18f81446b4dbfdb8e74322e6cca9ff29d94da",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "cmw-rework",
+      "headRefOid": "2d0e947aad9c96b38ae405aa579d99237c4654b3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
