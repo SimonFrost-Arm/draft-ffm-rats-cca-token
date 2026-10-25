@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-15T03:17:36.673872+00:00",
+  "timestamp": "2026-10-25T03:17:15.345003+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -5384,19 +5384,93 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-10-14T09:37:18Z",
-      "updatedAt": "2026-10-14T09:46:52Z",
+      "updatedAt": "2026-10-22T09:56:06Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "eaa18f81446b4dbfdb8e74322e6cca9ff29d94da",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "cmw-rework",
-      "headRefOid": "2d0e947aad9c96b38ae405aa579d99237c4654b3",
+      "headRefOid": "5ab4c31077a310a4a8135cbf2dc0034f3c8a89ea",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABToT7lw",
+          "commit": {
+            "abbreviatedOid": "5ab4c31"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-22T09:48:56Z",
+          "updatedAt": "2026-10-22T09:48:56Z",
+          "comments": [
+            {
+              "originalPosition": 49,
+              "body": "```suggestion\nWhere Realm code is responsible for preparing or obtaining additional evidence and to add it as an additional element to the attestation token, it needs to perform the following steps\n```",
+              "createdAt": "2026-10-22T09:48:56Z",
+              "updatedAt": "2026-10-22T09:49:21Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABToUVmw",
+          "commit": {
+            "abbreviatedOid": "5ab4c31"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-22T09:49:30Z",
+          "updatedAt": "2026-10-22T09:49:30Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "```suggestion\n\n```",
+              "createdAt": "2026-10-22T09:49:30Z",
+              "updatedAt": "2026-10-22T09:49:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABToVvNg",
+          "commit": {
+            "abbreviatedOid": "5ab4c31"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-22T09:51:32Z",
+          "updatedAt": "2026-10-22T09:51:32Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "I checked the entire document, could not find reference to how ECN is expanded and what it refers to..?\n\nCould you please add this to the first use of this term.",
+              "createdAt": "2026-10-22T09:51:32Z",
+              "updatedAt": "2026-10-22T09:51:32Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABToZQCw",
+          "commit": {
+            "abbreviatedOid": "5ab4c31"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "LGTM, Have left few minor comments to have a look at!",
+          "createdAt": "2026-10-22T09:56:06Z",
+          "updatedAt": "2026-10-22T09:56:06Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
