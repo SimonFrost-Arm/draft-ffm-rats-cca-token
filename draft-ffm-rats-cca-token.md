@@ -313,7 +313,7 @@ A reference implementation of the CCA Attester is provided by {{TF-RMM}}.
 
 This section describes the claims to be used in a CCA reference attestation token.
 
-There are two logical sections within the CCA attestation token, relating to the two
+There are two logical sections within the CCA attestation token that will always be present, relating to the two
 Target Environment elements:
 
 * The CCA Platform token
@@ -322,6 +322,8 @@ Target Environment elements:
 
 The two sections use inter-related claims to bind together into a single logical unit.
 See {{sec-security-consideration}} for more details.
+
+The CCA attestation token may also contain further optional evidence sections depending upon the implementation and deployment choices.
 
 The above tokens are presented to the requester within a top level Conceptual Message Wrapper (CMW) collection {{CMW}}.
 
@@ -351,10 +353,11 @@ claims:
 The above tokens are presented to the requester within a top level CMW collection {{CMW}}.
 The collection map has two core entries, one for a bstr encoding of the CCA Platform token and
 the other for a bstr encoding of the Realm state token.
-The type of the CMW entry will vary for the Realm state token depending on whether
+The CMW collection entry will vary for the Realm state token depending on whether
 the delegated or direct attestation model is used by an implementation.
 
-Depending upon the features within a CCA implementation there may be additional entries within the CMW.
+Depending upon the features within a CCA implementation there may be additional entries within the CMW corresponding to additional layers of evidence.
+
 These can include:
 
 * A Firmware Activity List (FAL), used to support verification of the effect of Live Firmware Activation on the CCA Platform {{sec-live-firmware-activation}}.
@@ -362,6 +365,61 @@ These can include:
 * Selective Device Token - contains evidence obtained from selectively assigned devices {{sec-device-token-selective}}.
 * Comprehensive Device Token - contains evidence obtained from comprehensively trusted devices {{sec-device-token-comp}}.
 * Certificate Chain information optionally included to support an inline leaf endorsement certificate {{sec-signing-keys}}.
+
+An implementation can choose to add additional elements relevant to the implementation, for example extensions to the realm TCB
+or additional elements relevant to the workload, for example evidence relating to the TCB across multiple planes.
+
+## CCA Attestation Token construction
+{: #sec-cca-token-collection-construction}
+The CCA RMM and HES will collaborate to produce the base CMW collection containing the platform and realm tokens.
+Where additional tokens need to be added to provide additional TCB elements, these tokens will either
+
+* have been prepared as a result of host to RMM collaborations and be stored in the host
+* be prepared by Realm guest code
+
+Any elements added to the token collection MUST have a security binding to a controlling layer.
+
+Where Realm code is responsible for preparing or obtaining additional evidence, it is responsible for
+adding that evidence as an additional element to the attestation token by performing the following steps:
+
+* Prepare a CMW 'cbor-collection'{{CMW}} for the element. This consists of a labelled CBOR array containing an appropriate coap-content-format-type and the evidence converted to a cbor bstr.
+* Increment the number of elements in the CBOR map that holds the CCA Attestation token.
+* Concatenate the new cbor-record to the original CCA Attestation token.
+
+Note that a command line tool to accomplish the above is in preparation, see https://github.com/veraison/cmw/issues/30.
+
+## CCA Attestation Token Collection Element Registration
+{: #sec-cca-token-collection-element-registration}
+
+The following table captures the CMW cbor collection element labels and potential types supported by this profile.
+
+| Label | Description | CoAP Type | Note |
+| 44234 | CCA Platform Token | eat-cwt-coap-label | |
+| 44241 | CCA Realm Token (delegated model) | eat-cwt-coap-label | |
+| 44251 | CCA Realm Token (direct model) | eat-uccs-coap-label | |
+| 44256 | CCA Platform Firmware Activity Log | TBC | Note 1 |
+| 44258 | CCA Realm Device Token | eat-uccs-coap-label | Placeholder until DAT ECN resolved |
+| 44252 | CCA Realm Selective Device Evidence | eat-uccs-coap-label | EAT-DA - Note 2 |
+| 44253 | CCA Realm Comprehensive Device Evidence | eat-uccs-coap-label | EAT-DA |
+| 44254 | CCA Platform CPAK Cert Chain | cert-chain-coap-label or cert-chain-with-evidence-coap-label | Note 3 |
+| 44255 | CCA Platform CPAK Cert Chain | | Placeholder: type selection within cert chain element may be sufficient |
+| 44260 | CCA Realm Selective Device Log | coap-octet-stream-label | Note 2 |
+| 44261 | Confidential Compute Service Recipe File | coap-octet-stream-label | Note 4 |
+| 44262 | CCA Realm VMM Construction Log | coap-octet-stream-label | Note 4 |
+| 44263 | Discrete TPM quote | coap-octet-stream-label | Note 4 |
+{: #tbl-collection-labels title="Supported CMW collection element labels"}
+
+### CCA Attestation Token Collection Element Registration Notes
+{: #sec-cca-token-collection-element-registration-notes}
+
+Note 1: multiple FAL types are possible depending on implementation. As an example, the type may be the generic coap-octet-stream-label or a more specific type that targets a particular log format. Examples of these might be the (currently unregistered) / tcg-event-log-coap-label / tcg-canonical-event-log-coap-label / cc-event-log-coap-label.
+
+Note 2: If the outstanding DAT Engineering Change Notice (ECN) determines that the DAT is to be removed, element 44252 (EAT-DA) will be deprecated and replaced by use of element 44260 (DA evidence log). The exact type of the latter is TBC.
+
+Note 3: it is TBC whether it is sufficient to have a common CMW element for certificate chains that distinguishes the actual format by type alone, rather than having distinct elements for the formats.
+
+Note 4: this is a placeholder for future work, actual type (or types) possible for this element are TBC.
+
 
 ~~~
 {::include cddl/top/cca-top-claims.cddl}
@@ -463,7 +521,6 @@ The claims used vary by profile version and attestation model implemented as out
 * Attestation Model: Delegated attestation, with the RAK kept within the HES
 * Binding Claim: arm-platform-workload-binding
 * Claim Value: H(RAK public)
-* Note: for this attestation model, the PAT also contains an eat_nonce claim with the value equal to the CCA Realm challenge claim.
 
 #### Profile tag:arm.com,2026:cca_platform#2.1.0
 {: #prof-bind-211}
@@ -966,6 +1023,26 @@ The CCA platform verification service indicator claim is OPTIONAL in a CCA platf
 The CCA Realm state token contains claims that represent the Target Environment
 that is the Realm that requested the attestation report.
 
+### CCA Realm Claims - Delegated Attestation Model
+{: #sec-cca-realm-claims-delegated}
+
+The Realm state claims for the delegated attestation model are as follows.
+These claims will also be used for the HESRAK attestation model.
+
+~~~
+{::include cddl/realm/cca-realm-claims.cddl}
+~~~
+
+
+### CCA Realm Claims - Direct Attestation Model
+{: #sec-cca-realm-claims-direct}
+
+The Realm state claims for the direct attestation model are as follows.
+
+~~~
+{::include cddl/realm/cca-realm-claims-direct.cddl}
+~~~
+
 ### CCA Realm Challenge
 {: #sec-cca-realm-challenge-claim}
 
@@ -1304,6 +1381,21 @@ can be packaged in an additional entry within the RATS Conceptual Messages Wrapp
 # CCA Attestation Token Verification
 {: #sec-attestation-token-verification}
 
+## CCA Attestation Token Lead Verification
+{: #sec-attestation-platform-lead-verification}
+
+The lead verifier for the CCA Attestation token will need to determine what optional components are
+included in the CMW collection beyond the base CCA Platform and CCA Realm tokens.
+To that end it should scan the collection entries and determine which components require individual verification
+or dispatch to specific verification function by virtue of the CMW labels used and types declared for those labels.
+The lead verifier will also need to determine how to satisfy binding checks required between elements.
+This may be done by extracting binding data from the results of a verification on an individual element to be
+passed as input to the verification of a further element or performing binding checks from the verification results
+of multiple elements.
+
+## CCA Attestation Platform Token Verification
+{: #sec-attestation-platform-token-verification}
+
 To verify the token for the reference profile, the initial need is to check correct
 encoding for the token. Primary trust is established by checking the signing of
 the CCA Platform token CWT.
@@ -1319,25 +1411,25 @@ the ID claims may not be required to verify the CPAK. Instead this is achieved
 by forming a full X.509 chain to the trusted Certificate Authority root and
 validating that chain.
 
-Additional validation checks on the token are:
+## CCA Attestation Token Additional Verification
+{: #sec-attestation-token--additional-verification}
+
+Additional validation checks on the CCA attestation token are:
 
 * Checking that the binding between the CCA Platform token and the Realm state
 token is valid {{sec-token-binding}}. This has the side effect of establishing
 the trustworthiness of the RAK public key.
 * Validating that the Realm state token is correctly signed by the RAK.
-* Checking that the value of the {{sec-security-lifecycle}} claim is cca-platform-lifecycle-secured state. Note
-that some other values of this claim (cca-platform-lifecycle-non-psa-rot-debug and
-cca-platform-lifecycle-recoverable-psa-rot states) may indicate that the attester
-is only temporarily unsuitable and the verifier may choose the to indicate
-this as a contraindication rather than a full verification failure. See discussion
-of the CCA platform lifecycle in {{RMM}}.
 
 The Verifier will typically operate a policy where values of some
 of the claims in this profile can be compared to reference values, registered
 with the Verifier for a given deployment, in order to confirm that the device
 is endorsed by the manufacturer supply chain.  The policy may require that the
 relevant claims must have a match to a registered reference value.  All claims
-may be worthy of additional appraisal.  It is likely that most deployments
+may be worthy of additional appraisal.
+See {{CCA-ENDORSEMENTS}} for more details on selecting the appropriate reference values.
+
+With reference to the Platform Token, it is likely that most deployments
 would include a policy with appraisal for the following claims:
 
 * Implementation ID - the value of the Implementation ID can be used to
@@ -1347,11 +1439,21 @@ would include a policy with appraisal for the following claims:
   maintain a record for a series of firmware releases, being patches to an
   original baseline release. A verification policy may then allow this value to
   match any point on that release sequence or expect some minimum level of
-  maturity related to the sequence.
+  maturity related to the sequence. Note that measurement values in this claim are an
+  extension of an initial value of 0.
 * Software Component, Signer ID - where present in a deployment, this could
   allow a Verifier to operate a more general policy than that for Measurement
   Value as above, by allowing a token to contain any firmware entries signed by
   a known Signer ID, without checking for a uniquely registered version.
+* Checking that the value of the {{sec-security-lifecycle}} claim is cca-platform-lifecycle-secured state. Note
+that some other values of this claim (cca-platform-lifecycle-non-psa-rot-debug and
+cca-platform-lifecycle-recoverable-psa-rot states) may indicate that the attester
+is only temporarily unsuitable and the verifier may choose the to indicate
+this as a contraindication rather than a full verification failure. See discussion
+of the CCA platform lifecycle in {{RMM}}.
+* Confirming that the implemented System Properties reported in the Platform Config claim
+{{sec-platform-config}} provide the required security features.
+* Ensuring that the Platform Attestation was produced by the Realm security domain by checking the Platform Client ID has the value arm-platform-client-id-rmsd {{sec-arm-platform-client-id}}.
 
 ### Live Firmware Activation (LFA)
 {: #sec-live-firmware-activation}
@@ -1481,8 +1583,8 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 
 ### Arm CCA Attestation CMW
 
-* Claim Name: arm-cca-attestation-cmw
-* Claim Description: Arm CCA Attestation CMW
+* Claim Name: arm-cca-attestation-cmw-collection
+* Claim Description: Arm CCA Attestation CMW Collection
 * JWT Claim Name: N/A
 * Claim Key: 907
 * Claim Value Type(s): map
@@ -1609,16 +1711,6 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-platform-workload-binding-claim}} of {{&SELF}}
 
-### CCA Token Platform Token Label
-
-* Claim Name: cca-platform-token-label
-* Claim Description: CCA Token Platform Token Label
-* JWT Claim Name: N/A
-* Claim Key: 44234
-* Claim Value Type(s): byte string
-* Change Controller: iana-request@arm.com
-* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
-
 ### Realm Personalization Value Claim
 
 * Claim Name: cca-realm-personalization-value
@@ -1709,16 +1801,6 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 * Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-realm-devices-token-hash}} of {{&SELF}}
 
-
-### CCA Token Delegated Realm Token Label
-
-* Claim Name: cca-platform-delegated-realm-label
-* Claim Description: CCA Token Platform Token Label
-* JWT Claim Name: N/A
-* Claim Key: 44241
-* Claim Value Type(s): byte string
-* Change Controller: iana-request@arm.com
-* Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
 
 
 ## Media Types
