@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 25 April 2027                                            Linaro
+Expires: 29 April 2027                                            Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                         22 October 2026
+                                                         26 October 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 25 April 2027.
+   This Internet-Draft will expire on 29 April 2027.
 
 Copyright Notice
 
@@ -556,8 +556,8 @@ Table of Contents
    binding to a controlling layer.
 
    Where Realm code is responsible for preparing or obtaining additional
-   evidence it needs to perform the following steps to add that evidence
-   as an additional element to the attestation token:
+   evidence, it is responsible for adding that evidence as an additional
+   element to the attestation token by performing the following steps:
 
    *  Prepare a CMW 'cbor-collection'[CMW] for the element.  This
       consists of a labelled CBOR array containing an appropriate coap-
@@ -646,10 +646,10 @@ Table of Contents
    of these might be the (currently unregistered) / tcg-event-log-coap-
    label / tcg-canonical-event-log-coap-label / cc-event-log-coap-label.
 
-   Note 2: If the outstanding DAT ECN determines that the DAT is to be
-   removed, element 44252 (EAT-DA) will be deprecated and replaced by
-   use of element 44260 (DA evidence log).  The exact type of the latter
-   is TBC.
+   Note 2: If the outstanding DAT Engineering Change Notice (ECN)
+   determines that the DAT is to be removed, element 44252 (EAT-DA) will
+   be deprecated and replaced by use of element 44260 (DA evidence log).
+   The exact type of the latter is TBC.
 
    Note 3: it is TBC whether it is sufficient to have a common CMW
    element for certificate chains that distinguishes the actual format
