@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-25T03:17:15.345003+00:00",
+  "timestamp": "2026-10-27T03:47:20.568189+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -5377,24 +5377,26 @@
       "id": "PR_kwDOMRXjbM8AAAABIW71yg",
       "title": "Improve description and CDDL for top level CMW",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/66",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SimonFrost-Arm",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-10-14T09:37:18Z",
-      "updatedAt": "2026-10-22T09:56:06Z",
+      "updatedAt": "2026-10-26T14:41:42Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "eaa18f81446b4dbfdb8e74322e6cca9ff29d94da",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "cmw-rework",
-      "headRefOid": "5ab4c31077a310a4a8135cbf2dc0034f3c8a89ea",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "0fde79edea8b3e6ef7687b7394e5c2f3b4a4d1d8",
+      "closedAt": "2026-10-26T14:41:36Z",
+      "mergedAt": "2026-10-26T14:41:36Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "4832924a9c05fa8e0830c3963d57ea26aa456a13"
+      },
       "comments": [],
       "reviews": [
         {
@@ -5469,6 +5471,26 @@
           "createdAt": "2026-10-22T09:56:06Z",
           "updatedAt": "2026-10-22T09:56:06Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABUPmrlw",
+          "commit": {
+            "abbreviatedOid": "5ab4c31"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-10-26T14:23:01Z",
+          "updatedAt": "2026-10-26T14:23:01Z",
+          "comments": [
+            {
+              "originalPosition": 50,
+              "body": "Added slight rewording from the suggestion",
+              "createdAt": "2026-10-26T14:23:01Z",
+              "updatedAt": "2026-10-26T14:23:01Z"
+            }
+          ]
         }
       ]
     }
