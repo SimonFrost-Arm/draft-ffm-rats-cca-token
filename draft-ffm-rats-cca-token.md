@@ -86,6 +86,22 @@ normative:
     -: cose
     =: RFC9052
   COSE-ALGS: RFC9053
+  EAT: I-D.ietf-rats-eat
+  EAT-MEDIATYPES: I-D.ietf-rats-eat-media-type
+  CMW: I-D.draft-ietf-rats-msg-wrap
+
+
+informative:
+  I-D.kdyxy-rats-tdx-eat-profile:
+  I-D.mandyam-rats-qwestoken:
+  COSE-X509: RFC9360
+  RFC9334:
+  IANA-CoAP-Content-Formats:
+    author:
+      org: IANA
+    title: CoAP Content-Formats
+    target: https://www.iana.org/assignments/core-parameters#content-formats
+    date: 2022
   IANA-CWT:
     author:
       org: IANA
@@ -104,22 +120,6 @@ normative:
     title: Media Types
     target: https://www.iana.org/assignments/media-types
     date: 2026
-  EAT: I-D.ietf-rats-eat
-  EAT-MEDIATYPES: I-D.ietf-rats-eat-media-type
-  CMW: I-D.draft-ietf-rats-msg-wrap
-
-
-informative:
-  I-D.kdyxy-rats-tdx-eat-profile:
-  I-D.mandyam-rats-qwestoken:
-  COSE-X509: RFC9360
-  RFC9334:
-  IANA-CoAP-Content-Formats:
-    author:
-      org: IANA
-    title: CoAP Content-Formats
-    target: https://www.iana.org/assignments/core-parameters
-    date: 2022
   TF-RMM:
     author:
       org: Trusted Firmware Project
@@ -398,7 +398,7 @@ adding that evidence as an additional element to the attestation token by perfor
 * Increment the number of elements in the CBOR map that holds the CCA Attestation token.
 * Concatenate the new cbor-record to the original CCA Attestation token.
 
-Note that a command line tool to accomplish the above is in preparation, see https://github.com/veraison/cmw/issues/30.
+Note that a command line tool to accomplish the above is in preparation, see https://github.com/veraison/cmwcli.
 
 ## CCA Attestation Token Collection Element Registration
 {: #sec-cca-token-collection-element-registration}
@@ -1585,14 +1585,8 @@ keys.
 
 ## CBOR Tag Claims Registration
 
-IANA is requested to allocate the following tags in the "CBOR Tags" registry [IANA-CBOR],
+IANA is requested to allocate the following tags in the "CBOR Tags" registry {{IANA-CBOR}},
 preferably with the specific CBOR tag value requested:
-
-## CBOR Web Token Claims Registration
-
-IANA is requested to allocate the following tags in the "CBOR Web Token (CWT) Claims" registry [IANA-CWT],
-preferably with the specific CBOR tag value requested.
-Some of these claims have been already assigned via early allocation.
 
 ### Arm CCA Attestation CMW
 
@@ -1603,6 +1597,13 @@ Some of these claims have been already assigned via early allocation.
 * Claim Value Type(s): map
 * Change Controller: iana-request@arm.com
 * Specification Document(s): {{sec-cca-token-collection}} of {{&SELF}}
+
+
+## CBOR Web Token Claims Registration
+
+IANA is requested to allocate the following CWT claims in the "CBOR Web Token (CWT) Claims" registry {{IANA-CWT}},
+preferably with the specific CBOR tag value requested.
+Some of these claims have been already assigned via early allocation.
 
 ### Security Lifecycle Claim
 
@@ -1819,16 +1820,16 @@ Some of these claims have been already assigned via early allocation.
 ## Media Types
 {: #sec-iana-media-types}
 
-IANA is requested to add the following media type to the "Media Types" registry [IANA-MEDIATYPES].
+IANA is requested to add the following media type to the "Media Types" registry {{IANA-MEDIATYPES}}.
 
 ###  application/vnd.arm.cca
 
    Type name:  application
-   Subtype name:  vnd.arm.cca
+   Subtype name:  vnd.arm.cca+cbor
    Required parameters:  n/a
    Optional parameters:  n/a
    Encoding considerations:  binary
-   Security considerations:  Section 9 of RFCthis
+   Security considerations:  {{sec-security-consideration}} of {{&SELF}}
    Interoperability considerations:  n/a
    Published specification:  RFCthis
    Applications that use this media type:  Attestation Verifiers, Attesters producing Arm CCA evidence.
@@ -1838,8 +1839,8 @@ IANA is requested to add the following media type to the "Media Types" registry 
    Person and email address to contact for further information: iana-request@arm.com
    Intended usage:  COMMON
    Restrictions on usage:  none
-   Author/Change controller:  IETF
-   Provisional registration?  Maybe
+   Author/Change controller:  iana-request@arm.com
+   Provisional registration?  No
 
 ## CoAP Content-Formats Registration
 {: #sec-iana-coap-content-format}
@@ -1847,10 +1848,9 @@ IANA is requested to add the following media type to the "Media Types" registry 
 IANA is requested to register a CoAP Content-Format ID in the "CoAP
 Content-Formats" registry {{IANA-CoAP-Content-Formats}}:
 
-* A registration for the `application/eat+cwt` media type with the `eat_profile` parameter
-  equal to "tag:arm.com,2023:cca_platform#1.0.0"
+* A registration for the `application/vnd.arm.cca+cbor` media type
 
-The Content-Formats should be allocated from the Expert review range (0-255).
+The Content-Formats should be allocated from the Expert review range (10000-19999).
 
 --- back
 
