@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 2 April 2027                                             Linaro
+Expires: 2 May 2027                                               Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                       29 September 2026
+                                                         29 October 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 April 2027.
+   This Internet-Draft will expire on 2 May 2027.
 
 Copyright Notice
 
@@ -73,91 +73,98 @@ Table of Contents
      3.4.  Run-time Phase
    4.  CCA Claims
      4.1.  CCA Attestation Token top level wrapper
-     4.2.  CCA Platform token Claims
-     4.3.  Caller Claims
-       4.3.1.  CCA Platform Workload Binding
-       4.3.2.  CCA Platform Challenge
-       4.3.3.  Platform to Realm Binding compatibility
-     4.4.  Target Identification Claims
-       4.4.1.  CCA Platform Instance ID
-       4.4.2.  CCA Platform Implementation ID
-     4.5.  Target State Claims
-       4.5.1.  CCA Platform Profile Definition
-       4.5.2.  Security Lifecycle
-       4.5.3.  Platform Config
-       4.5.4.  Platform Manufacturing Config
-     4.6.  Software Inventory Claims
-       4.6.1.  Software Components
-       4.6.2.  CCA Platform Hash Algorithm ID
-       4.6.3.  CCA Platform Client ID
-       4.6.4.  CCA Platform Manufacturing Config
-       4.6.5.  CCA Platform Extension
-       4.6.6.  CCA Platform Peer Signers
-       4.6.7.  CCA Platform Discrete TPM Binding Data
-       4.6.8.  CCA Platform TBB ROTPK
-     4.7.  Verification Claims
-       4.7.1.  Verification Service Indicator
-     4.8.  CCA Realm state token Claims
-       4.8.1.  CCA Realm Challenge
-       4.8.2.  Realm Profile Definition
-       4.8.3.  Realm Personalisation Value
-       4.8.4.  Realm Initial Measurement
-       4.8.5.  Realm Extensible Measurements
-       4.8.6.  Realm Hash Algorithm Measurements
-       4.8.7.  Realm Public Key
-       4.8.8.  Realm Public Key Hash Algorithm ID
-       4.8.9.  Realm MEC Policy
-       4.8.10. Realm LFA Policy
-       4.8.11. Realm Instance ID
-       4.8.12. Realm Devices Token Hash
-     4.9.  Device Token
-       4.9.1.  Selectively Assigned Devices Token
-       4.9.2.  Comprehensive Trust Devices Token
-     4.10. Token Binding
-     4.11. Reference Profile
-       4.11.1.  Token Encoding and Signing
-       4.11.2.  Freshness Model
-       4.11.3.  Synopsis
+     4.2.  CCA Attestation Token construction
+     4.3.  CCA Attestation Token Collection Element Registration
+       4.3.1.  CCA Attestation Token Collection Element Registration
+               Notes
+     4.4.  CCA Platform token Claims
+     4.5.  Caller Claims
+       4.5.1.  CCA Platform Workload Binding
+       4.5.2.  CCA Platform Challenge
+       4.5.3.  Platform to Realm Binding compatibility
+     4.6.  Target Identification Claims
+       4.6.1.  CCA Platform Instance ID
+       4.6.2.  CCA Platform Implementation ID
+     4.7.  Target State Claims
+       4.7.1.  CCA Platform Profile Definition
+       4.7.2.  Security Lifecycle
+       4.7.3.  Platform Config
+       4.7.4.  Platform Manufacturing Config
+     4.8.  Software Inventory Claims
+       4.8.1.  Software Components
+       4.8.2.  CCA Platform Hash Algorithm ID
+       4.8.3.  CCA Platform Client ID
+       4.8.4.  CCA Platform Manufacturing Config
+       4.8.5.  CCA Platform Extension
+       4.8.6.  CCA Platform Peer Signers
+       4.8.7.  CCA Platform Discrete TPM Binding Data
+       4.8.8.  CCA Platform TBB ROTPK
+     4.9.  Verification Claims
+       4.9.1.  Verification Service Indicator
+     4.10. CCA Realm state token Claims
+       4.10.1.  CCA Realm Claims - Delegated Attestation Model
+       4.10.2.  CCA Realm Claims - Direct Attestation Model
+       4.10.3.  CCA Realm Challenge
+       4.10.4.  Realm Profile Definition
+       4.10.5.  Realm Personalisation Value
+       4.10.6.  Realm Initial Measurement
+       4.10.7.  Realm Extensible Measurements
+       4.10.8.  Realm Hash Algorithm Measurements
+       4.10.9.  Realm Public Key
+       4.10.10. Realm Public Key Hash Algorithm ID
+       4.10.11. Realm MEC Policy
+       4.10.12. Realm LFA Policy
+       4.10.13. Realm Instance ID
+       4.10.14. Realm Devices Token Hash
+     4.11. Device Token
+       4.11.1.  Selectively Assigned Devices Token
+       4.11.2.  Comprehensive Trust Devices Token
+     4.12. Token Binding
+     4.13. Reference Profile
+       4.13.1.  Token Encoding and Signing
+       4.13.2.  Freshness Model
+       4.13.3.  Synopsis
    5.  Collated CDDL
    6.  Signing key implementation alternatives
    7.  CCA Attestation Token Verification
-     7.1.  Live Firmware Activation (LFA)
-       7.1.1.  Introduction
-       7.1.2.  Live Firmware Activation Verification
-     7.2.  AR4SI Trustworthiness Claims Mappings
-     7.3.  Endorsements, Reference Values and Verification Key
+     7.1.  CCA Attestation Token Lead Verification
+     7.2.  CCA Attestation Platform Token Verification
+     7.3.  CCA Attestation Token Additional Verification
+       7.3.1.  Live Firmware Activation (LFA)
+       7.3.2.  Live Firmware Activation Verification
+     7.4.  AR4SI Trustworthiness Claims Mappings
+     7.5.  Endorsements, Reference Values and Verification Key
            Material
    8.  Implementation Status
    9.  Security and Privacy Considerations
    10. IANA Considerations
-     10.1.  CBOR Web Token Claims Registration
-       10.1.1.  Arm CCA Attestation CMW
-       10.1.2.  Security Lifecycle Claim
-       10.1.3.  Implementation ID Claim
-       10.1.4.  Software Components Claim
-       10.1.5.  Verification Service Indicator Claim
-       10.1.6.  Platform Config Claim
-       10.1.7.  Platform Hash Algorithm ID Claim
-       10.1.8.  Platform Manufacturing Config
-       10.1.9.  Platform Extension
-       10.1.10. Platform TBB RoTPK
-       10.1.11. Platform Peer Signers
-       10.1.12. Platform Device TPM Binding Data
-       10.1.13. Platform Workload Binding
-       10.1.14. CCA Token Platform Token Label
-       10.1.15. Realm Personalization Value Claim
-       10.1.16. Realm Hash Algorithm ID Claim
-       10.1.17. Realm Public Key Claim
-       10.1.18. Realm Initial Measurement Claim
-       10.1.19. Realm Extensible Measurements Claim
-       10.1.20. Realm Public Key Hash Algorithm ID Claim
-       10.1.21. Realm MEC Policy
-       10.1.22. Realm LFA Policy
-       10.1.23. Realm Devices Token Hash
-       10.1.24. CCA Token Delegated Realm Token Label
-     10.2.  Media Types
-     10.3.  CoAP Content-Formats Registration
-       10.3.1.  Registry Contents
+     10.1.  CBOR Tag Claims Registration
+     10.2.  CBOR Web Token Claims Registration
+       10.2.1.  Arm CCA Attestation CMW
+       10.2.2.  Security Lifecycle Claim
+       10.2.3.  Implementation ID Claim
+       10.2.4.  Software Components Claim
+       10.2.5.  Verification Service Indicator Claim
+       10.2.6.  Platform Config Claim
+       10.2.7.  Platform Hash Algorithm ID Claim
+       10.2.8.  Platform Manufacturing Config
+       10.2.9.  Platform Extension
+       10.2.10. Platform TBB RoTPK
+       10.2.11. Platform Peer Signers
+       10.2.12. Platform Device TPM Binding Data
+       10.2.13. Platform Workload Binding
+       10.2.14. Realm Personalization Value Claim
+       10.2.15. Realm Hash Algorithm ID Claim
+       10.2.16. Realm Public Key Claim
+       10.2.17. Realm Initial Measurement Claim
+       10.2.18. Realm Extensible Measurements Claim
+       10.2.19. Realm Public Key Hash Algorithm ID Claim
+       10.2.20. Realm MEC Policy
+       10.2.21. Realm LFA Policy
+       10.2.22. Realm Devices Token Hash
+     10.3.  Media Types
+       10.3.1.  application/vnd.arm.cca
+     10.4.  CoAP Content-Formats Registration
    11. References
      11.1.  Normative References
      11.2.  Informative References
@@ -348,7 +355,7 @@ Table of Contents
    The CCA Evidence produced with the direct model comprises a signed
    EAT for the platform token and an unsigned EAT for the realm token,
    wrapped in a CMW [CMW] collection.  The intra-collection binding is
-   detailed in Section 4.10.
+   detailed in Section 4.12.
 
    change addresses: Issue #16 (https://github.com/SimonFrost-Arm/draft-
    ffm-rats-cca-token/issues/16)
@@ -370,7 +377,7 @@ Table of Contents
    The CCA Evidence produced in delegated mode comprises two separately
    signed EATs, one for the platform, another for the realm, wrapped in
    a CMW [CMW] collection.  The intra-collection binding is detailed in
-   Section 4.10.
+   Section 4.12.
 
    TODO: Device Token
 
@@ -461,8 +468,9 @@ Table of Contents
    This section describes the claims to be used in a CCA reference
    attestation token.
 
-   There are two logical sections within the CCA attestation token,
-   relating to the two Target Environment elements:
+   There are two logical sections within the CCA attestation token that
+   will always be present, relating to the two Target Environment
+   elements:
 
    *  The CCA Platform token
 
@@ -470,6 +478,9 @@ Table of Contents
 
    The two sections use inter-related claims to bind together into a
    single logical unit.  See Section 9 for more details.
+
+   The CCA attestation token may also contain further optional evidence
+   sections depending upon the implementation and deployment choices.
 
    The above tokens are presented to the requester within a top level
    Conceptual Message Wrapper (CMW) collection [CMW].
@@ -498,59 +509,300 @@ Table of Contents
    The above tokens are presented to the requester within a top level
    CMW collection [CMW].  The collection map has two core entries, one
    for a bstr encoding of the CCA Platform token and the other for a
-   bstr encoding of the Realm state token.  The type of the CMW entry
+   bstr encoding of the Realm state token.  The CMW collection entry
    will vary for the Realm state token depending on whether the
    delegated or direct attestation model is used by an implementation.
 
    Depending upon the features within a CCA implementation there may be
-   additional entries within the CMW.  These can include:
+   additional entries within the CMW corresponding to additional layers
+   of evidence.
+
+   These can include:
 
    *  A Firmware Activity List (FAL), used to support verification of
       the effect of Live Firmware Activation on the CCA Platform
-      Section 7.1.
+      Section 7.3.1.
 
    *  Device Token - where a Realm has device(s) selectively assigned,
       the Device Token provides binding hashes to the device evidence
-      Section 4.9.
+      Section 4.11.
 
    *  Selective Device Token - contains evidence obtained from
-      selectively assigned devices Section 4.9.1.
+      selectively assigned devices Section 4.11.1.
 
    *  Comprehensive Device Token - contains evidence obtained from
-      comprehensively trusted devices Section 4.9.2.
+      comprehensively trusted devices Section 4.11.2.
 
    *  Certificate Chain information optionally included to support an
       inline leaf endorsement certificate Section 6.
 
-   ; CMW (draft-ietf-rats-msg-wrap) Collection
-   cca-token = #6.907(cca-token-cmw)
+   An implementation can choose to add additional elements relevant to
+   the implementation, for example extensions to the realm TCB or
+   additional elements relevant to the workload, for example evidence
+   relating to the TCB across multiple planes.
 
-   ; CoAP Content-Format for "application/eat+cwt"
-   eat-cwt-coap-cf = 263
+4.2.  CCA Attestation Token construction
 
-   cca-token-cmw = {
-     0xACCA => [
-       eat-cwt-coap-cf
-       bytes .cbor COSE_Sign1<arm-platform-claims>
-     ]
-     0xACD1 => [
-       eat-cwt-coap-cf
-       bytes .cbor COSE_Sign1<cca-realm-claims>
-     ]
-   }
+   The CCA RMM and HES will collaborate to produce the base CMW
+   collection containing the platform and realm tokens.  Where
+   additional tokens need to be added to provide additional TCB
+   elements, these tokens will either
 
-4.2.  CCA Platform token Claims
+   *  have been prepared as a result of host to RMM collaborations and
+      be stored in the host
 
-4.3.  Caller Claims
+   *  be prepared by Realm guest code
 
-4.3.1.  CCA Platform Workload Binding
+   Any elements added to the token collection MUST have a security
+   binding to a controlling layer.
+
+   Where Realm code is responsible for preparing or obtaining additional
+   evidence, it is responsible for adding that evidence as an additional
+   element to the attestation token by performing the following steps:
+
+   *  Prepare a CMW 'cbor-collection'[CMW] for the element.  This
+      consists of a labelled CBOR array containing an appropriate coap-
+      content-format-type and the evidence converted to a cbor bstr.
+
+   *  Increment the number of elements in the CBOR map that holds the
+      CCA Attestation token.
+
+   *  Concatenate the new cbor-record to the original CCA Attestation
+      token.
+
+   Note that a command line tool to accomplish the above is in
+   preparation, see https://github.com/veraison/cmw/issues/30.
+
+4.3.  CCA Attestation Token Collection Element Registration
+
+   The following table captures the CMW cbor collection element labels
+   and potential types supported by this profile.
+
+   +=======+===============+=====================+====================+
+   | Label | Description   | CoAP Type           | Note               |
+   +=======+===============+=====================+====================+
+   | 44234 | CCA Platform  | eat-cwt-coap-label  |                    |
+   |       | Token         |                     |                    |
+   +-------+---------------+---------------------+--------------------+
+   | 44241 | CCA Realm     | eat-cwt-coap-label  |                    |
+   |       | Token         |                     |                    |
+   |       | (delegated    |                     |                    |
+   |       | model)        |                     |                    |
+   +-------+---------------+---------------------+--------------------+
+   | 44251 | CCA Realm     | eat-uccs-coap-label |                    |
+   |       | Token (direct |                     |                    |
+   |       | model)        |                     |                    |
+   +-------+---------------+---------------------+--------------------+
+   | 44256 | CCA Platform  | TBC                 | Note 1             |
+   |       | Firmware      |                     |                    |
+   |       | Activity Log  |                     |                    |
+   +-------+---------------+---------------------+--------------------+
+   | 44258 | CCA Realm     | eat-uccs-coap-label | Placeholder until  |
+   |       | Device Token  |                     | DAT ECN resolved   |
+   +-------+---------------+---------------------+--------------------+
+   | 44252 | CCA Realm     | eat-uccs-coap-label | EAT-DA - Note 2    |
+   |       | Selective     |                     |                    |
+   |       | Device        |                     |                    |
+   |       | Evidence      |                     |                    |
+   +-------+---------------+---------------------+--------------------+
+   | 44253 | CCA Realm     | eat-uccs-coap-label | EAT-DA             |
+   |       | Comprehensive |                     |                    |
+   |       | Device        |                     |                    |
+   |       | Evidence      |                     |                    |
+   +-------+---------------+---------------------+--------------------+
+   | 44254 | CCA Platform  | cert-chain-coap-    | Note 3             |
+   |       | CPAK Cert     | label or cert-      |                    |
+   |       | Chain         | chain-with-         |                    |
+   |       |               | evidence-coap-label |                    |
+   +-------+---------------+---------------------+--------------------+
+   | 44255 | CCA Platform  |                     | Placeholder: type  |
+   |       | CPAK Cert     |                     | selection within   |
+   |       | Chain         |                     | cert chain element |
+   |       |               |                     | may be sufficient  |
+   +-------+---------------+---------------------+--------------------+
+   | 44260 | CCA Realm     | coap-octet-stream-  | Note 2             |
+   |       | Selective     | label               |                    |
+   |       | Device Log    |                     |                    |
+   +-------+---------------+---------------------+--------------------+
+   | 44261 | Confidential  | coap-octet-stream-  | Note 4             |
+   |       | Compute       | label               |                    |
+   |       | Service       |                     |                    |
+   |       | Recipe File   |                     |                    |
+   +-------+---------------+---------------------+--------------------+
+   | 44262 | CCA Realm VMM | coap-octet-stream-  | Note 4             |
+   |       | Construction  | label               |                    |
+   |       | Log           |                     |                    |
+   +-------+---------------+---------------------+--------------------+
+   | 44263 | Discrete TPM  | coap-octet-stream-  | Note 4             |
+   |       | quote         | label               |                    |
+   +-------+---------------+---------------------+--------------------+
+
+             Table 1: Supported CMW collection element labels
+
+4.3.1.  CCA Attestation Token Collection Element Registration Notes
+
+   Note 1: multiple FAL types are possible depending on implementation.
+   As an example, the type may be the generic coap-octet-stream-label or
+   a more specific type that targets a particular log format.  Examples
+   of these might be the (currently unregistered) / tcg-event-log-coap-
+   label / tcg-canonical-event-log-coap-label / cc-event-log-coap-label.
+
+   Note 2: If the outstanding DAT Engineering Change Notice (ECN)
+   determines that the DAT is to be removed, element 44252 (EAT-DA) will
+   be deprecated and replaced by use of element 44260 (DA evidence log).
+   The exact type of the latter is TBC.
+
+   Note 3: it is TBC whether it is sufficient to have a common CMW
+   element for certificate chains that distinguishes the actual format
+   by type alone, rather than having distinct elements for the formats.
+
+   Note 4: this is a placeholder for future work, actual type (or types)
+   possible for this element are TBC.
+
+;# import rfc9052
+
+; CBOR-tagged CMW Collection, see draft-ietf-rats-msg-wrap
+cca-token = #6.907(cca-token-CMW)
+
+; coap types
+coap-octet-stream-label = 42                                   ; application/octet-stream
+eat-cwt-coap-label = 263                            ; application/eat+cwt
+eat-uccs-coap-label = 601                           ; application/uccs+cbor
+cert-chain-coap-label = 900                         ; application/pkix-pkipath      LABEL-TBD
+cert-chain-with-evidence-coap-label = 901           ; application/dice-chain      LABEL-TBD
+tcg-event-log-coap-label = 902                      ; application/tcg-event-log  - type does not currently exist      LABEL-TBD
+tcg-canonical-event-log-coap-label = 903            ; application/tcg-canonical-log  - type does not currently exist      LABEL-TBD
+cc-event-log-coap-label = 904                       ; application/confidential-compute-event-log  - type does not currently exist      LABEL-TBD
+
+
+; CMW collection entry labels
+cca-platform-token-label = 44234
+cca-realm-delegated-token-label = 44241
+cca-realm-direct-token-label = 44251
+cca-platform-selective-device-evidence-label = 44252
+cca-platform-comprehensive-device-evidence-label =  44253
+cca-platform-cpak-cert-chain-label = 44254
+cca-platform-cpak-cert-chain-with-evidence-label = 44255    ; placeholder: type selection within cert chain element may be sufficient
+cca-platform-firmware-activity-log-label = 44256
+cca-device-token-label = 44258      ; placeholder until DAT ECN resolved
+cca-platform-selective-device-log-label = 44260
+confidential-compute-service-recipe-file-label = 44261
+cca-realm-vmm-construction-log-label = 44262
+discrete-TPM-quote-label = 44263
+
+; EAT entries
+EAT_CWT = (
+    bstr .cbor  COSE_Sign1_Tagged
+)
+
+; Common CMW element definition for EAT (signed) tokens
+CMW-CWT-element = (
+    [
+        eat-cwt-coap-label,
+        EAT_CWT
+    ]
+)
+
+; EAT non CWT (unsigned)
+CMW-EAT-claimset = (
+    [
+        eat-uccs-coap-label,         ; consider using a new type for EAT-CBOR-Untagged-Token
+        bstr                         ; placeholder for bstr .cbor EAT-CBOR-Untagged-Token when available as cddlc include
+    ]
+)
+
+
+; CMW element used to carry Realm claims when the Direct Attestation model is implemented
+CMW-realm-direct-element = CMW-EAT-claimset
+
+; CMW element used to carry Device Assignment evidence using draft-poirier-rats-eat-da
+; Current use case for this element is holding evidence for Comprehensive Trust devices
+CMW-device-EAT-evidence-element = CMW-EAT-claimset
+
+; CMW element used to carry the Device Assignment evidence for Selective Trust devices
+; The format of this log is TBD, so using generic stream placeholder until this is resolved
+CMW-device-log-evidence-element = (
+    [
+        coap-octet-stream-label,
+        bstr
+    ]
+)
+
+; CMW element used to carry the Firmware Activation Log. Currently there are multiple possibilities for the format
+FAL-format-choices /= coap-octet-stream-label / tcg-event-log-coap-label / tcg-canonical-event-log-coap-label / cc-event-log-coap-label
+CMW-FAL-evidence-element = (
+    [
+        FAL-format-choices,
+        bstr
+    ]
+)
+
+; CMW element that can be used to provide any certificate elements not included in Platform token signing headers
+CMW-cert-chain-evidence-element = (
+    [
+        cert-chain-coap-label // cert-chain-with-evidence-coap-label,
+        bstr
+    ]
+)
+
+; placeholder for future work relating to including VMM 'recipe' files e.g. IGVM to assist workload verification
+CMW-recipe-file-evidence-element = (
+    [
+       coap-octet-stream-label
+       bstr
+    ]
+)
+
+; placeholder for future work
+; potential exists to collapse all log element definitions into a common log-element
+VMM-log-format-choices /= coap-octet-stream-label
+CMW-VMM-log-evidence-element = (
+    [
+        VMM-log-format-choices,
+        bstr
+    ]
+)
+
+; CMW element that can be used to provide a Quote received from the host's Discrete TPM
+CMW-discrete-tpm-quote-element = (
+    [
+        coap-octet-stream-label,
+        bstr
+    ]
+)
+
+; the realm token has a different claim set depending upon the attestation model implemented
+cca-realm-token-models =  (
+    cca-realm-delegated-token-label => CMW-CWT-element
+    // cca-realm-direct-token-label => CMW-realm-direct-element
+)
+
+cca-token-CMW = {
+    cca-platform-token-label =>  CMW-CWT-element
+    cca-realm-token-models
+    ? cca-platform-firmware-activity-log-label => CMW-FAL-evidence-element
+    ? cca-platform-selective-device-evidence-label =>  CMW-device-EAT-evidence-element
+    ? cca-platform-selective-device-log-label =>  CMW-device-log-evidence-element
+    ? cca-platform-comprehensive-device-evidence-label =>  CMW-device-EAT-evidence-element
+    ? cca-platform-cpak-cert-chain-label => CMW-cert-chain-evidence-element
+    ? confidential-compute-service-recipe-file-label => CMW-recipe-file-evidence-element
+    ? cca-realm-vmm-construction-log-label => CMW-VMM-log-evidence-element
+    ? discrete-TPM-quote-label => CMW-discrete-tpm-quote-element
+
+}
+
+4.4.  CCA Platform token Claims
+
+4.5.  Caller Claims
+
+4.5.1.  CCA Platform Workload Binding
 
    The Workload Binding claim provides the basis for a cryptographic
    binding to be established between the CCA Platform and CCA Realm
    attestation tokens.
 
    The value of the workload binding claim varies by the implemented
-   attestation model.  See Section 4.3.3 for further details.
+   attestation model.  See Section 4.5.3 for further details.
 
    The length of the value of the claim MUST be either 32, 48, or 64
    bytes.
@@ -566,7 +818,7 @@ Table of Contents
        arm-platform-workload-binding-label => arm-platform-hash-type
    )
 
-4.3.2.  CCA Platform Challenge
+4.5.2.  CCA Platform Challenge
 
    If an implementation uses a different attestation model to the
    default delegated model, a CCA platform challenge claim can be
@@ -576,7 +828,7 @@ Table of Contents
 
    This claim is OPTIONAL in a CCA Platform attestation token.
 
-   See Section 4.3.3 for further details on when the claim may be
+   See Section 4.5.3 for further details on when the claim may be
    present.
 
    The [EAT] eat_nonce (claim key 10) is used.  Since the EAT nonce
@@ -594,14 +846,14 @@ Table of Contents
        arm-platform-challenge-label => arm-platform-hash-type
    )
 
-4.3.3.  Platform to Realm Binding compatibility
+4.5.3.  Platform to Realm Binding compatibility
 
    All versions of the CCA profile have had a mechanism to hold a
    binding between the CCA Platform and CCA Realm attestation tokens.
    The claims used vary by profile version and attestation model
    implemented as outlined below.
 
-4.3.3.1.  Profile tag:arm.com,2024:cca_platform#1.1.0
+4.5.3.1.  Profile tag:arm.com,2024:cca_platform#1.1.0
 
    *  Attestation Model: Delegated
 
@@ -609,7 +861,7 @@ Table of Contents
 
    *  Claim Value: H(RAK public)
 
-4.3.3.2.  Profile tag:arm.com,2024:cca_platform#2.0.0
+4.5.3.2.  Profile tag:arm.com,2024:cca_platform#2.0.0
 
    *  Attestation Model: Delegated
 
@@ -617,7 +869,7 @@ Table of Contents
 
    *  Claim Value: H(RAK public)
 
-4.3.3.3.  Profile tag:arm.com,2024:cca_platform#2.0.0;direct
+4.5.3.3.  Profile tag:arm.com,2024:cca_platform#2.0.0;direct
 
    *  Attestation Model: Direct
 
@@ -625,7 +877,7 @@ Table of Contents
 
    *  Claim Value: H(realm claims)
 
-4.3.3.4.  Profile tag:arm.com,2026:cca_platform#2.0.0
+4.5.3.4.  Profile tag:arm.com,2026:cca_platform#2.0.0
 
    *  Attestation Model: Delegated
 
@@ -636,7 +888,7 @@ Table of Contents
    *  Equivalent profile value:
       tag:arm.com,2026:cca_platform#2.0.0;delegated
 
-4.3.3.5.  Profile tag:arm.com,2026:cca_platform#2.0.0;direct
+4.5.3.5.  Profile tag:arm.com,2026:cca_platform#2.0.0;direct
 
    *  Attestation Model: Direct
 
@@ -644,7 +896,7 @@ Table of Contents
 
    *  Claim Value: H(realm claims)
 
-4.3.3.6.  Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
+4.5.3.6.  Profile tag:arm.com,2026:cca_platform#2.0.0;HESRAK
 
    *  Attestation Model: Delegated attestation, with the RAK kept within
       the HES
@@ -653,11 +905,7 @@ Table of Contents
 
    *  Claim Value: H(RAK public)
 
-   *  Note: for this attestation model, the PAT also contains an
-      eat_nonce claim with the value equal to the CCA Realm challenge
-      claim.
-
-4.3.3.7.  Profile tag:arm.com,2026:cca_platform#2.1.0
+4.5.3.7.  Profile tag:arm.com,2026:cca_platform#2.1.0
 
    *  Attestation Model: Delegated
 
@@ -668,7 +916,7 @@ Table of Contents
    *  Equivalent profile value:
       tag:arm.com,2026:cca_platform#2.1.0;delegated
 
-4.3.3.8.  Profile tag:arm.com,2026:cca_platform#2.1.0;direct
+4.5.3.8.  Profile tag:arm.com,2026:cca_platform#2.1.0;direct
 
    *  Attestation Model: Direct
 
@@ -676,7 +924,7 @@ Table of Contents
 
    *  Claim Value: H(realm claims)
 
-4.3.3.9.  Profile tag:arm.com,2026:cca_platform#2.1.0;HESRAK
+4.5.3.9.  Profile tag:arm.com,2026:cca_platform#2.1.0;HESRAK
 
    *  Attestation Model: Delegated attestation, with the RAK kept within
       the HES
@@ -689,7 +937,7 @@ Table of Contents
       eat_nonce claim with the value equal to the CCA Realm challenge
       claim.
 
-4.3.3.10.  Binding claim Notes
+4.5.3.10.  Binding claim Notes
 
    For the delegated attestation models, RAK public is a COSE_Key
    structure.  The hash algorithm used to generate H(RAK public) is that
@@ -715,9 +963,9 @@ Table of Contents
 
    *  tag:arm.com,2026:cca_platform#2.1.0;direct
 
-4.4.  Target Identification Claims
+4.6.  Target Identification Claims
 
-4.4.1.  CCA Platform Instance ID
+4.6.1.  CCA Platform Instance ID
 
    The Instance ID claim is a unique identifier of this Platform
    instance.  It can be used by a verifier to help locate an endorsement
@@ -754,7 +1002,7 @@ Table of Contents
        arm-platform-instance-id-label => arm-platform-instance-id-type
    )
 
-4.4.2.  CCA Platform Implementation ID
+4.6.2.  CCA Platform Implementation ID
 
    The Implementation ID claim uniquely identifies the implementation of
    the CCA Platform.  The value of the CCA platform Implementation ID
@@ -776,7 +1024,7 @@ Table of Contents
 
    Note that this identifies the CCA Platform implementation, not a
    particular instance.  To uniquely identify an instance, see the
-   Instance ID claim Section 4.4.1.
+   Instance ID claim Section 4.6.1.
 
    arm-platform-implementation-id-label = 2396 ; PSA implementation ID
    arm-platform-implementation-id-type = bytes .size 32
@@ -786,9 +1034,9 @@ Table of Contents
            arm-platform-implementation-id-type
    )
 
-4.5.  Target State Claims
+4.7.  Target State Claims
 
-4.5.1.  CCA Platform Profile Definition
+4.7.1.  CCA Platform Profile Definition
 
    The CCA platform profile claim identifies the EAT profile to which
    the CCA platform token conforms.  This allows a receiver to assign
@@ -819,7 +1067,7 @@ arm-platform-profile = (
     arm-platform-profile-label => arm-platform-profile-type
 )
 
-4.5.2.  Security Lifecycle
+4.7.2.  Security Lifecycle
 
    The Security Lifecycle claim represents the current lifecycle state
    of the CCA Platform.
@@ -883,7 +1131,7 @@ arm-platform-profile = (
 
                   Figure 4: CCA Platform Lifecycle States
 
-   The CDDL representation is shown below.  Table 1 provides the
+   The CDDL representation is shown below.  Table 2 provides the
    mappings between Figure 4 and the data model.
 
 arm-platform-lifecycle-label = 2395 ; PSA lifecycle
@@ -935,9 +1183,9 @@ arm-platform-lifecycle = (
        | decommissioned-type                 |                    |
        +-------------------------------------+--------------------+
 
-                    Table 1: Lifecycle States Mappings
+                    Table 2: Lifecycle States Mappings
 
-4.5.3.  Platform Config
+4.7.3.  Platform Config
 
    The CCA platform config claim describes the set of chosen
    implementation options of the CCA platform.  As an example, these may
@@ -989,7 +1237,7 @@ arm-platform-lifecycle = (
        arm-platform-config-label => arm-platform-config-type
    )
 
-4.5.4.  Platform Manufacturing Config
+4.7.4.  Platform Manufacturing Config
 
    The CCA platform manufacturing config claim represents a record of
    production phases and testing conducted during the manufacturing
@@ -1010,9 +1258,9 @@ arm-platform-lifecycle = (
            arm-platform-manufacturing-config-type
    )
 
-4.6.  Software Inventory Claims
+4.8.  Software Inventory Claims
 
-4.6.1.  Software Components
+4.8.1.  Software Components
 
    The Software Components claim is a list of software components which
    can affect the behavior of the CCA platform.
@@ -1057,7 +1305,7 @@ arm-platform-lifecycle = (
      arm-platform-sw-components-label => [ + arm-platform-sw-component ]
  )
 
-4.6.1.1.  Component Type
+4.8.1.1.  Component Type
 
    The Component Type attribute (key=1) is a short string representing
    the role of this software component.  This attribute is intended for
@@ -1066,7 +1314,7 @@ arm-platform-lifecycle = (
 
    This attribute is optional in a CCA Platform software component.
 
-4.6.1.2.  Measurement Value
+4.8.1.2.  Measurement Value
 
    The Measurement Value attribute (key=2) represents a hash of the
    state of the software component in memory at the time it was
@@ -1084,7 +1332,7 @@ arm-platform-lifecycle = (
 
    This attribute MUST be present in a CCA Platform software component.
 
-4.6.1.3.  Version
+4.8.1.3.  Version
 
    The Version attribute (key=4) is the issued software version in the
    form of a text string.  The meaning of this string is defined by the
@@ -1092,7 +1340,7 @@ arm-platform-lifecycle = (
 
    This attribute is optional in a CCA Platform software component.
 
-4.6.1.4.  Signer ID
+4.8.1.4.  Signer ID
 
    The Signer ID attribute (key=5) uniquely identifies the signer of the
    software component.  The identification is typically accomplished by
@@ -1103,7 +1351,7 @@ arm-platform-lifecycle = (
 
    This attribute MUST be present in a CCA Platform software component.
 
-4.6.1.5.  Measurement Description
+4.8.1.5.  Measurement Description
 
    The Measurement Description attribute (key=6) contains a string
    identifying the hash algorithm used to compute the corresponding
@@ -1111,7 +1359,7 @@ arm-platform-lifecycle = (
    Name String" in the "Named Information Hash Algorithm Registry"
    [IANA.named-information].
 
-4.6.1.6.  Live Firmware Activation support
+4.8.1.6.  Live Firmware Activation support
 
    The Live Firmware Activation (LFA) support attribute (key=7)
    indicates whether the component is subject to Live Firmware
@@ -1121,9 +1369,9 @@ arm-platform-lifecycle = (
    The Live Firmware Activation support attribute of the CCA Platform
    software component is optional.
 
-   More details on LFA can be found at Section 7.1.1.
+   More details on LFA can be found at Section 7.3.1.1.
 
-4.6.1.7.  Software Component Countersigner ID List
+4.8.1.7.  Software Component Countersigner ID List
 
    The Software Component Countersigner ID List (key=8) contains hashes
    of public keys which identify signing authorities that provide
@@ -1147,7 +1395,7 @@ arm-platform-lifecycle = (
    The Software Component Countersigner ID List attribute is optional in
    a CCA Platform software component.
 
-4.6.2.  CCA Platform Hash Algorithm ID
+4.8.2.  CCA Platform Hash Algorithm ID
 
    The CCA platform hash algorithm ID claim is a text string that
    identifies the algorithm used to calculate the extended measurements
@@ -1169,7 +1417,7 @@ arm-platform-lifecycle = (
       arm-platform-hash-algo-id-label => text
   )
 
-4.6.3.  CCA Platform Client ID
+4.8.3.  CCA Platform Client ID
 
    The CCA platform client ID claim identifies the security domain from
    which the attestation token was requested.
@@ -1194,7 +1442,7 @@ arm-platform-lifecycle = (
        arm-platform-client-id-label => arm-platform-client-id-type
    )
 
-4.6.4.  CCA Platform Manufacturing Config
+4.8.4.  CCA Platform Manufacturing Config
 
    The CCA platform manufacturing config claim represents a record of
    production phases and testing conducted during the manufacturing
@@ -1217,7 +1465,7 @@ arm-platform-lifecycle = (
            arm-platform-manufacturing-config-type
    )
 
-4.6.5.  CCA Platform Extension
+4.8.5.  CCA Platform Extension
 
    The CCA platform extension claim identifies components which have
    been added to the CCA platform at runtime and supplies verification
@@ -1284,7 +1532,7 @@ arm-platform-extension = (
     arm-platform-extension-label => [ + arm-platform-extension-device ]
 )
 
-4.6.6.  CCA Platform Peer Signers
+4.8.6.  CCA Platform Peer Signers
 
    In the event that the CCA platform consists of multiple peer RoTs
    which are unable to establish a single attestation signing entity at
@@ -1311,7 +1559,7 @@ arm-platform-extension = (
        arm-platform-peer-signers-label => arm-platform-peer-signers-type
    )
 
-4.6.7.  CCA Platform Discrete TPM Binding Data
+4.8.7.  CCA Platform Discrete TPM Binding Data
 
    The normal world of a device that supports CCA is outside the TCB of
    the confidential computing environment.  In some deployments, it is
@@ -1340,7 +1588,7 @@ arm-platform-discrete-tpm-binding-data = (
     arm-platform-discrete-tpm-binding-data-label => arm-platform-discrete-tpm-binding-data-type
 )
 
-4.6.8.  CCA Platform TBB ROTPK
+4.8.8.  CCA Platform TBB ROTPK
 
    Where an implementation of the CCA platform follows the Trusted Board
    Boot specification [TBB], the platform will include several
@@ -1353,29 +1601,46 @@ arm-platform-discrete-tpm-binding-data = (
    Compatibility: this claim can be present where profile values are at
    or newer than "tag:arm.com,2024:cca_platform#2.0.0".
 
-   arm-platform-tbb-rotpk-label = 2405
+arm-platform-tbb-rotpk-label = 2405
 
-   arm-platform-tbb-rotpk-type = [ + arm-platform-tbb-rotpk-item ]
+arm-platform-tbb-rotpk-type = [ + arm-platform-tbb-rotpk-item ]
 
-   arm-platform-tbb-rotpk-item = {
-       1 => tstr,             ; e.g. "CM" or "DM"
-       2 => int,              ; active ROTPK array
-       3 => int,              ; index in the active array
-       4 => arm-platform-hash-type    ; hash object
-   }
+arm-platform-tbb-rotpk-item = {
+    1 => tstr,                     ; provisioning stage, e.g. "CM" or "DM"
+    2 => int,                      ; index in the active array
+    3 => arm-platform-hash-type    ; key digest
+}
 
-   arm-platform-tbb-rotpk = (
-       arm-platform-tbb-rotpk-label => arm-platform-tbb-rotpk-type
-   )
+arm-platform-tbb-rotpk = (
+    arm-platform-tbb-rotpk-label => arm-platform-tbb-rotpk-type
+)
 
-4.7.  Verification Claims
+4.8.8.1.  Provisioning stage
+
+   The provisioning stage, (key=1) , indicates the lifecycle
+   provisioning stage of the CCA Platform TBB RoTPK keys. the permitted
+   values are either "CM", indicating Chip Manufacturing Stage or "DM",
+   indicating Device Manufacturing Stage of the platform.
+
+4.8.8.2.  Index
+
+   Index (key=2) denotes the current index within the active array on
+   the CCA Platform.
+
+4.8.8.3.  Key digest
+
+   The Key digest(key=3) represents the digest of a single Root of Trust
+   public key.  The size of the key digest can be ONLY one of 32, 48 or
+   64 bytes.
+
+4.9.  Verification Claims
 
    The following claims are part of the CCA Platform token (and
    therefore still Evidence) but aim to help receivers, including
    relying parties, with the processing of the received attestation
    Evidence.
 
-4.7.1.  Verification Service Indicator
+4.9.1.  Verification Service Indicator
 
    The Verification Service Indicator claim is a hint used by a relying
    party to locate a verification service for the token.  The value is a
@@ -1411,12 +1676,55 @@ arm-platform-discrete-tpm-binding-data = (
    The CCA platform verification service indicator claim is OPTIONAL in
    a CCA platform token.
 
-4.8.  CCA Realm state token Claims
+4.10.  CCA Realm state token Claims
 
    The CCA Realm state token contains claims that represent the Target
    Environment that is the Realm that requested the attestation report.
 
-4.8.1.  CCA Realm Challenge
+4.10.1.  CCA Realm Claims - Delegated Attestation Model
+
+   The Realm state claims for the delegated attestation model are as
+   follows.  These claims will also be used for the HESRAK attestation
+   model.
+
+   cca-realm-claims = (cca-realm-claim-map)
+
+   cca-realm-claim-map = {
+       cca-realm-challenge
+       ? cca-realm-profile
+       cca-realm-instance-id
+       cca-realm-personalization-value
+       cca-realm-initial-measurement
+       cca-realm-extensible-measurements
+       cca-realm-hash-algo-id
+       cca-realm-public-key
+       cca-realm-public-key-hash-algo-id
+       cca-realm-mec-policy
+       ? cca-realm-lfa-policy
+       ? cca-realm-devices-token-hash
+   }
+
+4.10.2.  CCA Realm Claims - Direct Attestation Model
+
+   The Realm state claims for the direct attestation model are as
+   follows.
+
+   cca-realm-claims = (cca-realm-claim-map)
+
+   cca-realm-claim-map = {
+       cca-realm-challenge
+       ? cca-realm-profile
+       cca-realm-instance-id
+       cca-realm-personalization-value
+       cca-realm-initial-measurement
+       cca-realm-extensible-measurements
+       cca-realm-hash-algo-id
+       cca-realm-mec-policy
+       ? cca-realm-lfa-policy
+       ? cca-realm-devices-token-hash
+   }
+
+4.10.3.  CCA Realm Challenge
 
    The CCA Realm challenge is used to carry a challenge provided by the
    Relying Party to demonstrate freshness of the generated token.
@@ -1442,7 +1750,7 @@ arm-platform-discrete-tpm-binding-data = (
        cca-realm-challenge-label => cca-realm-challenge-type
    )
 
-4.8.2.  Realm Profile Definition
+4.10.4.  Realm Profile Definition
 
    The Realm profile claim identifies the EAT profile to which the Realm
    token conforms.  This allows a receiver to assign the intended
@@ -1466,7 +1774,7 @@ arm-platform-discrete-tpm-binding-data = (
        cca-realm-profile-label => cca-realm-profile-type
    )
 
-4.8.3.  Realm Personalisation Value
+4.10.5.  Realm Personalisation Value
 
    The Realm Personalization Value (RPV) claim contains the RPV which
    was provided at Realm creation.
@@ -1484,7 +1792,7 @@ arm-platform-discrete-tpm-binding-data = (
            cca-realm-personalization-value-type
    )
 
-4.8.4.  Realm Initial Measurement
+4.10.6.  Realm Initial Measurement
 
    The Realm Initial Measurement claim contains the compound extension
    of measurements taken of Realm memory and state before the Realm is
@@ -1501,7 +1809,7 @@ arm-platform-discrete-tpm-binding-data = (
        cca-realm-initial-measurement-label => cca-realm-measurement-type
    )
 
-4.8.5.  Realm Extensible Measurements
+4.10.7.  Realm Extensible Measurements
 
    The Realm Extensible Measurements claim contains measurements
    provided by Realm guest software and extended to the set of Realm
@@ -1519,7 +1827,7 @@ arm-platform-discrete-tpm-binding-data = (
            [ 4*4 cca-realm-measurement-type ]
    )
 
-4.8.6.  Realm Hash Algorithm Measurements
+4.10.8.  Realm Hash Algorithm Measurements
 
    The Realm hash algorithm ID claim identifies the algorithm used to
    calculate all hash values which are present in the Realm token.
@@ -1539,7 +1847,7 @@ arm-platform-discrete-tpm-binding-data = (
        cca-realm-hash-algo-id-label => text
    )
 
-4.8.7.  Realm Public Key
+4.10.9.  Realm Public Key
 
    The Realm public key claim identifies the attestation key which is
    used to sign the Realm token
@@ -1562,12 +1870,12 @@ arm-platform-discrete-tpm-binding-data = (
        cca-realm-public-key-label => cca-realm-public-key-type
    )
 
-4.8.8.  Realm Public Key Hash Algorithm ID
+4.10.10.  Realm Public Key Hash Algorithm ID
 
    The Realm public key hash algorithm identifier claim identifies the
    algorithm used to hash the value of the Realm Public Key claim
-   Section 4.8.7 such that it can be presented as a Challenge for the
-   bound CCA Platform token Section 4.10.
+   Section 4.10.9 such that it can be presented as a Challenge for the
+   bound CCA Platform token Section 4.12.
 
    This claim MUST be present in a CCA Realm state attestation token
    when the attestation model is not Direct mode.
@@ -1581,7 +1889,7 @@ arm-platform-discrete-tpm-binding-data = (
        cca-realm-public-key-hash-algo-id-label => text
    )
 
-4.8.9.  Realm MEC Policy
+4.10.11.  Realm MEC Policy
 
    The Realm MEC policy claim identifies the MEC policy of the Realm.
    On a platform which does not implement FEAT_MEC, the value of the
@@ -1603,7 +1911,7 @@ arm-platform-discrete-tpm-binding-data = (
            cca-realm-mec-policy-private
    )
 
-4.8.10.  Realm LFA Policy
+4.10.12.  Realm LFA Policy
 
    The Realm LFA policy identifies the Live Firmware Activation policy
    of the Realm.
@@ -1624,7 +1932,7 @@ arm-platform-discrete-tpm-binding-data = (
            cca-realm-lfa-policy-allow
    )
 
-4.8.11.  Realm Instance ID
+4.10.13.  Realm Instance ID
 
    The Realm Instance ID claim is a random value generated using a
    cryptographic-quality entropy source.  This claim distinguishes
@@ -1648,7 +1956,7 @@ arm-platform-discrete-tpm-binding-data = (
        cca-realm-instance-id-label => cca-realm-instance-id-type
    )
 
-4.8.12.  Realm Devices Token Hash
+4.10.14.  Realm Devices Token Hash
 
    The Realm devices token hash claim contains a hash of the CBOR
    encoding of cca-realm-devices-token that represents the set of
@@ -1667,15 +1975,15 @@ arm-platform-discrete-tpm-binding-data = (
        cca-realm-devices-token-hash-label => arm-platform-hash-type
    )
 
-4.9.  Device Token
+4.11.  Device Token
 
    ToDo in separate PR
 
-4.9.1.  Selectively Assigned Devices Token
+4.11.1.  Selectively Assigned Devices Token
 
-4.9.2.  Comprehensive Trust Devices Token
+4.11.2.  Comprehensive Trust Devices Token
 
-4.10.  Token Binding
+4.12.  Token Binding
 
    The reference implementation uses a 'Delegated Model' for token
    signing.  In this model, the completion of signing operations for the
@@ -1704,16 +2012,16 @@ arm-platform-discrete-tpm-binding-data = (
    collection are bound together by the Nonce claim in the CCA Platform
    token having the same value as the hash of the Realm state claim set.
    If the Direct Model is used, the CCA Platform profile claim
-   Section 4.5.1 MUST have a different value from the reference profile.
+   Section 4.7.1 MUST have a different value from the reference profile.
    The map value within the CCA Attestation token CMW Collection for the
    Realm state claim set MUST also have a different value to that used
    for a Realm state CMW token.  In such a profile, the Realm Public Key
-   Section 4.8.7 and Realm Public Key Hash Algorithm ID Section 4.8.8
+   Section 4.10.9 and Realm Public Key Hash Algorithm ID Section 4.10.10
    claims will not be used.
 
-4.11.  Reference Profile
+4.13.  Reference Profile
 
-4.11.1.  Token Encoding and Signing
+4.13.1.  Token Encoding and Signing
 
    The CCA attestation token is encoded in CBOR [STD94] format.  The
    CBOR representation of a CCA attestation token MUST be "valid"
@@ -1745,7 +2053,7 @@ arm-platform-discrete-tpm-binding-data = (
    RoT.  Therefore, the CCA Platform claims-set is never carried in a
    Detached EAT bundle (Section 5 of [EAT]).
 
-4.11.2.  Freshness Model
+4.13.2.  Freshness Model
 
    The CCA token supports the freshness models for attestation Evidence
    based on nonces and epoch handles (Section 10.2 and Section 10.3 of
@@ -1758,9 +2066,9 @@ arm-platform-discrete-tpm-binding-data = (
    it must be possible to encode the epoch handle as an opaque binary
    string between 8 and 64 octets.
 
-4.11.3.  Synopsis
+4.13.3.  Synopsis
 
-   Table 2 presents a concise view of the requirements described in the
+   Table 3 presents a concise view of the requirements described in the
    preceding sections.
 
     +==================+=============================================+
@@ -1786,7 +2094,7 @@ arm-platform-discrete-tpm-binding-data = (
     | Verification Key | Any identification method listed in         |
     | Identification   | Appendix F.1 of [EAT]                       |
     +------------------+---------------------------------------------+
-    | Endorsements     | See Section 7.3                             |
+    | Endorsements     | See Section 7.5                             |
     +------------------+---------------------------------------------+
     | Freshness        | nonce or epoch ID based                     |
     +------------------+---------------------------------------------+
@@ -1795,29 +2103,98 @@ arm-platform-discrete-tpm-binding-data = (
     |                  | on claims it does not understand.           |
     +------------------+---------------------------------------------+
 
-                        Table 2: Baseline Profile
+                        Table 3: Baseline Profile
 
 5.  Collated CDDL
 
    =============== NOTE: '\' line wrapping per RFC 8792 ================
 
-   cca-token = #6.907(cca-token-cmw)
-   eat-cwt-coap-cf = 263
-   cca-token-cmw = {
-     0xACCA => [
-           eat-cwt-coap-cf,
-           bytes .cbor COSE_Sign1<arm-platform-claims>,
-   ],
-     0xACD1 => [
-           eat-cwt-coap-cf,
-           bytes .cbor COSE_Sign1<cca-realm-claims>,
-   ],
+   cca-token = #6.907(cca-token-CMW)
+   coap-octet-stream-label = 42
+   eat-cwt-coap-label = 263
+   eat-uccs-coap-label = 601
+   cert-chain-coap-label = 900
+   cert-chain-with-evidence-coap-label = 901
+   tcg-event-log-coap-label = 902
+   tcg-canonical-event-log-coap-label = 903
+   cc-event-log-coap-label = 904
+   cca-platform-token-label = 44234
+   cca-realm-delegated-token-label = 44241
+   cca-realm-direct-token-label = 44251
+   cca-platform-selective-device-evidence-label = 44252
+   cca-platform-comprehensive-device-evidence-label = 44253
+   cca-platform-cpak-cert-chain-label = 44254
+   cca-platform-cpak-cert-chain-with-evidence-label = 44255
+   cca-platform-firmware-activity-log-label = 44256
+   cca-device-token-label = 44258
+   cca-platform-selective-device-log-label = 44260
+   confidential-compute-service-recipe-file-label = 44261
+   cca-realm-vmm-construction-log-label = 44262
+   discrete-TPM-quote-label = 44263
+   EAT_CWT = bstr .cbor COSE_Sign1_Tagged
+   CMW-CWT-element = [
+     eat-cwt-coap-label,
+     EAT_CWT,
+   ]
+   CMW-EAT-claimset = [
+     eat-uccs-coap-label,
+     bstr,
+   ]
+   CMW-realm-direct-element = CMW-EAT-claimset
+   CMW-device-EAT-evidence-element = CMW-EAT-claimset
+   CMW-device-log-evidence-element = [
+     coap-octet-stream-label,
+     bstr,
+   ]
+   FAL-format-choices /= coap-octet-stream-label / tcg-event-log-coap-\
+    label / tcg-canonical-event-log-coap-label / cc-event-log-coap-label
+   CMW-FAL-evidence-element = [
+     FAL-format-choices,
+     bstr,
+   ]
+   CMW-cert-chain-evidence-element = [cert-chain-coap-label // (
+             cert-chain-with-evidence-coap-label,
+             bstr,
+         )]
+   CMW-recipe-file-evidence-element = [
+     coap-octet-stream-label,
+     bstr,
+   ]
+   VMM-log-format-choices /= coap-octet-stream-label
+   CMW-VMM-log-evidence-element = [
+     VMM-log-format-choices,
+     bstr,
+   ]
+   CMW-discrete-tpm-quote-element = [
+     coap-octet-stream-label,
+     bstr,
+   ]
+   cca-realm-token-models = (cca-realm-delegated-token-label => CMW-CWT\
+   -element // cca-realm-direct-token-label => CMW-realm-direct-element)
+   cca-token-CMW = {
+     cca-platform-token-label => CMW-CWT-element,
+     cca-realm-token-models,
+     ? cca-platform-firmware-activity-log-label => CMW-FAL-evidence-\
+                                                                element,
+     ? cca-platform-selective-device-evidence-label => CMW-device-EAT-\
+                                                       evidence-element,
+     ? cca-platform-selective-device-log-label => CMW-device-log-\
+                                                       evidence-element,
+     ? cca-platform-comprehensive-device-evidence-label => CMW-device-\
+                                                   EAT-evidence-element,
+     ? cca-platform-cpak-cert-chain-label => CMW-cert-chain-evidence-\
+                                                                element,
+     ? confidential-compute-service-recipe-file-label => CMW-recipe-\
+                                                  file-evidence-element,
+     ? cca-realm-vmm-construction-log-label => CMW-VMM-log-evidence-\
+                                                                element,
+     ? discrete-TPM-quote-label => CMW-discrete-tpm-quote-element,
    }
-   COSE_Sign1<C> = #6.18([
-         Headers,
-         payload: bytes .cbor C,
-         signature: bytes,
-   ])
+   COSE_Sign1 = [
+     Headers,
+     payload: bstr / nil,
+     signature: bstr,
+   ]
    cca-realm-claims = cca-realm-claim-map
    cca-realm-claim-map = {
      cca-realm-challenge,
@@ -2026,8 +2403,7 @@ arm-platform-discrete-tpm-binding-data = (
    arm-platform-tbb-rotpk-item = {
      1 => tstr,
      2 => int,
-     3 => int,
-     4 => arm-platform-hash-type,
+     3 => arm-platform-hash-type,
    }
    arm-platform-tbb-rotpk = (arm-platform-tbb-rotpk-label => arm-\
                                                 platform-tbb-rotpk-type)
@@ -2035,6 +2411,7 @@ arm-platform-discrete-tpm-binding-data = (
    arm-platform-discrete-tpm-binding-data-type = bytes
    arm-platform-discrete-tpm-binding-data = (arm-platform-discrete-tpm-\
       binding-data-label => arm-platform-discrete-tpm-binding-data-type)
+   COSE_Sign1_Tagged = #6.18(COSE_Sign1)
    Headers = (
      protected: empty_or_serialized_map,
      unprotected: header_map,
@@ -2059,7 +2436,7 @@ arm-platform-discrete-tpm-binding-data = (
 
    Some implementations may choose to use a PAK that is a certified
    public key.  If this option is taken, the value of the CCA Platform
-   Profile Definition claim Section 4.5.1 MUST be altered from the
+   Profile Definition claim Section 4.7.1 MUST be altered from the
    reference implementation value.
 
    Where the implementation uses a CPAK that is endorsed via an X.509
@@ -2084,6 +2461,23 @@ arm-platform-discrete-tpm-binding-data = (
 
 7.  CCA Attestation Token Verification
 
+7.1.  CCA Attestation Token Lead Verification
+
+   The lead verifier for the CCA Attestation token will need to
+   determine what optional components are included in the CMW collection
+   beyond the base CCA Platform and CCA Realm tokens.  To that end it
+   should scan the collection entries and determine which components
+   require individual verification or dispatch to specific verification
+   function by virtue of the CMW labels used and types declared for
+   those labels.  The lead verifier will also need to determine how to
+   satisfy binding checks required between elements.  This may be done
+   by extracting binding data from the results of a verification on an
+   individual element to be passed as input to the verification of a
+   further element or performing binding checks from the verification
+   results of multiple elements.
+
+7.2.  CCA Attestation Platform Token Verification
+
    To verify the token for the reference profile, the initial need is to
    check correct encoding for the token.  Primary trust is established
    by checking the signing of the CCA Platform token CWT.  The key used
@@ -2100,23 +2494,16 @@ arm-platform-discrete-tpm-binding-data = (
    CPAK.  Instead this is achieved by forming a full X.509 chain to the
    trusted Certificate Authority root and validating that chain.
 
-   Additional validation checks on the token are:
+7.3.  CCA Attestation Token Additional Verification
+
+   Additional validation checks on the CCA attestation token are:
 
    *  Checking that the binding between the CCA Platform token and the
-      Realm state token is valid Section 4.10.  This has the side effect
+      Realm state token is valid Section 4.12.  This has the side effect
       of establishing the trustworthiness of the RAK public key.
 
    *  Validating that the Realm state token is correctly signed by the
       RAK.
-
-   *  Checking that the value of the Section 4.5.2 claim is cca-
-      platform-lifecycle-secured state.  Note that some other values of
-      this claim (cca-platform-lifecycle-non-psa-rot-debug and cca-
-      platform-lifecycle-recoverable-psa-rot states) may indicate that
-      the attester is only temporarily unsuitable and the verifier may
-      choose the to indicate this as a contraindication rather than a
-      full verification failure.  See discussion of the CCA platform
-      lifecycle in [RMM].
 
    The Verifier will typically operate a policy where values of some of
    the claims in this profile can be compared to reference values,
@@ -2124,8 +2511,12 @@ arm-platform-discrete-tpm-binding-data = (
    confirm that the device is endorsed by the manufacturer supply chain.
    The policy may require that the relevant claims must have a match to
    a registered reference value.  All claims may be worthy of additional
-   appraisal.  It is likely that most deployments would include a policy
-   with appraisal for the following claims:
+   appraisal.  See [CCA-ENDORSEMENTS] for more details on selecting the
+   appropriate reference values.
+
+   With reference to the Platform Token, it is likely that most
+   deployments would include a policy with appraisal for the following
+   claims:
 
    *  Implementation ID - the value of the Implementation ID can be used
       to identify the verification requirements of the deployment.
@@ -2136,7 +2527,8 @@ arm-platform-discrete-tpm-binding-data = (
       releases, being patches to an original baseline release.  A
       verification policy may then allow this value to match any point
       on that release sequence or expect some minimum level of maturity
-      related to the sequence.
+      related to the sequence.  Note that measurement values in this
+      claim are an extension of an initial value of 0.
 
    *  Software Component, Signer ID - where present in a deployment,
       this could allow a Verifier to operate a more general policy than
@@ -2144,9 +2536,26 @@ arm-platform-discrete-tpm-binding-data = (
       contain any firmware entries signed by a known Signer ID, without
       checking for a uniquely registered version.
 
-7.1.  Live Firmware Activation (LFA)
+   *  Checking that the value of the Section 4.7.2 claim is cca-
+      platform-lifecycle-secured state.  Note that some other values of
+      this claim (cca-platform-lifecycle-non-psa-rot-debug and cca-
+      platform-lifecycle-recoverable-psa-rot states) may indicate that
+      the attester is only temporarily unsuitable and the verifier may
+      choose the to indicate this as a contraindication rather than a
+      full verification failure.  See discussion of the CCA platform
+      lifecycle in [RMM].
 
-7.1.1.  Introduction
+   *  Confirming that the implemented System Properties reported in the
+      Platform Config claim Section 4.7.3 provide the required security
+      features.
+
+   *  Ensuring that the Platform Attestation was produced by the Realm
+      security domain by checking the Platform Client ID has the value
+      arm-platform-client-id-rmsd Section 4.8.3.
+
+7.3.1.  Live Firmware Activation (LFA)
+
+7.3.1.1.  Introduction
 
    Where a CCA implementation has implemented Live Firmware Activation
    (LFA), firmware components within the CCA Platform can be updated
@@ -2169,10 +2578,10 @@ arm-platform-discrete-tpm-binding-data = (
    are stored in the untrusted host, which requires an additional
    integrity mechanism to be used: a hash of each entry is extended into
    a digest held in the HES.  This digest is delivered in the CCA PAT
-   arm-platform-software-components claim Section 4.6.1 for the entry
+   arm-platform-software-components claim Section 4.8.1 for the entry
    with component type "FAL".
 
-7.1.2.  Live Firmware Activation Verification
+7.3.2.  Live Firmware Activation Verification
 
    The use of LFA changes how firmware elements of the CCA platform are
    verified.  Normally, each component's measurement attribute in the
@@ -2229,14 +2638,14 @@ arm-platform-discrete-tpm-binding-data = (
 
    Other implementation defined checks can be made against FAL entries.
 
-7.2.  AR4SI Trustworthiness Claims Mappings
+7.4.  AR4SI Trustworthiness Claims Mappings
 
    [RATS-AR4SI] defines an information model that Verifiers can employ
    to produce Attestation Results.  AR4SI provides a set of standardized
    appraisal categories and tiers that greatly simplifies the task of
    writing Relying Party policies in multi-attester environments.
 
-   The contents of Table 3 are intended as guidance for implementing a
+   The contents of Table 4 are intended as guidance for implementing a
    PSA Verifier that computes its results using AR4SI.  The table
    describes which PSA Evidence claims (if any) are related to which
    AR4SI trustworthiness claim, and therefore what the Verifier must
@@ -2249,22 +2658,22 @@ arm-platform-discrete-tpm-binding-data = (
     | Trustworthiness   | Related PSA claims                          |
     | Vector claims     |                                             |
     +===================+=============================================+
-    | configuration     | Software Components (Section 4.6.1)         |
+    | configuration     | Software Components (Section 4.8.1)         |
     +-------------------+---------------------------------------------+
     | executables       | ditto                                       |
     +-------------------+---------------------------------------------+
     | file-system       | N/A                                         |
     +-------------------+---------------------------------------------+
-    | hardware          | Implementation ID (Section 4.4.2) and CCA   |
+    | hardware          | Implementation ID (Section 4.6.2) and CCA   |
     |                   | Platform config (TODO)                      |
     +-------------------+---------------------------------------------+
-    | instance-identity | Instance ID (Section 4.4.1).  The Security  |
-    |                   | Lifecycle (Section 4.5.2) can also impact   |
+    | instance-identity | Instance ID (Section 4.6.1).  The Security  |
+    |                   | Lifecycle (Section 4.7.2) can also impact   |
     |                   | the derived identity.                       |
     +-------------------+---------------------------------------------+
     | runtime-opaque    | Indirectly derived from executables,        |
     |                   | hardware, and instance-identity.  The       |
-    |                   | Security Lifecycle (Section 4.5.2) can also |
+    |                   | Security Lifecycle (Section 4.7.2) can also |
     |                   | be relevant: for example, any debug state   |
     |                   | will expose otherwise protected memory.     |
     +-------------------+---------------------------------------------+
@@ -2274,14 +2683,14 @@ arm-platform-discrete-tpm-binding-data = (
     |                   | hardware, and instance-identity.            |
     +-------------------+---------------------------------------------+
 
-                       Table 3: AR4SI Claims mappings
+                       Table 4: AR4SI Claims mappings
 
    This document does not prescribe what value must be chosen based on
    each possible situation: when assigning specific Trustworthiness
    Claim values, an implementation is expected to follow the algorithm
    described in Section 2.3.3 of [RATS-AR4SI].
 
-7.3.  Endorsements, Reference Values and Verification Key Material
+7.5.  Endorsements, Reference Values and Verification Key Material
 
    The [CCA-ENDORSEMENTS] defines a protocol based on the [RATS-CoRIM]
    data model that can be used to convey CCA Endorsements, Reference
@@ -2310,19 +2719,24 @@ arm-platform-discrete-tpm-binding-data = (
 
 10.  IANA Considerations
 
-   TODO: additional top level claims
+10.1.  CBOR Tag Claims Registration
 
-10.1.  CBOR Web Token Claims Registration
+   IANA is requested to allocate the following tags in the "CBOR Tags"
+   registry [IANA-CBOR], preferably with the specific CBOR tag value
+   requested:
 
-   IANA is requested to make permanent the following claims that have
-   been assigned via early allocation in the "CBOR Web Token (CWT)
-   Claims" registry [IANA-CWT].
+10.2.  CBOR Web Token Claims Registration
 
-10.1.1.  Arm CCA Attestation CMW
+   IANA is requested to allocate the following tags in the "CBOR Web
+   Token (CWT) Claims" registry [IANA-CWT], preferably with the specific
+   CBOR tag value requested.  Some of these claims have been already
+   assigned via early allocation.
 
-   *  Claim Name: arm-cca-attestation-cmw
+10.2.1.  Arm CCA Attestation CMW
 
-   *  Claim Description: Arm CCA Attestation CMW
+   *  Claim Name: arm-cca-attestation-cmw-collection
+
+   *  Claim Description: Arm CCA Attestation CMW Collection
 
    *  JWT Claim Name: N/A
 
@@ -2334,7 +2748,7 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Specification Document(s): Section 4.1 of RFCthis
 
-10.1.2.  Security Lifecycle Claim
+10.2.2.  Security Lifecycle Claim
 
    *  Claim Name: arm-platform-security-lifecycle
 
@@ -2348,9 +2762,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.5.2 of RFCthis
+   *  Specification Document(s): Section 4.7.2 of RFCthis
 
-10.1.3.  Implementation ID Claim
+10.2.3.  Implementation ID Claim
 
    *  Claim Name: arm-platform-implementation-id
 
@@ -2364,9 +2778,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.4.2 of RFCthis
+   *  Specification Document(s): Section 4.6.2 of RFCthis
 
-10.1.4.  Software Components Claim
+10.2.4.  Software Components Claim
 
    *  Claim Name: arm-platform-software-components
 
@@ -2380,9 +2794,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.6.1 of RFCthis
+   *  Specification Document(s): Section 4.8.1 of RFCthis
 
-10.1.5.  Verification Service Indicator Claim
+10.2.5.  Verification Service Indicator Claim
 
    *  Claim Name: arm-platform-verification-service-indicator
 
@@ -2396,9 +2810,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.7.1 of RFCthis
+   *  Specification Document(s): Section 4.9.1 of RFCthis
 
-10.1.6.  Platform Config Claim
+10.2.6.  Platform Config Claim
 
    *  Claim Name: arm-platform-config
 
@@ -2412,9 +2826,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.5.3 of RFCthis
+   *  Specification Document(s): Section 4.7.3 of RFCthis
 
-10.1.7.  Platform Hash Algorithm ID Claim
+10.2.7.  Platform Hash Algorithm ID Claim
 
    *  Claim Name: arm-platform-hash-algm-id
 
@@ -2428,9 +2842,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.6.2 of RFCthis
+   *  Specification Document(s): Section 4.8.2 of RFCthis
 
-10.1.8.  Platform Manufacturing Config
+10.2.8.  Platform Manufacturing Config
 
    *  Claim Name: arm-platform-manufacturing-config
 
@@ -2444,9 +2858,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.6.4 of RFCthis
+   *  Specification Document(s): Section 4.8.4 of RFCthis
 
-10.1.9.  Platform Extension
+10.2.9.  Platform Extension
 
    *  Claim Name: arm-platform-extension
 
@@ -2460,9 +2874,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.6.5 of RFCthis
+   *  Specification Document(s): Section 4.8.5 of RFCthis
 
-10.1.10.  Platform TBB RoTPK
+10.2.10.  Platform TBB RoTPK
 
    *  Claim Name: arm-platform-tbb-rotpk
 
@@ -2476,9 +2890,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.6.8 of RFCthis
+   *  Specification Document(s): Section 4.8.8 of RFCthis
 
-10.1.11.  Platform Peer Signers
+10.2.11.  Platform Peer Signers
 
    *  Claim Name: arm-platform-peer-signers
 
@@ -2492,9 +2906,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.6.6 of RFCthis
+   *  Specification Document(s): Section 4.8.6 of RFCthis
 
-10.1.12.  Platform Device TPM Binding Data
+10.2.12.  Platform Device TPM Binding Data
 
    *  Claim Name: arm-platform-discrete-tpm-binding-data
 
@@ -2508,9 +2922,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.6.7 of RFCthis
+   *  Specification Document(s): Section 4.8.7 of RFCthis
 
-10.1.13.  Platform Workload Binding
+10.2.13.  Platform Workload Binding
 
    *  Claim Name: arm-platform-workload-binding
 
@@ -2524,25 +2938,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.3.1 of RFCthis
+   *  Specification Document(s): Section 4.5.1 of RFCthis
 
-10.1.14.  CCA Token Platform Token Label
-
-   *  Claim Name: cca-platform-token-label
-
-   *  Claim Description: CCA Token Platform Token Label
-
-   *  JWT Claim Name: N/A
-
-   *  Claim Key: 44234
-
-   *  Claim Value Type(s): byte string
-
-   *  Change Controller: iana-request@arm.com
-
-   *  Specification Document(s): Section 4.1 of RFCthis
-
-10.1.15.  Realm Personalization Value Claim
+10.2.14.  Realm Personalization Value Claim
 
    *  Claim Name: cca-realm-personalization-value
 
@@ -2556,9 +2954,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.8.3 of RFCthis
+   *  Specification Document(s): Section 4.10.5 of RFCthis
 
-10.1.16.  Realm Hash Algorithm ID Claim
+10.2.15.  Realm Hash Algorithm ID Claim
 
    *  Claim Name: cca-realm-hash-algm-id
 
@@ -2572,9 +2970,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.8.6 of RFCthis
+   *  Specification Document(s): Section 4.10.8 of RFCthis
 
-10.1.17.  Realm Public Key Claim
+10.2.16.  Realm Public Key Claim
 
    *  Claim Name: cca-realm-public-key
 
@@ -2588,9 +2986,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.8.7 of RFCthis
+   *  Specification Document(s): Section 4.10.9 of RFCthis
 
-10.1.18.  Realm Initial Measurement Claim
+10.2.17.  Realm Initial Measurement Claim
 
    *  Claim Name: cca-realm-initial-measurement
 
@@ -2604,9 +3002,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.8.4 of RFCthis
+   *  Specification Document(s): Section 4.10.6 of RFCthis
 
-10.1.19.  Realm Extensible Measurements Claim
+10.2.18.  Realm Extensible Measurements Claim
 
    *  Claim Name: cca-realm-extensible-measurements
 
@@ -2620,9 +3018,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.8.4 of RFCthis
+   *  Specification Document(s): Section 4.10.6 of RFCthis
 
-10.1.20.  Realm Public Key Hash Algorithm ID Claim
+10.2.19.  Realm Public Key Hash Algorithm ID Claim
 
    *  Claim Name: cca-realm-public-key-hash-algm-id
 
@@ -2636,9 +3034,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.8.8 of RFCthis
+   *  Specification Document(s): Section 4.10.10 of RFCthis
 
-10.1.21.  Realm MEC Policy
+10.2.20.  Realm MEC Policy
 
    *  Claim Name: cca-realm-mec-policy
 
@@ -2652,9 +3050,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.8.9 of RFCthis
+   *  Specification Document(s): Section 4.10.11 of RFCthis
 
-10.1.22.  Realm LFA Policy
+10.2.21.  Realm LFA Policy
 
    *  Claim Name: cca-realm-lfa-policy
 
@@ -2668,9 +3066,9 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.8.10 of RFCthis
+   *  Specification Document(s): Section 4.10.12 of RFCthis
 
-10.1.23.  Realm Devices Token Hash
+10.2.22.  Realm Devices Token Hash
 
    *  Claim Name: cca-realm-devices-token-hash
 
@@ -2684,32 +3082,27 @@ arm-platform-discrete-tpm-binding-data = (
 
    *  Change Controller: iana-request@arm.com
 
-   *  Specification Document(s): Section 4.8.12 of RFCthis
+   *  Specification Document(s): Section 4.10.14 of RFCthis
 
-10.1.24.  CCA Token Delegated Realm Token Label
+10.3.  Media Types
 
-   *  Claim Name: cca-platform-delegated-realm-label
+   IANA is requested to add the following media type to the "Media
+   Types" registry [IANA-MEDIATYPES].
 
-   *  Claim Description: CCA Token Platform Token Label
+10.3.1.  application/vnd.arm.cca
 
-   *  JWT Claim Name: N/A
+   Type name: application Subtype name: vnd.arm.cca Required parameters:
+   n/a Optional parameters: n/a Encoding considerations: binary Security
+   considerations: Section 9 of RFCthis Interoperability considerations:
+   n/a Published specification: RFCthis Applications that use this media
+   type: Attestation Verifiers, Attesters producing Arm CCA evidence.
+   Fragment identifier considerations: n/a File extension(s): n/a
+   Macintosh file type code(s): n/a Person and email address to contact
+   for further information: iana-request@arm.com Intended usage: COMMON
+   Restrictions on usage: none Author/Change controller: IETF
+   Provisional registration?  Maybe
 
-   *  Claim Key: 44241
-
-   *  Claim Value Type(s): byte string
-
-   *  Change Controller: iana-request@arm.com
-
-   *  Specification Document(s): Section 4.1 of RFCthis
-
-10.2.  Media Types
-
-   No new media type registration is requested.  To indicate that the
-   transmitted content is a CCA attestation token, applications can use
-   the application/eat+cwt media type defined in [EAT-MEDIATYPES] with
-   the eat_profile parameter set to tag:arm.com,2023:cca_platform#1.0.0.
-
-10.3.  CoAP Content-Formats Registration
+10.4.  CoAP Content-Formats Registration
 
    IANA is requested to register a CoAP Content-Format ID in the "CoAP
    Content-Formats" registry [IANA-CoAP-Content-Formats]:
@@ -2720,26 +3113,6 @@ arm-platform-discrete-tpm-binding-data = (
 
    The Content-Formats should be allocated from the Expert review range
    (0-255).
-
-10.3.1.  Registry Contents
-
-   *  Media Type: `application/eat+cwt;
-      eat_profile="tag:arm.com,2023:cca_platform#1.0.0"
-
-   *  Encoding: -
-
-   *  Id: To-be-assigned by IANA
-
-   *  Reference: RFCthis
-
-   *  Media Type: `application/eat+cwt;
-      eat_profile="tag:arm.com,2023:realm#1.0.0"
-
-   *  Encoding: -
-
-   *  Id: To-be-assigned by IANA
-
-   *  Reference: RFCthis
 
 11.  References
 
@@ -2773,9 +3146,17 @@ arm-platform-discrete-tpm-binding-data = (
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
               eat-media-type-12>.
 
+   [IANA-CBOR]
+              IANA, "Concise Binary Object Representation (CBOR) Tags",
+              2026, <https://www.iana.org/assignments/cbor-tags>.
+
    [IANA-CWT] IANA, "CBOR Web Token (CWT) Claims", 2022,
               <https://www.iana.org/assignments/cwt/cwt.xhtml#claims-
               registry>.
+
+   [IANA-MEDIATYPES]
+              IANA, "Media Types", 2026,
+              <https://www.iana.org/assignments/media-types>.
 
    [IANA.named-information]
               IANA, "Named Information",
@@ -2896,7 +3277,7 @@ Appendix A.  Examples
 
    The following examples show CCA attestation tokens for an
    hypothetical system comprising a single number of software component.
-   The attesting device is in a lifecycle state (Section 4.5.2) of
+   The attesting device is in a lifecycle state (Section 4.7.2) of
    SECURED.
 
 A.1.  Delegated Mode
