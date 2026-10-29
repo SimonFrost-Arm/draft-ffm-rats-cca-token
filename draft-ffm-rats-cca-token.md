@@ -555,7 +555,6 @@ The claims used vary by profile version and attestation model implemented as out
 * Attestation Model: Delegated attestation, with the RAK kept within the HES
 * Binding Claim: arm-platform-workload-binding
 * Claim Value: H(RAK public)
-* Note: for this attestation model, the PAT also contains an `eat_nonce` claim with the value equal to the CCA Realm challenge claim.
 
 #### Binding claim Notes
 
