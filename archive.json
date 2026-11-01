@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-10-27T03:47:20.568189+00:00",
+  "timestamp": "2026-11-01T04:29:52.400277+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -62,9 +62,24 @@
       "labels": [],
       "body": "Can an integrated endpoint whose FW/SW is validated by HES at boot be listed as part of SW components?",
       "createdAt": "2024-07-03T18:11:29Z",
-      "updatedAt": "2024-07-03T18:11:29Z",
+      "updatedAt": "2026-10-29T15:14:14Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "If the HES loads (validated) sw, then the entries can become part of the sw components list.\nIf the endpoint requires integration with a device protocol e.g. SPDM, then is your use case be covered by the cca-platform-extension work? See the pending https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/59 change, which covers both selective and comprehensive devices. This PR is pending a decision on how selective trust devices will have their evidence recorded.",
+          "createdAt": "2026-10-29T15:00:05Z",
+          "updatedAt": "2026-10-29T15:00:05Z"
+        },
+        {
+          "author": "gmandyam",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> 2\\. If the HES loads (validated) sw, then the entries can become part of the sw components list.\n>     If the endpoint requires integration with a device protocol e.g. SPDM, then is your use case be covered by the cca-platform-extension work? See the pending [#59](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/59) change, which covers both selective and comprehensive devices. This PR is pending a decision on how selective trust devices will have their evidence recorded.\n\n\"At boot\" is what the scenario described in the issue.  Protocol negotiation may not apply even if a protocol is used, and it is not clear to me how an RP would use this digest if there is something like a nonce used in the protocol that is determined by e.g. HES.  I also assume that device measurements are measurements determined by the device.  What if the FW is measured by HES prior to download to the device?",
+          "createdAt": "2026-10-29T15:14:14Z",
+          "updatedAt": "2026-10-29T15:14:14Z"
+        }
+      ]
     },
     {
       "number": 3,
@@ -270,15 +285,15 @@
       "id": "I_kwDOMRXjbM6aRgfS",
       "title": "Describe \"direct\" mode",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/16",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "This is related to #14 because the direct mode is a different attester from delegated.",
       "createdAt": "2024-10-15T10:04:58Z",
-      "updatedAt": "2026-02-19T11:32:52Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-29T13:11:51Z",
+      "closedAt": "2026-10-29T13:11:51Z",
       "comments": [
         {
           "author": "SimonFrost-Arm",
@@ -286,6 +301,13 @@
           "body": "Partly implemented in https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/44, more to do in a further PR",
           "createdAt": "2026-02-19T11:32:52Z",
           "updatedAt": "2026-02-19T11:32:52Z"
+        },
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Addressed in recent PRs",
+          "createdAt": "2026-10-29T13:11:51Z",
+          "updatedAt": "2026-10-29T13:11:51Z"
         }
       ]
     },
@@ -294,15 +316,15 @@
       "id": "I_kwDOMRXjbM6hmUn0",
       "title": "In delegated mode, should `eat_nonce` be `rak_pub_hash_value` instead?",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/19",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "There is potential semantic ambiguity in using `eat_nonce` for the binder in delegated mode.\r\n\r\nIn particular,\r\n\r\n1. it's not a proper challenge issued by the ABI caller\r\n2. freshness properties associated with the claim are not clear.\r\n\r\nIt seems easier to create a new claim with explicit semantics, e.g., `rak_pub_hash_value`.",
       "createdAt": "2024-12-02T09:24:23Z",
-      "updatedAt": "2024-12-30T21:45:58Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-29T13:12:41Z",
+      "closedAt": "2026-10-29T13:12:41Z",
       "comments": [
         {
           "author": "SimonFrost-Arm",
@@ -317,6 +339,13 @@
           "body": "I think the use of eat-nonce is consistent with https://datatracker.ietf.org/doc/html/rfc9334#name-implicit-timekeeping-using-.  \r\n\r\nThis is because in this case the eat-nonce provides an implicit indication of time, namely the time at which the RAK was generated and bound to the platform token.",
           "createdAt": "2024-12-30T21:45:56Z",
           "updatedAt": "2024-12-30T21:45:56Z"
+        },
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Addressed in [PR58](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/58)",
+          "createdAt": "2026-10-29T13:12:41Z",
+          "updatedAt": "2026-10-29T13:12:41Z"
         }
       ]
     },
@@ -349,16 +378,24 @@
       "id": "I_kwDOMRXjbM6lLLty",
       "title": "New media types for identifying different CCA attestation modes",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/23",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "gmandyam",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Current draft does not register new media types, despite a new EAT profile being defined in the draft.  Should we consider the following:\r\n\r\na) Register new media type for the profile as per guidance in https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-12#name-a-media-type-parameter-for-\r\nb) Refine said media type to differentiate between delegated and direct models.   One way to do this is to create two EAT profiles for CCA.",
       "createdAt": "2025-01-06T18:04:35Z",
-      "updatedAt": "2025-01-06T18:04:35Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-10-29T13:16:09Z",
+      "closedAt": "2026-10-29T13:16:09Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Housekeeping: closing this Issue as [Issue 60](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/60) discusses the appropriate media type registration.\n\nAddressing b) - the intent is to use the same media type for all attestation modes but to then have differing CMW collection entries for the appropriate tokens, See clarifications in [PR66](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/66)\n",
+          "createdAt": "2026-10-29T13:16:09Z",
+          "updatedAt": "2026-10-29T13:16:09Z"
+        }
+      ]
     },
     {
       "number": 24,
@@ -381,15 +418,15 @@
       "id": "I_kwDOMRXjbM6o6JW4",
       "title": "algorithm ID claim string is discouraged?",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/28",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I'm reviewing the attestation design for our ARM silicon and I see\n\n> The CCA platform hash algorithm ID claim is a text string that identifies the algorithm used to calculate the extended measurements in the CCA platform token.\n> The string SHOULD be encoded according to \"Hash Name String\" in the \"Named Information Hash Algorithm Registry\" [IANA.named-information].\n\nMy understanding from Henk is that the text is discouraged and the number in [[IANA.named-information](https://www.ietf.org/archive/id/draft-ffm-rats-cca-token-00.html#IANA.named-information)] is preferred. I'd like the text to allow for both with `text / int` and say\n\nThe CCA platform hash algorithm ID claim is a text string or integer that identifies the algorithm used to calculate the extended measurements int the CCA platform token.\n> If the identifier is an integer, it MUST denote to the corresponding algorithm in the IANA.named-information hash algorithm registry.\n> If the identifier is a string, it SHOULD be encoded according to \"Hash Name String\" in the \"Named Information Hash Algorithm Registry\" [IANA.named-information].\n\n\nSimilar for `cca-realm-hash-algo-id-label`, `cca-realm-public-key-hash-algo-id-label`.",
       "createdAt": "2025-02-05T19:42:23Z",
-      "updatedAt": "2025-02-06T17:26:34Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-29T14:21:59Z",
+      "closedAt": "2026-10-29T14:21:59Z",
       "comments": [
         {
           "author": "SimonFrost-Arm",
@@ -464,15 +501,15 @@
       "id": "I_kwDOMRXjbM6pDUhF",
       "title": "Signer ID for platform software",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/30",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "> This attribute MUST be present in a CCA Platform software component.\n\nI understand this as being the CoRIM signer for the component, so does that mean there is some presupposed format that embeds the manifest with the binary for the loader to make note of in the certificate chain? What's the communication mechanism?",
       "createdAt": "2025-02-06T17:56:54Z",
-      "updatedAt": "2025-02-10T16:17:26Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-29T14:26:46Z",
+      "closedAt": "2026-10-29T14:26:46Z",
       "comments": [
         {
           "author": "deeglaze",
@@ -494,6 +531,13 @@
           "body": "Measured boot pulls the public key of a signer out of the image details and sends it to platform code to be 'measured' - in RSE this stores a hash, that is then copied to the platform attestation report.",
           "createdAt": "2025-02-10T16:17:24Z",
           "updatedAt": "2025-02-10T16:17:24Z"
+        },
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closed as clarified",
+          "createdAt": "2026-10-29T14:26:46Z",
+          "updatedAt": "2026-10-29T14:26:46Z"
         }
       ]
     },
@@ -574,16 +618,24 @@
       "id": "I_kwDOMRXjbM6pDmxk",
       "title": "Identify a change controller",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/34",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "deeglaze",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "> * Change Controller: Hannes Tschofenig      TODO... find document centric change controller...                                                                                                                                                                                                                                                                            \n",
       "createdAt": "2025-02-06T18:31:41Z",
-      "updatedAt": "2025-02-06T18:31:41Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-10-29T13:11:12Z",
+      "closedAt": "2026-10-29T13:11:12Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Addressed in [PR46](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/46)",
+          "createdAt": "2026-10-29T13:11:12Z",
+          "updatedAt": "2026-10-29T13:11:12Z"
+        }
+      ]
     },
     {
       "number": 35,
@@ -638,16 +690,24 @@
       "id": "I_kwDOMRXjbM7RuS6y",
       "title": "Allow the CMW to include optional entries",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/43",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomas-fossati",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The CMW collection should allow optional entries, e.g., to accommodate assigned devices, below-platform RoTs, etc.",
       "createdAt": "2025-10-15T15:34:33Z",
-      "updatedAt": "2025-10-15T15:34:33Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-10-29T13:10:00Z",
+      "closedAt": "2026-10-29T13:10:00Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Addressed in [PR66](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/66)",
+          "createdAt": "2026-10-29T13:10:00Z",
+          "updatedAt": "2026-10-29T13:10:00Z"
+        }
+      ]
     },
     {
       "number": 45,
@@ -685,16 +745,24 @@
       "id": "I_kwDOMRXjbM8AAAABBOzumA",
       "title": "Clarification needed: exact input bytes for the platform challenge (token binding) hash",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/50",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Ruach",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "Problem Statement\n\nThe CCA token specification defines the platform challenge as a hash of the Realm Attestation Key (RAK), used to bind the platform and realm tokens. However, the spec does not state what byte representation of the RAK should be used as the hash input.\n\n```\ncca-hash-type = bytes .size 32 / bytes .size 48 / bytes .size 64\ncca-platform-challenge-label = 10\ncca-platform-challenge = (\n    cca-platform-challenge-label => cca-hash-type\n)\n```\nWhat should be the correct input to be hashed?\n\nRaw uncompressed EC point: 0x04 || X || Y (97 bytes for P-384)\nCBOR-encoded COSE_Key: a CBOR map as defined by COSE\nRequest\nThe spec should explicitly state which byte representation of the RAK MUST be used as the input to the hash function when computing the cca-platform-challenge binding value.",
       "createdAt": "2026-05-04T15:07:10Z",
-      "updatedAt": "2026-05-04T15:07:10Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-10-29T13:09:13Z",
+      "closedAt": "2026-10-29T13:08:49Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Addressed in [PR58](https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/58)",
+          "createdAt": "2026-10-29T13:08:49Z",
+          "updatedAt": "2026-10-29T13:09:13Z"
+        }
+      ]
     },
     {
       "number": 52,
@@ -760,15 +828,15 @@
       "id": "I_kwDOMRXjbM8AAAABE2UOmw",
       "title": "CDDL for arm-platform-tbb-rotpk-item under specified",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/53",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Section 4.6.7.  CCA Platform TBB ROTPK, documents the CDDL for provisioned public key identifiers.\n\nHowever the CDDL below:\n\narm-platform-tbb-rotpk-item = {\n       1 => tstr,             ; e.g. \"CM\" or \"DM\"\n       2 => int,              ; active ROTPK array\n       3 => int,              ; index in the active array\n       4 => arm-platform-hash-type    ; hash object\n   }\n\nIn addition to just code points it should also add the name of each of the entries, for example  just a \"CM\" or a \"DM\" for first index, is not enough information.\n\n ",
       "createdAt": "2026-06-09T08:39:02Z",
-      "updatedAt": "2026-06-09T08:39:02Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-29T14:21:27Z",
+      "closedAt": "2026-10-29T14:21:27Z",
       "comments": []
     },
     {
@@ -800,15 +868,15 @@
       "id": "I_kwDOMRXjbM8AAAABKnbDfA",
       "title": "Clarify the requirement of LifeCycle value in arm-platform-tbb-rotpk-item",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/57",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "In the current specification:\n\narm-platform-tbb-rotpk-item first element, i.e. \n1=> tstr\n\nAllows users to set any arbitrary string value.\n\nWe need to change it to much more stringent requirement such as\nThe value of the string MUST be either \"CM\" or \"DM\"",
       "createdAt": "2026-07-29T08:59:02Z",
-      "updatedAt": "2026-07-29T09:23:13Z",
-      "closedAt": null,
+      "updatedAt": "2026-10-29T14:21:16Z",
+      "closedAt": "2026-10-29T14:21:16Z",
       "comments": [
         {
           "author": "thomas-fossati",
@@ -845,41 +913,72 @@
       "labels": [],
       "body": "Clarify and state the correct Media Type for New CCA Platform and Realm Profiles:\n\nDo we need to register a new Media Type that clearly states the nature of CCA Token carried inside CMW.\n\nThis issue is originated from the discussion on:\n\nhttps://github.com/veraison/services/issues/452\n\n\n\n\n",
       "createdAt": "2026-09-03T10:05:34Z",
-      "updatedAt": "2026-09-03T10:05:34Z",
+      "updatedAt": "2026-10-29T14:23:37Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "As Thomas states in the veraison thread, the media type needs to be for the accumulated tokens (+ other components) in the CMW collection. Thus a CMW media type could work provided the consumer understands that a 907 tag may be present. A new media type would be needed for the precise use. Suggest application/vnd.arm.cca (subject to review)",
+          "createdAt": "2026-10-29T13:05:27Z",
+          "updatedAt": "2026-10-29T13:05:27Z"
+        },
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "body": "This works for me",
+          "createdAt": "2026-10-29T14:23:37Z",
+          "updatedAt": "2026-10-29T14:23:37Z"
+        }
+      ]
     },
     {
       "number": 63,
       "id": "I_kwDOMRXjbM8AAAABTzZARA",
       "title": "Direct-mode realm token disagrees between prose and CDDL",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/63",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Ruach",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The direct-mode realm token is not described consistently by the prose and CDDL.\n\n## Realm token signing\nThe Direct section says:\n> The CCA Evidence produced with the direct model comprises a signed EAT for the platform token and an unsigned EAT for the realm token, wrapped in a CMW collection.\n\nThe Token Encoding and Signing section says:\n> In the Delegated and HESRAK attestation models, the Realm claims set will also be wrapped in a CWT.\n\nHowever, `cddl/top/cca-top-claims.cddl` always requires the realm entry to be a `COSE_Sign1`:\n```\n    0xACD1 => [\n      eat-cwt-coap-cf\n      bytes .cbor COSE_Sign1<cca-realm-claims>\n    ]\n```\n\nIt also uses the label registered as `cca-platform-delegated-realm-label`. The Token Binding section says direct mode must use a different CMW map value, but the draft does not assign one or specify its content format.\n\n## Realm public-key claims\nFor the Realm Public Key claim (44237), the draft says:\n> This claim MUST be present in a CCA Realm state attestation token when the attestation model is not Direct mode.\n\nIt then says:\n> Compatibility: this claim can be present for all values of CCA Realm Profile.\nThe same wording appears for the Realm Public Key Hash Algorithm ID claim (44240).\n\nThe Token Binding section additionally says:\n> In such a profile, the Realm Public Key and Realm Public Key Hash Algorithm ID claims will not be used.\n\nThis leaves their direct-mode presence unclear:\n- \u201cMUST be present ... when ... not Direct\u201d means they are not mandatory in direct mode.\n- \u201ccan be present for all values of CCA Realm Profile\u201d appears to permit them in direct mode.\n- \u201cwill not be used\u201d says a direct-mode verifier ignores them, but does not say whether they must be omitted or may be included.\n\nThe current `cca-realm-claim-map` requires both claims unconditionally:\n    cca-realm-hash-algo-id\n    cca-realm-public-key\n    cca-realm-public-key-hash-algo-id\n    cca-realm-mec-policy\n\n## Questions\n\n1. Is the direct-mode realm entry an unsigned claims set, or must it still be a `COSE_Sign1`?\n2. What CMW map label and content format should identify a direct-mode realm entry?\n3. In direct mode, must claims 44237 and 44240 be absent, may they be present but ignored, or must they still be present?\n4. Should the CDDL define a direct-mode realm claim-map alternative that reflects the intended rule?\n\n## Possible CDDL direction\nFor illustration, the CDDL could distinguish signed and direct Realm entries:\n ```\n cca-token-cmw =\n    cca-delegated-realm-cmw /\n    cca-direct-realm-cmw\n  cca-platform-cmw-entry = [\n    eat-cwt-coap-cf\n    bytes .cbor COSE_Sign1<arm-platform-claims>\n  ]\n  ; Delegated/HESRAK mode: signed Realm token.\n  cca-delegated-realm-cmw = {\n    0xACCA => cca-platform-cmw-entry\n    0xACD1 => [\n      eat-cwt-coap-cf\n      bytes .cbor COSE_Sign1<cca-realm-claims>\n    ]\n  }\n  ; Direct mode: unsigned Realm claims.\n  ; The draft must assign these two values.\n  cca-direct-realm-label = TBD\n  cca-direct-realm-content-format = TBD\n  cca-direct-realm-cmw = {\n    0xACCA => cca-platform-cmw-entry\n    cca-direct-realm-label => [\n      cca-direct-realm-content-format\n      bytes .cbor cca-realm-direct-claims\n    ]\n  }\n  cca-realm-direct-claims = {\n    cca-realm-challenge\n    ? cca-realm-profile\n    cca-realm-instance-id\n    cca-realm-personalization-value\n    cca-realm-initial-measurement\n    cca-realm-extensible-measurements\n    cca-realm-hash-algo-id\n    cca-realm-mec-policy\n    ? cca-realm-lfa-policy\n    ? cca-realm-devices-token-hash\n  }\n```",
       "createdAt": "2026-09-29T02:02:04Z",
-      "updatedAt": "2026-09-29T02:02:04Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-10-29T12:52:21Z",
+      "closedAt": "2026-10-29T12:52:21Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Please see changes introduced in https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/66 which should improve the description for the different attestation models",
+          "createdAt": "2026-10-29T12:52:21Z",
+          "updatedAt": "2026-10-29T12:52:21Z"
+        }
+      ]
     },
     {
       "number": 64,
       "id": "I_kwDOMRXjbM8AAAABVnIUfQ",
       "title": "Ambiguity in CCA Platform Hash Alg ID",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/issues/64",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "yogeshbdeshpande",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Following Ambiguities needs clarification \n1.\nCCA Platform Hash Alg ID is 2402\n\nIt is mandatory.\n\nThe field is OPEN Text\n\nWe should perhaps map it to cca-platform-hash-type ??\n\nSHA256/384/512 ..?\n\n2. When it is always present does it uniquely align with all the Computed Hashes for below:\na. SW Components\nb. Other token claims like TBB RoTPKs\nc. Peer signer IDs etc//?\n\n3. If answer to 2. above is yes, then why one need a Hash Alg ID in the CCA Software Component and is kept Optional???\n\n",
       "createdAt": "2026-10-07T12:53:25Z",
-      "updatedAt": "2026-10-07T12:54:17Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2026-10-29T12:57:58Z",
+      "closedAt": "2026-10-29T12:57:58Z",
+      "comments": [
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "This claim specifies the algorithm that is used for hash items in platform claims.\nIt is text so that the algm can be located in the IANA set from  http://www.iana.org/assignments/named-information\n\nSome items in the platform claims e.g. sw-components, can have overrides if their hashes are calculated with a different algm.",
+          "createdAt": "2026-10-29T12:57:58Z",
+          "updatedAt": "2026-10-29T12:57:58Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -5493,6 +5592,58 @@
           ]
         }
       ]
+    },
+    {
+      "number": 67,
+      "id": "PR_kwDOMRXjbM8AAAABLj6hpQ",
+      "title": "Alterations to IANA requests for CBOR tag and media type",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/67",
+      "state": "OPEN",
+      "author": "SimonFrost-Arm",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "Moved IANA request for 907 from CMW reg to CBOR reg.\n\nAdded request for new application/vnd.arm.com  media type for CCA CMW package.\n\n",
+      "createdAt": "2026-10-29T15:26:28Z",
+      "updatedAt": "2026-10-29T15:26:41Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "4832924a9c05fa8e0830c3963d57ea26aa456a13",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "iana-req",
+      "headRefOid": "7059c62939202db796e83bae6636c378ac309b30",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 68,
+      "id": "PR_kwDOMRXjbM8AAAABLluHgw",
+      "title": "add CI machinery to publish the autogenerated CDDL",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/68",
+      "state": "OPEN",
+      "author": "thomas-fossati",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This allows downstream consumers to pull the CDDL artefacts.",
+      "createdAt": "2026-10-29T17:34:42Z",
+      "updatedAt": "2026-10-29T18:14:23Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "4832924a9c05fa8e0830c3963d57ea26aa456a13",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "rel-cddl",
+      "headRefOid": "a17ed68ef6a780da664205011f96ff5d9c1479ba",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
