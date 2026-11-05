@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-03T05:25:48.379894+00:00",
+  "timestamp": "2026-11-05T05:12:39.267346+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -5605,7 +5605,7 @@
       "labels": [],
       "body": "Moved IANA request for 907 from CMW reg to CBOR reg.\n\nAdded request for new application/vnd.arm.com  media type for CCA CMW package.\n\n",
       "createdAt": "2026-10-29T15:26:28Z",
-      "updatedAt": "2026-11-02T18:15:45Z",
+      "updatedAt": "2026-11-03T09:00:01Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "4832924a9c05fa8e0830c3963d57ea26aa456a13",
@@ -5638,6 +5638,74 @@
           "createdAt": "2026-11-02T18:08:05Z",
           "updatedAt": "2026-11-02T18:08:05Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABVq9iSw",
+          "commit": {
+            "abbreviatedOid": "9f705c0"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-03T08:49:27Z",
+          "updatedAt": "2026-11-03T09:00:00Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "L1588 says _\"the following tags\"_ but then there are no tags in this section :-)",
+              "createdAt": "2026-11-03T08:49:27Z",
+              "updatedAt": "2026-11-03T09:00:00Z"
+            },
+            {
+              "originalPosition": 42,
+              "body": "s/tags/CWT claims/",
+              "createdAt": "2026-11-03T08:50:07Z",
+              "updatedAt": "2026-11-03T09:00:00Z"
+            },
+            {
+              "originalPosition": 66,
+              "body": "```suggestion\n   Security considerations:  {{sec-security-consideration}} of {{&SELF}}\n```",
+              "createdAt": "2026-11-03T08:52:10Z",
+              "updatedAt": "2026-11-03T09:00:00Z"
+            },
+            {
+              "originalPosition": 77,
+              "body": "Rather than \"Maybe\" we should decide whether we want to go ahead with IANA or wait. I'd recommend the former. ",
+              "createdAt": "2026-11-03T08:53:46Z",
+              "updatedAt": "2026-11-03T09:00:00Z"
+            },
+            {
+              "originalPosition": 76,
+              "body": "Unless the document is adopted by the RATS WG, this can't be \"IETF\".  It should be a person or better (to mitigate the bus factor) a pool of people within Arm.",
+              "createdAt": "2026-11-03T08:56:20Z",
+              "updatedAt": "2026-11-03T09:00:00Z"
+            },
+            {
+              "originalPosition": 62,
+              "body": "vnd.arm.cca+cbor?",
+              "createdAt": "2026-11-03T08:56:48Z",
+              "updatedAt": "2026-11-03T09:00:00Z"
+            },
+            {
+              "originalPosition": 1,
+              "body": "this should be for the vnd.arm.cca type instead",
+              "createdAt": "2026-11-03T08:57:26Z",
+              "updatedAt": "2026-11-03T09:00:00Z"
+            },
+            {
+              "originalPosition": 34,
+              "body": "```suggestion\nIANA is requested to allocate the following tags in the \"CBOR Tags\" registry {{IANA-CBOR}},\n```",
+              "createdAt": "2026-11-03T08:57:49Z",
+              "updatedAt": "2026-11-03T09:00:00Z"
+            },
+            {
+              "originalPosition": 15,
+              "body": "these should go together with IANA-CoAP-Content-Formats, which is currently in the informative section.",
+              "createdAt": "2026-11-03T08:59:50Z",
+              "updatedAt": "2026-11-03T09:00:00Z"
+            }
+          ]
         }
       ]
     },
