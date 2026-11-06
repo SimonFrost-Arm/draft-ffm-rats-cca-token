@@ -462,8 +462,7 @@ This claim is OPTIONAL in a CCA Platform attestation token.
 See {{sec-token-binding-compatibility}} for further details on when the claim may be present.
 
 The {{EAT}} `eat_nonce` (claim key 10) is used.  Since the EAT nonce claim offers flexiblity for different
-attestation technologies, this specifications applies the following constraints
- to the `nonce-type`:
+attestation technologies, this specifications applies the following constraints to the `nonce-type`:
 
 * The length MUST be either 32, 48, or 64 bytes.
 * Only a single nonce value is conveyed. The array notation MUST NOT be used for encoding the nonce value.
@@ -483,7 +482,7 @@ The claims used vary by profile version and attestation model implemented as out
 {: #prof-bind-11}
 
 * Attestation Model: Delegated
-* Binding Claim: eat_nonce
+* Binding Claim:  arm-platform-challenge
 * Claim Value: H(RAK public)
 
 #### Profile tag:arm.com,2024:cca_platform#2.0.0
@@ -497,7 +496,7 @@ The claims used vary by profile version and attestation model implemented as out
 {: #prof-bind-20-direct}
 
 * Attestation Model: Direct
-* Binding Claim: eat_nonce
+* Binding Claim:  arm-platform-challenge
 * Claim Value: H(realm claims)
 
 #### Profile tag:arm.com,2026:cca_platform#2.0.0
