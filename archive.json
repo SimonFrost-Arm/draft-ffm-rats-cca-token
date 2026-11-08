@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-05T05:12:39.267346+00:00",
+  "timestamp": "2026-11-08T04:32:55.699470+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -5605,13 +5605,13 @@
       "labels": [],
       "body": "Moved IANA request for 907 from CMW reg to CBOR reg.\n\nAdded request for new application/vnd.arm.com  media type for CCA CMW package.\n\n",
       "createdAt": "2026-10-29T15:26:28Z",
-      "updatedAt": "2026-11-03T09:00:01Z",
+      "updatedAt": "2026-11-05T15:07:37Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "4832924a9c05fa8e0830c3963d57ea26aa456a13",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "iana-req",
-      "headRefOid": "9f705c0eafec408737018f134669d93cd10fab6b",
+      "headRefOid": "cc197cecb8945bd0cb3c45569bf9d333bf293930",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -5623,6 +5623,13 @@
           "body": "Thanks Simon; I'll do my review tomorrow morning.",
           "createdAt": "2026-11-02T18:15:45Z",
           "updatedAt": "2026-11-02T18:15:45Z"
+        },
+        {
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "body": "Many thanks for the review @thomas-fossati, should be fixed up now.",
+          "createdAt": "2026-11-05T12:07:21Z",
+          "updatedAt": "2026-11-05T12:07:21Z"
         }
       ],
       "reviews": [
@@ -5706,6 +5713,59 @@
               "updatedAt": "2026-11-03T09:00:00Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABWMaDBQ",
+          "commit": {
+            "abbreviatedOid": "9f705c0"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-05T11:45:08Z",
+          "updatedAt": "2026-11-05T11:45:08Z",
+          "comments": [
+            {
+              "originalPosition": 34,
+              "body": "Whoops, dropped the 907 tag in the wrong section",
+              "createdAt": "2026-11-05T11:45:08Z",
+              "updatedAt": "2026-11-05T11:45:08Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABWPCrXQ",
+          "commit": {
+            "abbreviatedOid": "cc197ce"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-05T15:07:06Z",
+          "updatedAt": "2026-11-05T15:07:06Z",
+          "comments": [
+            {
+              "originalPosition": 84,
+              "body": "```suggestion\npreferably with the specific value requested.\n```",
+              "createdAt": "2026-11-05T15:07:06Z",
+              "updatedAt": "2026-11-05T15:07:06Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABWPDKVQ",
+          "commit": {
+            "abbreviatedOid": "cc197ce"
+          },
+          "author": "thomas-fossati",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "\ud83d\udea2 it! (modulo tiny correction inlined)",
+          "createdAt": "2026-11-05T15:07:37Z",
+          "updatedAt": "2026-11-05T15:07:37Z",
+          "comments": []
         }
       ]
     },
@@ -5734,6 +5794,86 @@
       "mergeCommit": null,
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 69,
+      "id": "PR_kwDOMRXjbM8AAAABNYCSJQ",
+      "title": "Minor clarification and consistency",
+      "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/69",
+      "state": "OPEN",
+      "author": "yogeshbdeshpande",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-11-06T18:20:14Z",
+      "updatedAt": "2026-11-06T18:26:10Z",
+      "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "baseRefName": "main",
+      "baseRefOid": "4832924a9c05fa8e0830c3963d57ea26aa456a13",
+      "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
+      "headRefName": "more-clarifications",
+      "headRefOid": "f95887a2176d231d207ee89e56ff3a372be6b1bb",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABWgB-uA",
+          "commit": {
+            "abbreviatedOid": "f95887a"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-06T18:23:05Z",
+          "updatedAt": "2026-11-06T18:23:05Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Line 458 implies that for a deployment model, which is `Direct  OR Non-Delegated` this is used to carry RP Nonce.",
+              "createdAt": "2026-11-06T18:23:05Z",
+              "updatedAt": "2026-11-06T18:23:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABWgDs-Q",
+          "commit": {
+            "abbreviatedOid": "f95887a"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-06T18:25:26Z",
+          "updatedAt": "2026-11-06T18:25:26Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Please see my comment at Line 458, which states For Direct Model, this parameter CCA Platform Challenge carries RP Nonce. However, Line 555 states, the Claim MUST NOT be present and `direct` deployment Model is in the list for 2026 Profile. \n\nDoes Line 458 and Line 555 contradict each other?",
+              "createdAt": "2026-11-06T18:25:26Z",
+              "updatedAt": "2026-11-06T18:25:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABWgENyA",
+          "commit": {
+            "abbreviatedOid": "f95887a"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "I have some generic questions along with the minor edits on this PR!",
+          "createdAt": "2026-11-06T18:26:10Z",
+          "updatedAt": "2026-11-06T18:26:10Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
