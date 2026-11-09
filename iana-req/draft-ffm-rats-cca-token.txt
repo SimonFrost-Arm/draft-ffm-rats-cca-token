@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 9 May 2027                                               Linaro
+Expires: 13 May 2027                                              Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                         5 November 2026
+                                                         9 November 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 May 2027.
+   This Internet-Draft will expire on 13 May 2027.
 
 Copyright Notice
 
@@ -2741,8 +2741,8 @@ arm-platform-tbb-rotpk = (
 
    IANA is requested to allocate the following CWT claims in the "CBOR
    Web Token (CWT) Claims" registry [IANA-CWT], preferably with the
-   specific CBOR tag value requested.  Some of these claims have been
-   already assigned via early allocation.
+   specific value requested.  Some of these claims have been already
+   assigned via early allocation.
 
 10.2.1.  Security Lifecycle Claim
 

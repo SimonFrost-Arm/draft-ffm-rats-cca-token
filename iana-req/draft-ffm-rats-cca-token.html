@@ -1040,7 +1040,7 @@ svg {
   & :is([stroke="white"], [stroke^="#fff"]) {
     stroke: var(--background-color);
   }
-  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+  & :is([fill="black"], [fill^="#000"], :not([fill], [fill] *)) {
     fill: var(--text-color);
   }
   & :is([fill="white"], [fill^="#fff"]) {
@@ -1059,7 +1059,7 @@ svg {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Frost, et al.</td>
-<td class="center">Expires 9 May 2027</td>
+<td class="center">Expires 13 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg {
 <dd class="internet-draft">draft-ffm-rats-cca-token-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-11-05" class="published">5 November 2026</time>
+<time datetime="2026-11-09" class="published">9 November 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-05-09">9 May 2027</time></dd>
+<dd class="expires"><time datetime="2027-05-13">13 May 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1131,7 +1131,7 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -4687,7 +4687,7 @@ preferably with the specific CBOR tag value requested:<a href="#section-10.1-1" 
 <a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-cbor-web-token-claims-regis" class="section-name selfRef">CBOR Web Token Claims Registration</a>
         </h3>
 <p id="section-10.2-1">IANA is requested to allocate the following CWT claims in the "CBOR Web Token (CWT) Claims" registry <span>[<a href="#IANA-CWT" class="cite xref">IANA-CWT</a>]</span>,
-preferably with the specific CBOR tag value requested.
+preferably with the specific value requested.
 Some of these claims have been already assigned via early allocation.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 <div id="security-lifecycle-claim">
 <section id="section-10.2.1">
