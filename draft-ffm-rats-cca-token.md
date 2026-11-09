@@ -453,8 +453,8 @@ Compatibility: this claim will only be present where profile values are at or ne
 ### CCA Platform Challenge
 {: #sec-platform-challenge-claim}
 
-If an implementation uses a different attestation model to the default delegated model, a CCA platform challenge
-claim can be present in the platform attestation token.
+If an implementation uses a different attestation model to the default delegated model or the direct model,
+a CCA platform challenge claim can be present in the platform attestation token.
 This claim is used to carry a challenge provided by the relying party to demonstrate freshness of the generated token.
 
 This claim is OPTIONAL in a CCA Platform attestation token.
