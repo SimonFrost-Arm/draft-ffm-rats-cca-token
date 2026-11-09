@@ -1602,7 +1602,7 @@ preferably with the specific CBOR tag value requested:
 ## CBOR Web Token Claims Registration
 
 IANA is requested to allocate the following CWT claims in the "CBOR Web Token (CWT) Claims" registry {{IANA-CWT}},
-preferably with the specific CBOR tag value requested.
+preferably with the specific value requested.
 Some of these claims have been already assigned via early allocation.
 
 ### Security Lifecycle Claim
