@@ -23,23 +23,23 @@ wire, and how they are cryptographically protected.
 interoperability with Arm's architecture. It is not a standard nor
 a product of the IETF. 
     " name="description">
-<meta content="xml2rfc 3.34.1" name="generator">
+<meta content="xml2rfc 3.35.0" name="generator">
 <meta content="Internet-Draft" name="keyword">
 <meta content="draft-ffm-rats-cca-token-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.34.1
-    Python 3.14.8
-    ConfigArgParse 1.8.0
+  xml2rfc 3.35.0
+    Python 3.14.10
+    ConfigArgParse 1.9.0
     google-i18n-address 3.1.1
     intervaltree 3.2.1
     Jinja2 3.1.6
     lxml 6.1.1
     natsort 8.4.0
-    platformdirs 4.13.4
+    platformdirs 4.14.3
     pycountry 24.6.1
     PyYAML 6.0.3
     requests 2.33.1
-    wcwidth 0.9.2
+    wcwidth 0.9.4
 -->
 <link href="draft-ffm-rats-cca-token.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1040,7 +1040,7 @@ svg {
   & :is([stroke="white"], [stroke^="#fff"]) {
     stroke: var(--background-color);
   }
-  & :is([fill="black"], [fill^="#000"], :not([fill])) {
+  & :is([fill="black"], [fill^="#000"], :not([fill], [fill] *)) {
     fill: var(--text-color);
   }
   & :is([fill="white"], [fill^="#fff"]) {
@@ -1055,11 +1055,11 @@ svg {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">CCA Reference Attestation Token</td>
-<td class="right">October 2026</td>
+<td class="right">November 2026</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Frost, et al.</td>
-<td class="center">Expires 29 April 2027</td>
+<td class="center">Expires 13 May 2027</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1072,12 +1072,12 @@ svg {
 <dd class="internet-draft">draft-ffm-rats-cca-token-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-10-26" class="published">26 October 2026</time>
+<time datetime="2026-11-09" class="published">9 November 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2027-04-29">29 April 2027</time></dd>
+<dd class="expires"><time datetime="2027-05-13">13 May 2027</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1131,7 +1131,7 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 29 April 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 13 May 2027.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1400,86 +1400,91 @@ a product of the IETF.<a href="#section-abstract-3" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.10.1"><a href="#section-10" class="auto internal xref">10</a>. <a href="#name-iana-considerations" class="internal xref">IANA Considerations</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-cbor-web-token-claims-regis" class="internal xref">CBOR Web Token Claims Registration</a></p>
+                <p id="section-toc.1-1.10.2.1.1"><a href="#section-10.1" class="auto internal xref">10.1</a>.  <a href="#name-cbor-tag-claims-registratio" class="internal xref">CBOR Tag Claims Registration</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.1">
                     <p id="section-toc.1-1.10.2.1.2.1.1"><a href="#section-10.1.1" class="auto internal xref">10.1.1</a>.  <a href="#name-arm-cca-attestation-cmw" class="internal xref">Arm CCA Attestation CMW</a></p>
 </li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.2">
-                    <p id="section-toc.1-1.10.2.1.2.2.1"><a href="#section-10.1.2" class="auto internal xref">10.1.2</a>.  <a href="#name-security-lifecycle-claim" class="internal xref">Security Lifecycle Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.3">
-                    <p id="section-toc.1-1.10.2.1.2.3.1"><a href="#section-10.1.3" class="auto internal xref">10.1.3</a>.  <a href="#name-implementation-id-claim" class="internal xref">Implementation ID Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.4">
-                    <p id="section-toc.1-1.10.2.1.2.4.1"><a href="#section-10.1.4" class="auto internal xref">10.1.4</a>.  <a href="#name-software-components-claim" class="internal xref">Software Components Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.5">
-                    <p id="section-toc.1-1.10.2.1.2.5.1"><a href="#section-10.1.5" class="auto internal xref">10.1.5</a>.  <a href="#name-verification-service-indicat" class="internal xref">Verification Service Indicator Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.6">
-                    <p id="section-toc.1-1.10.2.1.2.6.1"><a href="#section-10.1.6" class="auto internal xref">10.1.6</a>.  <a href="#name-platform-config-claim" class="internal xref">Platform Config Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.7">
-                    <p id="section-toc.1-1.10.2.1.2.7.1"><a href="#section-10.1.7" class="auto internal xref">10.1.7</a>.  <a href="#name-platform-hash-algorithm-id-" class="internal xref">Platform Hash Algorithm ID Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.8">
-                    <p id="section-toc.1-1.10.2.1.2.8.1"><a href="#section-10.1.8" class="auto internal xref">10.1.8</a>.  <a href="#name-platform-manufacturing-confi" class="internal xref">Platform Manufacturing Config</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.9">
-                    <p id="section-toc.1-1.10.2.1.2.9.1"><a href="#section-10.1.9" class="auto internal xref">10.1.9</a>.  <a href="#name-platform-extension" class="internal xref">Platform Extension</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.10">
-                    <p id="section-toc.1-1.10.2.1.2.10.1"><a href="#section-10.1.10" class="auto internal xref">10.1.10</a>. <a href="#name-platform-tbb-rotpk" class="internal xref">Platform TBB RoTPK</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.11">
-                    <p id="section-toc.1-1.10.2.1.2.11.1"><a href="#section-10.1.11" class="auto internal xref">10.1.11</a>. <a href="#name-platform-peer-signers" class="internal xref">Platform Peer Signers</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.12">
-                    <p id="section-toc.1-1.10.2.1.2.12.1"><a href="#section-10.1.12" class="auto internal xref">10.1.12</a>. <a href="#name-platform-device-tpm-binding" class="internal xref">Platform Device TPM Binding Data</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.13">
-                    <p id="section-toc.1-1.10.2.1.2.13.1"><a href="#section-10.1.13" class="auto internal xref">10.1.13</a>. <a href="#name-platform-workload-binding" class="internal xref">Platform Workload Binding</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.14">
-                    <p id="section-toc.1-1.10.2.1.2.14.1"><a href="#section-10.1.14" class="auto internal xref">10.1.14</a>. <a href="#name-realm-personalization-value" class="internal xref">Realm Personalization Value Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.15">
-                    <p id="section-toc.1-1.10.2.1.2.15.1"><a href="#section-10.1.15" class="auto internal xref">10.1.15</a>. <a href="#name-realm-hash-algorithm-id-cla" class="internal xref">Realm Hash Algorithm ID Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.16">
-                    <p id="section-toc.1-1.10.2.1.2.16.1"><a href="#section-10.1.16" class="auto internal xref">10.1.16</a>. <a href="#name-realm-public-key-claim" class="internal xref">Realm Public Key Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.17">
-                    <p id="section-toc.1-1.10.2.1.2.17.1"><a href="#section-10.1.17" class="auto internal xref">10.1.17</a>. <a href="#name-realm-initial-measurement-c" class="internal xref">Realm Initial Measurement Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.18">
-                    <p id="section-toc.1-1.10.2.1.2.18.1"><a href="#section-10.1.18" class="auto internal xref">10.1.18</a>. <a href="#name-realm-extensible-measurement" class="internal xref">Realm Extensible Measurements Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.19">
-                    <p id="section-toc.1-1.10.2.1.2.19.1"><a href="#section-10.1.19" class="auto internal xref">10.1.19</a>. <a href="#name-realm-public-key-hash-algori" class="internal xref">Realm Public Key Hash Algorithm ID Claim</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.20">
-                    <p id="section-toc.1-1.10.2.1.2.20.1"><a href="#section-10.1.20" class="auto internal xref">10.1.20</a>. <a href="#name-realm-mec-policy-2" class="internal xref">Realm MEC Policy</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.21">
-                    <p id="section-toc.1-1.10.2.1.2.21.1"><a href="#section-10.1.21" class="auto internal xref">10.1.21</a>. <a href="#name-realm-lfa-policy-2" class="internal xref">Realm LFA Policy</a></p>
-</li>
-                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1.2.22">
-                    <p id="section-toc.1-1.10.2.1.2.22.1"><a href="#section-10.1.22" class="auto internal xref">10.1.22</a>. <a href="#name-realm-devices-token-hash-2" class="internal xref">Realm Devices Token Hash</a></p>
-</li>
                 </ul>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-media-types" class="internal xref">Media Types</a></p>
-</li>
-              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3">
-                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="auto internal xref">10.3</a>.  <a href="#name-coap-content-formats-regist" class="internal xref">CoAP Content-Formats Registration</a></p>
+                <p id="section-toc.1-1.10.2.2.1"><a href="#section-10.2" class="auto internal xref">10.2</a>.  <a href="#name-cbor-web-token-claims-regis" class="internal xref">CBOR Web Token Claims Registration</a></p>
 <ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3.2.1">
-                    <p id="section-toc.1-1.10.2.3.2.1.1"><a href="#section-10.3.1" class="auto internal xref">10.3.1</a>.  <a href="#name-registry-contents" class="internal xref">Registry Contents</a></p>
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.1">
+                    <p id="section-toc.1-1.10.2.2.2.1.1"><a href="#section-10.2.1" class="auto internal xref">10.2.1</a>.  <a href="#name-security-lifecycle-claim" class="internal xref">Security Lifecycle Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.2">
+                    <p id="section-toc.1-1.10.2.2.2.2.1"><a href="#section-10.2.2" class="auto internal xref">10.2.2</a>.  <a href="#name-implementation-id-claim" class="internal xref">Implementation ID Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.3">
+                    <p id="section-toc.1-1.10.2.2.2.3.1"><a href="#section-10.2.3" class="auto internal xref">10.2.3</a>.  <a href="#name-software-components-claim" class="internal xref">Software Components Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.4">
+                    <p id="section-toc.1-1.10.2.2.2.4.1"><a href="#section-10.2.4" class="auto internal xref">10.2.4</a>.  <a href="#name-verification-service-indicat" class="internal xref">Verification Service Indicator Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.5">
+                    <p id="section-toc.1-1.10.2.2.2.5.1"><a href="#section-10.2.5" class="auto internal xref">10.2.5</a>.  <a href="#name-platform-config-claim" class="internal xref">Platform Config Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.6">
+                    <p id="section-toc.1-1.10.2.2.2.6.1"><a href="#section-10.2.6" class="auto internal xref">10.2.6</a>.  <a href="#name-platform-hash-algorithm-id-" class="internal xref">Platform Hash Algorithm ID Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.7">
+                    <p id="section-toc.1-1.10.2.2.2.7.1"><a href="#section-10.2.7" class="auto internal xref">10.2.7</a>.  <a href="#name-platform-manufacturing-confi" class="internal xref">Platform Manufacturing Config</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.8">
+                    <p id="section-toc.1-1.10.2.2.2.8.1"><a href="#section-10.2.8" class="auto internal xref">10.2.8</a>.  <a href="#name-platform-extension" class="internal xref">Platform Extension</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.9">
+                    <p id="section-toc.1-1.10.2.2.2.9.1"><a href="#section-10.2.9" class="auto internal xref">10.2.9</a>.  <a href="#name-platform-tbb-rotpk" class="internal xref">Platform TBB RoTPK</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.10">
+                    <p id="section-toc.1-1.10.2.2.2.10.1"><a href="#section-10.2.10" class="auto internal xref">10.2.10</a>. <a href="#name-platform-peer-signers" class="internal xref">Platform Peer Signers</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.11">
+                    <p id="section-toc.1-1.10.2.2.2.11.1"><a href="#section-10.2.11" class="auto internal xref">10.2.11</a>. <a href="#name-platform-device-tpm-binding" class="internal xref">Platform Device TPM Binding Data</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.12">
+                    <p id="section-toc.1-1.10.2.2.2.12.1"><a href="#section-10.2.12" class="auto internal xref">10.2.12</a>. <a href="#name-platform-workload-binding" class="internal xref">Platform Workload Binding</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.13">
+                    <p id="section-toc.1-1.10.2.2.2.13.1"><a href="#section-10.2.13" class="auto internal xref">10.2.13</a>. <a href="#name-realm-personalization-value" class="internal xref">Realm Personalization Value Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.14">
+                    <p id="section-toc.1-1.10.2.2.2.14.1"><a href="#section-10.2.14" class="auto internal xref">10.2.14</a>. <a href="#name-realm-hash-algorithm-id-cla" class="internal xref">Realm Hash Algorithm ID Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.15">
+                    <p id="section-toc.1-1.10.2.2.2.15.1"><a href="#section-10.2.15" class="auto internal xref">10.2.15</a>. <a href="#name-realm-public-key-claim" class="internal xref">Realm Public Key Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.16">
+                    <p id="section-toc.1-1.10.2.2.2.16.1"><a href="#section-10.2.16" class="auto internal xref">10.2.16</a>. <a href="#name-realm-initial-measurement-c" class="internal xref">Realm Initial Measurement Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.17">
+                    <p id="section-toc.1-1.10.2.2.2.17.1"><a href="#section-10.2.17" class="auto internal xref">10.2.17</a>. <a href="#name-realm-extensible-measurement" class="internal xref">Realm Extensible Measurements Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.18">
+                    <p id="section-toc.1-1.10.2.2.2.18.1"><a href="#section-10.2.18" class="auto internal xref">10.2.18</a>. <a href="#name-realm-public-key-hash-algori" class="internal xref">Realm Public Key Hash Algorithm ID Claim</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.19">
+                    <p id="section-toc.1-1.10.2.2.2.19.1"><a href="#section-10.2.19" class="auto internal xref">10.2.19</a>. <a href="#name-realm-mec-policy-2" class="internal xref">Realm MEC Policy</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.20">
+                    <p id="section-toc.1-1.10.2.2.2.20.1"><a href="#section-10.2.20" class="auto internal xref">10.2.20</a>. <a href="#name-realm-lfa-policy-2" class="internal xref">Realm LFA Policy</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2.2.21">
+                    <p id="section-toc.1-1.10.2.2.2.21.1"><a href="#section-10.2.21" class="auto internal xref">10.2.21</a>. <a href="#name-realm-devices-token-hash-2" class="internal xref">Realm Devices Token Hash</a></p>
 </li>
                 </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3">
+                <p id="section-toc.1-1.10.2.3.1"><a href="#section-10.3" class="auto internal xref">10.3</a>.  <a href="#name-media-types" class="internal xref">Media Types</a></p>
+<ul class="compact toc ulBare ulEmpty">
+<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3.2.1">
+                    <p id="section-toc.1-1.10.2.3.2.1.1"><a href="#section-10.3.1" class="auto internal xref">10.3.1</a>.  <a href="#name-application-vndarmcca" class="internal xref">application/vnd.arm.cca</a></p>
+</li>
+                </ul>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.4">
+                <p id="section-toc.1-1.10.2.4.1"><a href="#section-10.4" class="auto internal xref">10.4</a>.  <a href="#name-coap-content-formats-regist" class="internal xref">CoAP Content-Formats Registration</a></p>
 </li>
             </ul>
 </li>
@@ -2025,7 +2030,7 @@ adding that evidence as an additional element to the attestation token by perfor
             <p id="section-4.2-5.3.1">Concatenate the new cbor-record to the original CCA Attestation token.<a href="#section-4.2-5.3.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-4.2-6">Note that a command line tool to accomplish the above is in preparation, see https://github.com/veraison/cmw/issues/30.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
+<p id="section-4.2-6">Note that a command line tool to accomplish the above is in preparation, see https://github.com/veraison/cmwcli.<a href="#section-4.2-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-cca-token-collection-element-registration">
@@ -2520,9 +2525,6 @@ The claims used vary by profile version and attestation model implemented as out
 </li>
               <li class="normal" id="section-4.5.3.9-1.3">
                 <p id="section-4.5.3.9-1.3.1">Claim Value: H(RAK public)<a href="#section-4.5.3.9-1.3.1" class="pilcrow">¶</a></p>
-</li>
-              <li class="normal" id="section-4.5.3.9-1.4">
-                <p id="section-4.5.3.9-1.4.1">Note: for this attestation model, the PAT also contains an <code>eat_nonce</code> claim with the value equal to the CCA Realm challenge claim.<a href="#section-4.5.3.9-1.4.1" class="pilcrow">¶</a></p>
 </li>
             </ul>
 </section>
@@ -4595,7 +4597,7 @@ Attester.<a href="#section-7.4-2" class="pilcrow">¶</a></p>
 </div>
 <p id="section-7.4-5">This document does not prescribe what value must be chosen based on each
 possible situation: when assigning specific Trustworthiness Claim values, an
-implementation is expected to follow the algorithm described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-10#section-2.3.3" class="relref">Section 2.3.3</a> of [<a href="#RATS-AR4SI" class="cite xref">RATS-AR4SI</a>]</span>.<a href="#section-7.4-5" class="pilcrow">¶</a></p>
+implementation is expected to follow the algorithm described in <span><a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-11#section-2.3.3" class="relref">Section 2.3.3</a> of [<a href="#RATS-AR4SI" class="cite xref">RATS-AR4SI</a>]</span>.<a href="#section-7.4-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="sec-cca-endorsements">
@@ -4640,15 +4642,13 @@ keys.<a href="#section-9-2" class="pilcrow">¶</a></p>
       <h2 id="name-iana-considerations">
 <a href="#section-10" class="section-number selfRef">10. </a><a href="#name-iana-considerations" class="section-name selfRef">IANA Considerations</a>
       </h2>
-<p id="section-10-1">TODO: additional top level claims<a href="#section-10-1" class="pilcrow">¶</a></p>
-<div id="cbor-web-token-claims-registration">
+<div id="cbor-tag-claims-registration">
 <section id="section-10.1">
-        <h3 id="name-cbor-web-token-claims-regis">
-<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-cbor-web-token-claims-regis" class="section-name selfRef">CBOR Web Token Claims Registration</a>
+        <h3 id="name-cbor-tag-claims-registratio">
+<a href="#section-10.1" class="section-number selfRef">10.1. </a><a href="#name-cbor-tag-claims-registratio" class="section-name selfRef">CBOR Tag Claims Registration</a>
         </h3>
-<p id="section-10.1-1">IANA is requested to make permanent the following claims that have been
-assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
-<span>[<a href="#IANA-CWT" class="cite xref">IANA-CWT</a>]</span>.<a href="#section-10.1-1" class="pilcrow">¶</a></p>
+<p id="section-10.1-1">IANA is requested to allocate the following tags in the "CBOR Tags" registry <span>[<a href="#IANA-CBOR" class="cite xref">IANA-CBOR</a>]</span>,
+preferably with the specific CBOR tag value requested:<a href="#section-10.1-1" class="pilcrow">¶</a></p>
 <div id="arm-cca-attestation-cmw">
 <section id="section-10.1.1">
           <h4 id="name-arm-cca-attestation-cmw">
@@ -4679,632 +4679,642 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
           </ul>
 </section>
 </div>
+</section>
+</div>
+<div id="cbor-web-token-claims-registration">
+<section id="section-10.2">
+        <h3 id="name-cbor-web-token-claims-regis">
+<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-cbor-web-token-claims-regis" class="section-name selfRef">CBOR Web Token Claims Registration</a>
+        </h3>
+<p id="section-10.2-1">IANA is requested to allocate the following CWT claims in the "CBOR Web Token (CWT) Claims" registry <span>[<a href="#IANA-CWT" class="cite xref">IANA-CWT</a>]</span>,
+preferably with the specific value requested.
+Some of these claims have been already assigned via early allocation.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
 <div id="security-lifecycle-claim">
-<section id="section-10.1.2">
+<section id="section-10.2.1">
           <h4 id="name-security-lifecycle-claim">
-<a href="#section-10.1.2" class="section-number selfRef">10.1.2. </a><a href="#name-security-lifecycle-claim" class="section-name selfRef">Security Lifecycle Claim</a>
+<a href="#section-10.2.1" class="section-number selfRef">10.2.1. </a><a href="#name-security-lifecycle-claim" class="section-name selfRef">Security Lifecycle Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.2-1.1">
-              <p id="section-10.1.2-1.1.1">Claim Name: arm-platform-security-lifecycle<a href="#section-10.1.2-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.1-1.1">
+              <p id="section-10.2.1-1.1.1">Claim Name: arm-platform-security-lifecycle<a href="#section-10.2.1-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.2-1.2">
-              <p id="section-10.1.2-1.2.1">Claim Description: Arm Platform Security Lifecycle<a href="#section-10.1.2-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.1-1.2">
+              <p id="section-10.2.1-1.2.1">Claim Description: Arm Platform Security Lifecycle<a href="#section-10.2.1-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.2-1.3">
-              <p id="section-10.1.2-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.2-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.1-1.3">
+              <p id="section-10.2.1-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.1-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.2-1.4">
-              <p id="section-10.1.2-1.4.1">Claim Key: 2395<a href="#section-10.1.2-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.1-1.4">
+              <p id="section-10.2.1-1.4.1">Claim Key: 2395<a href="#section-10.2.1-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.2-1.5">
-              <p id="section-10.1.2-1.5.1">Claim Value Type(s): unsigned integer<a href="#section-10.1.2-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.1-1.5">
+              <p id="section-10.2.1-1.5.1">Claim Value Type(s): unsigned integer<a href="#section-10.2.1-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.2-1.6">
-              <p id="section-10.1.2-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.2-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.1-1.6">
+              <p id="section-10.2.1-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.1-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.2-1.7">
-              <p id="section-10.1.2-1.7.1">Specification Document(s): <a href="#sec-security-lifecycle" class="auto internal xref">Section 4.7.2</a> of RFCthis<a href="#section-10.1.2-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.1-1.7">
+              <p id="section-10.2.1-1.7.1">Specification Document(s): <a href="#sec-security-lifecycle" class="auto internal xref">Section 4.7.2</a> of RFCthis<a href="#section-10.2.1-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="implementation-id-claim">
-<section id="section-10.1.3">
+<section id="section-10.2.2">
           <h4 id="name-implementation-id-claim">
-<a href="#section-10.1.3" class="section-number selfRef">10.1.3. </a><a href="#name-implementation-id-claim" class="section-name selfRef">Implementation ID Claim</a>
+<a href="#section-10.2.2" class="section-number selfRef">10.2.2. </a><a href="#name-implementation-id-claim" class="section-name selfRef">Implementation ID Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.3-1.1">
-              <p id="section-10.1.3-1.1.1">Claim Name: arm-platform-implementation-id<a href="#section-10.1.3-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.2-1.1">
+              <p id="section-10.2.2-1.1.1">Claim Name: arm-platform-implementation-id<a href="#section-10.2.2-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.3-1.2">
-              <p id="section-10.1.3-1.2.1">Claim Description: Arm Platform Implementation ID<a href="#section-10.1.3-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.2-1.2">
+              <p id="section-10.2.2-1.2.1">Claim Description: Arm Platform Implementation ID<a href="#section-10.2.2-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.3-1.3">
-              <p id="section-10.1.3-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.3-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.2-1.3">
+              <p id="section-10.2.2-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.2-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.3-1.4">
-              <p id="section-10.1.3-1.4.1">Claim Key: 2396<a href="#section-10.1.3-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.2-1.4">
+              <p id="section-10.2.2-1.4.1">Claim Key: 2396<a href="#section-10.2.2-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.3-1.5">
-              <p id="section-10.1.3-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.3-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.2-1.5">
+              <p id="section-10.2.2-1.5.1">Claim Value Type(s): byte string<a href="#section-10.2.2-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.3-1.6">
-              <p id="section-10.1.3-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.3-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.2-1.6">
+              <p id="section-10.2.2-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.2-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.3-1.7">
-              <p id="section-10.1.3-1.7.1">Specification Document(s): <a href="#sec-implementation-id" class="auto internal xref">Section 4.6.2</a> of RFCthis<a href="#section-10.1.3-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.2-1.7">
+              <p id="section-10.2.2-1.7.1">Specification Document(s): <a href="#sec-implementation-id" class="auto internal xref">Section 4.6.2</a> of RFCthis<a href="#section-10.2.2-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="software-components-claim">
-<section id="section-10.1.4">
+<section id="section-10.2.3">
           <h4 id="name-software-components-claim">
-<a href="#section-10.1.4" class="section-number selfRef">10.1.4. </a><a href="#name-software-components-claim" class="section-name selfRef">Software Components Claim</a>
+<a href="#section-10.2.3" class="section-number selfRef">10.2.3. </a><a href="#name-software-components-claim" class="section-name selfRef">Software Components Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.4-1.1">
-              <p id="section-10.1.4-1.1.1">Claim Name: arm-platform-software-components<a href="#section-10.1.4-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.3-1.1">
+              <p id="section-10.2.3-1.1.1">Claim Name: arm-platform-software-components<a href="#section-10.2.3-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.4-1.2">
-              <p id="section-10.1.4-1.2.1">Claim Description: Arm Platform Software Components<a href="#section-10.1.4-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.3-1.2">
+              <p id="section-10.2.3-1.2.1">Claim Description: Arm Platform Software Components<a href="#section-10.2.3-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.4-1.3">
-              <p id="section-10.1.4-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.4-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.3-1.3">
+              <p id="section-10.2.3-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.3-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.4-1.4">
-              <p id="section-10.1.4-1.4.1">Claim Key: 2399<a href="#section-10.1.4-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.3-1.4">
+              <p id="section-10.2.3-1.4.1">Claim Key: 2399<a href="#section-10.2.3-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.4-1.5">
-              <p id="section-10.1.4-1.5.1">Claim Value Type(s): array<a href="#section-10.1.4-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.3-1.5">
+              <p id="section-10.2.3-1.5.1">Claim Value Type(s): array<a href="#section-10.2.3-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.4-1.6">
-              <p id="section-10.1.4-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.4-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.3-1.6">
+              <p id="section-10.2.3-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.3-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.4-1.7">
-              <p id="section-10.1.4-1.7.1">Specification Document(s): <a href="#sec-sw-components" class="auto internal xref">Section 4.8.1</a> of RFCthis<a href="#section-10.1.4-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.3-1.7">
+              <p id="section-10.2.3-1.7.1">Specification Document(s): <a href="#sec-sw-components" class="auto internal xref">Section 4.8.1</a> of RFCthis<a href="#section-10.2.3-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="verification-service-indicator-claim">
-<section id="section-10.1.5">
+<section id="section-10.2.4">
           <h4 id="name-verification-service-indicat">
-<a href="#section-10.1.5" class="section-number selfRef">10.1.5. </a><a href="#name-verification-service-indicat" class="section-name selfRef">Verification Service Indicator Claim</a>
+<a href="#section-10.2.4" class="section-number selfRef">10.2.4. </a><a href="#name-verification-service-indicat" class="section-name selfRef">Verification Service Indicator Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.5-1.1">
-              <p id="section-10.1.5-1.1.1">Claim Name: arm-platform-verification-service-indicator<a href="#section-10.1.5-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.4-1.1">
+              <p id="section-10.2.4-1.1.1">Claim Name: arm-platform-verification-service-indicator<a href="#section-10.2.4-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.5-1.2">
-              <p id="section-10.1.5-1.2.1">Claim Description: Arm Platform Verification Service Indicator<a href="#section-10.1.5-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.4-1.2">
+              <p id="section-10.2.4-1.2.1">Claim Description: Arm Platform Verification Service Indicator<a href="#section-10.2.4-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.5-1.3">
-              <p id="section-10.1.5-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.5-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.4-1.3">
+              <p id="section-10.2.4-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.4-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.5-1.4">
-              <p id="section-10.1.5-1.4.1">Claim Key: 2400<a href="#section-10.1.5-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.4-1.4">
+              <p id="section-10.2.4-1.4.1">Claim Key: 2400<a href="#section-10.2.4-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.5-1.5">
-              <p id="section-10.1.5-1.5.1">Claim Value Type(s): text string<a href="#section-10.1.5-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.4-1.5">
+              <p id="section-10.2.4-1.5.1">Claim Value Type(s): text string<a href="#section-10.2.4-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.5-1.6">
-              <p id="section-10.1.5-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.5-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.4-1.6">
+              <p id="section-10.2.4-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.4-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.5-1.7">
-              <p id="section-10.1.5-1.7.1">Specification Document(s): <a href="#sec-verification-service-indicator" class="auto internal xref">Section 4.9.1</a> of RFCthis<a href="#section-10.1.5-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.4-1.7">
+              <p id="section-10.2.4-1.7.1">Specification Document(s): <a href="#sec-verification-service-indicator" class="auto internal xref">Section 4.9.1</a> of RFCthis<a href="#section-10.2.4-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="platform-config-claim">
-<section id="section-10.1.6">
+<section id="section-10.2.5">
           <h4 id="name-platform-config-claim">
-<a href="#section-10.1.6" class="section-number selfRef">10.1.6. </a><a href="#name-platform-config-claim" class="section-name selfRef">Platform Config Claim</a>
+<a href="#section-10.2.5" class="section-number selfRef">10.2.5. </a><a href="#name-platform-config-claim" class="section-name selfRef">Platform Config Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.6-1.1">
-              <p id="section-10.1.6-1.1.1">Claim Name: arm-platform-config<a href="#section-10.1.6-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.5-1.1">
+              <p id="section-10.2.5-1.1.1">Claim Name: arm-platform-config<a href="#section-10.2.5-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.6-1.2">
-              <p id="section-10.1.6-1.2.1">Claim Description: Arm Platform Configuration<a href="#section-10.1.6-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.5-1.2">
+              <p id="section-10.2.5-1.2.1">Claim Description: Arm Platform Configuration<a href="#section-10.2.5-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.6-1.3">
-              <p id="section-10.1.6-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.6-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.5-1.3">
+              <p id="section-10.2.5-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.5-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.6-1.4">
-              <p id="section-10.1.6-1.4.1">Claim Key: 2401<a href="#section-10.1.6-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.5-1.4">
+              <p id="section-10.2.5-1.4.1">Claim Key: 2401<a href="#section-10.2.5-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.6-1.5">
-              <p id="section-10.1.6-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.6-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.5-1.5">
+              <p id="section-10.2.5-1.5.1">Claim Value Type(s): byte string<a href="#section-10.2.5-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.6-1.6">
-              <p id="section-10.1.6-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.6-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.5-1.6">
+              <p id="section-10.2.5-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.5-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.6-1.7">
-              <p id="section-10.1.6-1.7.1">Specification Document(s): <a href="#sec-platform-config" class="auto internal xref">Section 4.7.3</a> of RFCthis<a href="#section-10.1.6-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.5-1.7">
+              <p id="section-10.2.5-1.7.1">Specification Document(s): <a href="#sec-platform-config" class="auto internal xref">Section 4.7.3</a> of RFCthis<a href="#section-10.2.5-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="platform-hash-algorithm-id-claim">
-<section id="section-10.1.7">
+<section id="section-10.2.6">
           <h4 id="name-platform-hash-algorithm-id-">
-<a href="#section-10.1.7" class="section-number selfRef">10.1.7. </a><a href="#name-platform-hash-algorithm-id-" class="section-name selfRef">Platform Hash Algorithm ID Claim</a>
+<a href="#section-10.2.6" class="section-number selfRef">10.2.6. </a><a href="#name-platform-hash-algorithm-id-" class="section-name selfRef">Platform Hash Algorithm ID Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.7-1.1">
-              <p id="section-10.1.7-1.1.1">Claim Name: arm-platform-hash-algm-id<a href="#section-10.1.7-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.6-1.1">
+              <p id="section-10.2.6-1.1.1">Claim Name: arm-platform-hash-algm-id<a href="#section-10.2.6-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.7-1.2">
-              <p id="section-10.1.7-1.2.1">Claim Description: Arm Platform Hash Algorithm ID<a href="#section-10.1.7-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.6-1.2">
+              <p id="section-10.2.6-1.2.1">Claim Description: Arm Platform Hash Algorithm ID<a href="#section-10.2.6-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.7-1.3">
-              <p id="section-10.1.7-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.7-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.6-1.3">
+              <p id="section-10.2.6-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.6-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.7-1.4">
-              <p id="section-10.1.7-1.4.1">Claim Key: 2402<a href="#section-10.1.7-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.6-1.4">
+              <p id="section-10.2.6-1.4.1">Claim Key: 2402<a href="#section-10.2.6-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.7-1.5">
-              <p id="section-10.1.7-1.5.1">Claim Value Type(s): text string<a href="#section-10.1.7-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.6-1.5">
+              <p id="section-10.2.6-1.5.1">Claim Value Type(s): text string<a href="#section-10.2.6-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.7-1.6">
-              <p id="section-10.1.7-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.7-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.6-1.6">
+              <p id="section-10.2.6-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.6-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.7-1.7">
-              <p id="section-10.1.7-1.7.1">Specification Document(s): <a href="#sec-arm-platform-hash-algm-id" class="auto internal xref">Section 4.8.2</a> of RFCthis<a href="#section-10.1.7-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.6-1.7">
+              <p id="section-10.2.6-1.7.1">Specification Document(s): <a href="#sec-arm-platform-hash-algm-id" class="auto internal xref">Section 4.8.2</a> of RFCthis<a href="#section-10.2.6-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="platform-manufacturing-config">
-<section id="section-10.1.8">
+<section id="section-10.2.7">
           <h4 id="name-platform-manufacturing-confi">
-<a href="#section-10.1.8" class="section-number selfRef">10.1.8. </a><a href="#name-platform-manufacturing-confi" class="section-name selfRef">Platform Manufacturing Config</a>
+<a href="#section-10.2.7" class="section-number selfRef">10.2.7. </a><a href="#name-platform-manufacturing-confi" class="section-name selfRef">Platform Manufacturing Config</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.8-1.1">
-              <p id="section-10.1.8-1.1.1">Claim Name: arm-platform-manufacturing-config<a href="#section-10.1.8-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.7-1.1">
+              <p id="section-10.2.7-1.1.1">Claim Name: arm-platform-manufacturing-config<a href="#section-10.2.7-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.8-1.2">
-              <p id="section-10.1.8-1.2.1">Claim Description: Arm Platform Manufacturing Config<a href="#section-10.1.8-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.7-1.2">
+              <p id="section-10.2.7-1.2.1">Claim Description: Arm Platform Manufacturing Config<a href="#section-10.2.7-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.8-1.3">
-              <p id="section-10.1.8-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.8-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.7-1.3">
+              <p id="section-10.2.7-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.7-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.8-1.4">
-              <p id="section-10.1.8-1.4.1">Claim Key: 2403<a href="#section-10.1.8-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.7-1.4">
+              <p id="section-10.2.7-1.4.1">Claim Key: 2403<a href="#section-10.2.7-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.8-1.5">
-              <p id="section-10.1.8-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.8-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.7-1.5">
+              <p id="section-10.2.7-1.5.1">Claim Value Type(s): byte string<a href="#section-10.2.7-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.8-1.6">
-              <p id="section-10.1.8-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.8-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.7-1.6">
+              <p id="section-10.2.7-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.7-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.8-1.7">
-              <p id="section-10.1.8-1.7.1">Specification Document(s): <a href="#sec-arm-platform-manufacturing-config" class="auto internal xref">Section 4.8.4</a> of RFCthis<a href="#section-10.1.8-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.7-1.7">
+              <p id="section-10.2.7-1.7.1">Specification Document(s): <a href="#sec-arm-platform-manufacturing-config" class="auto internal xref">Section 4.8.4</a> of RFCthis<a href="#section-10.2.7-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="platform-extension">
-<section id="section-10.1.9">
+<section id="section-10.2.8">
           <h4 id="name-platform-extension">
-<a href="#section-10.1.9" class="section-number selfRef">10.1.9. </a><a href="#name-platform-extension" class="section-name selfRef">Platform Extension</a>
+<a href="#section-10.2.8" class="section-number selfRef">10.2.8. </a><a href="#name-platform-extension" class="section-name selfRef">Platform Extension</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.9-1.1">
-              <p id="section-10.1.9-1.1.1">Claim Name: arm-platform-extension<a href="#section-10.1.9-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.8-1.1">
+              <p id="section-10.2.8-1.1.1">Claim Name: arm-platform-extension<a href="#section-10.2.8-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.9-1.2">
-              <p id="section-10.1.9-1.2.1">Claim Description: Arm Platform Extension<a href="#section-10.1.9-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.8-1.2">
+              <p id="section-10.2.8-1.2.1">Claim Description: Arm Platform Extension<a href="#section-10.2.8-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.9-1.3">
-              <p id="section-10.1.9-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.9-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.8-1.3">
+              <p id="section-10.2.8-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.8-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.9-1.4">
-              <p id="section-10.1.9-1.4.1">Claim Key: 2404<a href="#section-10.1.9-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.8-1.4">
+              <p id="section-10.2.8-1.4.1">Claim Key: 2404<a href="#section-10.2.8-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.9-1.5">
-              <p id="section-10.1.9-1.5.1">Claim Value Type(s): array<a href="#section-10.1.9-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.8-1.5">
+              <p id="section-10.2.8-1.5.1">Claim Value Type(s): array<a href="#section-10.2.8-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.9-1.6">
-              <p id="section-10.1.9-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.9-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.8-1.6">
+              <p id="section-10.2.8-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.8-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.9-1.7">
-              <p id="section-10.1.9-1.7.1">Specification Document(s): <a href="#sec-arm-platform-extension" class="auto internal xref">Section 4.8.5</a> of RFCthis<a href="#section-10.1.9-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.8-1.7">
+              <p id="section-10.2.8-1.7.1">Specification Document(s): <a href="#sec-arm-platform-extension" class="auto internal xref">Section 4.8.5</a> of RFCthis<a href="#section-10.2.8-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="platform-tbb-rotpk">
-<section id="section-10.1.10">
+<section id="section-10.2.9">
           <h4 id="name-platform-tbb-rotpk">
-<a href="#section-10.1.10" class="section-number selfRef">10.1.10. </a><a href="#name-platform-tbb-rotpk" class="section-name selfRef">Platform TBB RoTPK</a>
+<a href="#section-10.2.9" class="section-number selfRef">10.2.9. </a><a href="#name-platform-tbb-rotpk" class="section-name selfRef">Platform TBB RoTPK</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.10-1.1">
-              <p id="section-10.1.10-1.1.1">Claim Name: arm-platform-tbb-rotpk<a href="#section-10.1.10-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.9-1.1">
+              <p id="section-10.2.9-1.1.1">Claim Name: arm-platform-tbb-rotpk<a href="#section-10.2.9-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.10-1.2">
-              <p id="section-10.1.10-1.2.1">Claim Description: Arm Platform TBB RoTPK<a href="#section-10.1.10-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.9-1.2">
+              <p id="section-10.2.9-1.2.1">Claim Description: Arm Platform TBB RoTPK<a href="#section-10.2.9-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.10-1.3">
-              <p id="section-10.1.10-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.10-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.9-1.3">
+              <p id="section-10.2.9-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.9-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.10-1.4">
-              <p id="section-10.1.10-1.4.1">Claim Key: 2405<a href="#section-10.1.10-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.9-1.4">
+              <p id="section-10.2.9-1.4.1">Claim Key: 2405<a href="#section-10.2.9-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.10-1.5">
-              <p id="section-10.1.10-1.5.1">Claim Value Type(s): array<a href="#section-10.1.10-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.9-1.5">
+              <p id="section-10.2.9-1.5.1">Claim Value Type(s): array<a href="#section-10.2.9-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.10-1.6">
-              <p id="section-10.1.10-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.10-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.9-1.6">
+              <p id="section-10.2.9-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.9-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.10-1.7">
-              <p id="section-10.1.10-1.7.1">Specification Document(s): <a href="#sec-arm-platform-tbb-rotpk" class="auto internal xref">Section 4.8.8</a> of RFCthis<a href="#section-10.1.10-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.9-1.7">
+              <p id="section-10.2.9-1.7.1">Specification Document(s): <a href="#sec-arm-platform-tbb-rotpk" class="auto internal xref">Section 4.8.8</a> of RFCthis<a href="#section-10.2.9-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="platform-peer-signers">
-<section id="section-10.1.11">
+<section id="section-10.2.10">
           <h4 id="name-platform-peer-signers">
-<a href="#section-10.1.11" class="section-number selfRef">10.1.11. </a><a href="#name-platform-peer-signers" class="section-name selfRef">Platform Peer Signers</a>
+<a href="#section-10.2.10" class="section-number selfRef">10.2.10. </a><a href="#name-platform-peer-signers" class="section-name selfRef">Platform Peer Signers</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.11-1.1">
-              <p id="section-10.1.11-1.1.1">Claim Name: arm-platform-peer-signers<a href="#section-10.1.11-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.10-1.1">
+              <p id="section-10.2.10-1.1.1">Claim Name: arm-platform-peer-signers<a href="#section-10.2.10-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.11-1.2">
-              <p id="section-10.1.11-1.2.1">Claim Description: Arm Platform Peer Signers<a href="#section-10.1.11-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.10-1.2">
+              <p id="section-10.2.10-1.2.1">Claim Description: Arm Platform Peer Signers<a href="#section-10.2.10-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.11-1.3">
-              <p id="section-10.1.11-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.11-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.10-1.3">
+              <p id="section-10.2.10-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.10-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.11-1.4">
-              <p id="section-10.1.11-1.4.1">Claim Key: 2406<a href="#section-10.1.11-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.10-1.4">
+              <p id="section-10.2.10-1.4.1">Claim Key: 2406<a href="#section-10.2.10-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.11-1.5">
-              <p id="section-10.1.11-1.5.1">Claim Value Type(s): array<a href="#section-10.1.11-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.10-1.5">
+              <p id="section-10.2.10-1.5.1">Claim Value Type(s): array<a href="#section-10.2.10-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.11-1.6">
-              <p id="section-10.1.11-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.11-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.10-1.6">
+              <p id="section-10.2.10-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.10-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.11-1.7">
-              <p id="section-10.1.11-1.7.1">Specification Document(s): <a href="#sec-arm-platform-peer-signers" class="auto internal xref">Section 4.8.6</a> of RFCthis<a href="#section-10.1.11-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.10-1.7">
+              <p id="section-10.2.10-1.7.1">Specification Document(s): <a href="#sec-arm-platform-peer-signers" class="auto internal xref">Section 4.8.6</a> of RFCthis<a href="#section-10.2.10-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="platform-device-tpm-binding-data">
-<section id="section-10.1.12">
+<section id="section-10.2.11">
           <h4 id="name-platform-device-tpm-binding">
-<a href="#section-10.1.12" class="section-number selfRef">10.1.12. </a><a href="#name-platform-device-tpm-binding" class="section-name selfRef">Platform Device TPM Binding Data</a>
+<a href="#section-10.2.11" class="section-number selfRef">10.2.11. </a><a href="#name-platform-device-tpm-binding" class="section-name selfRef">Platform Device TPM Binding Data</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.12-1.1">
-              <p id="section-10.1.12-1.1.1">Claim Name: arm-platform-discrete-tpm-binding-data<a href="#section-10.1.12-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.11-1.1">
+              <p id="section-10.2.11-1.1.1">Claim Name: arm-platform-discrete-tpm-binding-data<a href="#section-10.2.11-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.12-1.2">
-              <p id="section-10.1.12-1.2.1">Claim Description: Arm Platform Device TPM Binding Data<a href="#section-10.1.12-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.11-1.2">
+              <p id="section-10.2.11-1.2.1">Claim Description: Arm Platform Device TPM Binding Data<a href="#section-10.2.11-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.12-1.3">
-              <p id="section-10.1.12-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.12-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.11-1.3">
+              <p id="section-10.2.11-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.11-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.12-1.4">
-              <p id="section-10.1.12-1.4.1">Claim Key: 2407<a href="#section-10.1.12-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.11-1.4">
+              <p id="section-10.2.11-1.4.1">Claim Key: 2407<a href="#section-10.2.11-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.12-1.5">
-              <p id="section-10.1.12-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.12-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.11-1.5">
+              <p id="section-10.2.11-1.5.1">Claim Value Type(s): byte string<a href="#section-10.2.11-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.12-1.6">
-              <p id="section-10.1.12-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.12-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.11-1.6">
+              <p id="section-10.2.11-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.11-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.12-1.7">
-              <p id="section-10.1.12-1.7.1">Specification Document(s): <a href="#sec-arm-platform-discrete-tpm-binding-data" class="auto internal xref">Section 4.8.7</a> of RFCthis<a href="#section-10.1.12-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.11-1.7">
+              <p id="section-10.2.11-1.7.1">Specification Document(s): <a href="#sec-arm-platform-discrete-tpm-binding-data" class="auto internal xref">Section 4.8.7</a> of RFCthis<a href="#section-10.2.11-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="platform-workload-binding">
-<section id="section-10.1.13">
+<section id="section-10.2.12">
           <h4 id="name-platform-workload-binding">
-<a href="#section-10.1.13" class="section-number selfRef">10.1.13. </a><a href="#name-platform-workload-binding" class="section-name selfRef">Platform Workload Binding</a>
+<a href="#section-10.2.12" class="section-number selfRef">10.2.12. </a><a href="#name-platform-workload-binding" class="section-name selfRef">Platform Workload Binding</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.13-1.1">
-              <p id="section-10.1.13-1.1.1">Claim Name: arm-platform-workload-binding<a href="#section-10.1.13-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.12-1.1">
+              <p id="section-10.2.12-1.1.1">Claim Name: arm-platform-workload-binding<a href="#section-10.2.12-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.13-1.2">
-              <p id="section-10.1.13-1.2.1">Claim Description: Arm Platform Workload Binding<a href="#section-10.1.13-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.12-1.2">
+              <p id="section-10.2.12-1.2.1">Claim Description: Arm Platform Workload Binding<a href="#section-10.2.12-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.13-1.3">
-              <p id="section-10.1.13-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.13-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.12-1.3">
+              <p id="section-10.2.12-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.12-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.13-1.4">
-              <p id="section-10.1.13-1.4.1">Claim Key: 2408<a href="#section-10.1.13-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.12-1.4">
+              <p id="section-10.2.12-1.4.1">Claim Key: 2408<a href="#section-10.2.12-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.13-1.5">
-              <p id="section-10.1.13-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.13-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.12-1.5">
+              <p id="section-10.2.12-1.5.1">Claim Value Type(s): byte string<a href="#section-10.2.12-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.13-1.6">
-              <p id="section-10.1.13-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.13-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.12-1.6">
+              <p id="section-10.2.12-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.12-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.13-1.7">
-              <p id="section-10.1.13-1.7.1">Specification Document(s): <a href="#sec-platform-workload-binding-claim" class="auto internal xref">Section 4.5.1</a> of RFCthis<a href="#section-10.1.13-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.12-1.7">
+              <p id="section-10.2.12-1.7.1">Specification Document(s): <a href="#sec-platform-workload-binding-claim" class="auto internal xref">Section 4.5.1</a> of RFCthis<a href="#section-10.2.12-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="realm-personalization-value-claim">
-<section id="section-10.1.14">
+<section id="section-10.2.13">
           <h4 id="name-realm-personalization-value">
-<a href="#section-10.1.14" class="section-number selfRef">10.1.14. </a><a href="#name-realm-personalization-value" class="section-name selfRef">Realm Personalization Value Claim</a>
+<a href="#section-10.2.13" class="section-number selfRef">10.2.13. </a><a href="#name-realm-personalization-value" class="section-name selfRef">Realm Personalization Value Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.14-1.1">
-              <p id="section-10.1.14-1.1.1">Claim Name: cca-realm-personalization-value<a href="#section-10.1.14-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.13-1.1">
+              <p id="section-10.2.13-1.1.1">Claim Name: cca-realm-personalization-value<a href="#section-10.2.13-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.14-1.2">
-              <p id="section-10.1.14-1.2.1">Claim Description: CCA Realm Personalisation Value<a href="#section-10.1.14-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.13-1.2">
+              <p id="section-10.2.13-1.2.1">Claim Description: CCA Realm Personalisation Value<a href="#section-10.2.13-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.14-1.3">
-              <p id="section-10.1.14-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.14-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.13-1.3">
+              <p id="section-10.2.13-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.13-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.14-1.4">
-              <p id="section-10.1.14-1.4.1">Claim Key: 44235<a href="#section-10.1.14-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.13-1.4">
+              <p id="section-10.2.13-1.4.1">Claim Key: 44235<a href="#section-10.2.13-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.14-1.5">
-              <p id="section-10.1.14-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.14-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.13-1.5">
+              <p id="section-10.2.13-1.5.1">Claim Value Type(s): byte string<a href="#section-10.2.13-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.14-1.6">
-              <p id="section-10.1.14-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.14-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.13-1.6">
+              <p id="section-10.2.13-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.13-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.14-1.7">
-              <p id="section-10.1.14-1.7.1">Specification Document(s): <a href="#sec-realm-personalisation-value-claim" class="auto internal xref">Section 4.10.5</a> of RFCthis<a href="#section-10.1.14-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.13-1.7">
+              <p id="section-10.2.13-1.7.1">Specification Document(s): <a href="#sec-realm-personalisation-value-claim" class="auto internal xref">Section 4.10.5</a> of RFCthis<a href="#section-10.2.13-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="realm-hash-algorithm-id-claim">
-<section id="section-10.1.15">
+<section id="section-10.2.14">
           <h4 id="name-realm-hash-algorithm-id-cla">
-<a href="#section-10.1.15" class="section-number selfRef">10.1.15. </a><a href="#name-realm-hash-algorithm-id-cla" class="section-name selfRef">Realm Hash Algorithm ID Claim</a>
+<a href="#section-10.2.14" class="section-number selfRef">10.2.14. </a><a href="#name-realm-hash-algorithm-id-cla" class="section-name selfRef">Realm Hash Algorithm ID Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.15-1.1">
-              <p id="section-10.1.15-1.1.1">Claim Name: cca-realm-hash-algm-id<a href="#section-10.1.15-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.14-1.1">
+              <p id="section-10.2.14-1.1.1">Claim Name: cca-realm-hash-algm-id<a href="#section-10.2.14-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.15-1.2">
-              <p id="section-10.1.15-1.2.1">Claim Description: CCA Realm Hash Algorithm ID<a href="#section-10.1.15-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.14-1.2">
+              <p id="section-10.2.14-1.2.1">Claim Description: CCA Realm Hash Algorithm ID<a href="#section-10.2.14-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.15-1.3">
-              <p id="section-10.1.15-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.15-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.14-1.3">
+              <p id="section-10.2.14-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.14-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.15-1.4">
-              <p id="section-10.1.15-1.4.1">Claim Key: 44236<a href="#section-10.1.15-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.14-1.4">
+              <p id="section-10.2.14-1.4.1">Claim Key: 44236<a href="#section-10.2.14-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.15-1.5">
-              <p id="section-10.1.15-1.5.1">Claim Value Type(s): text string<a href="#section-10.1.15-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.14-1.5">
+              <p id="section-10.2.14-1.5.1">Claim Value Type(s): text string<a href="#section-10.2.14-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.15-1.6">
-              <p id="section-10.1.15-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.15-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.14-1.6">
+              <p id="section-10.2.14-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.14-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.15-1.7">
-              <p id="section-10.1.15-1.7.1">Specification Document(s): <a href="#sec-realm-hash-algm-id-claim" class="auto internal xref">Section 4.10.8</a> of RFCthis<a href="#section-10.1.15-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.14-1.7">
+              <p id="section-10.2.14-1.7.1">Specification Document(s): <a href="#sec-realm-hash-algm-id-claim" class="auto internal xref">Section 4.10.8</a> of RFCthis<a href="#section-10.2.14-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="realm-public-key-claim">
-<section id="section-10.1.16">
+<section id="section-10.2.15">
           <h4 id="name-realm-public-key-claim">
-<a href="#section-10.1.16" class="section-number selfRef">10.1.16. </a><a href="#name-realm-public-key-claim" class="section-name selfRef">Realm Public Key Claim</a>
+<a href="#section-10.2.15" class="section-number selfRef">10.2.15. </a><a href="#name-realm-public-key-claim" class="section-name selfRef">Realm Public Key Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.16-1.1">
-              <p id="section-10.1.16-1.1.1">Claim Name: cca-realm-public-key<a href="#section-10.1.16-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.15-1.1">
+              <p id="section-10.2.15-1.1.1">Claim Name: cca-realm-public-key<a href="#section-10.2.15-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.16-1.2">
-              <p id="section-10.1.16-1.2.1">Claim Description: CCA Realm Public Key<a href="#section-10.1.16-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.15-1.2">
+              <p id="section-10.2.15-1.2.1">Claim Description: CCA Realm Public Key<a href="#section-10.2.15-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.16-1.3">
-              <p id="section-10.1.16-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.16-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.15-1.3">
+              <p id="section-10.2.15-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.15-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.16-1.4">
-              <p id="section-10.1.16-1.4.1">Claim Key: 44237<a href="#section-10.1.16-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.15-1.4">
+              <p id="section-10.2.15-1.4.1">Claim Key: 44237<a href="#section-10.2.15-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.16-1.5">
-              <p id="section-10.1.16-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.16-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.15-1.5">
+              <p id="section-10.2.15-1.5.1">Claim Value Type(s): byte string<a href="#section-10.2.15-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.16-1.6">
-              <p id="section-10.1.16-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.16-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.15-1.6">
+              <p id="section-10.2.15-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.15-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.16-1.7">
-              <p id="section-10.1.16-1.7.1">Specification Document(s): <a href="#sec-realm-public-key-claim" class="auto internal xref">Section 4.10.9</a> of RFCthis<a href="#section-10.1.16-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.15-1.7">
+              <p id="section-10.2.15-1.7.1">Specification Document(s): <a href="#sec-realm-public-key-claim" class="auto internal xref">Section 4.10.9</a> of RFCthis<a href="#section-10.2.15-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="realm-initial-measurement-claim">
-<section id="section-10.1.17">
+<section id="section-10.2.16">
           <h4 id="name-realm-initial-measurement-c">
-<a href="#section-10.1.17" class="section-number selfRef">10.1.17. </a><a href="#name-realm-initial-measurement-c" class="section-name selfRef">Realm Initial Measurement Claim</a>
+<a href="#section-10.2.16" class="section-number selfRef">10.2.16. </a><a href="#name-realm-initial-measurement-c" class="section-name selfRef">Realm Initial Measurement Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.17-1.1">
-              <p id="section-10.1.17-1.1.1">Claim Name: cca-realm-initial-measurement<a href="#section-10.1.17-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.16-1.1">
+              <p id="section-10.2.16-1.1.1">Claim Name: cca-realm-initial-measurement<a href="#section-10.2.16-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.17-1.2">
-              <p id="section-10.1.17-1.2.1">Claim Description: CCA Realm Initial Measurement<a href="#section-10.1.17-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.16-1.2">
+              <p id="section-10.2.16-1.2.1">Claim Description: CCA Realm Initial Measurement<a href="#section-10.2.16-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.17-1.3">
-              <p id="section-10.1.17-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.17-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.16-1.3">
+              <p id="section-10.2.16-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.16-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.17-1.4">
-              <p id="section-10.1.17-1.4.1">Claim Key: 44238<a href="#section-10.1.17-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.16-1.4">
+              <p id="section-10.2.16-1.4.1">Claim Key: 44238<a href="#section-10.2.16-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.17-1.5">
-              <p id="section-10.1.17-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.17-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.16-1.5">
+              <p id="section-10.2.16-1.5.1">Claim Value Type(s): byte string<a href="#section-10.2.16-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.17-1.6">
-              <p id="section-10.1.17-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.17-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.16-1.6">
+              <p id="section-10.2.16-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.16-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.17-1.7">
-              <p id="section-10.1.17-1.7.1">Specification Document(s): <a href="#sec-realm-initial-measurement-claim" class="auto internal xref">Section 4.10.6</a> of RFCthis<a href="#section-10.1.17-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.16-1.7">
+              <p id="section-10.2.16-1.7.1">Specification Document(s): <a href="#sec-realm-initial-measurement-claim" class="auto internal xref">Section 4.10.6</a> of RFCthis<a href="#section-10.2.16-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="realm-extensible-measurements-claim">
-<section id="section-10.1.18">
+<section id="section-10.2.17">
           <h4 id="name-realm-extensible-measurement">
-<a href="#section-10.1.18" class="section-number selfRef">10.1.18. </a><a href="#name-realm-extensible-measurement" class="section-name selfRef">Realm Extensible Measurements Claim</a>
+<a href="#section-10.2.17" class="section-number selfRef">10.2.17. </a><a href="#name-realm-extensible-measurement" class="section-name selfRef">Realm Extensible Measurements Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.18-1.1">
-              <p id="section-10.1.18-1.1.1">Claim Name: cca-realm-extensible-measurements<a href="#section-10.1.18-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.17-1.1">
+              <p id="section-10.2.17-1.1.1">Claim Name: cca-realm-extensible-measurements<a href="#section-10.2.17-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.18-1.2">
-              <p id="section-10.1.18-1.2.1">Claim Description: CCA Realm Extensible Measurements<a href="#section-10.1.18-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.17-1.2">
+              <p id="section-10.2.17-1.2.1">Claim Description: CCA Realm Extensible Measurements<a href="#section-10.2.17-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.18-1.3">
-              <p id="section-10.1.18-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.18-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.17-1.3">
+              <p id="section-10.2.17-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.17-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.18-1.4">
-              <p id="section-10.1.18-1.4.1">Claim Key: 44239<a href="#section-10.1.18-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.17-1.4">
+              <p id="section-10.2.17-1.4.1">Claim Key: 44239<a href="#section-10.2.17-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.18-1.5">
-              <p id="section-10.1.18-1.5.1">Claim Value Type(s): array<a href="#section-10.1.18-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.17-1.5">
+              <p id="section-10.2.17-1.5.1">Claim Value Type(s): array<a href="#section-10.2.17-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.18-1.6">
-              <p id="section-10.1.18-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.18-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.17-1.6">
+              <p id="section-10.2.17-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.17-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.18-1.7">
-              <p id="section-10.1.18-1.7.1">Specification Document(s): <a href="#sec-realm-initial-measurement-claim" class="auto internal xref">Section 4.10.6</a> of RFCthis<a href="#section-10.1.18-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.17-1.7">
+              <p id="section-10.2.17-1.7.1">Specification Document(s): <a href="#sec-realm-initial-measurement-claim" class="auto internal xref">Section 4.10.6</a> of RFCthis<a href="#section-10.2.17-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="realm-public-key-hash-algorithm-id-claim">
-<section id="section-10.1.19">
+<section id="section-10.2.18">
           <h4 id="name-realm-public-key-hash-algori">
-<a href="#section-10.1.19" class="section-number selfRef">10.1.19. </a><a href="#name-realm-public-key-hash-algori" class="section-name selfRef">Realm Public Key Hash Algorithm ID Claim</a>
+<a href="#section-10.2.18" class="section-number selfRef">10.2.18. </a><a href="#name-realm-public-key-hash-algori" class="section-name selfRef">Realm Public Key Hash Algorithm ID Claim</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.19-1.1">
-              <p id="section-10.1.19-1.1.1">Claim Name: cca-realm-public-key-hash-algm-id<a href="#section-10.1.19-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.18-1.1">
+              <p id="section-10.2.18-1.1.1">Claim Name: cca-realm-public-key-hash-algm-id<a href="#section-10.2.18-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.19-1.2">
-              <p id="section-10.1.19-1.2.1">Claim Description: Realm Public Key Hash Algorithm ID Claim<a href="#section-10.1.19-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.18-1.2">
+              <p id="section-10.2.18-1.2.1">Claim Description: Realm Public Key Hash Algorithm ID Claim<a href="#section-10.2.18-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.19-1.3">
-              <p id="section-10.1.19-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.19-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.18-1.3">
+              <p id="section-10.2.18-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.18-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.19-1.4">
-              <p id="section-10.1.19-1.4.1">Claim Key: 44240<a href="#section-10.1.19-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.18-1.4">
+              <p id="section-10.2.18-1.4.1">Claim Key: 44240<a href="#section-10.2.18-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.19-1.5">
-              <p id="section-10.1.19-1.5.1">Claim Value Type(s): text string<a href="#section-10.1.19-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.18-1.5">
+              <p id="section-10.2.18-1.5.1">Claim Value Type(s): text string<a href="#section-10.2.18-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.19-1.6">
-              <p id="section-10.1.19-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.19-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.18-1.6">
+              <p id="section-10.2.18-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.18-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.19-1.7">
-              <p id="section-10.1.19-1.7.1">Specification Document(s): <a href="#sec-realm-public-key-hash-algo-id-claim" class="auto internal xref">Section 4.10.10</a> of RFCthis<a href="#section-10.1.19-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.18-1.7">
+              <p id="section-10.2.18-1.7.1">Specification Document(s): <a href="#sec-realm-public-key-hash-algo-id-claim" class="auto internal xref">Section 4.10.10</a> of RFCthis<a href="#section-10.2.18-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="realm-mec-policy">
-<section id="section-10.1.20">
+<section id="section-10.2.19">
           <h4 id="name-realm-mec-policy-2">
-<a href="#section-10.1.20" class="section-number selfRef">10.1.20. </a><a href="#name-realm-mec-policy-2" class="section-name selfRef">Realm MEC Policy</a>
+<a href="#section-10.2.19" class="section-number selfRef">10.2.19. </a><a href="#name-realm-mec-policy-2" class="section-name selfRef">Realm MEC Policy</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.20-1.1">
-              <p id="section-10.1.20-1.1.1">Claim Name: cca-realm-mec-policy<a href="#section-10.1.20-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.19-1.1">
+              <p id="section-10.2.19-1.1.1">Claim Name: cca-realm-mec-policy<a href="#section-10.2.19-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.20-1.2">
-              <p id="section-10.1.20-1.2.1">Claim Description: Realm MEC Policy<a href="#section-10.1.20-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.19-1.2">
+              <p id="section-10.2.19-1.2.1">Claim Description: Realm MEC Policy<a href="#section-10.2.19-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.20-1.3">
-              <p id="section-10.1.20-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.20-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.19-1.3">
+              <p id="section-10.2.19-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.19-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.20-1.4">
-              <p id="section-10.1.20-1.4.1">Claim Key: 44243<a href="#section-10.1.20-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.19-1.4">
+              <p id="section-10.2.19-1.4.1">Claim Key: 44243<a href="#section-10.2.19-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.20-1.5">
-              <p id="section-10.1.20-1.5.1">Claim Value Type(s): unsigned integer<a href="#section-10.1.20-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.19-1.5">
+              <p id="section-10.2.19-1.5.1">Claim Value Type(s): unsigned integer<a href="#section-10.2.19-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.20-1.6">
-              <p id="section-10.1.20-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.20-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.19-1.6">
+              <p id="section-10.2.19-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.19-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.20-1.7">
-              <p id="section-10.1.20-1.7.1">Specification Document(s): <a href="#sec-realm-mec-policy" class="auto internal xref">Section 4.10.11</a> of RFCthis<a href="#section-10.1.20-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.19-1.7">
+              <p id="section-10.2.19-1.7.1">Specification Document(s): <a href="#sec-realm-mec-policy" class="auto internal xref">Section 4.10.11</a> of RFCthis<a href="#section-10.2.19-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="realm-lfa-policy">
-<section id="section-10.1.21">
+<section id="section-10.2.20">
           <h4 id="name-realm-lfa-policy-2">
-<a href="#section-10.1.21" class="section-number selfRef">10.1.21. </a><a href="#name-realm-lfa-policy-2" class="section-name selfRef">Realm LFA Policy</a>
+<a href="#section-10.2.20" class="section-number selfRef">10.2.20. </a><a href="#name-realm-lfa-policy-2" class="section-name selfRef">Realm LFA Policy</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.21-1.1">
-              <p id="section-10.1.21-1.1.1">Claim Name: cca-realm-lfa-policy<a href="#section-10.1.21-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.20-1.1">
+              <p id="section-10.2.20-1.1.1">Claim Name: cca-realm-lfa-policy<a href="#section-10.2.20-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.21-1.2">
-              <p id="section-10.1.21-1.2.1">Claim Description: Realm LFA Policy<a href="#section-10.1.21-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.20-1.2">
+              <p id="section-10.2.20-1.2.1">Claim Description: Realm LFA Policy<a href="#section-10.2.20-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.21-1.3">
-              <p id="section-10.1.21-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.21-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.20-1.3">
+              <p id="section-10.2.20-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.20-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.21-1.4">
-              <p id="section-10.1.21-1.4.1">Claim Key: 44244<a href="#section-10.1.21-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.20-1.4">
+              <p id="section-10.2.20-1.4.1">Claim Key: 44244<a href="#section-10.2.20-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.21-1.5">
-              <p id="section-10.1.21-1.5.1">Claim Value Type(s): unsigned integer<a href="#section-10.1.21-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.20-1.5">
+              <p id="section-10.2.20-1.5.1">Claim Value Type(s): unsigned integer<a href="#section-10.2.20-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.21-1.6">
-              <p id="section-10.1.21-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.21-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.20-1.6">
+              <p id="section-10.2.20-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.20-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.21-1.7">
-              <p id="section-10.1.21-1.7.1">Specification Document(s): <a href="#sec-realm-lfa-policy" class="auto internal xref">Section 4.10.12</a> of RFCthis<a href="#section-10.1.21-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.20-1.7">
+              <p id="section-10.2.20-1.7.1">Specification Document(s): <a href="#sec-realm-lfa-policy" class="auto internal xref">Section 4.10.12</a> of RFCthis<a href="#section-10.2.20-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
 </div>
 <div id="realm-devices-token-hash">
-<section id="section-10.1.22">
+<section id="section-10.2.21">
           <h4 id="name-realm-devices-token-hash-2">
-<a href="#section-10.1.22" class="section-number selfRef">10.1.22. </a><a href="#name-realm-devices-token-hash-2" class="section-name selfRef">Realm Devices Token Hash</a>
+<a href="#section-10.2.21" class="section-number selfRef">10.2.21. </a><a href="#name-realm-devices-token-hash-2" class="section-name selfRef">Realm Devices Token Hash</a>
           </h4>
 <ul class="normal">
-<li class="normal" id="section-10.1.22-1.1">
-              <p id="section-10.1.22-1.1.1">Claim Name: cca-realm-devices-token-hash<a href="#section-10.1.22-1.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.2.21-1.1">
+              <p id="section-10.2.21-1.1.1">Claim Name: cca-realm-devices-token-hash<a href="#section-10.2.21-1.1.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.22-1.2">
-              <p id="section-10.1.22-1.2.1">Claim Description: Realm Devices Token Hash<a href="#section-10.1.22-1.2.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.21-1.2">
+              <p id="section-10.2.21-1.2.1">Claim Description: Realm Devices Token Hash<a href="#section-10.2.21-1.2.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.22-1.3">
-              <p id="section-10.1.22-1.3.1">JWT Claim Name: N/A<a href="#section-10.1.22-1.3.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.21-1.3">
+              <p id="section-10.2.21-1.3.1">JWT Claim Name: N/A<a href="#section-10.2.21-1.3.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.22-1.4">
-              <p id="section-10.1.22-1.4.1">Claim Key: 44257<a href="#section-10.1.22-1.4.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.21-1.4">
+              <p id="section-10.2.21-1.4.1">Claim Key: 44257<a href="#section-10.2.21-1.4.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.22-1.5">
-              <p id="section-10.1.22-1.5.1">Claim Value Type(s): byte string<a href="#section-10.1.22-1.5.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.21-1.5">
+              <p id="section-10.2.21-1.5.1">Claim Value Type(s): byte string<a href="#section-10.2.21-1.5.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.22-1.6">
-              <p id="section-10.1.22-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.1.22-1.6.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.21-1.6">
+              <p id="section-10.2.21-1.6.1">Change Controller: iana-request@arm.com<a href="#section-10.2.21-1.6.1" class="pilcrow">¶</a></p>
 </li>
-            <li class="normal" id="section-10.1.22-1.7">
-              <p id="section-10.1.22-1.7.1">Specification Document(s): <a href="#sec-realm-devices-token-hash" class="auto internal xref">Section 4.10.14</a> of RFCthis<a href="#section-10.1.22-1.7.1" class="pilcrow">¶</a></p>
+            <li class="normal" id="section-10.2.21-1.7">
+              <p id="section-10.2.21-1.7.1">Specification Document(s): <a href="#sec-realm-devices-token-hash" class="auto internal xref">Section 4.10.14</a> of RFCthis<a href="#section-10.2.21-1.7.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 </section>
@@ -5312,64 +5322,50 @@ assigned via early allocation in the "CBOR Web Token (CWT) Claims" registry
 </section>
 </div>
 <div id="sec-iana-media-types">
-<section id="section-10.2">
+<section id="section-10.3">
         <h3 id="name-media-types">
-<a href="#section-10.2" class="section-number selfRef">10.2. </a><a href="#name-media-types" class="section-name selfRef">Media Types</a>
+<a href="#section-10.3" class="section-number selfRef">10.3. </a><a href="#name-media-types" class="section-name selfRef">Media Types</a>
         </h3>
-<p id="section-10.2-1">No new media type registration is requested.
-To indicate that the transmitted content is a CCA attestation token,
-applications can use the <code>application/eat+cwt</code> media type defined in
-<span>[<a href="#EAT-MEDIATYPES" class="cite xref">EAT-MEDIATYPES</a>]</span> with the <code>eat_profile</code> parameter set to
-<code>tag:arm.com,2023:cca_platform#1.0.0</code>.<a href="#section-10.2-1" class="pilcrow">¶</a></p>
+<p id="section-10.3-1">IANA is requested to add the following media type to the "Media Types" registry <span>[<a href="#IANA-MEDIATYPES" class="cite xref">IANA-MEDIATYPES</a>]</span>.<a href="#section-10.3-1" class="pilcrow">¶</a></p>
+<div id="applicationvndarmcca">
+<section id="section-10.3.1">
+          <h4 id="name-application-vndarmcca">
+<a href="#section-10.3.1" class="section-number selfRef">10.3.1. </a><a href="#name-application-vndarmcca" class="section-name selfRef">application/vnd.arm.cca</a>
+          </h4>
+<p id="section-10.3.1-1">Type name:  application
+   Subtype name:  vnd.arm.cca+cbor
+   Required parameters:  n/a
+   Optional parameters:  n/a
+   Encoding considerations:  binary
+   Security considerations:  <a href="#sec-security-consideration" class="auto internal xref">Section 9</a> of RFCthis
+   Interoperability considerations:  n/a
+   Published specification:  RFCthis
+   Applications that use this media type:  Attestation Verifiers, Attesters producing Arm CCA evidence.
+   Fragment identifier considerations:  n/a
+   File extension(s):  n/a
+   Macintosh file type code(s):  n/a
+   Person and email address to contact for further information: iana-request@arm.com
+   Intended usage:  COMMON
+   Restrictions on usage:  none
+   Author/Change controller:  iana-request@arm.com
+   Provisional registration?  No<a href="#section-10.3.1-1" class="pilcrow">¶</a></p>
+</section>
+</div>
 </section>
 </div>
 <div id="sec-iana-coap-content-format">
-<section id="section-10.3">
+<section id="section-10.4">
         <h3 id="name-coap-content-formats-regist">
-<a href="#section-10.3" class="section-number selfRef">10.3. </a><a href="#name-coap-content-formats-regist" class="section-name selfRef">CoAP Content-Formats Registration</a>
+<a href="#section-10.4" class="section-number selfRef">10.4. </a><a href="#name-coap-content-formats-regist" class="section-name selfRef">CoAP Content-Formats Registration</a>
         </h3>
-<p id="section-10.3-1">IANA is requested to register a CoAP Content-Format ID in the "CoAP
-Content-Formats" registry <span>[<a href="#IANA-CoAP-Content-Formats" class="cite xref">IANA-CoAP-Content-Formats</a>]</span>:<a href="#section-10.3-1" class="pilcrow">¶</a></p>
+<p id="section-10.4-1">IANA is requested to register a CoAP Content-Format ID in the "CoAP
+Content-Formats" registry <span>[<a href="#IANA-CoAP-Content-Formats" class="cite xref">IANA-CoAP-Content-Formats</a>]</span>:<a href="#section-10.4-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-10.3-2.1">
-            <p id="section-10.3-2.1.1">A registration for the <code>application/eat+cwt</code> media type with the <code>eat_profile</code> parameter
-equal to "tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3-2.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-10.4-2.1">
+            <p id="section-10.4-2.1.1">A registration for the <code>application/vnd.arm.cca+cbor</code> media type<a href="#section-10.4-2.1.1" class="pilcrow">¶</a></p>
 </li>
         </ul>
-<p id="section-10.3-3">The Content-Formats should be allocated from the Expert review range (0-255).<a href="#section-10.3-3" class="pilcrow">¶</a></p>
-<div id="registry-contents">
-<section id="section-10.3.1">
-          <h4 id="name-registry-contents">
-<a href="#section-10.3.1" class="section-number selfRef">10.3.1. </a><a href="#name-registry-contents" class="section-name selfRef">Registry Contents</a>
-          </h4>
-<ul class="normal">
-<li class="normal" id="section-10.3.1-1.1">
-              <p id="section-10.3.1-1.1.1">Media Type: `application/eat+cwt; eat_profile="tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3.1-1.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.3.1-1.2">
-              <p id="section-10.3.1-1.2.1">Encoding: -<a href="#section-10.3.1-1.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.3.1-1.3">
-              <p id="section-10.3.1-1.3.1">Id: To-be-assigned by IANA<a href="#section-10.3.1-1.3.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.3.1-1.4">
-              <p id="section-10.3.1-1.4.1">Reference: RFCthis<a href="#section-10.3.1-1.4.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.3.1-1.5">
-              <p id="section-10.3.1-1.5.1">Media Type: `application/eat+cwt; eat_profile="tag:arm.com,2023:realm#1.0.0"<a href="#section-10.3.1-1.5.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.3.1-1.6">
-              <p id="section-10.3.1-1.6.1">Encoding: -<a href="#section-10.3.1-1.6.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.3.1-1.7">
-              <p id="section-10.3.1-1.7.1">Id: To-be-assigned by IANA<a href="#section-10.3.1-1.7.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-10.3.1-1.8">
-              <p id="section-10.3.1-1.8.1">Reference: RFCthis<a href="#section-10.3.1-1.8.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-</section>
-</div>
+<p id="section-10.4-3">The Content-Formats should be allocated from the Expert review range (10000-19999).<a href="#section-10.4-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -5404,10 +5400,6 @@ equal to "tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3-2.1.1" clas
 <dt id="EAT-MEDIATYPES">[EAT-MEDIATYPES]</dt>
         <dd>
 <span class="refAuthor">Lundblade, L.</span>, <span class="refAuthor">Birkholz, H.</span>, and <span class="refAuthor">T. Fossati</span>, <span class="refTitle">"EAT Media Types"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-eat-media-type-12</span>, <time datetime="2024-11-03" class="refDate">3 November 2024</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-12">https://datatracker.ietf.org/doc/html/draft-ietf-rats-eat-media-type-12</a>&gt;</span>. </dd>
-<dd class="break"></dd>
-<dt id="IANA-CWT">[IANA-CWT]</dt>
-        <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"CBOR Web Token (CWT) Claims"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://www.iana.org/assignments/cwt/cwt.xhtml#claims-registry">https://www.iana.org/assignments/cwt/cwt.xhtml#claims-registry</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="IANA.named-information">[IANA.named-information]</dt>
         <dd>
@@ -5482,17 +5474,29 @@ equal to "tag:arm.com,2023:cca_platform#1.0.0"<a href="#section-10.3-2.1.1" clas
         <dd>
 <span class="refAuthor">Mandyam, G.</span>, <span class="refAuthor">Sekhar, V.</span>, and <span class="refAuthor">S. Mohammed</span>, <span class="refTitle">"The Qualcomm Wireless Edge Services (QWES) Attestation Token"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-mandyam-rats-qwestoken-00</span>, <time datetime="2019-11-01" class="refDate">1 November 2019</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-mandyam-rats-qwestoken-00">https://datatracker.ietf.org/doc/html/draft-mandyam-rats-qwestoken-00</a>&gt;</span>. </dd>
 <dd class="break"></dd>
+<dt id="IANA-CBOR">[IANA-CBOR]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Concise Binary Object Representation (CBOR) Tags"</span>, <time datetime="2026" class="refDate">2026</time>, <span>&lt;<a href="https://www.iana.org/assignments/cbor-tags">https://www.iana.org/assignments/cbor-tags</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="IANA-CoAP-Content-Formats">[IANA-CoAP-Content-Formats]</dt>
         <dd>
-<span class="refAuthor">IANA</span>, <span class="refTitle">"CoAP Content-Formats"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://www.iana.org/assignments/core-parameters">https://www.iana.org/assignments/core-parameters</a>&gt;</span>. </dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"CoAP Content-Formats"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://www.iana.org/assignments/core-parameters#content-formats">https://www.iana.org/assignments/core-parameters#content-formats</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA-CWT">[IANA-CWT]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"CBOR Web Token (CWT) Claims"</span>, <time datetime="2022" class="refDate">2022</time>, <span>&lt;<a href="https://www.iana.org/assignments/cwt/cwt.xhtml#claims-registry">https://www.iana.org/assignments/cwt/cwt.xhtml#claims-registry</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="IANA-MEDIATYPES">[IANA-MEDIATYPES]</dt>
+        <dd>
+<span class="refAuthor">IANA</span>, <span class="refTitle">"Media Types"</span>, <time datetime="2026" class="refDate">2026</time>, <span>&lt;<a href="https://www.iana.org/assignments/media-types">https://www.iana.org/assignments/media-types</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RATS-AR4SI">[RATS-AR4SI]</dt>
         <dd>
-<span class="refAuthor">Voit, E.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Hardjono, T.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">V. Scarlata</span>, <span class="refTitle">"Attestation Results for Secure Interactions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-ar4si-10</span>, <time datetime="2026-05-18" class="refDate">18 May 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-10">https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-10</a>&gt;</span>. </dd>
+<span class="refAuthor">Voit, E.</span>, <span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Hardjono, T.</span>, <span class="refAuthor">Fossati, T.</span>, and <span class="refAuthor">V. Scarlata</span>, <span class="refTitle">"Attestation Results for Secure Interactions"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-ar4si-11</span>, <time datetime="2026-10-30" class="refDate">30 October 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-11">https://datatracker.ietf.org/doc/html/draft-ietf-rats-ar4si-11</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RATS-CoRIM">[RATS-CoRIM]</dt>
         <dd>
-<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-11</span>, <time datetime="2026-07-06" class="refDate">6 July 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-11">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Birkholz, H.</span>, <span class="refAuthor">Fossati, T.</span>, <span class="refAuthor">Deshpande, Y.</span>, <span class="refAuthor">Smith, N.</span>, and <span class="refAuthor">W. Pan</span>, <span class="refTitle">"Concise Reference Integrity Manifest"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-rats-corim-12</span>, <time datetime="2026-11-01" class="refDate">1 November 2026</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-12">https://datatracker.ietf.org/doc/html/draft-ietf-rats-corim-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC9334">[RFC9334]</dt>
         <dd>

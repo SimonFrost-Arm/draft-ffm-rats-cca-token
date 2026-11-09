@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 29 April 2027                                            Linaro
+Expires: 13 May 2027                                              Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                         26 October 2026
+                                                         9 November 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 April 2027.
+   This Internet-Draft will expire on 13 May 2027.
 
 Copyright Notice
 
@@ -138,32 +138,33 @@ Table of Contents
    8.  Implementation Status
    9.  Security and Privacy Considerations
    10. IANA Considerations
-     10.1.  CBOR Web Token Claims Registration
+     10.1.  CBOR Tag Claims Registration
        10.1.1.  Arm CCA Attestation CMW
-       10.1.2.  Security Lifecycle Claim
-       10.1.3.  Implementation ID Claim
-       10.1.4.  Software Components Claim
-       10.1.5.  Verification Service Indicator Claim
-       10.1.6.  Platform Config Claim
-       10.1.7.  Platform Hash Algorithm ID Claim
-       10.1.8.  Platform Manufacturing Config
-       10.1.9.  Platform Extension
-       10.1.10. Platform TBB RoTPK
-       10.1.11. Platform Peer Signers
-       10.1.12. Platform Device TPM Binding Data
-       10.1.13. Platform Workload Binding
-       10.1.14. Realm Personalization Value Claim
-       10.1.15. Realm Hash Algorithm ID Claim
-       10.1.16. Realm Public Key Claim
-       10.1.17. Realm Initial Measurement Claim
-       10.1.18. Realm Extensible Measurements Claim
-       10.1.19. Realm Public Key Hash Algorithm ID Claim
-       10.1.20. Realm MEC Policy
-       10.1.21. Realm LFA Policy
-       10.1.22. Realm Devices Token Hash
-     10.2.  Media Types
-     10.3.  CoAP Content-Formats Registration
-       10.3.1.  Registry Contents
+     10.2.  CBOR Web Token Claims Registration
+       10.2.1.  Security Lifecycle Claim
+       10.2.2.  Implementation ID Claim
+       10.2.3.  Software Components Claim
+       10.2.4.  Verification Service Indicator Claim
+       10.2.5.  Platform Config Claim
+       10.2.6.  Platform Hash Algorithm ID Claim
+       10.2.7.  Platform Manufacturing Config
+       10.2.8.  Platform Extension
+       10.2.9.  Platform TBB RoTPK
+       10.2.10. Platform Peer Signers
+       10.2.11. Platform Device TPM Binding Data
+       10.2.12. Platform Workload Binding
+       10.2.13. Realm Personalization Value Claim
+       10.2.14. Realm Hash Algorithm ID Claim
+       10.2.15. Realm Public Key Claim
+       10.2.16. Realm Initial Measurement Claim
+       10.2.17. Realm Extensible Measurements Claim
+       10.2.18. Realm Public Key Hash Algorithm ID Claim
+       10.2.19. Realm MEC Policy
+       10.2.20. Realm LFA Policy
+       10.2.21. Realm Devices Token Hash
+     10.3.  Media Types
+       10.3.1.  application/vnd.arm.cca
+     10.4.  CoAP Content-Formats Registration
    11. References
      11.1.  Normative References
      11.2.  Informative References
@@ -570,7 +571,7 @@ Table of Contents
       token.
 
    Note that a command line tool to accomplish the above is in
-   preparation, see https://github.com/veraison/cmw/issues/30.
+   preparation, see https://github.com/veraison/cmwcli.
 
 4.3.  CCA Attestation Token Collection Element Registration
 
@@ -931,10 +932,6 @@ cca-token-CMW = {
    *  Binding Claim: arm-platform-workload-binding
 
    *  Claim Value: H(RAK public)
-
-   *  Note: for this attestation model, the PAT also contains an
-      eat_nonce claim with the value equal to the CCA Realm challenge
-      claim.
 
 4.5.3.10.  Binding claim Notes
 
@@ -2718,13 +2715,11 @@ arm-platform-tbb-rotpk = (
 
 10.  IANA Considerations
 
-   TODO: additional top level claims
+10.1.  CBOR Tag Claims Registration
 
-10.1.  CBOR Web Token Claims Registration
-
-   IANA is requested to make permanent the following claims that have
-   been assigned via early allocation in the "CBOR Web Token (CWT)
-   Claims" registry [IANA-CWT].
+   IANA is requested to allocate the following tags in the "CBOR Tags"
+   registry [IANA-CBOR], preferably with the specific CBOR tag value
+   requested:
 
 10.1.1.  Arm CCA Attestation CMW
 
@@ -2742,7 +2737,14 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.1 of RFCthis
 
-10.1.2.  Security Lifecycle Claim
+10.2.  CBOR Web Token Claims Registration
+
+   IANA is requested to allocate the following CWT claims in the "CBOR
+   Web Token (CWT) Claims" registry [IANA-CWT], preferably with the
+   specific value requested.  Some of these claims have been already
+   assigned via early allocation.
+
+10.2.1.  Security Lifecycle Claim
 
    *  Claim Name: arm-platform-security-lifecycle
 
@@ -2758,7 +2760,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.7.2 of RFCthis
 
-10.1.3.  Implementation ID Claim
+10.2.2.  Implementation ID Claim
 
    *  Claim Name: arm-platform-implementation-id
 
@@ -2774,7 +2776,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.6.2 of RFCthis
 
-10.1.4.  Software Components Claim
+10.2.3.  Software Components Claim
 
    *  Claim Name: arm-platform-software-components
 
@@ -2790,7 +2792,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.8.1 of RFCthis
 
-10.1.5.  Verification Service Indicator Claim
+10.2.4.  Verification Service Indicator Claim
 
    *  Claim Name: arm-platform-verification-service-indicator
 
@@ -2806,7 +2808,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.9.1 of RFCthis
 
-10.1.6.  Platform Config Claim
+10.2.5.  Platform Config Claim
 
    *  Claim Name: arm-platform-config
 
@@ -2822,7 +2824,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.7.3 of RFCthis
 
-10.1.7.  Platform Hash Algorithm ID Claim
+10.2.6.  Platform Hash Algorithm ID Claim
 
    *  Claim Name: arm-platform-hash-algm-id
 
@@ -2838,7 +2840,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.8.2 of RFCthis
 
-10.1.8.  Platform Manufacturing Config
+10.2.7.  Platform Manufacturing Config
 
    *  Claim Name: arm-platform-manufacturing-config
 
@@ -2854,7 +2856,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.8.4 of RFCthis
 
-10.1.9.  Platform Extension
+10.2.8.  Platform Extension
 
    *  Claim Name: arm-platform-extension
 
@@ -2870,7 +2872,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.8.5 of RFCthis
 
-10.1.10.  Platform TBB RoTPK
+10.2.9.  Platform TBB RoTPK
 
    *  Claim Name: arm-platform-tbb-rotpk
 
@@ -2886,7 +2888,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.8.8 of RFCthis
 
-10.1.11.  Platform Peer Signers
+10.2.10.  Platform Peer Signers
 
    *  Claim Name: arm-platform-peer-signers
 
@@ -2902,7 +2904,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.8.6 of RFCthis
 
-10.1.12.  Platform Device TPM Binding Data
+10.2.11.  Platform Device TPM Binding Data
 
    *  Claim Name: arm-platform-discrete-tpm-binding-data
 
@@ -2918,7 +2920,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.8.7 of RFCthis
 
-10.1.13.  Platform Workload Binding
+10.2.12.  Platform Workload Binding
 
    *  Claim Name: arm-platform-workload-binding
 
@@ -2934,7 +2936,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.5.1 of RFCthis
 
-10.1.14.  Realm Personalization Value Claim
+10.2.13.  Realm Personalization Value Claim
 
    *  Claim Name: cca-realm-personalization-value
 
@@ -2950,7 +2952,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.10.5 of RFCthis
 
-10.1.15.  Realm Hash Algorithm ID Claim
+10.2.14.  Realm Hash Algorithm ID Claim
 
    *  Claim Name: cca-realm-hash-algm-id
 
@@ -2966,7 +2968,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.10.8 of RFCthis
 
-10.1.16.  Realm Public Key Claim
+10.2.15.  Realm Public Key Claim
 
    *  Claim Name: cca-realm-public-key
 
@@ -2982,7 +2984,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.10.9 of RFCthis
 
-10.1.17.  Realm Initial Measurement Claim
+10.2.16.  Realm Initial Measurement Claim
 
    *  Claim Name: cca-realm-initial-measurement
 
@@ -2998,7 +3000,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.10.6 of RFCthis
 
-10.1.18.  Realm Extensible Measurements Claim
+10.2.17.  Realm Extensible Measurements Claim
 
    *  Claim Name: cca-realm-extensible-measurements
 
@@ -3014,7 +3016,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.10.6 of RFCthis
 
-10.1.19.  Realm Public Key Hash Algorithm ID Claim
+10.2.18.  Realm Public Key Hash Algorithm ID Claim
 
    *  Claim Name: cca-realm-public-key-hash-algm-id
 
@@ -3030,7 +3032,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.10.10 of RFCthis
 
-10.1.20.  Realm MEC Policy
+10.2.19.  Realm MEC Policy
 
    *  Claim Name: cca-realm-mec-policy
 
@@ -3046,7 +3048,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.10.11 of RFCthis
 
-10.1.21.  Realm LFA Policy
+10.2.20.  Realm LFA Policy
 
    *  Claim Name: cca-realm-lfa-policy
 
@@ -3062,7 +3064,7 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.10.12 of RFCthis
 
-10.1.22.  Realm Devices Token Hash
+10.2.21.  Realm Devices Token Hash
 
    *  Claim Name: cca-realm-devices-token-hash
 
@@ -3078,44 +3080,33 @@ arm-platform-tbb-rotpk = (
 
    *  Specification Document(s): Section 4.10.14 of RFCthis
 
-10.2.  Media Types
+10.3.  Media Types
 
-   No new media type registration is requested.  To indicate that the
-   transmitted content is a CCA attestation token, applications can use
-   the application/eat+cwt media type defined in [EAT-MEDIATYPES] with
-   the eat_profile parameter set to tag:arm.com,2023:cca_platform#1.0.0.
+   IANA is requested to add the following media type to the "Media
+   Types" registry [IANA-MEDIATYPES].
 
-10.3.  CoAP Content-Formats Registration
+10.3.1.  application/vnd.arm.cca
+
+   Type name: application Subtype name: vnd.arm.cca+cbor Required
+   parameters: n/a Optional parameters: n/a Encoding considerations:
+   binary Security considerations: Section 9 of RFCthis Interoperability
+   considerations: n/a Published specification: RFCthis Applications
+   that use this media type: Attestation Verifiers, Attesters producing
+   Arm CCA evidence.  Fragment identifier considerations: n/a File
+   extension(s): n/a Macintosh file type code(s): n/a Person and email
+   address to contact for further information: iana-request@arm.com
+   Intended usage: COMMON Restrictions on usage: none Author/Change
+   controller: iana-request@arm.com Provisional registration?  No
+
+10.4.  CoAP Content-Formats Registration
 
    IANA is requested to register a CoAP Content-Format ID in the "CoAP
    Content-Formats" registry [IANA-CoAP-Content-Formats]:
 
-   *  A registration for the application/eat+cwt media type with the
-      eat_profile parameter equal to
-      "tag:arm.com,2023:cca_platform#1.0.0"
+   *  A registration for the application/vnd.arm.cca+cbor media type
 
    The Content-Formats should be allocated from the Expert review range
-   (0-255).
-
-10.3.1.  Registry Contents
-
-   *  Media Type: `application/eat+cwt;
-      eat_profile="tag:arm.com,2023:cca_platform#1.0.0"
-
-   *  Encoding: -
-
-   *  Id: To-be-assigned by IANA
-
-   *  Reference: RFCthis
-
-   *  Media Type: `application/eat+cwt;
-      eat_profile="tag:arm.com,2023:realm#1.0.0"
-
-   *  Encoding: -
-
-   *  Id: To-be-assigned by IANA
-
-   *  Reference: RFCthis
+   (10000-19999).
 
 11.  References
 
@@ -3148,10 +3139,6 @@ arm-platform-tbb-rotpk = (
               eat-media-type-12, 3 November 2024,
               <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
               eat-media-type-12>.
-
-   [IANA-CWT] IANA, "CBOR Web Token (CWT) Claims", 2022,
-              <https://www.iana.org/assignments/cwt/cwt.xhtml#claims-
-              registry>.
 
    [IANA.named-information]
               IANA, "Named Information",
@@ -3239,23 +3226,37 @@ arm-platform-tbb-rotpk = (
               1 November 2019, <https://datatracker.ietf.org/doc/html/
               draft-mandyam-rats-qwestoken-00>.
 
+   [IANA-CBOR]
+              IANA, "Concise Binary Object Representation (CBOR) Tags",
+              2026, <https://www.iana.org/assignments/cbor-tags>.
+
    [IANA-CoAP-Content-Formats]
               IANA, "CoAP Content-Formats", 2022,
-              <https://www.iana.org/assignments/core-parameters>.
+              <https://www.iana.org/assignments/core-parameters#content-
+              formats>.
+
+   [IANA-CWT] IANA, "CBOR Web Token (CWT) Claims", 2022,
+              <https://www.iana.org/assignments/cwt/cwt.xhtml#claims-
+              registry>.
+
+   [IANA-MEDIATYPES]
+              IANA, "Media Types", 2026,
+              <https://www.iana.org/assignments/media-types>.
 
    [RATS-AR4SI]
               Voit, E., Birkholz, H., Hardjono, T., Fossati, T., and V.
               Scarlata, "Attestation Results for Secure Interactions",
               Work in Progress, Internet-Draft, draft-ietf-rats-ar4si-
-              10, 18 May 2026, <https://datatracker.ietf.org/doc/html/
-              draft-ietf-rats-ar4si-10>.
+              11, 30 October 2026,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-rats-
+              ar4si-11>.
 
    [RATS-CoRIM]
               Birkholz, H., Fossati, T., Deshpande, Y., Smith, N., and
               W. Pan, "Concise Reference Integrity Manifest", Work in
-              Progress, Internet-Draft, draft-ietf-rats-corim-11, 6 July
-              2026, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              rats-corim-11>.
+              Progress, Internet-Draft, draft-ietf-rats-corim-12, 1
+              November 2026, <https://datatracker.ietf.org/doc/html/
+              draft-ietf-rats-corim-12>.
 
    [RFC9334]  Birkholz, H., Thaler, D., Richardson, M., Smith, N., and
               W. Pan, "Remote ATtestation procedureS (RATS)
