@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-11-08T04:32:55.699470+00:00",
+  "timestamp": "2026-11-10T05:59:28.451836+00:00",
   "repo": "SimonFrost-Arm/draft-ffm-rats-cca-token",
   "labels": [
     {
@@ -5598,24 +5598,26 @@
       "id": "PR_kwDOMRXjbM8AAAABLj6hpQ",
       "title": "Alterations to IANA requests for CBOR tag and media type",
       "url": "https://github.com/SimonFrost-Arm/draft-ffm-rats-cca-token/pull/67",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "SimonFrost-Arm",
       "authorAssociation": "OWNER",
       "assignees": [],
       "labels": [],
       "body": "Moved IANA request for 907 from CMW reg to CBOR reg.\n\nAdded request for new application/vnd.arm.com  media type for CCA CMW package.\n\n",
       "createdAt": "2026-10-29T15:26:28Z",
-      "updatedAt": "2026-11-05T15:07:37Z",
+      "updatedAt": "2026-11-09T10:58:57Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "4832924a9c05fa8e0830c3963d57ea26aa456a13",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "iana-req",
-      "headRefOid": "cc197cecb8945bd0cb3c45569bf9d333bf293930",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "76f816c4f5ccc2b260ce143297709dd0672d2960",
+      "closedAt": "2026-11-09T10:58:53Z",
+      "mergedAt": "2026-11-09T10:58:53Z",
+      "mergedBy": "SimonFrost-Arm",
+      "mergeCommit": {
+        "oid": "86b3216da3581c107e860dfa6372ed5fac115255"
+      },
       "comments": [
         {
           "author": "thomas-fossati",
@@ -5781,7 +5783,7 @@
       "labels": [],
       "body": "This allows downstream consumers to pull the CDDL artefacts.",
       "createdAt": "2026-10-29T17:34:42Z",
-      "updatedAt": "2026-10-29T18:14:23Z",
+      "updatedAt": "2026-11-09T12:43:02Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "4832924a9c05fa8e0830c3963d57ea26aa456a13",
@@ -5793,7 +5795,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABW0GFaQ",
+          "commit": {
+            "abbreviatedOid": "a17ed68"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2026-11-09T12:43:02Z",
+          "updatedAt": "2026-11-09T12:43:02Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 69,
@@ -5807,18 +5823,26 @@
       "labels": [],
       "body": "",
       "createdAt": "2026-11-06T18:20:14Z",
-      "updatedAt": "2026-11-06T18:26:10Z",
+      "updatedAt": "2026-11-09T18:22:18Z",
       "baseRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "baseRefName": "main",
       "baseRefOid": "4832924a9c05fa8e0830c3963d57ea26aa456a13",
       "headRepository": "SimonFrost-Arm/draft-ffm-rats-cca-token",
       "headRefName": "more-clarifications",
-      "headRefOid": "f95887a2176d231d207ee89e56ff3a372be6b1bb",
+      "headRefOid": "b000d73615e5d599edcf32ccbd98fc21a75a539b",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> I have some generic questions along with the minor edits on this PR!\r\n\r\nThe question has been clarified by @SimonFrost-Arm and PR updated accordingly!",
+          "createdAt": "2026-11-09T18:22:05Z",
+          "updatedAt": "2026-11-09T18:22:18Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOMRXjbM8AAAABWgB-uA",
@@ -5872,6 +5896,66 @@
           "createdAt": "2026-11-06T18:26:10Z",
           "updatedAt": "2026-11-06T18:26:10Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABW1JSwg",
+          "commit": {
+            "abbreviatedOid": "f95887a"
+          },
+          "author": "SimonFrost-Arm",
+          "authorAssociation": "OWNER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-09T14:14:25Z",
+          "updatedAt": "2026-11-09T14:14:25Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "By using the word 'can' in 457 above I was trying to leave this general, but I can see how this can be seen as a contradiction.\r\nPerhaps we should reword 456 as:\r\nIf an implementation uses a different attestation model to the default delegated model or the direct model, a CCA platform challenge",
+              "createdAt": "2026-11-09T14:14:25Z",
+              "updatedAt": "2026-11-09T14:14:25Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABW1NK4g",
+          "commit": {
+            "abbreviatedOid": "f95887a"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-09T14:19:14Z",
+          "updatedAt": "2026-11-09T14:19:14Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Works for me, I will change in the same PR!",
+              "createdAt": "2026-11-09T14:19:14Z",
+              "updatedAt": "2026-11-09T14:19:14Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMRXjbM8AAAABW4ZHRA",
+          "commit": {
+            "abbreviatedOid": "f95887a"
+          },
+          "author": "yogeshbdeshpande",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-11-09T18:13:33Z",
+          "updatedAt": "2026-11-09T18:13:33Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "I have added the same in this PR! Please have a look now!",
+              "createdAt": "2026-11-09T18:13:33Z",
+              "updatedAt": "2026-11-09T18:13:33Z"
+            }
+          ]
         }
       ]
     }
