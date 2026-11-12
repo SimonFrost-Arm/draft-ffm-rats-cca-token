@@ -5,10 +5,10 @@
 Network Working Group                                           S. Frost
 Internet-Draft                                               Arm Limited
 Intended status: Informational                                T. Fossati
-Expires: 15 May 2027                                              Linaro
+Expires: 16 May 2027                                              Linaro
                                                               G. Mandyam
                                               Advanced Micro Devices Inc
-                                                        11 November 2026
+                                                        12 November 2026
 
 
   Arm's Confidential Compute Architecture Reference Attestation Token
@@ -49,7 +49,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 May 2027.
+   This Internet-Draft will expire on 16 May 2027.
 
 Copyright Notice
 
@@ -821,10 +821,10 @@ cca-token-CMW = {
 4.5.2.  CCA Platform Challenge
 
    If an implementation uses a different attestation model to the
-   default delegated model, a CCA platform challenge claim can be
-   present in the platform attestation token.  This claim is used to
-   carry a challenge provided by the relying party to demonstrate
-   freshness of the generated token.
+   default delegated model or the direct model, a CCA platform challenge
+   claim can be present in the platform attestation token.  This claim
+   is used to carry a challenge provided by the relying party to
+   demonstrate freshness of the generated token.
 
    This claim is OPTIONAL in a CCA Platform attestation token.
 
@@ -857,7 +857,7 @@ cca-token-CMW = {
 
    *  Attestation Model: Delegated
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-challenge
 
    *  Claim Value: H(RAK public)
 
@@ -873,7 +873,7 @@ cca-token-CMW = {
 
    *  Attestation Model: Direct
 
-   *  Binding Claim: eat_nonce
+   *  Binding Claim: arm-platform-challenge
 
    *  Claim Value: H(realm claims)
 
